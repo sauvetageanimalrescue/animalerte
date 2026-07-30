@@ -69,7 +69,9 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
           <h1 className="max-w-2xl whitespace-pre-line text-3xl font-extrabold tracking-tight text-brand-dark md:text-5xl">
             {t("titre")}
           </h1>
-          <p className="max-w-xl text-lg text-muted">{t("sousTitre")}</p>
+          <p className="hidden max-w-xl text-lg text-muted md:block">
+            {t("sousTitre")}
+          </p>
 
           <p className="flex max-w-xl items-center gap-2 rounded-2xl bg-surface/80 px-4 py-2.5 text-sm font-semibold text-brand-dark shadow-sm ring-1 ring-brand/15">
             <IconSparkles size={18} className="shrink-0 text-accent" />
@@ -100,6 +102,13 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
               className="inline-flex items-center gap-2 rounded-full border border-brand px-6 py-3 font-semibold text-brand-dark transition hover:bg-brand-soft"
             >
               {t("signalerTrouveCta")}
+            </Link>
+            <Link
+              href="/inscription"
+              className="inline-flex items-center gap-2 rounded-full border border-brand px-6 py-3 font-semibold text-brand-dark transition hover:bg-brand-soft"
+            >
+              <IconUsers size={18} />
+              {m("sentinelleBouton")}
             </Link>
           </div>
         </div>
