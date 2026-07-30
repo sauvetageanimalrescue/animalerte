@@ -16,7 +16,8 @@ import {
 import { Link } from "@/i18n/navigation";
 import { obtenirAnnoncesRecentes } from "@/lib/annonces";
 import { AnnonceCard } from "@/components/annonce-card";
-import { Logo, FlairWord } from "@/components/logo";
+import Image from "next/image";
+import { FlairWord } from "@/components/logo";
 
 export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -52,28 +53,32 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-brand-soft to-background">
+      <section className="relative overflow-hidden bg-brand-dark">
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div
-            className="absolute inset-0 bg-cover bg-center opacity-25"
+            className="absolute inset-0 bg-cover bg-center opacity-20"
             style={{ backgroundImage: "url('/hero.jpg')" }}
           />
-          <div className="absolute inset-0 bg-brand/50 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-soft/60 via-brand-soft/20 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/40 via-brand-dark/10 to-background" />
         </div>
 
         <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-14 text-center md:py-20">
-          <div className="rounded-3xl bg-surface p-4 shadow-sm">
-            <Logo className="h-24 w-auto" priority />
-          </div>
-          <h1 className="max-w-2xl whitespace-pre-line text-3xl font-extrabold tracking-tight text-brand-dark md:text-5xl">
+          <Image
+            src="/logo-blanc.png"
+            alt="animALERTE · flAIr"
+            width={420}
+            height={170}
+            priority
+            className="h-auto w-full max-w-md"
+          />
+          <h1 className="max-w-2xl whitespace-pre-line text-3xl font-extrabold tracking-tight text-brand-soft md:text-5xl">
             {t("titre")}
           </h1>
-          <p className="hidden max-w-xl text-lg text-muted md:block">
+          <p className="hidden max-w-xl text-lg text-white/80 md:block">
             {t("sousTitre")}
           </p>
 
-          <p className="flex max-w-xl items-center gap-2 rounded-2xl bg-surface/80 px-4 py-2.5 text-sm font-semibold text-brand-dark shadow-sm ring-1 ring-brand/15">
+          <p className="flex max-w-xl items-center gap-2 rounded-2xl bg-white px-4 py-2.5 text-sm font-semibold text-brand-dark shadow-sm">
             <IconSparkles size={18} className="shrink-0 text-accent" />
             <span>
               {m.rich("usp", {
@@ -92,14 +97,14 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
             </Link>
             <Link
               href="/recherche"
-              className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 font-semibold text-white transition hover:bg-brand-dark"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-light px-6 py-3 font-semibold text-white transition hover:brightness-95"
             >
               <IconSearch size={18} />
               {t("chercherCta")}
             </Link>
             <Link
               href="/signaler?type=trouve"
-              className="inline-flex items-center gap-2 rounded-full border border-brand px-6 py-3 font-semibold text-brand-dark transition hover:bg-brand-soft"
+              className="inline-flex items-center gap-2 rounded-full border border-white/50 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
             >
               {t("signalerTrouveCta")}
             </Link>

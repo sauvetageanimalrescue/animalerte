@@ -79,6 +79,34 @@ export function LogoMark({ className }: { className?: string }) {
   );
 }
 
+// Logo blanc empilé (mark + « animALERTE ») pour fond foncé. Temporaire, en
+// attendant le logo blanc officiel déposé dans public/.
+export function LogoBlanc({ className }: { className?: string }) {
+  return (
+    <div className={`flex flex-col items-center gap-3 ${className ?? ""}`}>
+      <svg
+        viewBox="0 0 120 120"
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-hidden="true"
+        className="h-16 w-16"
+      >
+        <path d="M12 12 L48 20 L42 62 L20 70 Z" fill="#ffffff" />
+        <path d="M108 12 L72 20 L78 62 L100 70 Z" fill="#ffffff" />
+        <g fill="none" strokeLinecap="round">
+          <path d="M18 92 A48 48 0 0 1 102 92" stroke="#ffffff" strokeWidth="12" />
+          <path d="M35 98 A31 31 0 0 1 85 98" stroke="#ffffff" strokeWidth="12" />
+          <path d="M50 103 A14 14 0 0 1 70 103" stroke="#ffffff" strokeWidth="12" />
+        </g>
+        <circle cx="60" cy="106" r="8" fill="#ffffff" />
+      </svg>
+      <span className="text-3xl font-extrabold tracking-tight text-white">
+        animALERTE
+      </span>
+    </div>
+  );
+}
+
 // Wordmark « animALERTE » : « anim » marine, « ALERTE » rouge.
 export function Wordmark({ className }: { className?: string }) {
   return (
