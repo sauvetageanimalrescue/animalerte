@@ -13,6 +13,7 @@ export async function SiteHeader() {
   const liens = [
     { href: "/" as const, label: t("accueil") },
     { href: "/recherche" as const, label: t("recherche") },
+    { href: "/forfaits" as const, label: t("forfaits") },
   ];
 
   return (

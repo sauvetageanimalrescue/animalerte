@@ -23,7 +23,7 @@ export async function SiteFooter() {
       titre: "animALERTE",
       liens: [
         { href: "#", label: t("apropos") },
-        { href: "#", label: t("forfaits") },
+        { href: "/forfaits", label: t("forfaits") },
         { href: "#", label: "flAIr" },
         { href: "#", label: t("sentinelles") },
       ],

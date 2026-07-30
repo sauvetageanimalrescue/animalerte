@@ -13,6 +13,7 @@
   "nav": {
     "accueil": "Home",
     "recherche": "Search",
+    "forfaits": "Plans",
     "signaler": "Report",
     "mesAnnonces": "My listings",
     "connexion": "Sign in",
@@ -213,5 +214,54 @@
     "sentinelleBouton": "Become a Sentinel",
     "sentinelleTexte": "Vets, pet stores, citizens: get alerts for your area and help reunite families.",
     "sentinelleCta": "Join the Sentinels"
+  },
+  "forfaits": {
+    "titre": "Plans",
+    "sousTitre": "You only pay when you launch an alert. Reporting a found pet is always free.",
+    "parAnnonce": "per listing",
+    "populaire": "Most popular",
+    "choisir": "Choose this plan",
+    "commencerGratuit": "Start for free",
+    "toutLe": "Everything in {nom}, plus:",
+    "gratuit": {
+      "nom": "Free",
+      "prix": "$0",
+      "points": [
+        "Listing on animalerte.ca",
+        "1 photo",
+        "“What to do when you lose your pet” email"
+      ]
+    },
+    "base": {
+      "nom": "Base",
+      "prix": "$49.99",
+      "points": [
+        "Multiple photos",
+        "Poster kit: PDF, social media and QR code",
+        "Anonymous toll-free line",
+        "Anonymous messaging",
+        "Local alert (targeted reach)"
+      ]
+    },
+    "regional": {
+      "nom": "Regional",
+      "prix": "$149.99",
+      "points": [
+        "Video in addition to photos",
+        "Regional alert (wider radius)",
+        "Sentinel network for your area",
+        "Enhanced posters (microchip, reward…)"
+      ]
+    },
+    "provincial": {
+      "nom": "Provincial",
+      "prix": "$249.99",
+      "points": [
+        "Province-wide alert, all of Quebec",
+        "Shared on Facebook Sauvetage Animal Rescue (112,000 followers)",
+        "Alerts to Quebec SPCAs",
+        "flAIr priority (AI matches)"
+      ]
+    }
   }
 }

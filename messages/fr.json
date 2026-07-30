@@ -13,6 +13,7 @@
   "nav": {
     "accueil": "Accueil",
     "recherche": "Rechercher",
+    "forfaits": "Forfaits",
     "signaler": "Signaler",
     "mesAnnonces": "Mes annonces",
     "connexion": "Connexion",
@@ -213,5 +214,54 @@
     "sentinelleBouton": "Devenir Sentinelle",
     "sentinelleTexte": "Vétérinaires, animaleries, citoyens : recevez les alertes de votre secteur et aidez à réunir les familles.",
     "sentinelleCta": "Rejoindre les Sentinelles"
+  },
+  "forfaits": {
+    "titre": "Forfaits",
+    "sousTitre": "Vous payez seulement au moment de lancer une alerte. Signaler un animal trouvé est toujours gratuit.",
+    "parAnnonce": "par annonce",
+    "populaire": "Le plus populaire",
+    "choisir": "Choisir ce forfait",
+    "commencerGratuit": "Commencer gratuitement",
+    "toutLe": "Tout le forfait {nom}, plus :",
+    "gratuit": {
+      "nom": "Gratuit",
+      "prix": "0 $",
+      "points": [
+        "Fiche sur animalerte.ca",
+        "1 photo",
+        "Courriel « quoi faire quand on perd son animal »"
+      ]
+    },
+    "base": {
+      "nom": "Base",
+      "prix": "49,99 $",
+      "points": [
+        "Plusieurs photos",
+        "Kit d'affiches : PDF, réseaux sociaux et code QR",
+        "Ligne sans frais anonyme",
+        "Messagerie anonyme",
+        "Alerte locale (diffusion ciblée)"
+      ]
+    },
+    "regional": {
+      "nom": "Régional",
+      "prix": "149,99 $",
+      "points": [
+        "Vidéo en plus des photos",
+        "Alerte régionale (rayon élargi)",
+        "Réseau Sentinelle de votre secteur",
+        "Affiches enrichies (micropuce, récompense…)"
+      ]
+    },
+    "provincial": {
+      "nom": "Provincial",
+      "prix": "249,99 $",
+      "points": [
+        "Alerte provinciale, tout le Québec",
+        "Diffusion sur Facebook Sauvetage Animal Rescue (112 000 abonnés)",
+        "Alerte aux SPCA du Québec",
+        "Priorité flAIr (correspondances IA)"
+      ]
+    }
   }
 }
