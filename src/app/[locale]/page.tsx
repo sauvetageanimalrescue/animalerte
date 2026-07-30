@@ -103,13 +103,6 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
             >
               {t("signalerTrouveCta")}
             </Link>
-            <Link
-              href="/inscription"
-              className="inline-flex items-center gap-2 rounded-full border border-brand px-6 py-3 font-semibold text-brand-dark transition hover:bg-brand-soft"
-            >
-              <IconUsers size={18} />
-              {m("sentinelleBouton")}
-            </Link>
           </div>
         </div>
       </section>
