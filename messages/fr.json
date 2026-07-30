@@ -61,7 +61,7 @@
   },
   "accueil": {
     "titre": "Un animal perdu ?\nChaque minute compte.",
-    "sousTitre": "animALERTE aide les familles canadiennes à retrouver leurs animaux de compagnie. Signalez, cherchez et partagez.",
+    "sousTitre": "animALERTE aide les familles québécoises à retrouver leurs animaux de compagnie. Signalez, cherchez et partagez.",
     "chercherCta": "Rechercher un animal",
     "signalerPerduCta": "Signaler un animal perdu",
     "signalerTrouveCta": "J'ai trouvé un animal",
@@ -176,7 +176,41 @@
     "confirmerSuppression": "Supprimer définitivement cette annonce ?"
   },
   "pied": {
-    "description": "animALERTE est un service communautaire gratuit pour retrouver les animaux de compagnie perdus au Canada.",
-    "droits": "Tous droits réservés."
+    "description": "animALERTE aide à retrouver les animaux de compagnie perdus au Québec.",
+    "droits": "Tous droits réservés.",
+    "navTitre": "Navigation",
+    "legalTitre": "Légal",
+    "apropos": "À propos",
+    "forfaits": "Forfaits",
+    "sentinelles": "Sentinelles",
+    "conditions": "Conditions d'utilisation",
+    "confidentialite": "Confidentialité",
+    "contact": "Contact"
+  },
+  "marketing": {
+    "usp": "La seule plateforme d'animaux perdus au Québec à utiliser <flair></flair>.",
+    "flairVerbe": "renifle",
+    "flairTitre": "flAIr renifle les correspondances — pour vous.",
+    "flairTexte": "flAIr est un système d'intelligence artificielle qui reconnaît le visage d'un animal — la couleur de son pelage, ses motifs, jusqu'à la couleur de ses yeux — et veille sur votre secteur sans relâche. Dès qu'un animal trouvé lui ressemble, flAIr vous prévient.",
+    "flairUnique": "Une technologie exclusive",
+    "flairPoint1Titre": "Reconnaît le visage",
+    "flairPoint1Texte": "Le pelage, les motifs, jusqu'à la couleur des yeux.",
+    "flairPoint2Titre": "Surveille le secteur",
+    "flairPoint2Texte": "Chaque animal trouvé signalé près de chez vous.",
+    "flairPoint3Titre": "Vous alerte",
+    "flairPoint3Texte": "« flAIr a reniflé une piste. »",
+    "porteeTitre": "Jusqu'où va votre alerte ?",
+    "porteeSousTitre": "Vous choisissez la portée. Plus elle est large, plus de gens cherchent avec vous.",
+    "porteeWeb": "Sur animalerte.ca",
+    "porteeWebD": "Fiche, recherche et carte, visibles de tous.",
+    "porteeLocale": "Alerte locale",
+    "porteeLocaleD": "Diffusée dans votre voisinage immédiat.",
+    "porteeRegionale": "Alerte régionale",
+    "porteeRegionaleD": "Votre secteur élargi et son réseau.",
+    "porteeProvinciale": "Alerte provinciale",
+    "porteeProvincialeD": "Tout le Québec, jusqu'aux SPCA.",
+    "sentinelleTitre": "Devenez Sentinelle",
+    "sentinelleTexte": "Vétérinaires, animaleries, citoyens : recevez les alertes de votre secteur et aidez à réunir les familles.",
+    "sentinelleCta": "Rejoindre les Sentinelles"
   }
 }

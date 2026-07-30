@@ -88,3 +88,14 @@ export function Wordmark({ className }: { className?: string }) {
     </span>
   );
 }
+
+// Wordmark « flAIr » : « fl » et « r » marine, « AI » rouge (le AI dans le mot).
+export function FlairWord({ className }: { className?: string }) {
+  return (
+    <span className={className}>
+      <span className="text-brand-dark">fl</span>
+      <span className="text-accent">AI</span>
+      <span className="text-brand-dark">r</span>
+    </span>
+  );
+}

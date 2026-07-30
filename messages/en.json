@@ -61,7 +61,7 @@
   },
   "accueil": {
     "titre": "Lost a pet?\nEvery minute counts.",
-    "sousTitre": "animALERTE helps Canadian families find their pets. Report, search and share.",
+    "sousTitre": "animALERTE helps Quebec families find their pets. Report, search and share.",
     "chercherCta": "Search for a pet",
     "signalerPerduCta": "Report a lost pet",
     "signalerTrouveCta": "I found a pet",
@@ -176,7 +176,41 @@
     "confirmerSuppression": "Permanently delete this listing?"
   },
   "pied": {
-    "description": "animALERTE is a free community service to help find lost pets across Canada.",
-    "droits": "All rights reserved."
+    "description": "animALERTE helps find lost pets across Quebec.",
+    "droits": "All rights reserved.",
+    "navTitre": "Navigation",
+    "legalTitre": "Legal",
+    "apropos": "About",
+    "forfaits": "Plans",
+    "sentinelles": "Sentinels",
+    "conditions": "Terms of use",
+    "confidentialite": "Privacy",
+    "contact": "Contact"
+  },
+  "marketing": {
+    "usp": "The only lost-pet platform in Quebec to use <flair></flair>.",
+    "flairVerbe": "sniffs",
+    "flairTitre": "flAIr sniffs out the matches — for you.",
+    "flairTexte": "flAIr is an artificial-intelligence system that recognizes an animal's face — its coat colour, its markings, right down to its eye colour — and watches your area around the clock. The moment a found pet looks like yours, flAIr lets you know.",
+    "flairUnique": "Exclusive technology",
+    "flairPoint1Titre": "Recognizes the face",
+    "flairPoint1Texte": "Coat colour, markings, even eye colour.",
+    "flairPoint2Titre": "Watches your area",
+    "flairPoint2Texte": "Every found pet reported near you.",
+    "flairPoint3Titre": "Alerts you",
+    "flairPoint3Texte": "“flAIr caught a scent.”",
+    "porteeTitre": "How far does your alert travel?",
+    "porteeSousTitre": "You choose the reach. The wider it goes, the more people search with you.",
+    "porteeWeb": "On animalerte.ca",
+    "porteeWebD": "Listing, search and map, seen by everyone.",
+    "porteeLocale": "Local alert",
+    "porteeLocaleD": "Shared in your immediate neighbourhood.",
+    "porteeRegionale": "Regional alert",
+    "porteeRegionaleD": "Your wider area and its network.",
+    "porteeProvinciale": "Province-wide alert",
+    "porteeProvincialeD": "All of Quebec, all the way to the SPCAs.",
+    "sentinelleTitre": "Become a Sentinel",
+    "sentinelleTexte": "Vets, pet stores, citizens: get alerts for your area and help reunite families.",
+    "sentinelleCta": "Join the Sentinels"
   }
 }

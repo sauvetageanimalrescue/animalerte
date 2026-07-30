@@ -12,9 +12,9 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AnimAlerte — Animaux perdus et trouvés au Canada",
+  title: "animALERTE — Animaux perdus et trouvés au Québec",
   description:
-    "Signalez et retrouvez les animaux de compagnie perdus partout au Canada.",
+    "Signalez et retrouvez les animaux de compagnie perdus partout au Québec.",
 };
 
 export function generateStaticParams() {
