@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# animALERTE
 
-## Getting Started
+Site communautaire bilingue (FR/EN) pour **signaler et retrouver les animaux
+de compagnie perdus au Canada**. Consultation publique ; la publication d'une
+annonce demande un compte.
 
-First, run the development server:
+## Fonctionnalités
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Signaler un animal **perdu** ou **trouvé** (photo, espèce, lieu, date, contact)
+- **Recherche** avec filtres (type, espèce, province, ville, statut, mot-clé)
+- **Carte** des signalements (Leaflet + OpenStreetMap)
+- Fiche détaillée avec coordonnées de contact et carte
+- Gestion de ses annonces (marquer résolu, supprimer)
+- Interface **bilingue** français / anglais (routes `/fr` et `/en`)
+
+## Stack
+
+| Élément | Techno |
+|---|---|
+| Framework | Next.js 16 (App Router) + React 19 + TypeScript |
+| Base de données, auth, stockage | Supabase |
+| Style | Tailwind CSS 4 |
+| Carte | Leaflet + react-leaflet + OpenStreetMap |
+| i18n | next-intl |
+| Icônes | @tabler/icons-react |
+
+> Next.js 16 : le « middleware » s'appelle désormais **proxy** (`src/proxy.ts`).
+
+## Mise en route
+
+### 1. Variables d'environnement
+
+Copiez `.env.example` vers `.env.local` et remplissez les clés Supabase
+(Tableau de bord Supabase → *Project Settings* → *API*) :
+
+```
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
+SUPABASE_SERVICE_ROLE_KEY=...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> Un `.env.local` de démonstration (valeurs bidon) est fourni pour lancer
+> l'interface sans backend ; remplacez-le par vos vraies clés pour que la
+> recherche, l'auth et la publication fonctionnent.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2. Base de données
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Dans l'éditeur SQL Supabase, collez le contenu de
+[`supabase/migrations/0001_schema_initial.sql`](supabase/migrations/0001_schema_initial.sql)
+et exécutez-le. La migration est **idempotente** (rejouable sans erreur) et crée :
 
-## Learn More
+- les tables `profiles` et `annonces` + leurs politiques RLS ;
+- le trigger de création automatique du profil à l'inscription ;
+- le bucket de stockage public `photos`.
 
-To learn more about Next.js, take a look at the following resources:
+Dans *Authentication → Providers*, activez le fournisseur **Email**. Pour un
+test rapide sans courriel de confirmation, désactivez *Confirm email* ; sinon
+l'utilisateur doit confirmer son adresse avant de se connecter.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. Développement
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm install
+npm run dev
+```
 
-## Deploy on Vercel
+L'app démarre sur http://localhost:3000 (redirige vers `/fr`).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 4. Build de production
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+```
+
+> Toujours lancer `npm run build` avant de déployer : le mode dev ne détecte
+> pas certaines erreurs TypeScript qui bloquent le build Vercel.
+
+## Déploiement (Vercel)
+
+1. Importez le dépôt dans Vercel.
+2. Ajoutez les trois variables d'environnement ci-dessus.
+3. Déployez — aucune configuration supplémentaire requise.
+
+## Structure
+
+```
+src/
+  proxy.ts                 # locale (next-intl) + rafraîchissement session Supabase
+  i18n/                    # routing, navigation, chargement des messages
+  lib/
+    supabase/              # clients browser / server / admin
+    actions/               # Server Actions (auth, annonces)
+    annonces.ts            # accès aux données
+    constants.ts, types.ts # domaine (espèces, provinces, statuts…)
+  components/              # en-tête, carte, formulaires, cartes d'annonce
+  app/[locale]/            # pages : accueil, recherche, annonces/[id],
+                           #         signaler, mes-annonces, connexion, inscription
+messages/                  # fr.json, en.json
+supabase/migrations/       # schéma SQL (à coller dans Supabase)
+```
+
+## Logo
+
+Le mark du logo est recréé en SVG dans [`src/components/logo.tsx`](src/components/logo.tsx).
+Pour utiliser le PNG officiel, déposez-le dans `public/` et remplacez
+`<LogoMark />` par une balise `<Image>`.

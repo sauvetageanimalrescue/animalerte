@@ -1,0 +1,182 @@
+{
+  "commun": {
+    "nomSite": "animALERTE",
+    "slogan": "Bringing pets home, together",
+    "chargement": "Loading…",
+    "enregistrer": "Save",
+    "annuler": "Cancel",
+    "supprimer": "Delete",
+    "retour": "Back",
+    "obligatoire": "required",
+    "optionnel": "optional"
+  },
+  "nav": {
+    "accueil": "Home",
+    "recherche": "Search",
+    "signaler": "Report",
+    "mesAnnonces": "My listings",
+    "connexion": "Sign in",
+    "inscription": "Sign up",
+    "deconnexion": "Sign out",
+    "changerLangue": "Français"
+  },
+  "especes": {
+    "chien": "Dog",
+    "chat": "Cat",
+    "oiseau": "Bird",
+    "lapin": "Rabbit",
+    "rongeur": "Rodent",
+    "reptile": "Reptile",
+    "autre": "Other"
+  },
+  "sexes": {
+    "male": "Male",
+    "femelle": "Female",
+    "inconnu": "Unknown"
+  },
+  "types": {
+    "perdu": "Lost",
+    "trouve": "Found",
+    "perduLong": "Lost pet",
+    "trouveLong": "Found pet"
+  },
+  "statuts": {
+    "actif": "Active",
+    "resolu": "Resolved"
+  },
+  "provinces": {
+    "AB": "Alberta",
+    "BC": "British Columbia",
+    "MB": "Manitoba",
+    "NB": "New Brunswick",
+    "NL": "Newfoundland and Labrador",
+    "NS": "Nova Scotia",
+    "NT": "Northwest Territories",
+    "NU": "Nunavut",
+    "ON": "Ontario",
+    "PE": "Prince Edward Island",
+    "QC": "Quebec",
+    "SK": "Saskatchewan",
+    "YT": "Yukon"
+  },
+  "accueil": {
+    "titre": "Lost a pet?\nEvery minute counts.",
+    "sousTitre": "animALERTE helps Canadian families find their pets. Report, search and share.",
+    "chercherCta": "Search for a pet",
+    "signalerPerduCta": "Report a lost pet",
+    "signalerTrouveCta": "I found a pet",
+    "recentesTitre": "Recent reports",
+    "recentesVoirTout": "See all reports",
+    "aucuneRecente": "No reports yet. Be the first to post one.",
+    "commentTitre": "How it works",
+    "etape1Titre": "Report",
+    "etape1Texte": "Create a listing with a photo, the location and the date.",
+    "etape2Titre": "Broadcast",
+    "etape2Texte": "Your listing appears instantly in search and on the map.",
+    "etape3Titre": "Reunite",
+    "etape3Texte": "The community reaches out as soon as a pet matches."
+  },
+  "recherche": {
+    "titre": "Search for a pet",
+    "motCle": "Keyword (name, breed, colour…)",
+    "type": "Listing type",
+    "espece": "Species",
+    "province": "Province",
+    "ville": "City",
+    "statut": "Status",
+    "tous": "All",
+    "toutes": "All",
+    "filtrer": "Filter",
+    "reinitialiser": "Reset",
+    "vueListe": "List",
+    "vueCarte": "Map",
+    "resultats": "{count, plural, =0 {No results} =1 {1 result} other {# results}}",
+    "aucunResultat": "No listing matches your search.",
+    "carteSansPosition": "Some listings have no location and don't appear on the map."
+  },
+  "annonce": {
+    "publieeLe": "Posted on {date}",
+    "disparuLe": "Lost on {date}",
+    "trouveLe": "Found on {date}",
+    "lieu": "Location",
+    "espece": "Species",
+    "race": "Breed",
+    "sexe": "Sex",
+    "couleur": "Colour",
+    "description": "Description",
+    "contact": "Contact information",
+    "contactNom": "Contact person",
+    "contactCourriel": "Email",
+    "contactTelephone": "Phone",
+    "sansNom": "No name",
+    "sansPhoto": "No photo",
+    "introuvable": "This listing cannot be found or was removed."
+  },
+  "formulaire": {
+    "titrePerdu": "Report a lost pet",
+    "titreTrouve": "Report a found pet",
+    "section": {
+      "type": "Report type",
+      "animal": "The pet",
+      "lieu": "Location and date",
+      "contact": "Your contact info",
+      "photo": "Photo"
+    },
+    "champ": {
+      "type": "I am reporting a",
+      "espece": "Species",
+      "nomAnimal": "Pet name",
+      "race": "Breed",
+      "sexe": "Sex",
+      "couleur": "Colour / distinctive marks",
+      "description": "Description",
+      "descriptionAide": "Behaviour, collar, microchip, particularities…",
+      "ville": "City",
+      "province": "Province",
+      "dateEvenement": "Date lost / found",
+      "position": "Location on the map",
+      "positionAide": "Click the map to pinpoint the location (optional).",
+      "contactNom": "Your name",
+      "contactCourriel": "Email",
+      "contactTelephone": "Phone",
+      "contactAide": "At least one contact method is required.",
+      "photo": "Pet photo"
+    },
+    "choisirPhoto": "Choose a photo",
+    "publier": "Publish listing",
+    "publication": "Publishing…",
+    "erreurContact": "Provide at least an email or a phone number.",
+    "erreurGenerale": "Something went wrong. Please try again.",
+    "succes": "Listing published successfully."
+  },
+  "auth": {
+    "connexionTitre": "Sign in",
+    "inscriptionTitre": "Create an account",
+    "nom": "Full name",
+    "courriel": "Email",
+    "telephone": "Phone",
+    "motDePasse": "Password",
+    "seConnecter": "Sign in",
+    "sInscrire": "Sign up",
+    "pasDeCompte": "No account yet?",
+    "dejaCompte": "Already have an account?",
+    "lienInscription": "Create an account",
+    "lienConnexion": "Sign in",
+    "erreurIdentifiants": "Invalid email or password.",
+    "erreurInscription": "Could not create the account. Please try again.",
+    "verifierCourriel": "Check your email to confirm your account, then sign in.",
+    "requisConnexion": "Sign in to publish a listing."
+  },
+  "mesAnnonces": {
+    "titre": "My listings",
+    "aucune": "You haven't published any listing.",
+    "creerCta": "Publish a listing",
+    "marquerResolu": "Mark as resolved",
+    "marquerActif": "Reopen",
+    "confirmerSuppression": "Permanently delete this listing?"
+  },
+  "pied": {
+    "description": "animALERTE is a free community service to help find lost pets across Canada.",
+    "droits": "All rights reserved."
+  }
+}

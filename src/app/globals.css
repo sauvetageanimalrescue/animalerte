@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f7f9;
+  --surface: #ffffff;
+  --foreground: #12222c;
+  --muted: #5b6b74;
+  --border: #dbe2e7;
+
+  /* Marque animALERTE : bleu marine + bleu clair + rouge alerte. */
+  --brand: #0c5679;
+  --brand-light: #3d87b3;
+  --brand-dark: #08405c;
+  --brand-soft: #dcebf3;
+  --accent: #ce1f2b;
+  --accent-soft: #fbe6e7;
+
+  /* Badges de statut : perdu = rouge alerte, trouvé = vert. */
+  --perdu: #ce1f2b;
+  --perdu-soft: #fbe6e7;
+  --trouve: #16a34a;
+  --trouve-soft: #e7f6ec;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-light: var(--brand-light);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-soft: var(--brand-soft);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-perdu: var(--perdu);
+  --color-perdu-soft: var(--perdu-soft);
+  --color-trouve: var(--trouve);
+  --color-trouve-soft: var(--trouve-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Leaflet : la tuile de carte doit rester au-dessus du fond mais sous l'en-tête. */
+.leaflet-container {
+  z-index: 0;
+  font: inherit;
 }

@@ -1,0 +1,182 @@
+{
+  "commun": {
+    "nomSite": "animALERTE",
+    "slogan": "Retrouvons nos animaux ensemble",
+    "chargement": "Chargement…",
+    "enregistrer": "Enregistrer",
+    "annuler": "Annuler",
+    "supprimer": "Supprimer",
+    "retour": "Retour",
+    "obligatoire": "obligatoire",
+    "optionnel": "optionnel"
+  },
+  "nav": {
+    "accueil": "Accueil",
+    "recherche": "Rechercher",
+    "signaler": "Signaler",
+    "mesAnnonces": "Mes annonces",
+    "connexion": "Connexion",
+    "inscription": "Inscription",
+    "deconnexion": "Déconnexion",
+    "changerLangue": "English"
+  },
+  "especes": {
+    "chien": "Chien",
+    "chat": "Chat",
+    "oiseau": "Oiseau",
+    "lapin": "Lapin",
+    "rongeur": "Rongeur",
+    "reptile": "Reptile",
+    "autre": "Autre"
+  },
+  "sexes": {
+    "male": "Mâle",
+    "femelle": "Femelle",
+    "inconnu": "Inconnu"
+  },
+  "types": {
+    "perdu": "Perdu",
+    "trouve": "Trouvé",
+    "perduLong": "Animal perdu",
+    "trouveLong": "Animal trouvé"
+  },
+  "statuts": {
+    "actif": "Actif",
+    "resolu": "Résolu"
+  },
+  "provinces": {
+    "AB": "Alberta",
+    "BC": "Colombie-Britannique",
+    "MB": "Manitoba",
+    "NB": "Nouveau-Brunswick",
+    "NL": "Terre-Neuve-et-Labrador",
+    "NS": "Nouvelle-Écosse",
+    "NT": "Territoires du Nord-Ouest",
+    "NU": "Nunavut",
+    "ON": "Ontario",
+    "PE": "Île-du-Prince-Édouard",
+    "QC": "Québec",
+    "SK": "Saskatchewan",
+    "YT": "Yukon"
+  },
+  "accueil": {
+    "titre": "Un animal perdu ?\nChaque minute compte.",
+    "sousTitre": "animALERTE aide les familles canadiennes à retrouver leurs animaux de compagnie. Signalez, cherchez et partagez.",
+    "chercherCta": "Rechercher un animal",
+    "signalerPerduCta": "Signaler un animal perdu",
+    "signalerTrouveCta": "J'ai trouvé un animal",
+    "recentesTitre": "Signalements récents",
+    "recentesVoirTout": "Voir tous les signalements",
+    "aucuneRecente": "Aucun signalement pour l'instant. Soyez le premier à en publier un.",
+    "commentTitre": "Comment ça marche",
+    "etape1Titre": "Signalez",
+    "etape1Texte": "Créez une annonce avec une photo, le lieu et la date de disparition.",
+    "etape2Titre": "Diffusez",
+    "etape2Texte": "Votre annonce apparaît immédiatement dans la recherche et sur la carte.",
+    "etape3Titre": "Retrouvez",
+    "etape3Texte": "La communauté vous contacte dès qu'un animal correspond."
+  },
+  "recherche": {
+    "titre": "Rechercher un animal",
+    "motCle": "Mot-clé (nom, race, couleur…)",
+    "type": "Type d'annonce",
+    "espece": "Espèce",
+    "province": "Province",
+    "ville": "Ville",
+    "statut": "Statut",
+    "tous": "Tous",
+    "toutes": "Toutes",
+    "filtrer": "Filtrer",
+    "reinitialiser": "Réinitialiser",
+    "vueListe": "Liste",
+    "vueCarte": "Carte",
+    "resultats": "{count, plural, =0 {Aucun résultat} =1 {1 résultat} other {# résultats}}",
+    "aucunResultat": "Aucune annonce ne correspond à votre recherche.",
+    "carteSansPosition": "Certaines annonces n'ont pas de position et n'apparaissent pas sur la carte."
+  },
+  "annonce": {
+    "publieeLe": "Publiée le {date}",
+    "disparuLe": "Disparu le {date}",
+    "trouveLe": "Trouvé le {date}",
+    "lieu": "Lieu",
+    "espece": "Espèce",
+    "race": "Race",
+    "sexe": "Sexe",
+    "couleur": "Couleur",
+    "description": "Description",
+    "contact": "Coordonnées de contact",
+    "contactNom": "Personne à contacter",
+    "contactCourriel": "Courriel",
+    "contactTelephone": "Téléphone",
+    "sansNom": "Sans nom",
+    "sansPhoto": "Aucune photo",
+    "introuvable": "Cette annonce est introuvable ou a été retirée."
+  },
+  "formulaire": {
+    "titrePerdu": "Signaler un animal perdu",
+    "titreTrouve": "Signaler un animal trouvé",
+    "section": {
+      "type": "Type de signalement",
+      "animal": "L'animal",
+      "lieu": "Lieu et date",
+      "contact": "Vos coordonnées",
+      "photo": "Photo"
+    },
+    "champ": {
+      "type": "Je signale un animal",
+      "espece": "Espèce",
+      "nomAnimal": "Nom de l'animal",
+      "race": "Race",
+      "sexe": "Sexe",
+      "couleur": "Couleur / signes distinctifs",
+      "description": "Description",
+      "descriptionAide": "Comportement, collier, puce, particularités…",
+      "ville": "Ville",
+      "province": "Province",
+      "dateEvenement": "Date de la disparition / découverte",
+      "position": "Position sur la carte",
+      "positionAide": "Cliquez sur la carte pour préciser le lieu (optionnel).",
+      "contactNom": "Votre nom",
+      "contactCourriel": "Courriel",
+      "contactTelephone": "Téléphone",
+      "contactAide": "Au moins un moyen de contact est requis.",
+      "photo": "Photo de l'animal"
+    },
+    "choisirPhoto": "Choisir une photo",
+    "publier": "Publier l'annonce",
+    "publication": "Publication…",
+    "erreurContact": "Indiquez au moins un courriel ou un téléphone.",
+    "erreurGenerale": "Une erreur est survenue. Réessayez.",
+    "succes": "Annonce publiée avec succès."
+  },
+  "auth": {
+    "connexionTitre": "Connexion",
+    "inscriptionTitre": "Créer un compte",
+    "nom": "Nom complet",
+    "courriel": "Courriel",
+    "telephone": "Téléphone",
+    "motDePasse": "Mot de passe",
+    "seConnecter": "Se connecter",
+    "sInscrire": "S'inscrire",
+    "pasDeCompte": "Pas encore de compte ?",
+    "dejaCompte": "Vous avez déjà un compte ?",
+    "lienInscription": "Créer un compte",
+    "lienConnexion": "Se connecter",
+    "erreurIdentifiants": "Courriel ou mot de passe invalide.",
+    "erreurInscription": "Impossible de créer le compte. Réessayez.",
+    "verifierCourriel": "Vérifiez votre courriel pour confirmer votre compte, puis connectez-vous.",
+    "requisConnexion": "Connectez-vous pour publier une annonce."
+  },
+  "mesAnnonces": {
+    "titre": "Mes annonces",
+    "aucune": "Vous n'avez publié aucune annonce.",
+    "creerCta": "Publier une annonce",
+    "marquerResolu": "Marquer comme résolu",
+    "marquerActif": "Rouvrir",
+    "confirmerSuppression": "Supprimer définitivement cette annonce ?"
+  },
+  "pied": {
+    "description": "animALERTE est un service communautaire gratuit pour retrouver les animaux de compagnie perdus au Canada.",
+    "droits": "Tous droits réservés."
+  }
+}

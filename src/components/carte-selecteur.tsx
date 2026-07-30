@@ -1,0 +1,58 @@
+"use client";
+
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+
+const CENTRE_CANADA: [number, number] = [56.13, -96.35];
+
+const icone = L.divIcon({
+  className: "",
+  html: `<div style="width:20px;height:20px;border-radius:50% 50% 50% 0;background:#0c5679;transform:rotate(-45deg);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4)"></div>`,
+  iconSize: [20, 20],
+  iconAnchor: [10, 20],
+});
+
+function GestionClic({
+  onPick,
+}: {
+  onPick: (lat: number, lng: number) => void;
+}) {
+  useMapEvents({
+    click(e) {
+      onPick(e.latlng.lat, e.latlng.lng);
+    },
+  });
+  return null;
+}
+
+export default function CarteSelecteur({
+  lat,
+  lng,
+  onPick,
+}: {
+  lat: number | null;
+  lng: number | null;
+  onPick: (lat: number, lng: number) => void;
+}) {
+  const centre: [number, number] =
+    lat != null && lng != null ? [lat, lng] : CENTRE_CANADA;
+
+  return (
+    <MapContainer
+      center={centre}
+      zoom={lat != null ? 12 : 4}
+      scrollWheelZoom
+      className="h-72 w-full rounded-2xl border border-border"
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <GestionClic onPick={onPick} />
+      {lat != null && lng != null && (
+        <Marker position={[lat, lng]} icon={icone} />
+      )}
+    </MapContainer>
+  );
+}
