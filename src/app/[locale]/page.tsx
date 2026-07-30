@@ -113,7 +113,7 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
           <p className="text-xs font-bold uppercase tracking-widest text-accent">
             {m("flairUnique")}
           </p>
-          <div className="mt-3 text-4xl font-extrabold tracking-tight md:text-5xl">
+          <div className="mt-3 text-5xl font-extrabold tracking-tight">
             <FlairWord /> <span className="italic text-muted">{m("flairVerbe")}</span>
           </div>
 
