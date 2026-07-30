@@ -10,13 +10,12 @@ import {
   IconWorld,
   IconUsers,
   IconMap2,
-  IconSparkles,
   IconArrowRight,
 } from "@tabler/icons-react";
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { obtenirAnnoncesRecentes } from "@/lib/annonces";
 import { AnnonceCard } from "@/components/annonce-card";
-import Image from "next/image";
 import { FlairWord } from "@/components/logo";
 
 export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
@@ -74,20 +73,8 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
           <h1 className="max-w-2xl whitespace-pre-line text-3xl font-extrabold tracking-tight text-brand-soft md:text-5xl">
             {t("titre")}
           </h1>
-          <p className="hidden max-w-xl text-lg text-white/80 md:block">
-            {t("sousTitre")}
-          </p>
 
-          <p className="flex max-w-xl items-center gap-2 rounded-2xl bg-white px-4 py-2.5 text-sm font-semibold text-brand-dark shadow-sm">
-            <IconSparkles size={18} className="shrink-0 text-accent" />
-            <span>
-              {m.rich("usp", {
-                flair: () => <FlairWord className="font-extrabold" />,
-              })}
-            </span>
-          </p>
-
-          <div className="mt-1 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/signaler?type=perdu"
               className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-white transition hover:brightness-95"
