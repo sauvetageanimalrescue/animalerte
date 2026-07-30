@@ -71,57 +71,57 @@ export async function SiteHeader() {
           )}
         </div>
 
-        {/* Menu mobile : disclosure natif, sans JavaScript. */}
-        <details className="relative ml-auto md:hidden">
-          <summary className="flex cursor-pointer list-none items-center rounded-full border border-border p-2 text-brand-dark">
-            <IconMenu2 size={20} />
-          </summary>
-          <div className="absolute right-0 mt-2 flex w-56 flex-col gap-1 rounded-xl border border-border bg-surface p-2 shadow-lg">
-            {liens.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-brand-soft"
-              >
-                {l.label}
-              </Link>
-            ))}
-            <Link
-              href="/signaler"
-              className="rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-white"
-            >
-              {t("signaler")}
-            </Link>
-            {user ? (
-              <>
+        {/* Mobile : bouton de langue à gauche du menu hamburger. */}
+        <div className="ml-auto flex items-center gap-2 md:hidden">
+          <LanguageSwitcher />
+          <details className="relative">
+            <summary className="flex cursor-pointer list-none items-center rounded-full border border-border p-2 text-brand-dark">
+              <IconMenu2 size={20} />
+            </summary>
+            <div className="absolute right-0 mt-2 flex w-56 flex-col gap-1 rounded-xl border border-border bg-surface p-2 shadow-lg">
+              {liens.map((l) => (
                 <Link
-                  href="/mes-annonces"
+                  key={l.href}
+                  href={l.href}
                   className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-brand-soft"
                 >
-                  {t("mesAnnonces")}
+                  {l.label}
                 </Link>
-                <form action={seDeconnecter}>
-                  <button
-                    type="submit"
-                    className="w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-muted hover:bg-brand-soft"
-                  >
-                    {t("deconnexion")}
-                  </button>
-                </form>
-              </>
-            ) : (
+              ))}
               <Link
-                href="/connexion"
-                className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-brand-soft"
+                href="/signaler"
+                className="rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-white"
               >
-                {t("connexion")}
+                {t("signaler")}
               </Link>
-            )}
-            <div className="border-t border-border pt-2">
-              <LanguageSwitcher />
+              {user ? (
+                <>
+                  <Link
+                    href="/mes-annonces"
+                    className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-brand-soft"
+                  >
+                    {t("mesAnnonces")}
+                  </Link>
+                  <form action={seDeconnecter}>
+                    <button
+                      type="submit"
+                      className="w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-muted hover:bg-brand-soft"
+                    >
+                      {t("deconnexion")}
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <Link
+                  href="/connexion"
+                  className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-brand-soft"
+                >
+                  {t("connexion")}
+                </Link>
+              )}
             </div>
-          </div>
-        </details>
+          </details>
+        </div>
       </div>
     </header>
   );
