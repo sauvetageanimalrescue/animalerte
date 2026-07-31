@@ -118,9 +118,11 @@ export function Wordmark({ className }: { className?: string }) {
 }
 
 // Wordmark « flAIr » : « fl » et « r » marine, « AI » rouge (le AI dans le mot).
+// letterSpacing léger : désactive la ligature « fl » et sépare le « f » du « l »
+// pour que le « l » reste bien visible (sinon la police le colle au « f »).
 export function FlairWord({ className }: { className?: string }) {
   return (
-    <span className={className}>
+    <span className={className} style={{ letterSpacing: "0.02em" }}>
       <span className="text-brand-dark">fl</span>
       <span className="text-accent">AI</span>
       <span className="text-brand-dark">r</span>
