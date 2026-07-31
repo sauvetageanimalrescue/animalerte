@@ -190,11 +190,15 @@ export function FormulaireAnnonce({
             {tSection("lieu")}
           </legend>
           <label className={label}>
-            {tChamp("ville")} <span className="text-accent">*</span>
+            <span>
+              {tChamp("ville")} <span className="text-accent">*</span>
+            </span>
             <input name="ville" type="text" required className={champ} />
           </label>
           <label className={label}>
-            {tChamp("province")} <span className="text-accent">*</span>
+            <span>
+              {tChamp("province")} <span className="text-accent">*</span>
+            </span>
             <select name="province" defaultValue="QC" required className={champ}>
               {PROVINCES.map((v) => (
                 <option key={v} value={v}>
@@ -204,7 +208,9 @@ export function FormulaireAnnonce({
             </select>
           </label>
           <label className={label}>
-            {tChamp("dateEvenement")} <span className="text-accent">*</span>
+            <span>
+              {tChamp("dateEvenement")} <span className="text-accent">*</span>
+            </span>
             <input
               name="date_evenement"
               type="date"
@@ -259,7 +265,9 @@ export function FormulaireAnnonce({
             {tSection("contact")}
           </legend>
           <label className={label}>
-            {tChamp("contactNom")} <span className="text-accent">*</span>
+            <span>
+              {tChamp("contactNom")} <span className="text-accent">*</span>
+            </span>
             <input
               name="contact_nom"
               type="text"
@@ -269,7 +277,9 @@ export function FormulaireAnnonce({
             />
           </label>
           <label className={label}>
-            {tChamp("contactPrenom")} <span className="text-accent">*</span>
+            <span>
+              {tChamp("contactPrenom")} <span className="text-accent">*</span>
+            </span>
             <input name="contact_prenom" type="text" required className={champ} />
           </label>
           <label className={`${label} sm:col-span-2`}>
