@@ -162,6 +162,7 @@
       "contactNom": "Nom",
       "contactPrenom": "Prénom",
       "contactAdresse": "Adresse de facturation",
+      "contactAdresseTrouve": "Adresse",
       "contactCourriel": "Courriel",
       "contactTelephone": "Téléphone",
       "contactAide": "Au moins un moyen de contact est requis.",

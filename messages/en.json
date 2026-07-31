@@ -162,6 +162,7 @@
       "contactNom": "Last name",
       "contactPrenom": "First name",
       "contactAdresse": "Billing address",
+      "contactAdresseTrouve": "Address",
       "contactCourriel": "Email",
       "contactTelephone": "Phone",
       "contactAide": "At least one contact method is required.",

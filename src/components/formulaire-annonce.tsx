@@ -276,7 +276,9 @@ export function FormulaireAnnonce({
           </label>
           <label className={`${label} sm:col-span-2`}>
             <span>
-              {tChamp("contactAdresse")}{" "}
+              {type === "perdu"
+                ? tChamp("contactAdresse")
+                : tChamp("contactAdresseTrouve")}{" "}
               {type === "perdu" && <span className="text-accent">*</span>}
             </span>
             <ChampAdresse
