@@ -117,6 +117,7 @@
   "formulaire": {
     "titrePerdu": "Signaler un animal perdu",
     "titreTrouve": "Signaler un animal trouvé",
+    "choixTitre": "Que voulez-vous signaler ?",
     "section": {
       "type": "Type de signalement",
       "animal": "L'animal",

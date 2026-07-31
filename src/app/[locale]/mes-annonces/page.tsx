@@ -31,15 +31,24 @@ export default async function MesAnnoncesPage({
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-2xl font-bold text-brand-dark">{t("titre")}</h1>
-        <Link
-          href="/signaler"
-          className="inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:brightness-95"
-        >
-          <IconPlus size={16} />
-          {t("creerCta")}
-        </Link>
+        <div className="flex flex-wrap gap-2">
+          <Link
+            href="/signaler?type=perdu"
+            className="inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:brightness-95"
+          >
+            <IconPlus size={16} />
+            {tT("perduLong")}
+          </Link>
+          <Link
+            href="/signaler?type=trouve"
+            className="inline-flex items-center gap-1.5 rounded-full bg-trouve px-4 py-2 text-sm font-semibold text-white transition hover:brightness-95"
+          >
+            <IconPlus size={16} />
+            {tT("trouveLong")}
+          </Link>
+        </div>
       </div>
 
       {annonces.length === 0 ? (

@@ -117,6 +117,7 @@
   "formulaire": {
     "titrePerdu": "Report a lost pet",
     "titreTrouve": "Report a found pet",
+    "choixTitre": "What would you like to report?",
     "section": {
       "type": "Report type",
       "animal": "The pet",
