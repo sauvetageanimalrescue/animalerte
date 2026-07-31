@@ -16,7 +16,6 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { obtenirAnnoncesRecentes } from "@/lib/annonces";
 import { AnnonceCard } from "@/components/annonce-card";
-import { FlairWord } from "@/components/logo";
 
 export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -63,7 +62,7 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
 
         <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-14 text-center md:py-20">
           <Image
-            src="/logo-blanc.png"
+            src="/logos-combo-blanc.png"
             alt="animALERTE · flAIr"
             width={420}
             height={170}
@@ -105,8 +104,17 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
           <p className="text-xs font-bold uppercase tracking-widest text-accent">
             {m("flairUnique")}
           </p>
-          <div className="mt-3 text-5xl font-extrabold tracking-tight">
-            <FlairWord /> <span className="italic text-muted">{m("flairVerbe")}</span>
+          <div className="mt-3 flex items-center justify-center gap-3">
+            <Image
+              src="/flair-couleur.png"
+              alt="flAIr"
+              width={220}
+              height={110}
+              className="h-11 w-auto md:h-14"
+            />
+            <span className="text-4xl font-extrabold italic tracking-tight text-muted md:text-5xl">
+              {m("flairVerbe")}
+            </span>
           </div>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-3">

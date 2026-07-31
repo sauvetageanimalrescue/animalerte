@@ -1,6 +1,7 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { Logo, FlairWord } from "./logo";
+import { Logo } from "./logo";
 
 export async function SiteFooter() {
   const [t, nav] = await Promise.all([
@@ -45,7 +46,13 @@ export async function SiteFooter() {
           <div className="flex items-center gap-4">
             <Logo className="h-12 w-auto" />
             <span className="h-9 w-px bg-border" aria-hidden />
-            <FlairWord className="text-2xl font-extrabold tracking-tight" />
+            <Image
+              src="/flair-couleur.png"
+              alt="flAIr"
+              width={120}
+              height={60}
+              className="h-7 w-auto"
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
