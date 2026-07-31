@@ -192,7 +192,17 @@
     "erreurIdentifiants": "Invalid email or password.",
     "erreurInscription": "Could not create the account. Please try again.",
     "verifierCourriel": "Check your email to confirm your account, then sign in.",
-    "requisConnexion": "Sign in to publish a listing."
+    "requisConnexion": "Sign in to publish a listing.",
+    "oubliMotDePasse": "Forgot your password?",
+    "reinitTitre": "Reset your password",
+    "reinitInstruction": "Enter your email. We'll send you a link to choose a new password.",
+    "reinitEnvoyer": "Send the link",
+    "reinitEnvoye": "If an account exists for this email, a link was just sent. Check your inbox.",
+    "definirTitre": "New password",
+    "nouveauMotDePasse": "New password",
+    "definirBouton": "Save password",
+    "definiSucces": "Password updated. You can now sign in.",
+    "erreurReinit": "Could not send the link. Please try again."
   },
   "mesAnnonces": {
     "titre": "My listings",

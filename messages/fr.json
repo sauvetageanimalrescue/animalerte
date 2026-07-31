@@ -192,7 +192,17 @@
     "erreurIdentifiants": "Courriel ou mot de passe invalide.",
     "erreurInscription": "Impossible de créer le compte. Réessayez.",
     "verifierCourriel": "Vérifiez votre courriel pour confirmer votre compte, puis connectez-vous.",
-    "requisConnexion": "Connectez-vous pour publier une annonce."
+    "requisConnexion": "Connectez-vous pour publier une annonce.",
+    "oubliMotDePasse": "Mot de passe oublié ?",
+    "reinitTitre": "Réinitialiser le mot de passe",
+    "reinitInstruction": "Entrez votre courriel. On vous enverra un lien pour choisir un nouveau mot de passe.",
+    "reinitEnvoyer": "Envoyer le lien",
+    "reinitEnvoye": "Si un compte existe pour ce courriel, un lien vient d'être envoyé. Vérifiez votre boîte de réception.",
+    "definirTitre": "Nouveau mot de passe",
+    "nouveauMotDePasse": "Nouveau mot de passe",
+    "definirBouton": "Enregistrer le mot de passe",
+    "definiSucces": "Mot de passe mis à jour. Vous pouvez maintenant vous connecter.",
+    "erreurReinit": "Impossible d'envoyer le lien. Réessayez."
   },
   "mesAnnonces": {
     "titre": "Mes annonces",

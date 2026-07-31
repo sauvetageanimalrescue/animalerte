@@ -37,6 +37,7 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Tout sauf les fichiers statiques, l'API et les ressources internes Next.
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  // Tout sauf les fichiers statiques, l'API, le callback d'auth et les
+  // ressources internes Next.
+  matcher: ["/((?!api|auth|_next|_vercel|.*\\..*).*)"],
 };

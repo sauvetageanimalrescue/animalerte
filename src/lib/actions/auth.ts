@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { getLocale, getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
@@ -52,4 +53,41 @@ export async function inscription(
   }
 
   return { message: t("verifierCourriel") };
+}
+
+// Envoie le courriel de réinitialisation avec un lien vers /reinitialiser.
+export async function resetMotDePasse(
+  _prev: EtatAuth,
+  formData: FormData,
+): Promise<EtatAuth> {
+  const t = await getTranslations("auth");
+  const courriel = String(formData.get("courriel") ?? "").trim();
+  const locale = await getLocale();
+
+  const h = await headers();
+  const host = h.get("host") ?? "";
+  const proto =
+    host.startsWith("localhost") || host.startsWith("127.") ? "http" : "https";
+  const origin = `${proto}://${host}`;
+
+  const supabase = await createClient();
+  const { error } = await supabase.auth.resetPasswordForEmail(courriel, {
+    redirectTo: `${origin}/auth/callback?next=/${locale}/reinitialiser`,
+  });
+  if (error) return { erreur: t("erreurReinit") };
+  return { message: t("reinitEnvoye") };
+}
+
+// Définit le nouveau mot de passe (dans la session de récupération).
+export async function definirMotDePasse(
+  _prev: EtatAuth,
+  formData: FormData,
+): Promise<EtatAuth> {
+  const t = await getTranslations("auth");
+  const motDePasse = String(formData.get("motDePasse") ?? "");
+
+  const supabase = await createClient();
+  const { error } = await supabase.auth.updateUser({ password: motDePasse });
+  if (error) return { erreur: t("erreurReinit") };
+  return { message: t("definiSucces") };
 }

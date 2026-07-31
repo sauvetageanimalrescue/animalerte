@@ -71,17 +71,36 @@ export function AuthForm({ mode }: { mode: "connexion" | "inscription" }) {
         >
           {mode === "connexion" ? t("seConnecter") : t("sInscrire")}
         </button>
+
+        {mode === "connexion" && (
+          <>
+            <Link
+              href="/inscription"
+              className="rounded-full bg-brand-light px-4 py-2.5 text-center font-semibold text-white transition hover:brightness-95"
+            >
+              {t("lienInscription")}
+            </Link>
+            <Link
+              href="/mot-de-passe-oublie"
+              className="text-center text-sm text-muted hover:text-brand-dark"
+            >
+              {t("oubliMotDePasse")}
+            </Link>
+          </>
+        )}
       </form>
 
-      <p className="mt-6 text-center text-sm text-muted">
-        {mode === "connexion" ? t("pasDeCompte") : t("dejaCompte")}{" "}
-        <Link
-          href={mode === "connexion" ? "/inscription" : "/connexion"}
-          className="font-semibold text-brand hover:text-brand-dark"
-        >
-          {mode === "connexion" ? t("lienInscription") : t("lienConnexion")}
-        </Link>
-      </p>
+      {mode === "inscription" && (
+        <p className="mt-6 text-center text-sm text-muted">
+          {t("dejaCompte")}{" "}
+          <Link
+            href="/connexion"
+            className="font-semibold text-brand hover:text-brand-dark"
+          >
+            {t("lienConnexion")}
+          </Link>
+        </p>
+      )}
     </div>
   );
 }
