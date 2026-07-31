@@ -16,6 +16,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { obtenirAnnoncesRecentes } from "@/lib/annonces";
 import { AnnonceCard } from "@/components/annonce-card";
+import { FlairWord } from "@/components/logo";
 
 export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -104,15 +105,9 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
           <p className="text-xs font-bold uppercase tracking-widest text-accent">
             {m("flairUnique")}
           </p>
-          <div className="mt-3 flex items-center justify-center gap-3">
-            <Image
-              src="/flair-couleur.png"
-              alt="flAIr"
-              width={220}
-              height={110}
-              className="h-11 w-auto md:h-14"
-            />
-            <span className="text-4xl font-extrabold italic tracking-tight text-muted md:text-5xl">
+          <div className="mt-3 text-4xl font-extrabold md:text-5xl">
+            <FlairWord />{" "}
+            <span className="italic tracking-tight text-muted">
               {m("flairVerbe")}
             </span>
           </div>
