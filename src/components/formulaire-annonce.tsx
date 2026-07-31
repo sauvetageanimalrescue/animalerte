@@ -13,6 +13,7 @@ import {
   publierAnnonce,
   type EtatAnnonce,
 } from "@/lib/actions/annonces";
+import { ChampAdresse } from "@/components/champ-adresse";
 
 const CarteSelecteur = dynamic(
   () => import("@/components/carte-selecteur"),
@@ -224,7 +225,11 @@ export function FormulaireAnnonce({
           </label>
           <label className={`${label} sm:col-span-2`}>
             {tChamp("adresse")}
-            <input name="adresse" type="text" className={champ} />
+            <ChampAdresse
+              name="adresse"
+              className={champ}
+              onSelect={(_a, lat, lng) => setPos({ lat, lng })}
+            />
           </label>
           <div className="sm:col-span-2">
             <p className="mb-2 text-sm font-medium text-muted">
@@ -284,7 +289,7 @@ export function FormulaireAnnonce({
           </label>
           <label className={`${label} sm:col-span-2`}>
             {tChamp("contactAdresse")}
-            <input name="contact_adresse" type="text" className={champ} />
+            <ChampAdresse name="contact_adresse" className={champ} />
           </label>
           <label className={label}>
             {tChamp("contactCourriel")}

@@ -1,6 +1,13 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import { useEffect } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -24,6 +31,15 @@ function GestionClic({
       onPick(e.latlng.lat, e.latlng.lng);
     },
   });
+  return null;
+}
+
+// Recentre la carte quand la position change (ex. adresse choisie).
+function Recentrer({ lat, lng }: { lat: number | null; lng: number | null }) {
+  const map = useMap();
+  useEffect(() => {
+    if (lat != null && lng != null) map.setView([lat, lng], 15);
+  }, [lat, lng, map]);
   return null;
 }
 
@@ -51,6 +67,7 @@ export default function CarteSelecteur({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <GestionClic onPick={onPick} />
+      <Recentrer lat={lat} lng={lng} />
       {lat != null && lng != null && (
         <Marker position={[lat, lng]} icon={icone} />
       )}
