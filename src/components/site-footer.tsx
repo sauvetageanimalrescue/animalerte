@@ -27,6 +27,7 @@ export async function SiteFooter() {
         { href: "/forfaits", label: t("forfaits") },
         { href: "#", label: "flAIr" },
         { href: "#", label: t("sentinelles") },
+        { href: "/faq", label: t("faq") },
       ],
     },
     {

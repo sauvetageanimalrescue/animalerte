@@ -207,6 +207,48 @@
     "definiSucces": "Password updated. You can now sign in.",
     "erreurReinit": "Could not send the link. Please try again."
   },
+  "faq": {
+    "titre": "Frequently asked questions",
+    "sousTitre": "Everything you need to know to report, search and find a pet with animALERTE.",
+    "items": [
+      {
+        "q": "Is it free to post a listing?",
+        "r": "Reporting a found pet is always free. For a lost pet, a free plan lets you post on animalerte.ca, and paid plans widen the reach of your alert."
+      },
+      {
+        "q": "How long does my listing stay online?",
+        "r": "A listing stays online for 365 days while the pet is still being sought."
+      },
+      {
+        "q": "Do I need an account to post?",
+        "r": "Yes. A free account lets you post, edit and manage your listings in one place."
+      },
+      {
+        "q": "What is the difference between the plans?",
+        "r": "The plan sets the reach of your alert, from your immediate neighbourhood to all of Quebec. The wider the reach, the more people search with you."
+      },
+      {
+        "q": "What is flAIr?",
+        "r": "flAIr is our artificial intelligence system that recognizes a pet's face, meaning its coat, its markings and its eye colour, then alerts you the moment a found pet looks like yours."
+      },
+      {
+        "q": "What is a Sentinel?",
+        "r": "A Sentinel is a person or business, such as a vet, a pet store or a citizen, who receives alerts for their area and helps reunite families with their pet."
+      },
+      {
+        "q": "I found my pet, what should I do?",
+        "r": "Go to “My listings” and mark the listing as resolved. Your story encourages the whole community."
+      },
+      {
+        "q": "Which area does animALERTE cover?",
+        "r": "animALERTE focuses on Quebec, while remaining available in both French and English."
+      },
+      {
+        "q": "How do I edit or remove my listing?",
+        "r": "From “My listings”, you can reopen, mark as resolved or delete a listing at any time."
+      }
+    ]
+  },
   "mesAnnonces": {
     "titre": "My listings",
     "aucune": "You haven't published any listing.",
@@ -223,6 +265,7 @@
     "apropos": "About",
     "forfaits": "Plans",
     "sentinelles": "Sentinels",
+    "faq": "FAQ",
     "conditions": "Terms of use",
     "confidentialite": "Privacy",
     "contact": "Contact"

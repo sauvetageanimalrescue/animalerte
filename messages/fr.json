@@ -207,6 +207,48 @@
     "definiSucces": "Mot de passe mis à jour. Vous pouvez maintenant vous connecter.",
     "erreurReinit": "Impossible d'envoyer le lien. Réessayez."
   },
+  "faq": {
+    "titre": "Foire aux questions",
+    "sousTitre": "Tout ce qu'il faut savoir pour signaler, chercher et retrouver un animal avec animALERTE.",
+    "items": [
+      {
+        "q": "Est-ce gratuit de publier une annonce ?",
+        "r": "Signaler un animal trouvé est toujours gratuit. Pour un animal perdu, un forfait gratuit permet de publier sur animalerte.ca, et des forfaits payants élargissent la portée de votre alerte."
+      },
+      {
+        "q": "Combien de temps mon annonce reste-t-elle en ligne ?",
+        "r": "Une annonce reste en ligne pendant 365 jours tant que l'animal est toujours recherché."
+      },
+      {
+        "q": "Dois-je créer un compte pour publier ?",
+        "r": "Oui. Un compte gratuit vous permet de publier, de modifier et de gérer vos annonces au même endroit."
+      },
+      {
+        "q": "Quelle est la différence entre les forfaits ?",
+        "r": "Le forfait détermine la portée de votre alerte, de votre quartier immédiat jusqu'à tout le Québec. Plus la portée est large, plus de gens cherchent avec vous."
+      },
+      {
+        "q": "Qu'est-ce que flAIr ?",
+        "r": "flAIr est notre système d'intelligence artificielle qui reconnaît le visage d'un animal, soit son pelage, ses marques et la couleur de ses yeux, puis vous prévient dès qu'un animal trouvé lui ressemble."
+      },
+      {
+        "q": "Qu'est-ce qu'une Sentinelle ?",
+        "r": "Une Sentinelle est une personne ou un commerce, comme un vétérinaire, une animalerie ou un citoyen, qui reçoit les alertes de son secteur et aide à réunir les familles avec leur animal."
+      },
+      {
+        "q": "J'ai retrouvé mon animal, que dois-je faire ?",
+        "r": "Rendez-vous dans « Mes annonces » et marquez l'annonce comme résolue. Votre histoire encourage toute la communauté."
+      },
+      {
+        "q": "Quelle région couvre animALERTE ?",
+        "r": "animALERTE est axé sur le Québec, tout en restant offert en français et en anglais."
+      },
+      {
+        "q": "Comment modifier ou retirer mon annonce ?",
+        "r": "Depuis « Mes annonces », vous pouvez rouvrir, marquer comme résolue ou supprimer une annonce en tout temps."
+      }
+    ]
+  },
   "mesAnnonces": {
     "titre": "Mes annonces",
     "aucune": "Vous n'avez publié aucune annonce.",
@@ -223,6 +265,7 @@
     "apropos": "À propos",
     "forfaits": "Forfaits",
     "sentinelles": "Sentinelles",
+    "faq": "Foire aux questions",
     "conditions": "Conditions d'utilisation",
     "confidentialite": "Confidentialité",
     "contact": "Contact"
