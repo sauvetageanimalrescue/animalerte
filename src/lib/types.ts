@@ -10,19 +10,34 @@ import type {
 export type Annonce = {
   id: string;
   user_id: string;
+  numero_dossier: string | null;
   type: TypeAnnonce;
   statut: StatutAnnonce;
   espece: Espece;
   race: string | null;
   nom_animal: string | null;
   sexe: Sexe;
+  age: string | null;
+  poids: string | null;
   couleur: string | null;
+  couleur_yeux: string | null;
+  signes_distinctifs: string | null;
+  sterilise: boolean | null;
+  micropuce: boolean | null;
+  micropuce_numero: string | null;
+  accessoires: string | null;
+  temperament: string | null;
   description: string | null;
   ville: string;
   province: Province;
+  adresse: string | null;
+  dernier_lieu_vu: string | null;
   latitude: number | null;
   longitude: number | null;
   date_evenement: string; // date ISO (YYYY-MM-DD)
+  heure_approx: string | null;
+  recompense: boolean;
+  recompense_montant: string | null;
   contact_nom: string;
   contact_courriel: string | null;
   contact_telephone: string | null;

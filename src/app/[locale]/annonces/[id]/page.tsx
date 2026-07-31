@@ -21,7 +21,7 @@ export default async function AnnoncePage({
   setRequestLocale(locale);
   const annonce = await obtenirAnnonce(id);
 
-  const [t, tE, tT, tS, tSexe, tP, tC] = await Promise.all([
+  const [t, tE, tT, tS, tSexe, tP, tC, tChamp, tF] = await Promise.all([
     getTranslations("annonce"),
     getTranslations("especes"),
     getTranslations("types"),
@@ -29,6 +29,8 @@ export default async function AnnoncePage({
     getTranslations("sexes"),
     getTranslations("provinces"),
     getTranslations("commun"),
+    getTranslations("formulaire.champ"),
+    getTranslations("formulaire"),
   ]);
 
   if (!annonce) {
@@ -45,11 +47,40 @@ export default async function AnnoncePage({
       ? t("disparuLe", { date: formaterDate(annonce.date_evenement, locale) })
       : t("trouveLe", { date: formaterDate(annonce.date_evenement, locale) });
 
+  const ouiNon = (b: boolean | null) =>
+    b === null ? null : b ? tF("oui") : tF("non");
+  const micropuceVal =
+    annonce.micropuce === null
+      ? null
+      : annonce.micropuce_numero
+        ? `${ouiNon(true)} (${annonce.micropuce_numero})`
+        : ouiNon(annonce.micropuce);
+
+  const opt = (label: string, valeur: string | null | undefined) =>
+    valeur ? [{ label, valeur }] : [];
+
   const lignes: { label: string; valeur: string }[] = [
     { label: t("espece"), valeur: tE(annonce.espece) },
-    ...(annonce.race ? [{ label: t("race"), valeur: annonce.race }] : []),
+    ...opt(t("race"), annonce.race),
     { label: t("sexe"), valeur: tSexe(annonce.sexe) },
-    ...(annonce.couleur ? [{ label: t("couleur"), valeur: annonce.couleur }] : []),
+    ...opt(tChamp("age"), annonce.age),
+    ...opt(tChamp("poids"), annonce.poids),
+    ...opt(t("couleur"), annonce.couleur),
+    ...opt(tChamp("couleurYeux"), annonce.couleur_yeux),
+    ...opt(tChamp("signesDistinctifs"), annonce.signes_distinctifs),
+    ...opt(tChamp("sterilise"), ouiNon(annonce.sterilise)),
+    ...opt(tChamp("micropuce"), micropuceVal),
+    ...opt(tChamp("accessoires"), annonce.accessoires),
+    ...opt(tChamp("temperament"), annonce.temperament),
+    ...opt(tChamp("heure"), annonce.heure_approx),
+    ...opt(tChamp("adresse"), annonce.adresse),
+    ...opt(tChamp("dernierLieuVu"), annonce.dernier_lieu_vu),
+    ...opt(
+      tChamp("recompense"),
+      annonce.recompense
+        ? annonce.recompense_montant || tF("oui")
+        : null,
+    ),
   ];
 
   return (
@@ -92,6 +123,11 @@ export default async function AnnoncePage({
             {annonce.ville}, {tP(annonce.province)}
           </p>
           <p className="mt-1 text-sm text-muted">{dateLabel}</p>
+          {annonce.numero_dossier && (
+            <p className="mt-1 text-xs text-muted">
+              {t("dossier")} {annonce.numero_dossier}
+            </p>
+          )}
 
           <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3">
             {lignes.map((l) => (

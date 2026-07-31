@@ -17,6 +17,13 @@ function nombreOuNull(v: FormDataEntryValue | null): number | null {
   const n = Number.parseFloat(texte(v));
   return Number.isFinite(n) ? n : null;
 }
+// Tri-état : « oui » → true, « non » → false, autre → null (inconnu).
+function boolTriOuNull(v: FormDataEntryValue | null): boolean | null {
+  const s = texte(v);
+  if (s === "oui") return true;
+  if (s === "non") return false;
+  return null;
+}
 
 export async function publierAnnonce(
   _prev: EtatAnnonce,
@@ -53,17 +60,31 @@ export async function publierAnnonce(
   const ligne = {
     user_id: user.id,
     type: texte(formData.get("type")) || "perdu",
-    espece: texte(formData.get("espece")) || "autre",
+    espece: texte(formData.get("espece")) || "chien",
     nom_animal: texteOuNull(formData.get("nom_animal")),
     race: texteOuNull(formData.get("race")),
     sexe: texte(formData.get("sexe")) || "inconnu",
+    age: texteOuNull(formData.get("age")),
+    poids: texteOuNull(formData.get("poids")),
     couleur: texteOuNull(formData.get("couleur")),
+    couleur_yeux: texteOuNull(formData.get("couleur_yeux")),
+    signes_distinctifs: texteOuNull(formData.get("signes_distinctifs")),
+    sterilise: boolTriOuNull(formData.get("sterilise")),
+    micropuce: boolTriOuNull(formData.get("micropuce")),
+    micropuce_numero: texteOuNull(formData.get("micropuce_numero")),
+    accessoires: texteOuNull(formData.get("accessoires")),
+    temperament: texteOuNull(formData.get("temperament")),
     description: texteOuNull(formData.get("description")),
     ville: texte(formData.get("ville")),
     province: texte(formData.get("province")) || "QC",
+    adresse: texteOuNull(formData.get("adresse")),
+    dernier_lieu_vu: texteOuNull(formData.get("dernier_lieu_vu")),
     latitude: nombreOuNull(formData.get("latitude")),
     longitude: nombreOuNull(formData.get("longitude")),
     date_evenement: texte(formData.get("date_evenement")),
+    heure_approx: texteOuNull(formData.get("heure_approx")),
+    recompense: texte(formData.get("recompense")) === "oui",
+    recompense_montant: texteOuNull(formData.get("recompense_montant")),
     contact_nom: texte(formData.get("contact_nom")),
     contact_courriel: contactCourriel,
     contact_telephone: contactTelephone,

@@ -125,9 +125,53 @@ export function FormulaireAnnonce({
             {tChamp("race")}
             <input name="race" type="text" className={champ} />
           </label>
-          <label className={`${label} sm:col-span-2`}>
+          <label className={label}>
+            {tChamp("age")}
+            <input name="age" type="text" className={champ} />
+          </label>
+          <label className={label}>
+            {tChamp("poids")}
+            <input name="poids" type="text" className={champ} />
+          </label>
+          <label className={label}>
             {tChamp("couleur")}
             <input name="couleur" type="text" className={champ} />
+          </label>
+          <label className={label}>
+            {tChamp("couleurYeux")}
+            <input name="couleur_yeux" type="text" className={champ} />
+          </label>
+          <label className={`${label} sm:col-span-2`}>
+            {tChamp("signesDistinctifs")}
+            <input name="signes_distinctifs" type="text" className={champ} />
+          </label>
+          <label className={label}>
+            {tChamp("sterilise")}
+            <select name="sterilise" defaultValue="" className={champ}>
+              <option value="">{t("inconnu")}</option>
+              <option value="oui">{t("oui")}</option>
+              <option value="non">{t("non")}</option>
+            </select>
+          </label>
+          <label className={label}>
+            {tChamp("micropuce")}
+            <select name="micropuce" defaultValue="" className={champ}>
+              <option value="">{t("inconnu")}</option>
+              <option value="oui">{t("oui")}</option>
+              <option value="non">{t("non")}</option>
+            </select>
+          </label>
+          <label className={label}>
+            {tChamp("micropuceNumero")}
+            <input name="micropuce_numero" type="text" className={champ} />
+          </label>
+          <label className={label}>
+            {tChamp("accessoires")}
+            <input name="accessoires" type="text" className={champ} />
+          </label>
+          <label className={`${label} sm:col-span-2`}>
+            {tChamp("temperament")}
+            <input name="temperament" type="text" className={champ} />
           </label>
           <label className={`${label} sm:col-span-2`}>
             {tChamp("description")}
@@ -159,7 +203,7 @@ export function FormulaireAnnonce({
               ))}
             </select>
           </label>
-          <label className={`${label} sm:col-span-2`}>
+          <label className={label}>
             {tChamp("dateEvenement")} <span className="text-accent">*</span>
             <input
               name="date_evenement"
@@ -167,6 +211,18 @@ export function FormulaireAnnonce({
               required
               className={champ}
             />
+          </label>
+          <label className={label}>
+            {tChamp("heure")}
+            <input name="heure_approx" type="text" className={champ} />
+          </label>
+          <label className={`${label} sm:col-span-2`}>
+            {tChamp("adresse")}
+            <input name="adresse" type="text" className={champ} />
+          </label>
+          <label className={`${label} sm:col-span-2`}>
+            {tChamp("dernierLieuVu")}
+            <input name="dernier_lieu_vu" type="text" className={champ} />
           </label>
           <div className="sm:col-span-2">
             <p className="mb-2 text-sm font-medium text-muted">
@@ -181,6 +237,24 @@ export function FormulaireAnnonce({
             <input type="hidden" name="latitude" value={pos.lat ?? ""} />
             <input type="hidden" name="longitude" value={pos.lng ?? ""} />
           </div>
+        </fieldset>
+
+        {/* Récompense */}
+        <fieldset className="grid gap-4 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-2">
+          <legend className="px-1 text-sm font-semibold text-brand-dark">
+            {tSection("recompense")}
+          </legend>
+          <label className={label}>
+            {tChamp("recompense")}
+            <select name="recompense" defaultValue="non" className={champ}>
+              <option value="non">{t("non")}</option>
+              <option value="oui">{t("oui")}</option>
+            </select>
+          </label>
+          <label className={label}>
+            {tChamp("recompenseMontant")}
+            <input name="recompense_montant" type="text" className={champ} />
+          </label>
         </fieldset>
 
         {/* Contact */}
@@ -236,6 +310,8 @@ export function FormulaireAnnonce({
             />
           </label>
         </fieldset>
+
+        <p className="text-xs text-muted">{t("retention")}</p>
 
         {etat.erreur && (
           <p className="rounded-lg bg-perdu-soft px-3 py-2 text-sm text-perdu">

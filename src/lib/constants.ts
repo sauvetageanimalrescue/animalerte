@@ -7,15 +7,9 @@ export type TypeAnnonce = (typeof TYPES_ANNONCE)[number];
 export const STATUTS_ANNONCE = ["actif", "resolu"] as const;
 export type StatutAnnonce = (typeof STATUTS_ANNONCE)[number];
 
-export const ESPECES = [
-  "chien",
-  "chat",
-  "oiseau",
-  "lapin",
-  "rongeur",
-  "reptile",
-  "autre",
-] as const;
+// Espèces offertes au formulaire (le type BD accepte d'autres valeurs héritées,
+// mais on se limite à chien/chat côté produit).
+export const ESPECES = ["chien", "chat"] as const;
 export type Espece = (typeof ESPECES)[number];
 
 export const SEXES = ["male", "femelle", "inconnu"] as const;
