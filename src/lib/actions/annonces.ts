@@ -38,7 +38,7 @@ export async function publierAnnonce(
 
   const contactCourriel = texteOuNull(formData.get("contact_courriel"));
   const contactTelephone = texteOuNull(formData.get("contact_telephone"));
-  if (!contactCourriel && !contactTelephone) {
+  if (!contactCourriel || !contactTelephone) {
     return { erreur: t("erreurContact") };
   }
 

@@ -3,17 +3,13 @@
 import { useActionState, useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
-import {
-  ESPECES,
-  PROVINCES,
-  SEXES,
-  TYPES_ANNONCE,
-} from "@/lib/constants";
+import { ESPECES, PROVINCES, SEXES } from "@/lib/constants";
 import {
   publierAnnonce,
   type EtatAnnonce,
 } from "@/lib/actions/annonces";
 import { ChampAdresse } from "@/components/champ-adresse";
+import { ChampTelephone } from "@/components/champ-telephone";
 
 const CarteSelecteur = dynamic(
   () => import("@/components/carte-selecteur"),
@@ -39,11 +35,10 @@ export function FormulaireAnnonce({
   const tSection = useTranslations("formulaire.section");
   const tE = useTranslations("especes");
   const tSexe = useTranslations("sexes");
-  const tType = useTranslations("types");
   const tP = useTranslations("provinces");
   const tCommun = useTranslations("commun");
 
-  const [type, setType] = useState<"perdu" | "trouve">(defaultType);
+  const type = defaultType;
   const [pos, setPos] = useState<{ lat: number | null; lng: number | null }>({
     lat: null,
     lng: null,
@@ -64,34 +59,7 @@ export function FormulaireAnnonce({
       </h1>
 
       <form action={formAction} className="flex flex-col gap-6">
-        {/* Type */}
-        <fieldset className="rounded-2xl border border-border bg-surface p-4">
-          <legend className="px-1 text-sm font-semibold text-brand-dark">
-            {tSection("type")}
-          </legend>
-          <div className="mt-2 flex gap-3">
-            {TYPES_ANNONCE.map((v) => (
-              <label
-                key={v}
-                className={`flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition ${
-                  type === v
-                    ? "border-brand bg-brand-soft text-brand-dark"
-                    : "border-border text-muted hover:bg-brand-soft/50"
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="type"
-                  value={v}
-                  checked={type === v}
-                  onChange={() => setType(v)}
-                  className="sr-only"
-                />
-                {tType(v)}
-              </label>
-            ))}
-          </div>
-        </fieldset>
+        <input type="hidden" name="type" value={type} />
 
         {/* Animal */}
         <fieldset className="grid gap-4 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-2">
@@ -188,7 +156,7 @@ export function FormulaireAnnonce({
         {/* Lieu et date */}
         <fieldset className="grid gap-4 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-2">
           <legend className="px-1 text-sm font-semibold text-brand-dark">
-            {tSection("lieu")}
+            {type === "perdu" ? tSection("lieuPerdu") : tSection("lieuTrouve")}
           </legend>
           <label className={label}>
             <span>
@@ -210,7 +178,10 @@ export function FormulaireAnnonce({
           </label>
           <label className={label}>
             <span>
-              {tChamp("dateEvenement")} <span className="text-accent">*</span>
+              {type === "perdu"
+                ? tChamp("dateEvenement")
+                : tChamp("dateDecouverte")}{" "}
+              <span className="text-accent">*</span>
             </span>
             <input
               name="date_evenement"
@@ -231,6 +202,10 @@ export function FormulaireAnnonce({
               onSelect={(_a, lat, lng) => setPos({ lat, lng })}
             />
           </label>
+          <label className={`${label} sm:col-span-2`}>
+            {tChamp("precisionLieu")}
+            <input name="dernier_lieu_vu" type="text" className={champ} />
+          </label>
           <div className="sm:col-span-2">
             <p className="mb-2 text-sm font-medium text-muted">
               {tChamp("position")}
@@ -246,23 +221,25 @@ export function FormulaireAnnonce({
           </div>
         </fieldset>
 
-        {/* Récompense */}
-        <fieldset className="grid gap-4 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-2">
-          <legend className="px-1 text-sm font-semibold text-brand-dark">
-            {tSection("recompense")}
-          </legend>
-          <label className={label}>
-            {tChamp("recompense")}
-            <select name="recompense" defaultValue="non" className={champ}>
-              <option value="non">{t("non")}</option>
-              <option value="oui">{t("oui")}</option>
-            </select>
-          </label>
-          <label className={label}>
-            {tChamp("recompenseMontant")}
-            <input name="recompense_montant" type="text" className={champ} />
-          </label>
-        </fieldset>
+        {/* Récompense (uniquement pour un animal perdu) */}
+        {type === "perdu" && (
+          <fieldset className="grid gap-4 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-2">
+            <legend className="px-1 text-sm font-semibold text-brand-dark">
+              {tSection("recompense")}
+            </legend>
+            <label className={label}>
+              {tChamp("recompense")}
+              <select name="recompense" defaultValue="non" className={champ}>
+                <option value="non">{t("non")}</option>
+                <option value="oui">{t("oui")}</option>
+              </select>
+            </label>
+            <label className={label}>
+              {tChamp("recompenseMontant")}
+              <input name="recompense_montant" type="text" className={champ} />
+            </label>
+          </fieldset>
+        )}
 
         {/* Contact */}
         <fieldset className="grid gap-4 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-2">
@@ -292,26 +269,28 @@ export function FormulaireAnnonce({
             <ChampAdresse name="contact_adresse" className={champ} />
           </label>
           <label className={label}>
-            {tChamp("contactCourriel")}
+            <span>
+              {tChamp("contactCourriel")} <span className="text-accent">*</span>
+            </span>
             <input
               name="contact_courriel"
               type="email"
+              required
               defaultValue={contact.courriel}
               className={champ}
             />
           </label>
           <label className={label}>
-            {tChamp("contactTelephone")}
-            <input
+            <span>
+              {tChamp("contactTelephone")} <span className="text-accent">*</span>
+            </span>
+            <ChampTelephone
               name="contact_telephone"
-              type="tel"
+              required
               defaultValue={contact.telephone}
               className={champ}
             />
           </label>
-          <p className="text-xs text-muted sm:col-span-2">
-            {tChamp("contactAide")}
-          </p>
         </fieldset>
 
         {/* Photo */}

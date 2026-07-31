@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { connexion, inscription, type EtatAuth } from "@/lib/actions/auth";
+import { ChampTelephone } from "@/components/champ-telephone";
 
 export function AuthForm({ mode }: { mode: "connexion" | "inscription" }) {
   const t = useTranslations("auth");
@@ -31,7 +32,7 @@ export function AuthForm({ mode }: { mode: "connexion" | "inscription" }) {
             </label>
             <label className="flex flex-col gap-1 text-sm font-medium text-muted">
               {t("telephone")}
-              <input name="telephone" type="tel" className={champ} />
+              <ChampTelephone name="telephone" className={champ} />
             </label>
           </>
         )}
