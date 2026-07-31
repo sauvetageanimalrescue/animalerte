@@ -147,7 +147,7 @@
       "province": "Province",
       "adresse": "Address or intersection",
       "dernierLieuVu": "Last seen / where found",
-      "dateEvenement": "Date lost / found",
+      "dateEvenement": "Date lost",
       "heure": "Approximate time",
       "position": "Location on the map",
       "positionAide": "Click the map to pinpoint the location (optional).",

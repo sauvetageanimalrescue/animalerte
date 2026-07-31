@@ -214,15 +214,11 @@ export function FormulaireAnnonce({
           </label>
           <label className={label}>
             {tChamp("heure")}
-            <input name="heure_approx" type="text" className={champ} />
+            <input name="heure_approx" type="time" className={champ} />
           </label>
           <label className={`${label} sm:col-span-2`}>
             {tChamp("adresse")}
             <input name="adresse" type="text" className={champ} />
-          </label>
-          <label className={`${label} sm:col-span-2`}>
-            {tChamp("dernierLieuVu")}
-            <input name="dernier_lieu_vu" type="text" className={champ} />
           </label>
           <div className="sm:col-span-2">
             <p className="mb-2 text-sm font-medium text-muted">

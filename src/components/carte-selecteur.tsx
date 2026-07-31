@@ -4,7 +4,8 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-const CENTRE_CANADA: [number, number] = [56.13, -96.35];
+// Centre par défaut : sud du Québec (là où se trouve la population).
+const CENTRE_QUEBEC: [number, number] = [46.5, -72.0];
 
 const icone = L.divIcon({
   className: "",
@@ -36,12 +37,12 @@ export default function CarteSelecteur({
   onPick: (lat: number, lng: number) => void;
 }) {
   const centre: [number, number] =
-    lat != null && lng != null ? [lat, lng] : CENTRE_CANADA;
+    lat != null && lng != null ? [lat, lng] : CENTRE_QUEBEC;
 
   return (
     <MapContainer
       center={centre}
-      zoom={lat != null ? 12 : 4}
+      zoom={lat != null ? 13 : 6}
       scrollWheelZoom
       className="h-72 w-full rounded-2xl border border-border"
     >

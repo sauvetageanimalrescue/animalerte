@@ -147,7 +147,7 @@
       "province": "Province",
       "adresse": "Adresse ou intersection",
       "dernierLieuVu": "Dernier endroit où vu / lieu de découverte",
-      "dateEvenement": "Date de la disparition / découverte",
+      "dateEvenement": "Date de la disparition",
       "heure": "Heure approximative",
       "position": "Position sur la carte",
       "positionAide": "Cliquez sur la carte pour préciser le lieu (optionnel).",
