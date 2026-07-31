@@ -4,8 +4,8 @@ import { Link } from "@/i18n/navigation";
 
 const PLANS = [
   { id: "gratuit", populaire: false },
-  { id: "base", populaire: true },
-  { id: "regional", populaire: false },
+  { id: "base", populaire: false },
+  { id: "regional", populaire: true },
   { id: "provincial", populaire: false },
 ] as const;
 
