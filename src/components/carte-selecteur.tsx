@@ -11,8 +11,9 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-// Centre par défaut : sud du Québec (là où se trouve la population).
-const CENTRE_QUEBEC: [number, number] = [46.5, -72.0];
+// Centre par défaut : Québec habité, décalé vers le nord pour que la frontière
+// canado-américaine reste dans le bas de la carte.
+const CENTRE_QUEBEC: [number, number] = [47.5, -72.0];
 
 const icone = L.divIcon({
   className: "",

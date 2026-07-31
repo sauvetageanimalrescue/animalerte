@@ -87,8 +87,16 @@ export function FormulaireAnnonce({
             </select>
           </label>
           <label className={label}>
-            {tChamp("nomAnimal")}
-            <input name="nom_animal" type="text" className={champ} />
+            <span>
+              {tChamp("nomAnimal")}{" "}
+              {type === "perdu" && <span className="text-accent">*</span>}
+            </span>
+            <input
+              name="nom_animal"
+              type="text"
+              required={type === "perdu"}
+              className={champ}
+            />
           </label>
           <label className={label}>
             {tChamp("race")}
@@ -195,7 +203,9 @@ export function FormulaireAnnonce({
             <input name="heure_approx" type="time" className={champ} />
           </label>
           <label className={`${label} sm:col-span-2`}>
-            {tChamp("adresse")}
+            {type === "perdu"
+              ? tChamp("adressePerdu")
+              : tChamp("adresseTrouve")}
             <ChampAdresse
               name="adresse"
               className={champ}
@@ -265,8 +275,15 @@ export function FormulaireAnnonce({
             <input name="contact_prenom" type="text" required className={champ} />
           </label>
           <label className={`${label} sm:col-span-2`}>
-            {tChamp("contactAdresse")}
-            <ChampAdresse name="contact_adresse" className={champ} />
+            <span>
+              {tChamp("contactAdresse")}{" "}
+              {type === "perdu" && <span className="text-accent">*</span>}
+            </span>
+            <ChampAdresse
+              name="contact_adresse"
+              required={type === "perdu"}
+              className={champ}
+            />
           </label>
           <label className={label}>
             <span>

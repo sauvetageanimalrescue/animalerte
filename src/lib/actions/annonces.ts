@@ -42,6 +42,15 @@ export async function publierAnnonce(
     return { erreur: t("erreurContact") };
   }
 
+  const typeAnnonce = texte(formData.get("type")) || "perdu";
+  const nomAnimal = texteOuNull(formData.get("nom_animal"));
+  const contactAdresse = texteOuNull(formData.get("contact_adresse"));
+  // Pour un animal perdu, le nom de l'animal et l'adresse de facturation
+  // sont obligatoires (le formulaire les impose aussi côté client).
+  if (typeAnnonce === "perdu" && (!nomAnimal || !contactAdresse)) {
+    return { erreur: t("erreurGenerale") };
+  }
+
   // Téléversement de la photo (optionnel).
   let photoUrl: string | null = null;
   const photo = formData.get("photo");
@@ -59,9 +68,9 @@ export async function publierAnnonce(
 
   const ligne = {
     user_id: user.id,
-    type: texte(formData.get("type")) || "perdu",
+    type: typeAnnonce,
     espece: texte(formData.get("espece")) || "chien",
-    nom_animal: texteOuNull(formData.get("nom_animal")),
+    nom_animal: nomAnimal,
     race: texteOuNull(formData.get("race")),
     sexe: texte(formData.get("sexe")) || "inconnu",
     age: texteOuNull(formData.get("age")),
@@ -87,7 +96,7 @@ export async function publierAnnonce(
     recompense_montant: texteOuNull(formData.get("recompense_montant")),
     contact_nom: texte(formData.get("contact_nom")),
     contact_prenom: texteOuNull(formData.get("contact_prenom")),
-    contact_adresse: texteOuNull(formData.get("contact_adresse")),
+    contact_adresse: contactAdresse,
     contact_courriel: contactCourriel,
     contact_telephone: contactTelephone,
     photo_url: photoUrl,

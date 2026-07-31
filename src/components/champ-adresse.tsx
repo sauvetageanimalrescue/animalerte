@@ -26,11 +26,13 @@ export function ChampAdresse({
   name,
   className,
   defaultValue,
+  required,
   onSelect,
 }: {
   name: string;
   className?: string;
   defaultValue?: string;
+  required?: boolean;
   onSelect?: (adresse: string, lat: number, lng: number) => void;
 }) {
   const ref = useRef<HTMLInputElement>(null);
@@ -69,6 +71,7 @@ export function ChampAdresse({
       type="text"
       autoComplete="off"
       defaultValue={defaultValue}
+      required={required}
       className={className}
     />
   );
