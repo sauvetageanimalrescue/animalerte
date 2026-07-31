@@ -249,6 +249,19 @@
       }
     ]
   },
+  "contact": {
+    "titre": "Contact us",
+    "sousTitre": "A question, a comment or an issue? Write to us and we'll get back to you shortly.",
+    "nom": "Name",
+    "courriel": "Email",
+    "sujet": "Subject",
+    "message": "Message",
+    "envoyer": "Send",
+    "envoi": "Sending…",
+    "succes": "Thank you! Your message has been sent. We'll get back to you soon.",
+    "erreurChamps": "Please fill in your name, email and message.",
+    "erreurEnvoi": "Sending failed. Please try again later."
+  },
   "mesAnnonces": {
     "titre": "My listings",
     "aucune": "You haven't published any listing.",

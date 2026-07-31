@@ -249,6 +249,19 @@
       }
     ]
   },
+  "contact": {
+    "titre": "Nous joindre",
+    "sousTitre": "Une question, un commentaire ou un problème ? Écrivez-nous et nous vous répondrons rapidement.",
+    "nom": "Nom",
+    "courriel": "Courriel",
+    "sujet": "Sujet",
+    "message": "Message",
+    "envoyer": "Envoyer",
+    "envoi": "Envoi…",
+    "succes": "Merci ! Votre message a été envoyé. Nous vous répondrons bientôt.",
+    "erreurChamps": "Veuillez remplir votre nom, votre courriel et votre message.",
+    "erreurEnvoi": "L'envoi a échoué. Réessayez plus tard."
+  },
   "mesAnnonces": {
     "titre": "Mes annonces",
     "aucune": "Vous n'avez publié aucune annonce.",

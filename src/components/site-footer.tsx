@@ -35,7 +35,7 @@ export async function SiteFooter() {
       liens: [
         { href: "#", label: t("conditions") },
         { href: "#", label: t("confidentialite") },
-        { href: "#", label: t("contact") },
+        { href: "/contact", label: t("contact") },
       ],
     },
   ];
