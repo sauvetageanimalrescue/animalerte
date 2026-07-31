@@ -62,7 +62,6 @@ export async function resetMotDePasse(
 ): Promise<EtatAuth> {
   const t = await getTranslations("auth");
   const courriel = String(formData.get("courriel") ?? "").trim();
-  const locale = await getLocale();
 
   const h = await headers();
   const host = h.get("host") ?? "";
@@ -70,9 +69,12 @@ export async function resetMotDePasse(
     host.startsWith("localhost") || host.startsWith("127.") ? "http" : "https";
   const origin = `${proto}://${host}`;
 
+  // Pas de paramètre de requête ici : l'URL doit correspondre exactement à
+  // une entrée de la liste blanche « Redirect URLs » de Supabase, sinon
+  // Supabase retombe sur le « Site URL » (la page d'accueil).
   const supabase = await createClient();
   const { error } = await supabase.auth.resetPasswordForEmail(courriel, {
-    redirectTo: `${origin}/auth/callback?next=/${locale}/reinitialiser`,
+    redirectTo: `${origin}/auth/callback`,
   });
   if (error) return { erreur: t("erreurReinit") };
   return { message: t("reinitEnvoye") };
