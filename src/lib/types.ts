@@ -39,6 +39,8 @@ export type Annonce = {
   recompense: boolean;
   recompense_montant: string | null;
   contact_nom: string;
+  contact_prenom: string | null;
+  contact_adresse: string | null;
   contact_courriel: string | null;
   contact_telephone: string | null;
   photo_url: string | null;

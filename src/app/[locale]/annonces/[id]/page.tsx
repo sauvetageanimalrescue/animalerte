@@ -155,7 +155,11 @@ export default async function AnnoncePage({
           <div className="mt-6 rounded-2xl border border-border bg-surface p-4">
             <h2 className="font-semibold text-brand-dark">{t("contact")}</h2>
             <p className="mt-2 text-sm text-muted">{t("contactNom")}</p>
-            <p className="font-medium text-foreground">{annonce.contact_nom}</p>
+            <p className="font-medium text-foreground">
+              {[annonce.contact_prenom, annonce.contact_nom]
+                .filter(Boolean)
+                .join(" ")}
+            </p>
             <div className="mt-3 flex flex-col gap-2">
               {annonce.contact_courriel && (
                 <a

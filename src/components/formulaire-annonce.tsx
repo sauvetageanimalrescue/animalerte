@@ -258,7 +258,7 @@ export function FormulaireAnnonce({
           <legend className="px-1 text-sm font-semibold text-brand-dark">
             {tSection("contact")}
           </legend>
-          <label className={`${label} sm:col-span-2`}>
+          <label className={label}>
             {tChamp("contactNom")} <span className="text-accent">*</span>
             <input
               name="contact_nom"
@@ -267,6 +267,14 @@ export function FormulaireAnnonce({
               defaultValue={contact.nom}
               className={champ}
             />
+          </label>
+          <label className={label}>
+            {tChamp("contactPrenom")} <span className="text-accent">*</span>
+            <input name="contact_prenom" type="text" required className={champ} />
+          </label>
+          <label className={`${label} sm:col-span-2`}>
+            {tChamp("contactAdresse")}
+            <input name="contact_adresse" type="text" className={champ} />
           </label>
           <label className={label}>
             {tChamp("contactCourriel")}

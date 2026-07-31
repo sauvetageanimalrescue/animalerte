@@ -86,6 +86,8 @@ export async function publierAnnonce(
     recompense: texte(formData.get("recompense")) === "oui",
     recompense_montant: texteOuNull(formData.get("recompense_montant")),
     contact_nom: texte(formData.get("contact_nom")),
+    contact_prenom: texteOuNull(formData.get("contact_prenom")),
+    contact_adresse: texteOuNull(formData.get("contact_adresse")),
     contact_courriel: contactCourriel,
     contact_telephone: contactTelephone,
     photo_url: photoUrl,
