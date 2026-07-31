@@ -38,6 +38,15 @@
 > À valider avec le coût réel des pubs (benchmark PawBoost + CPM Meta) pour dimensionner
 > le budget/rayon de chaque niveau — surtout Provincial (249,99 $) qui couvre tout le Québec.
 
+**Raffinements forfaits (2026-07-31) :**
+- Noms des 4 niveaux = **Gratuit / Alerte locale / Alerte régionale / Alerte provinciale** (terminologie uniforme partout).
+- **Rayons** : locale = **5 km**, régionale = **25 km**, provinciale = tout le Québec.
+- **flAIr** débloqué dès l'**Alerte régionale** (plus seulement Provincial).
+- **Une seule affiche pour tous** (pas de versions « enrichies ») : « affiche imprimable + image pour réseaux sociaux ». Elle doit être **riche/complète/belle** même au niveau de base. Les champs exacts de l'affiche restent à valider.
+- Provinciale : Facebook SAR **sans afficher le nombre d'abonnés** (info changeante). **SPCA / services animaliers** = font partie de la diffusion des alertes provinciales, mais **pas mentionnés dans l'offre pour l'instant**.
+- **Courriel de conseils** (ancien « quoi faire quand on perd son animal »).
+- Nouveau perk **Provincial : « Signalement prioritaire »** — les annonces provinciales apparaissent dans une section **« Signalements prioritaires »** en haut de l'accueil, avant « Signalements récents ». *Nécessite un champ de priorité sur les annonces (lié au forfait/paiement) — section d'accueil à construire quand ce mécanisme existera.*
+
 ## 2. Fonctionnalités (backlog groupé)
 
 ### A. Kit de diffusion (médias multi-formats) + code QR
