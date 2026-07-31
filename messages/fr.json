@@ -228,7 +228,7 @@
       "points": [
         "Fiche sur animalerte.ca",
         "1 photo",
-        "Courriel « quoi faire quand on perd son animal »"
+        "Courriel de conseils"
       ]
     },
     "base": {
@@ -237,11 +237,11 @@
       "points": [
         "Fiche sur animalerte.ca",
         "Plusieurs photos",
-        "Courriel « quoi faire quand on perd son animal »",
-        "Kit d'affiches : PDF, réseaux sociaux et code QR",
+        "Courriel de conseils",
+        "Affiche imprimable et image pour les réseaux sociaux",
         "Ligne sans frais anonyme",
         "Messagerie anonyme",
-        "Alerte locale (diffusion ciblée)"
+        "Alerte locale (rayon de 5 km)"
       ]
     },
     "regional": {
@@ -250,12 +250,13 @@
       "points": [
         "Fiche sur animalerte.ca",
         "Plusieurs photos et vidéo",
-        "Courriel « quoi faire quand on perd son animal »",
-        "Kit d'affiches enrichi (micropuce, récompense…)",
+        "Courriel de conseils",
+        "Affiche imprimable et image pour les réseaux sociaux",
         "Ligne sans frais anonyme",
         "Messagerie anonyme",
-        "Alerte régionale (rayon élargi)",
-        "Réseau Sentinelle de votre secteur"
+        "Alerte régionale (rayon de 25 km)",
+        "Réseau Sentinelle de votre secteur",
+        "flAIr (correspondances IA)"
       ]
     },
     "provincial": {
@@ -264,15 +265,15 @@
       "points": [
         "Fiche sur animalerte.ca",
         "Plusieurs photos et vidéo",
-        "Courriel « quoi faire quand on perd son animal »",
-        "Kit d'affiches enrichi (micropuce, récompense…)",
+        "Courriel de conseils",
+        "Affiche imprimable et image pour les réseaux sociaux",
         "Ligne sans frais anonyme",
         "Messagerie anonyme",
         "Alerte provinciale, tout le Québec",
         "Réseau Sentinelle de votre secteur",
-        "Diffusion sur Facebook Sauvetage Animal Rescue (112 000 abonnés)",
-        "Alerte aux SPCA du Québec",
-        "Priorité flAIr (correspondances IA)"
+        "flAIr (correspondances IA)",
+        "Diffusion sur la page Facebook de Sauvetage Animal Rescue",
+        "Signalement prioritaire"
       ]
     }
   }

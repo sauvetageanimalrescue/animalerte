@@ -228,7 +228,7 @@
       "points": [
         "Listing on animalerte.ca",
         "1 photo",
-        "“What to do when you lose your pet” email"
+        "Advice email"
       ]
     },
     "base": {
@@ -237,11 +237,11 @@
       "points": [
         "Listing on animalerte.ca",
         "Multiple photos",
-        "“What to do when you lose your pet” email",
-        "Poster kit: PDF, social media and QR code",
+        "Advice email",
+        "Printable poster and social media image",
         "Anonymous toll-free line",
         "Anonymous messaging",
-        "Local alert (targeted reach)"
+        "Local alert (5 km radius)"
       ]
     },
     "regional": {
@@ -250,12 +250,13 @@
       "points": [
         "Listing on animalerte.ca",
         "Multiple photos and video",
-        "“What to do when you lose your pet” email",
-        "Enhanced poster kit (microchip, reward…)",
+        "Advice email",
+        "Printable poster and social media image",
         "Anonymous toll-free line",
         "Anonymous messaging",
-        "Regional alert (wider radius)",
-        "Sentinel network for your area"
+        "Regional alert (25 km radius)",
+        "Sentinel network for your area",
+        "flAIr (AI matches)"
       ]
     },
     "provincial": {
@@ -264,15 +265,15 @@
       "points": [
         "Listing on animalerte.ca",
         "Multiple photos and video",
-        "“What to do when you lose your pet” email",
-        "Enhanced poster kit (microchip, reward…)",
+        "Advice email",
+        "Printable poster and social media image",
         "Anonymous toll-free line",
         "Anonymous messaging",
         "Province-wide alert, all of Quebec",
         "Sentinel network for your area",
-        "Shared on Facebook Sauvetage Animal Rescue (112,000 followers)",
-        "Alerts to Quebec SPCAs",
-        "flAIr priority (AI matches)"
+        "flAIr (AI matches)",
+        "Shared on the Sauvetage Animal Rescue Facebook page",
+        "Priority listing"
       ]
     }
   }
