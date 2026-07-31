@@ -222,7 +222,6 @@
     "populaire": "Most popular",
     "choisir": "Choose this plan",
     "commencerGratuit": "Start for free",
-    "toutLe": "Everything in {nom}, plus:",
     "gratuit": {
       "nom": "Free",
       "prix": "$0",
@@ -233,10 +232,12 @@
       ]
     },
     "base": {
-      "nom": "Base",
+      "nom": "Local alert",
       "prix": "$49.99",
       "points": [
+        "Listing on animalerte.ca",
         "Multiple photos",
+        "“What to do when you lose your pet” email",
         "Poster kit: PDF, social media and QR code",
         "Anonymous toll-free line",
         "Anonymous messaging",
@@ -244,20 +245,31 @@
       ]
     },
     "regional": {
-      "nom": "Regional",
+      "nom": "Regional alert",
       "prix": "$149.99",
       "points": [
-        "Video in addition to photos",
+        "Listing on animalerte.ca",
+        "Multiple photos and video",
+        "“What to do when you lose your pet” email",
+        "Enhanced poster kit (microchip, reward…)",
+        "Anonymous toll-free line",
+        "Anonymous messaging",
         "Regional alert (wider radius)",
-        "Sentinel network for your area",
-        "Enhanced posters (microchip, reward…)"
+        "Sentinel network for your area"
       ]
     },
     "provincial": {
-      "nom": "Provincial",
+      "nom": "Province-wide alert",
       "prix": "$249.99",
       "points": [
+        "Listing on animalerte.ca",
+        "Multiple photos and video",
+        "“What to do when you lose your pet” email",
+        "Enhanced poster kit (microchip, reward…)",
+        "Anonymous toll-free line",
+        "Anonymous messaging",
         "Province-wide alert, all of Quebec",
+        "Sentinel network for your area",
         "Shared on Facebook Sauvetage Animal Rescue (112,000 followers)",
         "Alerts to Quebec SPCAs",
         "flAIr priority (AI matches)"

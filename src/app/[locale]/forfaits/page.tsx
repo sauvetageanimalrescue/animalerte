@@ -3,10 +3,10 @@ import { IconCheck } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 
 const PLANS = [
-  { id: "gratuit", precedent: null, populaire: false },
-  { id: "base", precedent: "gratuit", populaire: true },
-  { id: "regional", precedent: "base", populaire: false },
-  { id: "provincial", precedent: "regional", populaire: false },
+  { id: "gratuit", populaire: false },
+  { id: "base", populaire: true },
+  { id: "regional", populaire: false },
+  { id: "provincial", populaire: false },
 ] as const;
 
 export default async function ForfaitsPage({
@@ -44,22 +44,18 @@ export default async function ForfaitsPage({
               <h2 className="text-lg font-bold text-brand-dark">
                 {t(`${p.id}.nom`)}
               </h2>
-              <div className="mt-2 flex items-baseline gap-1">
-                <span className="text-3xl font-extrabold text-foreground">
+              <div className="mt-2 flex items-baseline gap-1.5">
+                <span className="text-2xl font-extrabold text-foreground">
                   {t(`${p.id}.prix`)}
                 </span>
                 {!gratuit && (
-                  <span className="text-sm text-muted">/ {t("parAnnonce")}</span>
+                  <span className="whitespace-nowrap text-xs text-muted">
+                    / {t("parAnnonce")}
+                  </span>
                 )}
               </div>
 
-              {p.precedent && (
-                <p className="mt-5 text-sm font-semibold text-brand-dark">
-                  {t("toutLe", { nom: t(`${p.precedent}.nom`) })}
-                </p>
-              )}
-
-              <ul className="mt-3 flex flex-1 flex-col gap-2.5">
+              <ul className="mt-5 flex flex-1 flex-col gap-2.5">
                 {points.map((pt, i) => (
                   <li
                     key={i}

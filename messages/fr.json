@@ -222,7 +222,6 @@
     "populaire": "Le plus populaire",
     "choisir": "Choisir ce forfait",
     "commencerGratuit": "Commencer gratuitement",
-    "toutLe": "Tout le forfait {nom}, plus :",
     "gratuit": {
       "nom": "Gratuit",
       "prix": "0 $",
@@ -233,10 +232,12 @@
       ]
     },
     "base": {
-      "nom": "Base",
+      "nom": "Alerte locale",
       "prix": "49,99 $",
       "points": [
+        "Fiche sur animalerte.ca",
         "Plusieurs photos",
+        "Courriel « quoi faire quand on perd son animal »",
         "Kit d'affiches : PDF, réseaux sociaux et code QR",
         "Ligne sans frais anonyme",
         "Messagerie anonyme",
@@ -244,20 +245,31 @@
       ]
     },
     "regional": {
-      "nom": "Régional",
+      "nom": "Alerte régionale",
       "prix": "149,99 $",
       "points": [
-        "Vidéo en plus des photos",
+        "Fiche sur animalerte.ca",
+        "Plusieurs photos et vidéo",
+        "Courriel « quoi faire quand on perd son animal »",
+        "Kit d'affiches enrichi (micropuce, récompense…)",
+        "Ligne sans frais anonyme",
+        "Messagerie anonyme",
         "Alerte régionale (rayon élargi)",
-        "Réseau Sentinelle de votre secteur",
-        "Affiches enrichies (micropuce, récompense…)"
+        "Réseau Sentinelle de votre secteur"
       ]
     },
     "provincial": {
-      "nom": "Provincial",
+      "nom": "Alerte provinciale",
       "prix": "249,99 $",
       "points": [
+        "Fiche sur animalerte.ca",
+        "Plusieurs photos et vidéo",
+        "Courriel « quoi faire quand on perd son animal »",
+        "Kit d'affiches enrichi (micropuce, récompense…)",
+        "Ligne sans frais anonyme",
+        "Messagerie anonyme",
         "Alerte provinciale, tout le Québec",
+        "Réseau Sentinelle de votre secteur",
         "Diffusion sur Facebook Sauvetage Animal Rescue (112 000 abonnés)",
         "Alerte aux SPCA du Québec",
         "Priorité flAIr (correspondances IA)"
