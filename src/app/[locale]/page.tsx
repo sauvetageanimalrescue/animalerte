@@ -63,7 +63,7 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
 
         <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-14 text-center md:py-20">
           <Image
-            src="/logos-combo-blanc.png"
+            src="/logos-combo-blanc-v2.png"
             alt="animALERTE · flAIr"
             width={420}
             height={170}
