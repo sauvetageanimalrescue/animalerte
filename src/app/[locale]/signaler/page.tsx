@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { redirect } from "next/navigation";
 import { IconAlertTriangle, IconHeartHandshake } from "@tabler/icons-react";
-import { Link, redirect } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import { getCurrentProfile, getCurrentUser } from "@/lib/authz";
 import { FormulaireAnnonce } from "@/components/formulaire-annonce";
 
@@ -16,36 +17,44 @@ export default async function SignalerPage({
   setRequestLocale(locale);
 
   const user = await getCurrentUser();
-  if (!user) redirect({ href: "/connexion", locale });
+  if (!user) redirect(`/${locale}/connexion`);
 
   const sp = await searchParams;
   const type = premier(sp.type);
 
-  // Aucun type choisi : on affiche l'écran de choix (perdu / trouvé).
+  // Sans type précis : écran de choix (deux cartes).
   if (type !== "perdu" && type !== "trouve") {
     const [tf, ta] = await Promise.all([
       getTranslations("formulaire"),
       getTranslations("accueil"),
     ]);
     return (
-      <div className="mx-auto max-w-md px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold text-brand-dark">
+      <div className="mx-auto max-w-2xl px-4 py-16">
+        <h1 className="text-center text-2xl font-bold text-brand-dark">
           {tf("choixTitre")}
         </h1>
-        <div className="mt-8 flex flex-col gap-4">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2">
           <Link
             href="/signaler?type=perdu"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-4 font-semibold text-white transition hover:brightness-95"
+            className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-surface p-8 text-center transition hover:border-accent hover:shadow-md"
           >
-            <IconAlertTriangle size={20} />
-            {ta("signalerPerduCta")}
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-soft text-accent">
+              <IconAlertTriangle size={28} />
+            </div>
+            <span className="font-semibold text-brand-dark">
+              {ta("signalerPerduCta")}
+            </span>
           </Link>
           <Link
             href="/signaler?type=trouve"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-trouve px-6 py-4 font-semibold text-white transition hover:brightness-95"
+            className="flex flex-col items-center gap-3 rounded-2xl border border-border bg-surface p-8 text-center transition hover:border-trouve hover:shadow-md"
           >
-            <IconHeartHandshake size={20} />
-            {ta("signalerTrouveCta")}
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-trouve-soft text-trouve">
+              <IconHeartHandshake size={28} />
+            </div>
+            <span className="font-semibold text-brand-dark">
+              {ta("signalerTrouveCta")}
+            </span>
           </Link>
         </div>
       </div>
@@ -58,7 +67,7 @@ export default async function SignalerPage({
       defaultType={type}
       contact={{
         nom: profil?.nom ?? "",
-        courriel: profil?.courriel ?? user?.email ?? "",
+        courriel: profil?.courriel ?? user.email ?? "",
         telephone: profil?.telephone ?? "",
       }}
     />
