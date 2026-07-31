@@ -76,7 +76,8 @@ export async function resetMotDePasse(
   const { error } = await supabase.auth.resetPasswordForEmail(courriel, {
     redirectTo: `${origin}/auth/callback`,
   });
-  if (error) return { erreur: t("erreurReinit") };
+  // Diagnostic temporaire : on affiche la vraie erreur Supabase.
+  if (error) return { erreur: `${t("erreurReinit")} [${error.message}]` };
   return { message: t("reinitEnvoye") };
 }
 
