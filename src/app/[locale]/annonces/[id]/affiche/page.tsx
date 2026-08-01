@@ -37,11 +37,9 @@ export default async function AffichePage({
 
   const perdu = annonce.type === "perdu";
   const entete = perdu ? "#ce1f2b" : "#167a4d";
+  const bande = perdu ? "#d9535e" : "#4ba07f";
   const motFr = perdu ? "PERDU" : "TROUVÉ";
   const motEn = perdu ? "LOST" : "FOUND";
-  const sousTitre = perdu
-    ? "Aidez-nous à le retrouver / Help us find them"
-    : "Aidez à retrouver sa famille / Help find their family";
 
   const h = await headers();
   const host = h.get("host") ?? "animalerte.ca";
@@ -49,43 +47,36 @@ export default async function AffichePage({
   const url = `${proto}://${host}/annonces/${id}`;
   const qr = await QRCode.toDataURL(url, {
     margin: 1,
-    width: 260,
-    color: { dark: "#0c5679", light: "#ffffff" },
+    width: 300,
+    color: { dark: "#0c3d56", light: "#ffffff" },
   });
 
   const nom = annonce.nom_animal || ESPECE_BI[annonce.espece] || annonce.espece;
   const especeVal = ESPECE_BI[annonce.espece] ?? annonce.espece;
   const sexeVal = SEXE_BI[annonce.sexe] ?? annonce.sexe;
   const dossier = annonce.numero_dossier;
+  const aide = "1 833 999 AIDE";
+  const numAffiche = LIGNE_SANS_FRAIS.replace(/-/g, " ");
+  const lieu2 = annonce.adresse || annonce.dernier_lieu_vu;
 
-  const champs: { k: string; v: string; large?: boolean }[] = [
+  const champs: { k: string; v: string | null; large?: boolean }[] = [
     { k: "Espèce / Species", v: especeVal },
-    ...(annonce.race ? [{ k: "Race / Breed", v: annonce.race }] : []),
+    { k: "Race / Breed", v: annonce.race },
     { k: "Sexe / Sex", v: sexeVal },
-    ...(annonce.couleur ? [{ k: "Couleur / Colour", v: annonce.couleur }] : []),
-    ...(annonce.signes_distinctifs
-      ? [
-          {
-            k: "Signes distinctifs / Distinctive marks",
-            v: annonce.signes_distinctifs,
-            large: true,
-          },
-        ]
-      : []),
-    ...(annonce.accessoires
-      ? [
-          {
-            k: "Collier, laisse / Collar, leash",
-            v: annonce.accessoires,
-            large: true,
-          },
-        ]
-      : []),
-  ];
+    { k: "Couleur / Colour", v: annonce.couleur },
+    { k: "Âge / Age", v: annonce.age },
+    { k: "Poids / Weight", v: annonce.poids },
+    {
+      k: "Signes distinctifs / Distinctive features",
+      v: annonce.signes_distinctifs,
+      large: true,
+    },
+  ].filter((c) => c.v);
 
   return (
     <>
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
         @media print {
           @page { size: letter; margin: 0; }
           body { visibility: hidden; }
@@ -95,41 +86,40 @@ export default async function AffichePage({
         }
         .aff-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 24px 16px 48px; }
         #aff-print {
-          width: 816px; min-height: 1056px; background: #fff; color: #1a1a1a;
+          width: 816px; min-height: 1056px; background: #fff; color: #16232b;
           display: flex; flex-direction: column; overflow: hidden;
           box-shadow: 0 8px 30px rgba(0,0,0,.2);
-          font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+          font-family: "Poppins", system-ui, -apple-system, sans-serif;
         }
-        .aff-entete { color: #fff; padding: 20px 40px; display: flex; align-items: center; gap: 24px; }
-        .aff-badge { background: #fff; border-radius: 14px; padding: 8px 14px; display: flex; align-items: center; }
-        .aff-badge img { height: 78px; width: auto; display: block; }
-        .aff-titre { flex: 1; }
-        .aff-mot { font-size: 62px; font-weight: 800; letter-spacing: 2px; line-height: 1; }
-        .aff-mot small { font-size: 32px; font-weight: 700; opacity: .9; }
-        .aff-tagline { font-size: 15px; margin-top: 6px; opacity: .95; }
-        .aff-photo { width: 100%; height: 360px; object-fit: cover; display: block; background: #f2f6f9; }
-        .aff-photo-vide { width: 100%; height: 360px; background: #f2f6f9; display: flex; align-items: center; justify-content: center; color: #3d87b3; font-size: 18px; }
-        .aff-corps { flex: 1; display: flex; flex-direction: column; padding: 26px 40px 0; gap: 20px; }
-        .aff-nom { font-size: 58px; font-weight: 800; color: #0c5679; line-height: 1; word-break: break-word; }
-        .aff-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 26px; }
+        .aff-entete { color: #fff; padding: 22px 44px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .aff-mot { font-size: 68px; font-weight: 800; letter-spacing: 1px; line-height: 1; }
+        .aff-mot small { font-size: 32px; font-weight: 700; }
+        .aff-dossier-top { font-size: 40px; font-weight: 700; letter-spacing: 1px; }
+        .aff-bande { height: 14px; }
+        .aff-corps { flex: 1; display: flex; gap: 36px; padding: 34px 44px 30px; }
+        .aff-gauche { width: 336px; flex-shrink: 0; display: flex; flex-direction: column; }
+        .aff-photo { width: 336px; height: 336px; object-fit: cover; border-radius: 14px; border: 3px solid #0c5679; display: block; background: #eef3f6; }
+        .aff-photo-vide { width: 336px; height: 336px; border-radius: 14px; border: 3px solid #0c5679; background: #eef3f6; display: flex; align-items: center; justify-content: center; color: #3d87b3; font-size: 18px; }
+        .aff-bloc { margin-top: 22px; }
+        .aff-k { font-size: 13px; text-transform: uppercase; letter-spacing: .5px; color: #7c8b95; font-weight: 600; }
+        .aff-v { font-size: 21px; font-weight: 700; color: #0c5679; line-height: 1.15; }
+        .aff-recompense { margin-top: 20px; display: inline-block; background: #fdeaec; color: #ce1f2b; font-weight: 700; font-size: 18px; padding: 8px 16px; border-radius: 10px; }
+        .aff-appel { margin-top: auto; }
+        .aff-appel .lbl { font-size: 16px; color: #7c8b95; margin-bottom: 6px; }
+        .aff-aide { font-size: 46px; font-weight: 800; color: #ce1f2b; line-height: 1; letter-spacing: 1px; }
+        .aff-num { font-size: 30px; font-weight: 700; color: #3d87b3; margin-top: 2px; letter-spacing: 1px; }
+        .aff-droite { flex: 1; display: flex; flex-direction: column; }
+        .aff-nom { font-size: 60px; font-weight: 800; color: #0c5679; line-height: 1; margin-bottom: 20px; word-break: break-word; }
+        .aff-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; align-content: start; }
         .aff-large { grid-column: 1 / -1; }
-        .aff-k { font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: #6b7b86; }
-        .aff-v { font-size: 21px; font-weight: 600; color: #1a1a1a; }
-        .aff-lieu { background: #f2f6f9; border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .aff-lieu .aff-v { font-size: 23px; font-weight: 700; color: #0c5679; }
-        .aff-recompense { background: #0c5679; color: #fff; border-radius: 12px; padding: 14px 18px; text-align: center; font-size: 25px; font-weight: 800; letter-spacing: 1px; }
-        .aff-recompense span { color: #ffd54a; }
-        .aff-bas { margin-top: auto; margin-bottom: 26px; display: flex; gap: 28px; align-items: center; }
-        .aff-contact { flex: 1; }
-        .aff-app { font-size: 15px; color: #6b7b86; margin-bottom: 4px; }
-        .aff-aide { font-size: 52px; font-weight: 800; color: #ce1f2b; line-height: 1; letter-spacing: 1px; }
-        .aff-num { font-size: 30px; font-weight: 700; color: #0c5679; margin-top: 4px; }
-        .aff-dossier { font-size: 16px; color: #40515c; margin-top: 8px; }
-        .aff-qr { width: 158px; flex-shrink: 0; text-align: center; }
-        .aff-qr img { width: 158px; height: 158px; display: block; border: 3px solid #0c5679; border-radius: 12px; }
-        .aff-qr p { font-size: 11px; color: #6b7b86; margin-top: 5px; line-height: 1.3; }
-        .aff-pied { background: #0c5679; color: #fff; padding: 14px 40px; display: flex; justify-content: space-between; font-size: 15px; align-items: center; }
-        .aff-pied b i { font-style: normal; color: #9fd0ea; }
+        .aff-cell .aff-cv { font-size: 20px; font-weight: 600; color: #16232b; margin-top: 2px; }
+        .aff-qr { margin-top: auto; margin-left: auto; text-align: right; }
+        .aff-qr .lbl { font-size: 15px; color: #7c8b95; line-height: 1.35; margin-bottom: 8px; }
+        .aff-qr img { width: 170px; height: 170px; display: inline-block; }
+        .aff-pied { background: #0c3d56; color: #fff; padding: 20px 44px; display: flex; align-items: center; justify-content: space-between; }
+        .aff-pied img { height: 46px; width: auto; display: block; }
+        .aff-url { font-size: 30px; font-weight: 700; letter-spacing: .5px; }
+        .aff-url i { font-style: normal; color: #6fb2d6; }
       `}</style>
 
       <div className="aff-wrap">
@@ -145,88 +135,93 @@ export default async function AffichePage({
 
         <div id="aff-print">
           <div className="aff-entete" style={{ background: entete }}>
-            <div className="aff-badge">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.png" alt="animALERTE" />
+            <div className="aff-mot">
+              {motFr} <small>/ {motEn}</small>
             </div>
-            <div className="aff-titre">
-              <div className="aff-mot">
-                {motFr} <small>/ {motEn}</small>
-              </div>
-              <div className="aff-tagline">{sousTitre}</div>
-            </div>
+            {dossier && <div className="aff-dossier-top">#{dossier}</div>}
           </div>
-
-          {annonce.photo_url ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={annonce.photo_url} alt={nom} className="aff-photo" />
-          ) : (
-            <div className="aff-photo-vide">Photo</div>
-          )}
+          <div className="aff-bande" style={{ background: bande }} />
 
           <div className="aff-corps">
-            <div className="aff-nom">{nom}</div>
+            <div className="aff-gauche">
+              {annonce.photo_url ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={annonce.photo_url} alt={nom} className="aff-photo" />
+              ) : (
+                <div className="aff-photo-vide">Photo</div>
+              )}
 
-            <div className="aff-grille">
-              {champs.map((c) => (
-                <div key={c.k} className={c.large ? "aff-large" : ""}>
-                  <div className="aff-k">{c.k}</div>
-                  <div className="aff-v">{c.v}</div>
-                </div>
-              ))}
-            </div>
-
-            <div className="aff-lieu">
-              <div>
+              <div className="aff-bloc">
                 <div className="aff-k">Vu pour la dernière fois / Last seen</div>
-                <div className="aff-v">{annonce.ville}</div>
+                <div className="aff-v">
+                  {annonce.ville}
+                  {lieu2 ? (
+                    <>
+                      <br />
+                      {lieu2}
+                    </>
+                  ) : null}
+                </div>
               </div>
-              <div style={{ textAlign: "right" }}>
+
+              <div className="aff-bloc">
                 <div className="aff-k">Date</div>
                 <div className="aff-v">
                   {formaterDate(annonce.date_evenement, "fr")}
                 </div>
               </div>
+
+              {perdu && annonce.recompense && (
+                <div className="aff-recompense">
+                  Récompense / Reward
+                  {annonce.recompense_montant
+                    ? ` : ${annonce.recompense_montant}`
+                    : ""}
+                </div>
+              )}
+
+              <div className="aff-appel">
+                <div className="lbl">
+                  Une information ? Appelez / Any info? Call
+                </div>
+                <div className="aff-aide">{aide}</div>
+                <div className="aff-num">{numAffiche}</div>
+              </div>
             </div>
 
-            {perdu && annonce.recompense && (
-              <div className="aff-recompense">
-                RÉCOMPENSE / REWARD
-                {annonce.recompense_montant ? (
-                  <>
-                    {" "}
-                    <span>•</span> {annonce.recompense_montant}
-                  </>
-                ) : null}
-              </div>
-            )}
-
-            <div className="aff-bas">
-              <div className="aff-contact">
-                <div className="aff-app">
-                  Un renseignement ? Composez / Any info? Call
-                </div>
-                <div className="aff-aide">1-833-999-AIDE</div>
-                <div className="aff-num">{LIGNE_SANS_FRAIS}</div>
-                {dossier && (
-                  <div className="aff-dossier">
-                    Mentionnez le dossier / Quote file&nbsp;: {dossier}
+            <div className="aff-droite">
+              <div className="aff-nom">{nom}</div>
+              <div className="aff-grille">
+                {champs.map((c) => (
+                  <div
+                    key={c.k}
+                    className={`aff-cell ${c.large ? "aff-large" : ""}`}
+                  >
+                    <div className="aff-k">{c.k}</div>
+                    <div className="aff-cv">{c.v}</div>
                   </div>
-                )}
+                ))}
               </div>
+
               <div className="aff-qr">
+                <div className="lbl">
+                  Scannez pour la fiche complète
+                  <br />
+                  Scan for full details
+                </div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={qr} alt="Code QR" />
-                <p>Scannez pour la fiche / Scan for details</p>
               </div>
             </div>
           </div>
 
+          <div className="aff-bande" style={{ background: "#3d87b3" }} />
           <div className="aff-pied">
-            <b>
-              anim<i>ALERTE</i>.ca
-            </b>
-            <span>{dossier ? `Dossier / File ${dossier}` : ""}</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logos-combo-blanc-v2.png" alt="animALERTE · flAIr" />
+            <div className="aff-url">
+              anim<i>alerte</i>.ca
+            </div>
           </div>
         </div>
       </div>
