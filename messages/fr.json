@@ -98,6 +98,8 @@
   "annonce": {
     "publieeLe": "Publiée le {date}",
     "dossier": "Dossier",
+    "infoTitre": "Vous avez une information ?",
+    "poste": "Poste",
     "disparuLe": "Disparu le {date}",
     "trouveLe": "Trouvé le {date}",
     "lieu": "Lieu",

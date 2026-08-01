@@ -2,7 +2,6 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 import {
-  IconMail,
   IconMapPin,
   IconPaw,
   IconPhone,
@@ -10,6 +9,7 @@ import {
   IconFileText,
 } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
+import { LIGNE_SANS_FRAIS } from "@/lib/constants";
 import { obtenirAnnonce } from "@/lib/annonces";
 import { formaterDate } from "@/lib/format";
 import { TypeBadge, StatutBadge } from "@/components/badges";
@@ -85,6 +85,11 @@ export default async function AnnoncePage({
     ),
   ];
 
+  // Les 4 chiffres du dossier = poste à composer sur la ligne animALERTE.
+  const poste = annonce.numero_dossier
+    ? annonce.numero_dossier.replace(/^\d+-/, "")
+    : null;
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
       <Link
@@ -153,35 +158,20 @@ export default async function AnnoncePage({
             </div>
           )}
 
-          {/* Contact */}
+          {/* Ligne animALERTE (contact anonyme, coordonnées jamais exposées) */}
           <div className="mt-6 rounded-2xl border border-border bg-surface p-4">
-            <h2 className="font-semibold text-brand-dark">{t("contact")}</h2>
-            <p className="mt-2 text-sm text-muted">{t("contactNom")}</p>
-            <p className="font-medium text-foreground">
-              {[annonce.contact_prenom, annonce.contact_nom]
-                .filter(Boolean)
-                .join(" ")}
+            <p className="text-sm text-muted">{t("infoTitre")}</p>
+            <a
+              href={`tel:${LIGNE_SANS_FRAIS.replace(/-/g, "")}`}
+              className="mt-1 inline-flex items-center gap-2 text-2xl font-extrabold text-accent"
+            >
+              <IconPhone size={22} />
+              1&nbsp;833&nbsp;999&nbsp;AIDE
+            </a>
+            <p className="mt-1 text-sm text-brand">
+              {LIGNE_SANS_FRAIS.replace(/-/g, " ")}
+              {poste ? ` · ${t("poste")} ${poste}` : ""}
             </p>
-            <div className="mt-3 flex flex-col gap-2">
-              {annonce.contact_courriel && (
-                <a
-                  href={`mailto:${annonce.contact_courriel}`}
-                  className="inline-flex items-center gap-2 font-medium text-brand hover:text-brand-dark"
-                >
-                  <IconMail size={16} />
-                  {annonce.contact_courriel}
-                </a>
-              )}
-              {annonce.contact_telephone && (
-                <a
-                  href={`tel:${annonce.contact_telephone}`}
-                  className="inline-flex items-center gap-2 font-medium text-brand hover:text-brand-dark"
-                >
-                  <IconPhone size={16} />
-                  {annonce.contact_telephone}
-                </a>
-              )}
-            </div>
           </div>
 
           <Link

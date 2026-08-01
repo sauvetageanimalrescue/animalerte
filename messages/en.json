@@ -98,6 +98,8 @@
   "annonce": {
     "publieeLe": "Posted on {date}",
     "dossier": "File",
+    "infoTitre": "Do you have any information?",
+    "poste": "Ext.",
     "disparuLe": "Lost on {date}",
     "trouveLe": "Found on {date}",
     "lieu": "Location",
