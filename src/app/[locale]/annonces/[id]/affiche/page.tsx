@@ -94,6 +94,7 @@ export default async function AffichePage({
           box-shadow: 0 8px 30px rgba(0,0,0,.2);
           font-family: "Poppins", system-ui, -apple-system, sans-serif;
         }
+        #aff-print, #aff-print * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         .aff-entete { color: #fff; padding: 22px 44px 24px; display: flex; align-items: center; justify-content: space-between; }
         .aff-mot { font-size: 68px; font-weight: 800; letter-spacing: 1px; line-height: 1; }
         .aff-mot small { font-size: 32px; font-weight: 700; }
@@ -119,9 +120,9 @@ export default async function AffichePage({
         .aff-qr { margin-top: auto; margin-left: auto; text-align: right; }
         .aff-qr .lbl { font-size: 15px; color: #7c8b95; line-height: 1.35; margin-bottom: 8px; }
         .aff-qr img { width: 170px; height: 170px; display: inline-block; }
-        .aff-pied { background: #0c3d56; color: #fff; padding: 20px 44px; display: flex; align-items: center; justify-content: space-between; }
-        .aff-pied img { height: 46px; width: auto; display: block; }
-        .aff-url { font-size: 30px; font-weight: 700; letter-spacing: .5px; }
+        .aff-pied { background: #0c3d56; color: #fff; padding: 30px 44px; display: flex; align-items: center; justify-content: space-between; }
+        .aff-pied img { height: 64px; width: auto; display: block; }
+        .aff-url { font-size: 36px; font-weight: 700; letter-spacing: .5px; }
         .aff-url i { font-style: normal; color: #6fb2d6; }
       `}</style>
 
