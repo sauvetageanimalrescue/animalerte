@@ -55,6 +55,8 @@ export default async function AffichePage({
   const especeVal = ESPECE_BI[annonce.espece] ?? annonce.espece;
   const sexeVal = SEXE_BI[annonce.sexe] ?? annonce.sexe;
   const dossier = annonce.numero_dossier;
+  // Les 4 chiffres du dossier servent de « poste » à composer sur la ligne.
+  const poste = dossier ? dossier.replace(/^\d+-/, "") : null;
   const aide = "1 833 999 AIDE";
   const numAffiche = LIGNE_SANS_FRAIS.replace(/-/g, " ");
   const lieu2 = annonce.adresse || annonce.dernier_lieu_vu;
@@ -107,10 +109,12 @@ export default async function AffichePage({
         .aff-k { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: #7c8b95; font-weight: 600; }
         .aff-v { font-size: 18px; font-weight: 700; color: #0c5679; line-height: 1.15; }
         .aff-recompense { margin-top: 20px; display: inline-block; background: #fdeaec; color: #ce1f2b; font-weight: 700; font-size: 18px; padding: 8px 16px; border-radius: 10px; }
-        .aff-appel { margin-top: auto; }
+        .aff-appel { margin-top: 24px; }
         .aff-appel .lbl { font-size: 16px; color: #7c8b95; margin-bottom: 6px; }
         .aff-aide { font-size: 46px; font-weight: 800; color: #ce1f2b; line-height: 1; letter-spacing: 1px; }
         .aff-num { font-size: 30px; font-weight: 700; color: #3d87b3; margin-top: 2px; letter-spacing: 1px; }
+        .aff-poste { margin-top: 10px; font-size: 20px; font-weight: 700; color: #0c5679; }
+        .aff-poste span { font-size: 14px; font-weight: 600; color: #7c8b95; text-transform: uppercase; letter-spacing: .5px; }
         .aff-droite { flex: 1; display: flex; flex-direction: column; }
         .aff-nom { font-size: 46px; font-weight: 800; color: #0c5679; line-height: 1; margin-bottom: 18px; word-break: break-word; }
         .aff-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 22px; align-content: start; }
@@ -189,6 +193,11 @@ export default async function AffichePage({
                 </div>
                 <div className="aff-aide">{aide}</div>
                 <div className="aff-num">{numAffiche}</div>
+                {poste && (
+                  <div className="aff-poste">
+                    <span>Poste / Ext.</span> {poste}
+                  </div>
+                )}
               </div>
             </div>
 
