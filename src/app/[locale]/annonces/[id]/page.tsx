@@ -7,6 +7,7 @@ import {
   IconPaw,
   IconPhone,
   IconArrowLeft,
+  IconFileText,
 } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 import { obtenirAnnonce } from "@/lib/annonces";
@@ -21,7 +22,7 @@ export default async function AnnoncePage({
   setRequestLocale(locale);
   const annonce = await obtenirAnnonce(id);
 
-  const [t, tE, tT, tS, tSexe, tP, tC, tChamp, tF] = await Promise.all([
+  const [t, tE, tT, tS, tSexe, tP, tC, tChamp, tF, tA] = await Promise.all([
     getTranslations("annonce"),
     getTranslations("especes"),
     getTranslations("types"),
@@ -31,6 +32,7 @@ export default async function AnnoncePage({
     getTranslations("commun"),
     getTranslations("formulaire.champ"),
     getTranslations("formulaire"),
+    getTranslations("affiche"),
   ]);
 
   if (!annonce) {
@@ -181,6 +183,14 @@ export default async function AnnoncePage({
               )}
             </div>
           </div>
+
+          <Link
+            href={`/annonces/${annonce.id}/affiche`}
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 font-semibold text-white transition hover:brightness-95"
+          >
+            <IconFileText size={18} />
+            {tA("genererCta")}
+          </Link>
         </div>
       </div>
 

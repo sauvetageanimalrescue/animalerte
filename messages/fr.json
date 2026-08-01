@@ -249,6 +249,12 @@
       }
     ]
   },
+  "affiche": {
+    "genererCta": "Générer l'affiche",
+    "imprimer": "Imprimer / Enregistrer en PDF",
+    "retour": "Retour à l'annonce",
+    "introuvable": "Cette annonce est introuvable ou a été retirée."
+  },
   "contact": {
     "titre": "Nous joindre",
     "sousTitre": "Une question, un commentaire ou un problème ? Écrivez-nous et nous vous répondrons rapidement.",

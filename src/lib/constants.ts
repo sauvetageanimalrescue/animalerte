@@ -4,6 +4,10 @@
 export const TYPES_ANNONCE = ["perdu", "trouve"] as const;
 export type TypeAnnonce = (typeof TYPES_ANNONCE)[number];
 
+// Ligne sans frais animALERTE (1-833-999-AIDE). Le routage IVR/anonyme vers le
+// propriétaire reste à bâtir ; d'ici là, l'affiche montre aussi le contact direct.
+export const LIGNE_SANS_FRAIS = "1-833-999-2433";
+
 export const STATUTS_ANNONCE = ["actif", "resolu"] as const;
 export type StatutAnnonce = (typeof STATUTS_ANNONCE)[number];
 

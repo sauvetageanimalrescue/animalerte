@@ -249,6 +249,12 @@
       }
     ]
   },
+  "affiche": {
+    "genererCta": "Generate the poster",
+    "imprimer": "Print / Save as PDF",
+    "retour": "Back to the listing",
+    "introuvable": "This listing cannot be found or was removed."
+  },
   "contact": {
     "titre": "Contact us",
     "sousTitre": "A question, a comment or an issue? Write to us and we'll get back to you shortly.",
