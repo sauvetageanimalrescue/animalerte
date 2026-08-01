@@ -54,7 +54,10 @@ export default async function AffichePage({
   const nom = annonce.nom_animal || ESPECE_BI[annonce.espece] || annonce.espece;
   const especeVal = ESPECE_BI[annonce.espece] ?? annonce.espece;
   const sexeVal = SEXE_BI[annonce.sexe] ?? annonce.sexe;
-  const dossier = annonce.numero_dossier;
+  // Sur l'affiche, on montre le dossier sans le préfixe d'année (« 26- »).
+  const dossier = annonce.numero_dossier
+    ? annonce.numero_dossier.replace(/^\d+-/, "")
+    : null;
   const aide = "1 833 999 AIDE";
   const numAffiche = LIGNE_SANS_FRAIS.replace(/-/g, " ");
   const lieu2 = annonce.adresse || annonce.dernier_lieu_vu;
