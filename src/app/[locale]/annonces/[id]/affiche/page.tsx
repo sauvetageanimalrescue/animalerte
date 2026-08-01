@@ -54,10 +54,7 @@ export default async function AffichePage({
   const nom = annonce.nom_animal || ESPECE_BI[annonce.espece] || annonce.espece;
   const especeVal = ESPECE_BI[annonce.espece] ?? annonce.espece;
   const sexeVal = SEXE_BI[annonce.sexe] ?? annonce.sexe;
-  // Sur l'affiche, on montre le dossier sans le préfixe d'année (« 26- »).
-  const dossier = annonce.numero_dossier
-    ? annonce.numero_dossier.replace(/^\d+-/, "")
-    : null;
+  const dossier = annonce.numero_dossier;
   const aide = "1 833 999 AIDE";
   const numAffiche = LIGNE_SANS_FRAIS.replace(/-/g, " ");
   const lieu2 = annonce.adresse || annonce.dernier_lieu_vu;
@@ -118,7 +115,7 @@ export default async function AffichePage({
         .aff-nom { font-size: 46px; font-weight: 800; color: #0c5679; line-height: 1; margin-bottom: 18px; word-break: break-word; }
         .aff-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 22px; align-content: start; }
         .aff-large { grid-column: 1 / -1; }
-        .aff-cell .aff-cv { font-size: 17px; font-weight: 600; color: #16232b; margin-top: 2px; }
+        .aff-cell .aff-cv { font-size: 18px; font-weight: 700; color: #0c5679; margin-top: 2px; }
         .aff-qr { margin-top: auto; margin-left: auto; text-align: right; }
         .aff-qr .lbl { font-size: 15px; color: #7c8b95; line-height: 1.35; margin-bottom: 8px; }
         .aff-qr img { width: 170px; height: 170px; display: inline-block; }
