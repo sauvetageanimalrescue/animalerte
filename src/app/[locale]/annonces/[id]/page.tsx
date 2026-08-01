@@ -174,13 +174,15 @@ export default async function AnnoncePage({
             </p>
           </div>
 
-          <Link
-            href={`/annonces/${annonce.id}/affiche`}
+          <a
+            href={`/api/affiche/${annonce.id}`}
+            target="_blank"
+            rel="noopener"
             className="mt-4 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 font-semibold text-white transition hover:brightness-95"
           >
             <IconFileText size={18} />
             {tA("genererCta")}
-          </Link>
+          </a>
         </div>
       </div>
 
