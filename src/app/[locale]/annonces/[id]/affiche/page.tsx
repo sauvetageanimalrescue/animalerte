@@ -62,6 +62,8 @@ export default async function AffichePage({
   const numAffiche = LIGNE_SANS_FRAIS.replace(/-/g, " ");
   const lieu2 = annonce.adresse || annonce.dernier_lieu_vu;
 
+  // Toutes les étiquettes s'affichent, même si la valeur est vide (comme le
+  // modèle d'affiche).
   const champs: { k: string; v: string | null; large?: boolean }[] = [
     { k: "Espèce / Species", v: especeVal },
     { k: "Race / Breed", v: annonce.race },
@@ -74,7 +76,7 @@ export default async function AffichePage({
       v: annonce.signes_distinctifs,
       large: true,
     },
-  ].filter((c) => c.v);
+  ];
 
   return (
     <>
@@ -202,7 +204,7 @@ export default async function AffichePage({
                     className={`aff-cell ${c.large ? "aff-large" : ""}`}
                   >
                     <div className="aff-k">{c.k}</div>
-                    <div className="aff-cv">{c.v}</div>
+                    <div className="aff-cv">{c.v || " "}</div>
                   </div>
                 ))}
               </div>
