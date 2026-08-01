@@ -107,18 +107,18 @@ export default async function AffichePage({
         .aff-photo { width: 336px; height: 336px; object-fit: cover; border-radius: 14px; border: 3px solid #0c5679; display: block; background: #eef3f6; }
         .aff-photo-vide { width: 336px; height: 336px; border-radius: 14px; border: 3px solid #0c5679; background: #eef3f6; display: flex; align-items: center; justify-content: center; color: #3d87b3; font-size: 18px; }
         .aff-bloc { margin-top: 22px; }
-        .aff-k { font-size: 13px; text-transform: uppercase; letter-spacing: .5px; color: #7c8b95; font-weight: 600; }
-        .aff-v { font-size: 21px; font-weight: 700; color: #0c5679; line-height: 1.15; }
+        .aff-k { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: #7c8b95; font-weight: 600; }
+        .aff-v { font-size: 18px; font-weight: 700; color: #0c5679; line-height: 1.15; }
         .aff-recompense { margin-top: 20px; display: inline-block; background: #fdeaec; color: #ce1f2b; font-weight: 700; font-size: 18px; padding: 8px 16px; border-radius: 10px; }
         .aff-appel { margin-top: auto; }
         .aff-appel .lbl { font-size: 16px; color: #7c8b95; margin-bottom: 6px; }
         .aff-aide { font-size: 46px; font-weight: 800; color: #ce1f2b; line-height: 1; letter-spacing: 1px; }
         .aff-num { font-size: 30px; font-weight: 700; color: #3d87b3; margin-top: 2px; letter-spacing: 1px; }
         .aff-droite { flex: 1; display: flex; flex-direction: column; }
-        .aff-nom { font-size: 60px; font-weight: 800; color: #0c5679; line-height: 1; margin-bottom: 20px; word-break: break-word; }
-        .aff-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; align-content: start; }
+        .aff-nom { font-size: 46px; font-weight: 800; color: #0c5679; line-height: 1; margin-bottom: 18px; word-break: break-word; }
+        .aff-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 22px; align-content: start; }
         .aff-large { grid-column: 1 / -1; }
-        .aff-cell .aff-cv { font-size: 20px; font-weight: 600; color: #16232b; margin-top: 2px; }
+        .aff-cell .aff-cv { font-size: 17px; font-weight: 600; color: #16232b; margin-top: 2px; }
         .aff-qr { margin-top: auto; margin-left: auto; text-align: right; }
         .aff-qr .lbl { font-size: 15px; color: #7c8b95; line-height: 1.35; margin-bottom: 8px; }
         .aff-qr img { width: 170px; height: 170px; display: inline-block; }
