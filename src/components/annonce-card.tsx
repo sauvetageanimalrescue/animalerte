@@ -4,15 +4,16 @@ import { IconMapPin, IconPaw } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 import type { Annonce } from "@/lib/types";
 import { formaterDate } from "@/lib/format";
-import { TypeBadge, StatutBadge } from "./badges";
+import { TypeBadge, StatutBadge, ForfaitBadge } from "./badges";
 
 export async function AnnonceCard({ annonce }: { annonce: Annonce }) {
-  const [tE, tT, tS, tA, tP, locale] = await Promise.all([
+  const [tE, tT, tS, tA, tP, tF, locale] = await Promise.all([
     getTranslations("especes"),
     getTranslations("types"),
     getTranslations("statuts"),
     getTranslations("annonce"),
     getTranslations("provinces"),
+    getTranslations("forfaits"),
     getLocale(),
   ]);
 
@@ -43,6 +44,10 @@ export async function AnnonceCard({ annonce }: { annonce: Annonce }) {
         )}
         <div className="absolute left-3 top-3 flex gap-2">
           <TypeBadge type={annonce.type} label={tT(annonce.type)} />
+          <ForfaitBadge
+            forfait={annonce.forfait}
+            label={tF(`${annonce.forfait}.nom`)}
+          />
           <StatutBadge statut={annonce.statut} label={tS(annonce.statut)} />
         </div>
       </div>

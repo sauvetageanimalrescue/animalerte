@@ -1,5 +1,30 @@
 import type { StatutAnnonce, TypeAnnonce } from "@/lib/constants";
 
+// Pastille du forfait, avec le code de couleur d'escalade de la marque.
+// Rien n'est affiché pour le forfait gratuit (aucune alerte).
+export function ForfaitBadge({
+  forfait,
+  label,
+}: {
+  forfait: string;
+  label: string;
+}) {
+  const styles: Record<string, string> = {
+    locale: "bg-brand-light text-white",
+    regional: "bg-brand text-white",
+    provincial: "bg-accent text-white",
+  };
+  const cls = styles[forfait];
+  if (!cls) return null;
+  return (
+    <span
+      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${cls}`}
+    >
+      {label}
+    </span>
+  );
+}
+
 export function TypeBadge({
   type,
   label,

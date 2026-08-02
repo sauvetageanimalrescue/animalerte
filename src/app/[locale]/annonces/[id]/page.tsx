@@ -24,7 +24,7 @@ import {
   formaterPoids,
 } from "@/lib/champs";
 import { nomRace } from "@/lib/races";
-import { TypeBadge, StatutBadge } from "@/components/badges";
+import { TypeBadge, StatutBadge, ForfaitBadge } from "@/components/badges";
 import { CarteDetail } from "@/components/carte-detail";
 
 export default async function AnnoncePage({
@@ -51,6 +51,7 @@ export default async function AnnoncePage({
     tYeux,
     tTemp,
     tEtat,
+    tForf,
   ] = await Promise.all([
       getTranslations("annonce"),
       getTranslations("especes"),
@@ -66,6 +67,7 @@ export default async function AnnoncePage({
       getTranslations("yeux"),
       getTranslations("temperaments"),
       getTranslations("etats"),
+      getTranslations("forfaits"),
     ]);
   const langAge: "fr" | "en" = locale === "en" ? "en" : "fr";
   // Traduit un code de liste ; laisse tel quel si ce n'est pas un code connu
@@ -191,6 +193,10 @@ export default async function AnnoncePage({
         <div>
           <div className="mb-3 flex items-center gap-2">
             <TypeBadge type={annonce.type} label={tT(annonce.type)} />
+            <ForfaitBadge
+              forfait={annonce.forfait}
+              label={tForf(`${annonce.forfait}.nom`)}
+            />
             <StatutBadge statut={annonce.statut} label={tS(annonce.statut)} />
           </div>
           <h1 className="text-3xl font-extrabold text-brand-dark">{titre}</h1>

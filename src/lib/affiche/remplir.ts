@@ -83,8 +83,25 @@ export async function remplirAffiche(
 
   draw(nom, 293, 170, black, fit(black, nom, 290, 34), navy);
 
-  const val = (t: string | null | undefined, x: number, base: number) =>
-    draw(t, x, base, semi, 15, navy);
+  // Valeur bilingue « Français / English » empilée sur deux étages (FR au-dessus,
+  // EN dessous en bleu) pour éviter que les longues valeurs ne débordent. Chaque
+  // ligne rétrécit au besoin pour rester dans la largeur de sa colonne.
+  const valBi = (
+    combine: string | null | undefined,
+    x: number,
+    base: number,
+    maxW: number,
+  ) => {
+    if (!combine) return;
+    const parts = combine.split(" / ");
+    if (parts.length === 2 && parts[0] !== parts[1]) {
+      const [fr, en] = parts;
+      draw(fr, x, base, semi, fit(semi, fr, maxW, 14), navy);
+      draw(en, x, base + 13, semi, fit(semi, en, maxW, 11.5), blue);
+    } else {
+      draw(combine, x, base, semi, fit(semi, combine, maxW, 15), navy);
+    }
+  };
   const [tCoulFr, tCoulEn] = await Promise.all([
     getTranslations({ locale: "fr", namespace: "couleurs" }),
     getTranslations({ locale: "en", namespace: "couleurs" }),
@@ -94,13 +111,23 @@ export async function remplirAffiche(
       ? `${tCoulFr(a.couleur)} / ${tCoulEn(a.couleur)}`
       : a.couleur;
 
-  val(ESPECE_BI[a.espece] ?? a.espece, 293, 212);
-  val(nomRace(a.race, a.espece, "bi"), 444, 212);
-  val(SEXE_BI[a.sexe] ?? a.sexe, 293, 257);
-  val(couleurBi, 444, 257);
-  val(a.age ? formaterAge(a.age, "bi") : null, 293, 301);
-  val(a.poids ? formaterPoids(a.poids) : null, 444, 301);
-  val(a.signes_distinctifs, 293, 347);
+  const COL_G = 145; // largeur dispo colonne gauche (x=293 → avant x=444)
+  const COL_D = 135; // largeur dispo colonne droite (x=444 → bord droit)
+  valBi(ESPECE_BI[a.espece] ?? a.espece, 293, 212, COL_G);
+  valBi(nomRace(a.race, a.espece, "bi"), 444, 212, COL_D);
+  valBi(SEXE_BI[a.sexe] ?? a.sexe, 293, 257, COL_G);
+  valBi(couleurBi, 444, 257, COL_D);
+  valBi(a.age ? formaterAge(a.age, "bi") : null, 293, 301, COL_G);
+  valBi(a.poids ? formaterPoids(a.poids) : null, 444, 301, COL_D);
+  // Signes distinctifs : texte libre (une seule langue), pleine largeur.
+  draw(
+    a.signes_distinctifs,
+    293,
+    347,
+    semi,
+    a.signes_distinctifs ? fit(semi, a.signes_distinctifs, 290, 15) : 15,
+    navy,
+  );
   // MESSAGE (293, 393) : laissé vide (pas de colonne « message » en BD).
 
   draw(a.ville, 32, 418, bold, 15, navy);

@@ -5,7 +5,7 @@ import { Link, redirect } from "@/i18n/navigation";
 import { getCurrentUser } from "@/lib/authz";
 import { obtenirMesAnnonces } from "@/lib/annonces";
 import { formaterDate } from "@/lib/format";
-import { TypeBadge, StatutBadge } from "@/components/badges";
+import { TypeBadge, StatutBadge, ForfaitBadge } from "@/components/badges";
 import { ActionsAnnonce } from "@/components/actions-annonce";
 
 export default async function MesAnnoncesPage({
@@ -17,13 +17,14 @@ export default async function MesAnnoncesPage({
   const user = await getCurrentUser();
   if (!user) redirect({ href: "/connexion", locale });
 
-  const [t, tE, tT, tS, tP, tCommun] = await Promise.all([
+  const [t, tE, tT, tS, tP, tCommun, tForf] = await Promise.all([
     getTranslations("mesAnnonces"),
     getTranslations("especes"),
     getTranslations("types"),
     getTranslations("statuts"),
     getTranslations("provinces"),
     getTranslations("commun"),
+    getTranslations("forfaits"),
   ]);
 
   const annonces = await obtenirMesAnnonces(user!.id);
@@ -86,6 +87,7 @@ export default async function MesAnnoncesPage({
                 <div className="flex-1">
                   <div className="mb-1 flex items-center gap-2">
                     <TypeBadge type={a.type} label={tT(a.type)} />
+                    <ForfaitBadge forfait={a.forfait} label={tForf(`${a.forfait}.nom`)} />
                     <StatutBadge statut={a.statut} label={tS(a.statut)} />
                   </div>
                   <Link
