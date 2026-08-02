@@ -14,7 +14,10 @@ import {
 } from "@tabler/icons-react";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import { obtenirAnnoncesRecentes } from "@/lib/annonces";
+import {
+  obtenirAnnoncesRecentes,
+  obtenirAnnoncesPrioritaires,
+} from "@/lib/annonces";
 import { AnnonceCard } from "@/components/annonce-card";
 import { FlairWord } from "@/components/logo";
 
@@ -24,6 +27,7 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
   const t = await getTranslations("accueil");
   const m = await getTranslations("marketing");
   const recentes = await obtenirAnnoncesRecentes(6);
+  const prioritaires = await obtenirAnnoncesPrioritaires(12);
 
   const etapes = [
     { icon: IconSpeakerphone, titre: t("etape1Titre"), texte: t("etape1Texte") },
@@ -98,6 +102,27 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
           </div>
         </div>
       </section>
+
+      {/* Carrousel des annonces prioritaires */}
+      {prioritaires.length > 0 && (
+        <section className="border-b border-border bg-surface">
+          <div className="mx-auto max-w-6xl px-4 py-8">
+            <div className="mb-4 flex items-center gap-2">
+              <IconAlertTriangle size={20} className="text-accent" />
+              <h2 className="text-lg font-bold text-foreground">
+                {t("prioritairesTitre")}
+              </h2>
+            </div>
+            <div className="flex snap-x gap-5 overflow-x-auto pb-3">
+              {prioritaires.map((a) => (
+                <div key={a.id} className="w-72 shrink-0 snap-start">
+                  <AnnonceCard annonce={a} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* flAIr */}
       <section className="border-y border-border bg-surface">

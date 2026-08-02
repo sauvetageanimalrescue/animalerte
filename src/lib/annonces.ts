@@ -44,6 +44,26 @@ export async function obtenirAnnoncesRecentes(limite = 6): Promise<Annonce[]> {
   }
 }
 
+// Annonces prioritaires (forfait Régionale+) pour le carrousel de l'accueil.
+export async function obtenirAnnoncesPrioritaires(
+  limite = 12,
+): Promise<Annonce[]> {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("annonces")
+      .select(CHAMPS)
+      .eq("statut", "actif")
+      .in("forfait", ["regional", "provincial"])
+      .order("created_at", { ascending: false })
+      .limit(limite);
+    if (error) throw error;
+    return (data ?? []) as Annonce[];
+  } catch {
+    return [];
+  }
+}
+
 // Recherche filtrée pour la page /recherche.
 export async function rechercherAnnonces(
   filtres: FiltresRecherche,

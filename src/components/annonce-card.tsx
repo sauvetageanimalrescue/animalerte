@@ -4,6 +4,7 @@ import { IconMapPin, IconPaw } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 import type { Annonce } from "@/lib/types";
 import { formaterDate } from "@/lib/format";
+import { nomRace } from "@/lib/races";
 import { TypeBadge, StatutBadge, ForfaitBadge } from "./badges";
 
 export async function AnnonceCard({ annonce }: { annonce: Annonce }) {
@@ -56,7 +57,9 @@ export async function AnnonceCard({ annonce }: { annonce: Annonce }) {
         <h3 className="font-semibold text-foreground">{titre}</h3>
         <p className="text-sm text-muted">
           {tE(annonce.espece)}
-          {annonce.race ? ` · ${annonce.race}` : ""}
+          {annonce.race
+            ? ` · ${nomRace(annonce.race, annonce.espece, locale === "en" ? "en" : "fr")}`
+            : ""}
         </p>
         <p className="mt-1 flex items-center gap-1 text-sm text-muted">
           <IconMapPin size={14} />
