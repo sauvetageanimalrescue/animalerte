@@ -8,7 +8,13 @@ import sharp from "sharp";
 import { getTranslations } from "next-intl/server";
 import type { Annonce } from "@/lib/types";
 import { formaterDate, nomDeRue } from "@/lib/format";
-import { COULEURS, formaterAge, formaterPoids } from "@/lib/champs";
+import {
+  COULEURS,
+  YEUX,
+  TEMPERAMENTS,
+  formaterAge,
+  formaterPoids,
+} from "@/lib/champs";
 import { nomRace } from "@/lib/races";
 
 const DIR = path.join(process.cwd(), "src", "lib", "affiche");
@@ -79,60 +85,95 @@ export async function remplirAffiche(
 
   const dossier = a.numero_dossier;
   const poste = dossier ? dossier.replace(/^\d+-/, "") : null;
-  const nom = a.nom_animal || ESPECE_BI[a.espece] || a.espece;
+  const nom = a.nom_animal || ESPECE_BI[a.espece]?.split(" / ")[0] || a.espece;
 
-  draw(nom, 293, 170, black, fit(black, nom, 290, 34), navy);
+  // Nom : le haut des majuscules aligné au haut de la photo.
+  const PHOTO_TOP = 132;
+  const sNom = fit(black, nom, 290, 42);
+  draw(nom, 291, PHOTO_TOP + sNom * 0.72, black, sNom, navy);
 
-  // Valeurs en français seulement (l'affiche bilingue surchargeait trop la mise
-  // en page). On prend la partie française, avant « / ».
-  const tCoulFr = await getTranslations({ locale: "fr", namespace: "couleurs" });
-  const couleurFr =
-    a.couleur && (COULEURS as readonly string[]).includes(a.couleur)
-      ? tCoulFr(a.couleur)
-      : a.couleur;
+  // Traductions FR + EN pour construire les valeurs bilingues.
+  const [tCoulFr, tCoulEn, tYeuxFr, tYeuxEn, tTempFr, tTempEn] =
+    await Promise.all([
+      getTranslations({ locale: "fr", namespace: "couleurs" }),
+      getTranslations({ locale: "en", namespace: "couleurs" }),
+      getTranslations({ locale: "fr", namespace: "yeux" }),
+      getTranslations({ locale: "en", namespace: "yeux" }),
+      getTranslations({ locale: "fr", namespace: "temperaments" }),
+      getTranslations({ locale: "en", namespace: "temperaments" }),
+    ]);
+  const biCode = (
+    v: string | null,
+    liste: readonly string[],
+    fr: (k: string) => string,
+    en: (k: string) => string,
+  ) => (v && liste.includes(v) ? `${fr(v)} / ${en(v)}` : v);
 
-  const COL_G = 150; // largeur dispo colonne gauche (x=293 → avant x=444)
-  const COL_D = 138; // largeur dispo colonne droite (x=444 → bord droit)
-  const grille = [
-    { t: ESPECE_BI[a.espece] ?? a.espece, x: 293, base: 212, maxW: COL_G },
-    { t: nomRace(a.race, a.espece, "fr"), x: 444, base: 212, maxW: COL_D },
-    { t: SEXE_BI[a.sexe] ?? a.sexe, x: 293, base: 257, maxW: COL_G },
-    { t: couleurFr, x: 444, base: 257, maxW: COL_D },
-    { t: a.age ? formaterAge(a.age, "fr") : null, x: 293, base: 301, maxW: COL_G },
-    { t: a.poids ? formaterPoids(a.poids) : null, x: 444, base: 301, maxW: COL_D },
-  ].map((c) => ({ ...c, fr: c.t ? c.t.split(" / ")[0] : null }));
+  const couleurBi = biCode(a.couleur, COULEURS, tCoulFr, tCoulEn);
+  const yeuxBi = biCode(a.couleur_yeux, YEUX, tYeuxFr, tYeuxEn);
+  const tempBi = biCode(a.temperament, TEMPERAMENTS, tTempFr, tTempEn);
+  const micropuceBi =
+    a.micropuce === true
+      ? "Oui / Yes"
+      : a.micropuce === false
+        ? "Non / No"
+        : null;
 
-  // Taille uniforme de TOUTE l'information de l'affiche : 11 pt partout.
-  // (11 pt fait tenir même les valeurs les plus longues sans troncature.)
-  const TAILLE = 11;
-  for (const c of grille) {
-    if (c.fr) draw(c.fr, c.x, c.base, semi, TAILLE, navy);
+  // Grille bilingue : français gras (marine) au-dessus, anglais dessous (bleu,
+  // plus petit). Chaque langue occupe sa propre ligne, donc pas de débordement.
+  const COL_G = 145; // colonne gauche (x=293)
+  const COL_D = 139; // colonne droite (x=444)
+  const champs = [
+    { c: ESPECE_BI[a.espece] ?? a.espece, x: 293, ly: 179, max: COL_G },
+    { c: nomRace(a.race, a.espece, "bi"), x: 444, ly: 179, max: COL_D },
+    { c: couleurBi, x: 293, ly: 230, max: COL_G },
+    { c: yeuxBi, x: 444, ly: 230, max: COL_D },
+    { c: a.age ? formaterAge(a.age, "bi") : null, x: 293, ly: 284, max: COL_G },
+    { c: a.poids ? formaterPoids(a.poids) : null, x: 444, ly: 284, max: COL_D },
+    { c: SEXE_BI[a.sexe] ?? a.sexe, x: 293, ly: 336, max: COL_G },
+    { c: micropuceBi, x: 444, ly: 336, max: COL_D },
+    { c: tempBi, x: 293, ly: 389, max: COL_G },
+  ].map((o) => {
+    const p = o.c ? o.c.split(" / ") : [];
+    return {
+      ...o,
+      fr: p[0] ?? null,
+      en: p.length === 2 && p[0] !== p[1] ? p[1] : null,
+    };
+  });
+
+  // Tailles uniformes : la plus grande qui fait tenir la valeur la plus longue.
+  let sFR = 14;
+  let sEN = 11;
+  for (const c of champs) {
+    if (c.fr) sFR = Math.min(sFR, fit(bold, c.fr, c.max, 14));
+    if (c.en) sEN = Math.min(sEN, fit(semi, c.en, c.max, 11));
   }
-  // Signes distinctifs : texte libre ; rétréci sous 11 pt seulement si très long.
-  draw(
-    a.signes_distinctifs,
-    293,
-    347,
-    semi,
-    a.signes_distinctifs ? fit(semi, a.signes_distinctifs, 290, TAILLE) : TAILLE,
-    navy,
-  );
-  // MESSAGE (293, 393) : laissé vide (pas de colonne « message » en BD).
+  const DZ = 29; // décalage de la 1re ligne sous sa légende
+  const DE = 42; // décalage de la ligne anglaise
+  for (const c of champs) {
+    draw(c.fr, c.x, c.ly + DZ, bold, sFR, navy);
+    if (c.en) draw(c.en, c.x, c.ly + DE, semi, sEN, blue);
+  }
 
-  draw(a.ville, 32, 418, bold, TAILLE, navy);
-  draw(nomDeRue(a.adresse) || a.dernier_lieu_vu, 32, 436, bold, TAILLE, navy);
-  draw(formaterDate(a.date_evenement, "fr"), 32, 486, bold, TAILLE, navy);
+  // Lieu (ville + rue) et date, même style que le français.
+  draw(a.ville, 32, 388 + DZ, bold, sFR, navy);
+  draw(nomDeRue(a.adresse) || a.dernier_lieu_vu, 32, 388 + DE, bold, sFR, navy);
+  draw(formaterDate(a.date_evenement, "fr"), 32, 456 + DZ, bold, sFR, navy);
 
-  if (poste) draw(`1 833 999 2433  #${poste}`, 32, 618, bold, 22, blue);
-  if (dossier) drawRight(dossier, 583, 70, bold, 32, white);
+  // Numéro bleu (le rouge « 1 833 999 AIDE » est pré-imprimé dans le gabarit).
+  if (poste) draw(`1 833 999 2433 #${poste}`, 33, 614, bold, 20, blue);
+  // Numéro de dossier dans le bandeau rouge (sans #).
+  if (dossier) drawRight(dossier, 584, 66, bold, 34, white);
 
   if (a.photo_url) {
     try {
       const resp = await fetch(a.photo_url);
       const buf = Buffer.from(await resp.arrayBuffer());
       const w = 238,
-        h = 240,
-        r = 16;
+        h = 236,
+        r = 18;
+      // Coins arrondis, sans bordure.
       const masque = Buffer.from(
         `<svg width="${w}" height="${h}"><rect x="0" y="0" width="${w}" height="${h}" rx="${r}" ry="${r}"/></svg>`,
       );
@@ -142,7 +183,7 @@ export async function remplirAffiche(
         .png()
         .toBuffer();
       const img = await pdf.embedPng(cropped);
-      page.drawImage(img, { x: 31, y: td(370), width: w, height: h });
+      page.drawImage(img, { x: 33, y: td(PHOTO_TOP + h), width: w, height: h });
     } catch {
       // Photo inaccessible : on laisse le cadre vide du gabarit.
     }
@@ -150,11 +191,11 @@ export async function remplirAffiche(
 
   const qrPng = await QRCode.toBuffer(`${origin}/annonces/${a.id}`, {
     margin: 0,
-    width: 300,
-    color: { dark: "#0c3d56", light: "#ffffff" },
+    width: 320,
+    color: { dark: "#0c5679", light: "#ffffff" },
   });
   const qrImg = await pdf.embedPng(qrPng);
-  page.drawImage(qrImg, { x: 450, y: td(618), width: 129, height: 129 });
+  page.drawImage(qrImg, { x: 450, y: td(488 + 127), width: 127, height: 127 });
 
   return await pdf.save();
 }
