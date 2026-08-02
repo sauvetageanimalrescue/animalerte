@@ -5,8 +5,10 @@ import { PDFDocument, rgb, type PDFFont, type Color } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
 import QRCode from "qrcode";
 import sharp from "sharp";
+import { getTranslations } from "next-intl/server";
 import type { Annonce } from "@/lib/types";
 import { formaterDate, nomDeRue } from "@/lib/format";
+import { COULEURS, formaterAge, formaterPoids } from "@/lib/champs";
 
 const DIR = path.join(process.cwd(), "src", "lib", "affiche");
 
@@ -82,12 +84,21 @@ export async function remplirAffiche(
 
   const val = (t: string | null | undefined, x: number, base: number) =>
     draw(t, x, base, semi, 15, navy);
+  const [tCoulFr, tCoulEn] = await Promise.all([
+    getTranslations({ locale: "fr", namespace: "couleurs" }),
+    getTranslations({ locale: "en", namespace: "couleurs" }),
+  ]);
+  const couleurBi =
+    a.couleur && (COULEURS as readonly string[]).includes(a.couleur)
+      ? `${tCoulFr(a.couleur)} / ${tCoulEn(a.couleur)}`
+      : a.couleur;
+
   val(ESPECE_BI[a.espece] ?? a.espece, 293, 212);
   val(a.race, 444, 212);
   val(SEXE_BI[a.sexe] ?? a.sexe, 293, 257);
-  val(a.couleur, 444, 257);
-  val(a.age, 293, 301);
-  val(a.poids, 444, 301);
+  val(couleurBi, 444, 257);
+  val(a.age ? formaterAge(a.age, "bi") : null, 293, 301);
+  val(a.poids ? formaterPoids(a.poids) : null, 444, 301);
   val(a.signes_distinctifs, 293, 347);
   // MESSAGE (293, 393) : laissé vide (pas de colonne « message » en BD).
 

@@ -2,8 +2,17 @@
 
 import { useActionState, useState } from "react";
 import dynamic from "next/dynamic";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { ESPECES, PROVINCES, SEXES } from "@/lib/constants";
+import {
+  COULEURS,
+  YEUX,
+  TEMPERAMENTS,
+  AGES,
+  POIDS_LB,
+  formaterAge,
+  formaterPoids,
+} from "@/lib/champs";
 import {
   publierAnnonce,
   modifierAnnonce,
@@ -45,6 +54,10 @@ export function FormulaireAnnonce({
   const tSexe = useTranslations("sexes");
   const tP = useTranslations("provinces");
   const tCommun = useTranslations("commun");
+  const tCoul = useTranslations("couleurs");
+  const tYeux = useTranslations("yeux");
+  const tTemp = useTranslations("temperaments");
+  const langAge: "fr" | "en" = useLocale() === "en" ? "en" : "fr";
 
   const enEdition = !!initial;
   const type = (initial?.type as "perdu" | "trouve") ?? defaultType;
@@ -132,39 +145,63 @@ export function FormulaireAnnonce({
           </label>
           <label className={label}>
             {tChamp("age")}
-            <input
+            <select
               name="age"
-              type="text"
               defaultValue={initial?.age ?? ""}
               className={champ}
-            />
+            >
+              <option value="">—</option>
+              {AGES.map((c) => (
+                <option key={c} value={c}>
+                  {formaterAge(c, langAge)}
+                </option>
+              ))}
+            </select>
           </label>
           <label className={label}>
             {tChamp("couleur")}
-            <input
+            <select
               name="couleur"
-              type="text"
               defaultValue={initial?.couleur ?? ""}
               className={champ}
-            />
+            >
+              <option value="">—</option>
+              {COULEURS.map((c) => (
+                <option key={c} value={c}>
+                  {tCoul(c)}
+                </option>
+              ))}
+            </select>
           </label>
           <label className={label}>
             {tChamp("couleurYeux")}
-            <input
+            <select
               name="couleur_yeux"
-              type="text"
               defaultValue={initial?.couleur_yeux ?? ""}
               className={champ}
-            />
+            >
+              <option value="">—</option>
+              {YEUX.map((c) => (
+                <option key={c} value={c}>
+                  {tYeux(c)}
+                </option>
+              ))}
+            </select>
           </label>
           <label className={label}>
             {tChamp("poids")}
-            <input
+            <select
               name="poids"
-              type="text"
               defaultValue={initial?.poids ?? ""}
               className={champ}
-            />
+            >
+              <option value="">—</option>
+              {POIDS_LB.map((lb) => (
+                <option key={lb} value={String(lb)}>
+                  {formaterPoids(String(lb))}
+                </option>
+              ))}
+            </select>
           </label>
           <label className={label}>
             {tChamp("sterilise")}
@@ -219,12 +256,18 @@ export function FormulaireAnnonce({
           </label>
           <label className={`${label} sm:col-span-2`}>
             {tChamp("temperament")}
-            <input
+            <select
               name="temperament"
-              type="text"
               defaultValue={initial?.temperament ?? ""}
               className={champ}
-            />
+            >
+              <option value="">—</option>
+              {TEMPERAMENTS.map((c) => (
+                <option key={c} value={c}>
+                  {tTemp(c)}
+                </option>
+              ))}
+            </select>
           </label>
           <label className={`${label} sm:col-span-2`}>
             {tChamp("description")}

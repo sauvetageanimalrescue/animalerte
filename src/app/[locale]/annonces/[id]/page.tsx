@@ -14,6 +14,13 @@ import { LIGNE_SANS_FRAIS } from "@/lib/constants";
 import { createClient } from "@/lib/supabase/server";
 import { obtenirAnnonce } from "@/lib/annonces";
 import { formaterDate, nomDeRue } from "@/lib/format";
+import {
+  COULEURS,
+  YEUX,
+  TEMPERAMENTS,
+  formaterAge,
+  formaterPoids,
+} from "@/lib/champs";
 import { TypeBadge, StatutBadge } from "@/components/badges";
 import { CarteDetail } from "@/components/carte-detail";
 
@@ -24,18 +31,30 @@ export default async function AnnoncePage({
   setRequestLocale(locale);
   const annonce = await obtenirAnnonce(id);
 
-  const [t, tE, tT, tS, tSexe, tP, tC, tChamp, tF, tA] = await Promise.all([
-    getTranslations("annonce"),
-    getTranslations("especes"),
-    getTranslations("types"),
-    getTranslations("statuts"),
-    getTranslations("sexes"),
-    getTranslations("provinces"),
-    getTranslations("commun"),
-    getTranslations("formulaire.champ"),
-    getTranslations("formulaire"),
-    getTranslations("affiche"),
-  ]);
+  const [t, tE, tT, tS, tSexe, tP, tC, tChamp, tF, tA, tCoul, tYeux, tTemp] =
+    await Promise.all([
+      getTranslations("annonce"),
+      getTranslations("especes"),
+      getTranslations("types"),
+      getTranslations("statuts"),
+      getTranslations("sexes"),
+      getTranslations("provinces"),
+      getTranslations("commun"),
+      getTranslations("formulaire.champ"),
+      getTranslations("formulaire"),
+      getTranslations("affiche"),
+      getTranslations("couleurs"),
+      getTranslations("yeux"),
+      getTranslations("temperaments"),
+    ]);
+  const langAge: "fr" | "en" = locale === "en" ? "en" : "fr";
+  // Traduit un code de liste ; laisse tel quel si ce n'est pas un code connu
+  // (compatibilité avec d'anciennes données en texte libre).
+  const trad = (
+    tr: (k: string) => string,
+    arr: readonly string[],
+    v: string | null,
+  ) => (v && arr.includes(v) ? tr(v) : v);
 
   if (!annonce) {
     return (
@@ -69,15 +88,21 @@ export default async function AnnoncePage({
     { label: t("espece"), valeur: tE(annonce.espece) },
     ...opt(t("race"), annonce.race),
     { label: t("sexe"), valeur: tSexe(annonce.sexe) },
-    ...opt(tChamp("age"), annonce.age),
-    ...opt(t("couleur"), annonce.couleur),
-    ...opt(tChamp("couleurYeux"), annonce.couleur_yeux),
-    ...opt(tChamp("poids"), annonce.poids),
+    ...opt(
+      tChamp("age"),
+      annonce.age ? formaterAge(annonce.age, langAge) : null,
+    ),
+    ...opt(t("couleur"), trad(tCoul, COULEURS, annonce.couleur)),
+    ...opt(tChamp("couleurYeux"), trad(tYeux, YEUX, annonce.couleur_yeux)),
+    ...opt(
+      tChamp("poids"),
+      annonce.poids ? formaterPoids(annonce.poids) : null,
+    ),
     ...opt(tChamp("sterilise"), ouiNon(annonce.sterilise)),
     ...opt(tChamp("signesDistinctifs"), annonce.signes_distinctifs),
     ...opt(tChamp("accessoires"), annonce.accessoires),
     ...opt(tChamp("micropuce"), micropuceVal),
-    ...opt(tChamp("temperament"), annonce.temperament),
+    ...opt(tChamp("temperament"), trad(tTemp, TEMPERAMENTS, annonce.temperament)),
   ];
   const groupeLieu: { label: string; valeur: string }[] = [
     { label: dateChamp, valeur: formaterDate(annonce.date_evenement, locale) },
