@@ -6,7 +6,7 @@ import fontkit from "@pdf-lib/fontkit";
 import QRCode from "qrcode";
 import sharp from "sharp";
 import type { Annonce } from "@/lib/types";
-import { formaterDate } from "@/lib/format";
+import { formaterDate, nomDeRue } from "@/lib/format";
 
 const DIR = path.join(process.cwd(), "src", "lib", "affiche");
 
@@ -92,7 +92,7 @@ export async function remplirAffiche(
   // MESSAGE (293, 393) : laissé vide (pas de colonne « message » en BD).
 
   draw(a.ville, 32, 418, bold, 15, navy);
-  draw(a.adresse || a.dernier_lieu_vu, 32, 436, bold, 15, navy);
+  draw(nomDeRue(a.adresse) || a.dernier_lieu_vu, 32, 436, bold, 15, navy);
   draw(formaterDate(a.date_evenement, "fr"), 32, 486, bold, 15, navy);
 
   if (poste) draw(`1 833 999 2433  #${poste}`, 32, 618, bold, 22, blue);

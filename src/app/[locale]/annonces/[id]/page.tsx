@@ -13,7 +13,7 @@ import { Link } from "@/i18n/navigation";
 import { LIGNE_SANS_FRAIS } from "@/lib/constants";
 import { createClient } from "@/lib/supabase/server";
 import { obtenirAnnonce } from "@/lib/annonces";
-import { formaterDate } from "@/lib/format";
+import { formaterDate, nomDeRue } from "@/lib/format";
 import { TypeBadge, StatutBadge } from "@/components/badges";
 import { CarteDetail } from "@/components/carte-detail";
 
@@ -77,7 +77,7 @@ export default async function AnnoncePage({
     ...opt(tChamp("accessoires"), annonce.accessoires),
     ...opt(tChamp("temperament"), annonce.temperament),
     ...opt(tChamp("heure"), annonce.heure_approx),
-    ...opt(tChamp("adresse"), annonce.adresse),
+    ...opt(tChamp("adresse"), nomDeRue(annonce.adresse)),
     ...opt(tChamp("precisionLieu"), annonce.dernier_lieu_vu),
     ...opt(
       tChamp("recompense"),
