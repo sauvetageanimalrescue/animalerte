@@ -32,6 +32,7 @@ export const COULEURS = [
 export const YEUX = [
   "bruns",
   "ambre",
+  "jaune",
   "verts",
   "vert_jaune",
   "bleus",
