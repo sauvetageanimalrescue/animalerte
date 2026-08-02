@@ -46,10 +46,6 @@ export default async function AnnoncePage({
   }
 
   const titre = annonce.nom_animal || tE(annonce.espece);
-  const dateLabel =
-    annonce.type === "perdu"
-      ? t("disparuLe", { date: formaterDate(annonce.date_evenement, locale) })
-      : t("trouveLe", { date: formaterDate(annonce.date_evenement, locale) });
 
   const ouiNon = (b: boolean | null) =>
     b === null ? null : b ? tF("oui") : tF("non");
@@ -63,27 +59,36 @@ export default async function AnnoncePage({
   const opt = (label: string, valeur: string | null | undefined) =>
     valeur ? [{ label, valeur }] : [];
 
-  const lignes: { label: string; valeur: string }[] = [
+  const dateChamp =
+    annonce.type === "perdu"
+      ? tChamp("dateEvenement")
+      : tChamp("dateDecouverte");
+
+  // Champs regroupés logiquement pour la fiche publique.
+  const groupeAnimal: { label: string; valeur: string }[] = [
     { label: t("espece"), valeur: tE(annonce.espece) },
     ...opt(t("race"), annonce.race),
     { label: t("sexe"), valeur: tSexe(annonce.sexe) },
     ...opt(tChamp("age"), annonce.age),
-    ...opt(tChamp("poids"), annonce.poids),
     ...opt(t("couleur"), annonce.couleur),
     ...opt(tChamp("couleurYeux"), annonce.couleur_yeux),
-    ...opt(tChamp("signesDistinctifs"), annonce.signes_distinctifs),
+    ...opt(tChamp("poids"), annonce.poids),
     ...opt(tChamp("sterilise"), ouiNon(annonce.sterilise)),
-    ...opt(tChamp("micropuce"), micropuceVal),
+    ...opt(tChamp("signesDistinctifs"), annonce.signes_distinctifs),
     ...opt(tChamp("accessoires"), annonce.accessoires),
+    ...opt(tChamp("micropuce"), micropuceVal),
     ...opt(tChamp("temperament"), annonce.temperament),
+  ];
+  const groupeLieu: { label: string; valeur: string }[] = [
+    { label: dateChamp, valeur: formaterDate(annonce.date_evenement, locale) },
     ...opt(tChamp("heure"), annonce.heure_approx),
     ...opt(tChamp("secteur"), nomDeRue(annonce.adresse)),
     ...opt(tChamp("precisionLieu"), annonce.dernier_lieu_vu),
+  ];
+  const groupeRecompense: { label: string; valeur: string }[] = [
     ...opt(
       tChamp("recompense"),
-      annonce.recompense
-        ? annonce.recompense_montant || tF("oui")
-        : null,
+      annonce.recompense ? annonce.recompense_montant || tF("oui") : null,
     ),
   ];
 
@@ -139,26 +144,34 @@ export default async function AnnoncePage({
             <IconMapPin size={16} />
             {annonce.ville}, {tP(annonce.province)}
           </p>
-          <p className="mt-1 text-sm text-muted">{dateLabel}</p>
           {annonce.numero_dossier && (
             <p className="mt-1 text-xs text-muted">
               {t("dossier")} {annonce.numero_dossier}
             </p>
           )}
 
-          <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3">
-            {lignes.map((l) => (
-              <div key={l.label}>
-                <dt className="text-xs uppercase tracking-wide text-muted">
-                  {l.label}
-                </dt>
-                <dd className="font-medium text-foreground">{l.valeur}</dd>
-              </div>
-            ))}
-          </dl>
+          {[groupeAnimal, groupeLieu, groupeRecompense].map((grp, i) =>
+            grp.length === 0 ? null : (
+              <dl
+                key={i}
+                className={`grid grid-cols-2 gap-x-4 gap-y-3 ${
+                  i === 0 ? "mt-6" : "mt-5 border-t border-border pt-5"
+                }`}
+              >
+                {grp.map((l) => (
+                  <div key={l.label}>
+                    <dt className="text-xs uppercase tracking-wide text-muted">
+                      {l.label}
+                    </dt>
+                    <dd className="font-medium text-foreground">{l.valeur}</dd>
+                  </div>
+                ))}
+              </dl>
+            ),
+          )}
 
           {annonce.description && (
-            <div className="mt-6">
+            <div className="mt-5 border-t border-border pt-5">
               <dt className="text-xs uppercase tracking-wide text-muted">
                 {t("description")}
               </dt>

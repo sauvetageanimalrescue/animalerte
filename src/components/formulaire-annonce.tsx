@@ -80,6 +80,19 @@ export function FormulaireAnnonce({
           <legend className="px-1 text-sm font-semibold text-brand-dark">
             {tSection("animal")}
           </legend>
+          <label className={`${label} sm:col-span-2`}>
+            <span>
+              {tChamp("nomAnimal")}{" "}
+              {type === "perdu" && <span className="text-accent">*</span>}
+            </span>
+            <input
+              name="nom_animal"
+              type="text"
+              required={type === "perdu"}
+              defaultValue={initial?.nom_animal ?? ""}
+              className={champ}
+            />
+          </label>
           <label className={label}>
             {tChamp("espece")}
             <select
@@ -93,6 +106,15 @@ export function FormulaireAnnonce({
                 </option>
               ))}
             </select>
+          </label>
+          <label className={label}>
+            {tChamp("race")}
+            <input
+              name="race"
+              type="text"
+              defaultValue={initial?.race ?? ""}
+              className={champ}
+            />
           </label>
           <label className={label}>
             {tChamp("sexe")}
@@ -109,42 +131,11 @@ export function FormulaireAnnonce({
             </select>
           </label>
           <label className={label}>
-            <span>
-              {tChamp("nomAnimal")}{" "}
-              {type === "perdu" && <span className="text-accent">*</span>}
-            </span>
-            <input
-              name="nom_animal"
-              type="text"
-              required={type === "perdu"}
-              defaultValue={initial?.nom_animal ?? ""}
-              className={champ}
-            />
-          </label>
-          <label className={label}>
-            {tChamp("race")}
-            <input
-              name="race"
-              type="text"
-              defaultValue={initial?.race ?? ""}
-              className={champ}
-            />
-          </label>
-          <label className={label}>
             {tChamp("age")}
             <input
               name="age"
               type="text"
               defaultValue={initial?.age ?? ""}
-              className={champ}
-            />
-          </label>
-          <label className={label}>
-            {tChamp("poids")}
-            <input
-              name="poids"
-              type="text"
-              defaultValue={initial?.poids ?? ""}
               className={champ}
             />
           </label>
@@ -166,12 +157,12 @@ export function FormulaireAnnonce({
               className={champ}
             />
           </label>
-          <label className={`${label} sm:col-span-2`}>
-            {tChamp("signesDistinctifs")}
+          <label className={label}>
+            {tChamp("poids")}
             <input
-              name="signes_distinctifs"
+              name="poids"
               type="text"
-              defaultValue={initial?.signes_distinctifs ?? ""}
+              defaultValue={initial?.poids ?? ""}
               className={champ}
             />
           </label>
@@ -186,6 +177,24 @@ export function FormulaireAnnonce({
               <option value="oui">{t("oui")}</option>
               <option value="non">{t("non")}</option>
             </select>
+          </label>
+          <label className={`${label} sm:col-span-2`}>
+            {tChamp("signesDistinctifs")}
+            <input
+              name="signes_distinctifs"
+              type="text"
+              defaultValue={initial?.signes_distinctifs ?? ""}
+              className={champ}
+            />
+          </label>
+          <label className={label}>
+            {tChamp("accessoires")}
+            <input
+              name="accessoires"
+              type="text"
+              defaultValue={initial?.accessoires ?? ""}
+              className={champ}
+            />
           </label>
           <label className={label}>
             {tChamp("micropuce")}
@@ -205,15 +214,6 @@ export function FormulaireAnnonce({
               name="micropuce_numero"
               type="text"
               defaultValue={initial?.micropuce_numero ?? ""}
-              className={champ}
-            />
-          </label>
-          <label className={label}>
-            {tChamp("accessoires")}
-            <input
-              name="accessoires"
-              type="text"
-              defaultValue={initial?.accessoires ?? ""}
               className={champ}
             />
           </label>
