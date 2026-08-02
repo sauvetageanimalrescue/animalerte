@@ -45,14 +45,14 @@ export async function SiteFooter() {
       <div className="mx-auto max-w-6xl px-4 py-12">
         <div className="flex flex-col gap-10 md:flex-row md:justify-between">
           <div className="flex items-center gap-4">
-            <Logo className="h-12 w-auto" />
-            <span className="h-9 w-px bg-border" aria-hidden />
+            <Logo className="h-[72px] w-auto" />
+            <span className="h-[54px] w-px bg-border" aria-hidden />
             <Image
               src="/flair-couleur.png"
               alt="flAIr"
               width={120}
               height={60}
-              className="h-7 w-auto"
+              className="h-[42px] w-auto"
             />
           </div>
 
