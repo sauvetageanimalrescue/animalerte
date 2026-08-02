@@ -150,6 +150,7 @@
   },
   "annonce": {
     "publieeLe": "Publiée le {date}",
+    "paiementConfirme": "Paiement confirmé. Votre forfait est activé et l'alerte est lancée.",
     "dossier": "Dossier",
     "infoTitre": "Vous avez une information ?",
     "poste": "Poste",
@@ -398,6 +399,11 @@
     "choisir": "Choisir ce forfait",
     "commencerGratuit": "Commencer gratuitement",
     "telechargerComparatif": "Comparatif complet (PDF)",
+    "choixTitre": "Choisissez votre forfait",
+    "choixSousTitre": "Votre fiche est publiée. Sélectionnez la portée de diffusion pour lancer l'alerte. Paiement unique, sans abonnement.",
+    "payer": "Payer {prix}",
+    "continuerGratuit": "Continuer sans forfait",
+    "paiementAnnule": "Paiement annulé. Vous pouvez choisir un forfait quand vous voulez.",
     "gratuit": {
       "nom": "Gratuit",
       "prix": "0 $",

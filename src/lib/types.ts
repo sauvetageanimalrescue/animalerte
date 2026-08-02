@@ -5,6 +5,7 @@ import type {
   StatutAnnonce,
   TypeAnnonce,
 } from "./constants";
+import type { Forfait } from "./forfaits";
 
 // Reflète la table public.annonces (voir supabase/migrations).
 export type Annonce = {
@@ -45,5 +46,9 @@ export type Annonce = {
   contact_courriel: string | null;
   contact_telephone: string | null;
   photo_url: string | null;
+  forfait: Forfait;
+  paye: boolean;
+  paye_at: string | null;
+  stripe_session_id: string | null;
   created_at: string;
 };

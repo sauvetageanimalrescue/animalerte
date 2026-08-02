@@ -150,6 +150,7 @@
   },
   "annonce": {
     "publieeLe": "Posted on {date}",
+    "paiementConfirme": "Payment confirmed. Your plan is active and the alert is live.",
     "dossier": "File",
     "infoTitre": "Do you have any information?",
     "poste": "Ext.",
@@ -398,6 +399,11 @@
     "choisir": "Choose this plan",
     "commencerGratuit": "Start for free",
     "telechargerComparatif": "Full comparison (PDF)",
+    "choixTitre": "Choose your plan",
+    "choixSousTitre": "Your listing is published. Select the broadcast reach to launch the alert. One-time payment, no subscription.",
+    "payer": "Pay {prix}",
+    "continuerGratuit": "Continue without a plan",
+    "paiementAnnule": "Payment cancelled. You can choose a plan whenever you like.",
     "gratuit": {
       "nom": "Free",
       "prix": "$0",

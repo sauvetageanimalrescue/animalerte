@@ -29,8 +29,10 @@ import { CarteDetail } from "@/components/carte-detail";
 
 export default async function AnnoncePage({
   params,
+  searchParams,
 }: PageProps<"/[locale]/annonces/[id]">) {
   const { locale, id } = await params;
+  const { paiement } = await searchParams;
   setRequestLocale(locale);
   const annonce = await obtenirAnnonce(id);
 
@@ -160,6 +162,12 @@ export default async function AnnoncePage({
         <IconArrowLeft size={16} />
         {tC("retour")}
       </Link>
+
+      {paiement === "succes" && (
+        <div className="mb-6 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-800">
+          {t("paiementConfirme")}
+        </div>
+      )}
 
       <div className="grid gap-8 md:grid-cols-2">
         {/* Photo */}

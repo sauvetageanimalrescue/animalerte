@@ -112,7 +112,13 @@ export async function publierAnnonce(
   if (error || !data) return { erreur: t("erreurGenerale") };
 
   const locale = await getLocale();
-  redirect(`/${locale}/annonces/${data.id}`);
+  // Un animal « perdu » passe par l'écran de choix du forfait ; un animal
+  // « trouvé » est toujours gratuit et va directement à sa fiche.
+  redirect(
+    typeAnnonce === "perdu"
+      ? `/${locale}/annonces/${data.id}/forfait`
+      : `/${locale}/annonces/${data.id}`,
+  );
 }
 
 export async function modifierAnnonce(
