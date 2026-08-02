@@ -397,6 +397,8 @@
     "populaire": "Le plus populaire",
     "choisir": "Choisir ce forfait",
     "commencerGratuit": "Commencer gratuitement",
+    "telechargerComparatif": "Comparatif complet (PDF)",
+    "herite": "Tout ce qu'offre {plan}, plus :",
     "gratuit": {
       "nom": "Gratuit",
       "prix": "0 $",
@@ -406,49 +408,35 @@
         "Courriel de conseils"
       ]
     },
-    "base": {
-      "nom": "Alerte locale",
+    "locale": {
+      "nom": "Locale",
       "prix": "49,99 $",
       "points": [
-        "Fiche sur animalerte.ca",
-        "Plusieurs photos",
-        "Courriel de conseils",
-        "Affiche imprimable et image pour les réseaux sociaux",
-        "Ligne sans frais anonyme",
+        "2 photos",
+        "Affiche intelligente, prête à imprimer",
+        "Ligne sans frais 1 833 999 AIDE",
         "Messagerie anonyme",
-        "Alerte locale (rayon de 5 km)"
+        "Alerte : Sentinelle et publicité Meta (5 km)"
       ]
     },
     "regional": {
-      "nom": "Alerte régionale",
+      "nom": "Régionale",
       "prix": "149,99 $",
       "points": [
-        "Fiche sur animalerte.ca",
-        "Plusieurs photos et vidéo",
-        "Courriel de conseils",
-        "Affiche imprimable et image pour les réseaux sociaux",
-        "Ligne sans frais anonyme",
-        "Messagerie anonyme",
-        "Alerte régionale (rayon de 25 km)",
-        "Réseau Sentinelle de votre secteur",
-        "flAIr (correspondances IA)"
+        "3 photos",
+        "Images et publication pour les réseaux sociaux",
+        "flAIr, jumelage par intelligence artificielle",
+        "Annonce prioritaire",
+        "Alerte élargie à 25 km"
       ]
     },
     "provincial": {
-      "nom": "Alerte provinciale",
+      "nom": "Provinciale",
       "prix": "249,99 $",
       "points": [
-        "Fiche sur animalerte.ca",
-        "Plusieurs photos et vidéo",
-        "Courriel de conseils",
-        "Affiche imprimable et image pour les réseaux sociaux",
-        "Ligne sans frais anonyme",
-        "Messagerie anonyme",
-        "Alerte provinciale, tout le Québec",
-        "Réseau Sentinelle de votre secteur",
-        "flAIr (correspondances IA)",
-        "Diffusion sur la page Facebook de Sauvetage Animal Rescue",
-        "Signalement prioritaire"
+        "4 photos",
+        "Alerte à l'échelle du Québec",
+        "Diffusion sur la page Facebook de Sauvetage Animal Rescue"
       ]
     }
   }

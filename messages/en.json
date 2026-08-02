@@ -397,6 +397,8 @@
     "populaire": "Most popular",
     "choisir": "Choose this plan",
     "commencerGratuit": "Start for free",
+    "telechargerComparatif": "Full comparison (PDF)",
+    "herite": "Everything in {plan}, plus:",
     "gratuit": {
       "nom": "Free",
       "prix": "$0",
@@ -406,49 +408,35 @@
         "Advice email"
       ]
     },
-    "base": {
-      "nom": "Local alert",
+    "locale": {
+      "nom": "Local",
       "prix": "$49.99",
       "points": [
-        "Listing on animalerte.ca",
-        "Multiple photos",
-        "Advice email",
-        "Printable poster and social media image",
-        "Anonymous toll-free line",
+        "2 photos",
+        "Smart poster, ready to print",
+        "Toll-free line 1 833 999 AIDE",
         "Anonymous messaging",
-        "Local alert (5 km radius)"
+        "Alert: Sentinel network and Meta ads (5 km)"
       ]
     },
     "regional": {
-      "nom": "Regional alert",
+      "nom": "Regional",
       "prix": "$149.99",
       "points": [
-        "Listing on animalerte.ca",
-        "Multiple photos and video",
-        "Advice email",
-        "Printable poster and social media image",
-        "Anonymous toll-free line",
-        "Anonymous messaging",
-        "Regional alert (25 km radius)",
-        "Sentinel network for your area",
-        "flAIr (AI matches)"
+        "3 photos",
+        "Social media images and ready-made post",
+        "flAIr, AI matching",
+        "Priority listing",
+        "Alert extended to 25 km"
       ]
     },
     "provincial": {
-      "nom": "Province-wide alert",
+      "nom": "Province-wide",
       "prix": "$249.99",
       "points": [
-        "Listing on animalerte.ca",
-        "Multiple photos and video",
-        "Advice email",
-        "Printable poster and social media image",
-        "Anonymous toll-free line",
-        "Anonymous messaging",
-        "Province-wide alert, all of Quebec",
-        "Sentinel network for your area",
-        "flAIr (AI matches)",
-        "Shared on the Sauvetage Animal Rescue Facebook page",
-        "Priority listing"
+        "4 photos",
+        "Alert across all of Quebec",
+        "Shared on the Sauvetage Animal Rescue Facebook page"
       ]
     }
   }

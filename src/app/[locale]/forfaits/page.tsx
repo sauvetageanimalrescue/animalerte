@@ -1,12 +1,12 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { IconCheck } from "@tabler/icons-react";
+import { IconCheck, IconFileTypePdf } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 
 const PLANS = [
-  { id: "gratuit", populaire: false },
-  { id: "base", populaire: false },
-  { id: "regional", populaire: true },
-  { id: "provincial", populaire: false },
+  { id: "gratuit", herite: null, populaire: false },
+  { id: "locale", herite: "gratuit", populaire: false },
+  { id: "regional", herite: "locale", populaire: true },
+  { id: "provincial", herite: "regional", populaire: false },
 ] as const;
 
 export default async function ForfaitsPage({
@@ -24,6 +24,17 @@ export default async function ForfaitsPage({
       <p className="mx-auto mt-3 max-w-2xl text-center text-muted">
         {t("sousTitre")}
       </p>
+
+      <div className="mt-6 flex justify-center">
+        <a
+          href="/comparatif-forfaits.pdf"
+          download
+          className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-sm font-semibold text-brand-dark transition hover:border-brand hover:text-brand"
+        >
+          <IconFileTypePdf size={18} className="shrink-0 text-accent" />
+          {t("telechargerComparatif")}
+        </a>
+      </div>
 
       <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {PLANS.map((p) => {
@@ -55,7 +66,17 @@ export default async function ForfaitsPage({
                 )}
               </div>
 
-              <ul className="mt-5 flex flex-1 flex-col gap-2.5">
+              {p.herite && (
+                <p className="mt-5 text-xs font-semibold text-muted">
+                  {t("herite", { plan: t(`${p.herite}.nom`) })}
+                </p>
+              )}
+
+              <ul
+                className={`flex flex-1 flex-col gap-2.5 ${
+                  p.herite ? "mt-2.5" : "mt-5"
+                }`}
+              >
                 {points.map((pt, i) => (
                   <li
                     key={i}
