@@ -101,6 +101,7 @@
     "dossier": "File",
     "infoTitre": "Do you have any information?",
     "poste": "Ext.",
+    "ligneExplication": "animALERTE is the only lost-pet service with a direct, confidential line to the owner. Dial the number above; when the system asks, enter the 4-digit file number (the extension shown). The call is forwarded straight to the owner without ever revealing their contact details: anonymity is guaranteed, and reaching them stays simple.",
     "disparuLe": "Lost on {date}",
     "trouveLe": "Found on {date}",
     "lieu": "Location",

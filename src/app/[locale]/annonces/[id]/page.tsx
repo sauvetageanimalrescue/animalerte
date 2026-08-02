@@ -182,6 +182,9 @@ export default async function AnnoncePage({
               {LIGNE_SANS_FRAIS.replace(/-/g, " ")}
               {poste ? ` · ${t("poste")} ${poste}` : ""}
             </p>
+            <p className="mt-3 border-t border-border pt-3 text-sm leading-relaxed text-muted">
+              {t("ligneExplication")}
+            </p>
           </div>
 
           {estProprietaire && (

@@ -101,6 +101,7 @@
     "dossier": "Dossier",
     "infoTitre": "Vous avez une information ?",
     "poste": "Poste",
+    "ligneExplication": "animALERTE est le seul service d'animaux perdus doté d'une ligne directe et confidentielle vers le propriétaire. Composez le numéro ci-dessus; quand le système le demande, entrez les 4 chiffres du dossier (le poste indiqué). L'appel est redirigé directement vers le propriétaire, sans jamais dévoiler ses coordonnées : l'anonymat est garanti, et le joindre reste tout simple.",
     "disparuLe": "Disparu le {date}",
     "trouveLe": "Trouvé le {date}",
     "lieu": "Lieu",
