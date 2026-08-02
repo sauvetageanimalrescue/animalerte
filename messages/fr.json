@@ -462,5 +462,64 @@
         "Diffusion sur la page Facebook de Sauvetage Animal Rescue"
       ]
     }
+  },
+  "conditions": {
+    "titre": "Conditions d'utilisation",
+    "sousTitre": "Les règles qui encadrent l'utilisation d'animALERTE.",
+    "maj": "Dernière mise à jour : 2 août 2026",
+    "sections": [
+      {
+        "titre": "1. Acceptation des conditions",
+        "texte": "En créant un compte ou en utilisant animALERTE, vous acceptez les présentes conditions d'utilisation. Si vous n'êtes pas d'accord avec l'une d'elles, veuillez ne pas utiliser le service."
+      },
+      {
+        "titre": "2. Nature du service",
+        "texte": "animALERTE est un outil de diffusion communautaire qui aide à signaler et à retrouver les animaux de compagnie perdus ou trouvés au Québec. Le service met en relation les propriétaires, la communauté et un réseau de commerces et d'intervenants appelés « Sentinelles »."
+      },
+      {
+        "titre": "3. Aucune garantie de résultat",
+        "texte": "animALERTE ne garantit d'aucune façon qu'un animal signalé sera retrouvé. Le service est un outil de visibilité et de diffusion; il ne remplace ni vos démarches personnelles ni les services d'un professionnel. Nous mettons des moyens à votre disposition, sans obligation de résultat."
+      },
+      {
+        "titre": "4. Compte utilisateur",
+        "texte": "La publication d'une annonce nécessite un compte. Vous êtes responsable de l'exactitude de vos renseignements et de la confidentialité de votre mot de passe. Vous devez être majeur ou avoir l'autorisation d'un parent ou tuteur."
+      },
+      {
+        "titre": "5. Vos annonces",
+        "texte": "Vous garantissez que les renseignements et les photos que vous publiez sont exacts, qu'ils vous appartiennent ou que vous avez le droit de les utiliser, et qu'ils ne portent pas atteinte aux droits d'autrui. Nous pouvons retirer toute annonce trompeuse, frauduleuse, offensante ou non conforme."
+      },
+      {
+        "titre": "6. Forfaits et paiements",
+        "texte": "Le signalement d'un animal trouvé est toujours gratuit. Pour un animal perdu, des forfaits payants (paiement unique par annonce, sans abonnement) débloquent des fonctions de diffusion additionnelles. Les paiements sont traités de façon sécurisée par notre fournisseur de paiement; animALERTE ne conserve jamais vos données de carte."
+      },
+      {
+        "titre": "7. Affichage prioritaire (7 jours)",
+        "texte": "Les forfaits Régionale et Provinciale accordent un affichage prioritaire : votre annonce apparaît en tête des listes et dans le carrousel des alertes prioritaires de la page d'accueil pendant sept (7) jours suivant le paiement. Passé ce délai, votre annonce demeure active et consultable jusqu'à un an, mais n'est plus mise en avant de façon prioritaire."
+      },
+      {
+        "titre": "8. Alertes et publicité",
+        "texte": "Selon le forfait, une « alerte » comprend une diffusion sur notre réseau interne géolocalisé (Sentinelle) et une publicité ciblée sur les plateformes de Meta (Facebook et Instagram) dans un rayon donné. La portée des alertes varie selon le forfait et ne constitue pas une garantie de diffusion à un public précis."
+      },
+      {
+        "titre": "9. Anonymat et coordonnées",
+        "texte": "animALERTE protège vos coordonnées personnelles : elles n'apparaissent jamais publiquement sur une fiche ou une affiche. Les personnes qui trouvent votre animal peuvent vous joindre par la ligne sans frais ou la messagerie anonyme, sans que votre numéro personnel ne soit dévoilé."
+      },
+      {
+        "titre": "10. Limitation de responsabilité",
+        "texte": "Dans les limites permises par la loi, animALERTE et Sauvetage Animal Rescue ne peuvent être tenus responsables des dommages directs ou indirects liés à l'utilisation du service, à l'exactitude des annonces, au comportement des utilisateurs ou à l'issue d'un signalement."
+      },
+      {
+        "titre": "11. Vie privée",
+        "texte": "Le traitement de vos renseignements personnels est décrit dans notre politique de confidentialité. En utilisant le service, vous consentez à ce traitement."
+      },
+      {
+        "titre": "12. Modifications",
+        "texte": "Nous pouvons modifier ces conditions en tout temps. La date de mise à jour ci-dessus indique la version en vigueur. L'utilisation continue du service vaut acceptation des conditions révisées."
+      },
+      {
+        "titre": "13. Nous joindre",
+        "texte": "Pour toute question au sujet de ces conditions, utilisez la page Contact."
+      }
+    ]
   }
 }

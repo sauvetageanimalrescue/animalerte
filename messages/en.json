@@ -462,5 +462,64 @@
         "Shared on the Sauvetage Animal Rescue Facebook page"
       ]
     }
+  },
+  "conditions": {
+    "titre": "Terms of use",
+    "sousTitre": "The rules that govern the use of animALERTE.",
+    "maj": "Last updated: August 2, 2026",
+    "sections": [
+      {
+        "titre": "1. Acceptance of terms",
+        "texte": "By creating an account or using animALERTE, you agree to these terms of use. If you do not agree with any of them, please do not use the service."
+      },
+      {
+        "titre": "2. Nature of the service",
+        "texte": "animALERTE is a community broadcast tool that helps report and find lost or found pets in Quebec. The service connects owners, the community, and a network of businesses and partners called \"Sentinels\"."
+      },
+      {
+        "titre": "3. No guarantee of results",
+        "texte": "animALERTE in no way guarantees that a reported animal will be found. The service is a visibility and broadcast tool; it does not replace your own efforts or the services of a professional. We provide you with means, without any obligation of result."
+      },
+      {
+        "titre": "4. User account",
+        "texte": "Posting a listing requires an account. You are responsible for the accuracy of your information and the confidentiality of your password. You must be of legal age or have the authorization of a parent or guardian."
+      },
+      {
+        "titre": "5. Your listings",
+        "texte": "You warrant that the information and photos you post are accurate, belong to you or that you have the right to use them, and do not infringe the rights of others. We may remove any listing that is misleading, fraudulent, offensive, or non-compliant."
+      },
+      {
+        "titre": "6. Plans and payments",
+        "texte": "Reporting a found animal is always free. For a lost animal, paid plans (a one-time payment per listing, no subscription) unlock additional broadcast features. Payments are securely processed by our payment provider; animALERTE never stores your card details."
+      },
+      {
+        "titre": "7. Priority display (7 days)",
+        "texte": "The Regional and Province-wide plans grant priority display: your listing appears at the top of the lists and in the priority alerts carousel on the home page for seven (7) days following payment. After that period, your listing remains active and viewable for up to one year, but is no longer given priority placement."
+      },
+      {
+        "titre": "8. Alerts and advertising",
+        "texte": "Depending on the plan, an \"alert\" includes a broadcast on our geolocated internal network (Sentinel) and targeted advertising on Meta platforms (Facebook and Instagram) within a given radius. The reach of alerts varies by plan and does not constitute a guarantee of exposure to a specific audience."
+      },
+      {
+        "titre": "9. Anonymity and contact details",
+        "texte": "animALERTE protects your personal contact details: they never appear publicly on a listing or poster. People who find your animal can reach you through the toll-free line or anonymous messaging, without your personal number being disclosed."
+      },
+      {
+        "titre": "10. Limitation of liability",
+        "texte": "To the extent permitted by law, animALERTE and Sauvetage Animal Rescue cannot be held liable for direct or indirect damages related to the use of the service, the accuracy of listings, the behaviour of users, or the outcome of a report."
+      },
+      {
+        "titre": "11. Privacy",
+        "texte": "The processing of your personal information is described in our privacy policy. By using the service, you consent to this processing."
+      },
+      {
+        "titre": "12. Changes",
+        "texte": "We may change these terms at any time. The update date above indicates the version in effect. Continued use of the service constitutes acceptance of the revised terms."
+      },
+      {
+        "titre": "13. Contact us",
+        "texte": "For any questions about these terms, please use the Contact page."
+      }
+    ]
   }
 }

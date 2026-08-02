@@ -27,7 +27,7 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
   const t = await getTranslations("accueil");
   const m = await getTranslations("marketing");
   const recentes = await obtenirAnnoncesRecentes(6);
-  const prioritaires = await obtenirAnnoncesPrioritaires(12);
+  const prioritaires = await obtenirAnnoncesPrioritaires();
 
   const etapes = [
     { icon: IconSpeakerphone, titre: t("etape1Titre"), texte: t("etape1Texte") },
