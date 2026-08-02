@@ -1,7 +1,7 @@
 import type { StatutAnnonce, TypeAnnonce } from "@/lib/constants";
 
-// Pastille du forfait, avec le code de couleur d'escalade de la marque.
-// Rien n'est affiché pour le forfait gratuit (aucune alerte).
+// Pastille du forfait, avec le code de couleur d'escalade du comparatif :
+// gratuit = gris, locale = bleu clair, régionale = marine, provinciale = rouge.
 export function ForfaitBadge({
   forfait,
   label,
@@ -10,6 +10,7 @@ export function ForfaitBadge({
   label: string;
 }) {
   const styles: Record<string, string> = {
+    gratuit: "bg-slate-500 text-white",
     locale: "bg-brand-light text-white",
     regional: "bg-brand text-white",
     provincial: "bg-accent text-white",
