@@ -102,29 +102,26 @@ export async function remplirAffiche(
     { t: a.poids ? formaterPoids(a.poids) : null, x: 444, base: 301, maxW: COL_D },
   ].map((c) => ({ ...c, fr: c.t ? c.t.split(" / ")[0] : null }));
 
-  // Uniformité : UNE seule taille pour toute la grille = la plus grande taille
-  // qui fait tenir la valeur la plus longue dans sa colonne.
-  let taille = 15;
+  // Taille uniforme de TOUTE l'information de l'affiche : 11 pt partout.
+  // (11 pt fait tenir même les valeurs les plus longues sans troncature.)
+  const TAILLE = 11;
   for (const c of grille) {
-    if (c.fr) taille = Math.min(taille, fit(semi, c.fr, c.maxW, 15));
+    if (c.fr) draw(c.fr, c.x, c.base, semi, TAILLE, navy);
   }
-  for (const c of grille) {
-    if (c.fr) draw(c.fr, c.x, c.base, semi, taille, navy);
-  }
-  // Signes distinctifs : texte libre, pleine largeur, taille indépendante.
+  // Signes distinctifs : texte libre ; rétréci sous 11 pt seulement si très long.
   draw(
     a.signes_distinctifs,
     293,
     347,
     semi,
-    a.signes_distinctifs ? fit(semi, a.signes_distinctifs, 290, 15) : 15,
+    a.signes_distinctifs ? fit(semi, a.signes_distinctifs, 290, TAILLE) : TAILLE,
     navy,
   );
   // MESSAGE (293, 393) : laissé vide (pas de colonne « message » en BD).
 
-  draw(a.ville, 32, 418, bold, 15, navy);
-  draw(nomDeRue(a.adresse) || a.dernier_lieu_vu, 32, 436, bold, 15, navy);
-  draw(formaterDate(a.date_evenement, "fr"), 32, 486, bold, 15, navy);
+  draw(a.ville, 32, 418, bold, TAILLE, navy);
+  draw(nomDeRue(a.adresse) || a.dernier_lieu_vu, 32, 436, bold, TAILLE, navy);
+  draw(formaterDate(a.date_evenement, "fr"), 32, 486, bold, TAILLE, navy);
 
   if (poste) draw(`1 833 999 2433  #${poste}`, 32, 618, bold, 22, blue);
   if (dossier) drawRight(dossier, 583, 70, bold, 32, white);
