@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { obtenirAnnonce } from "@/lib/annonces";
 import { remplirAffiche } from "@/lib/affiche/remplir";
+import { peut } from "@/lib/forfaits";
 
 // Génère l'affiche PDF d'une annonce (gabarit d'Eric rempli automatiquement).
 // Réservé au propriétaire de l'annonce (l'affiche est une fonction du forfait).
@@ -18,6 +19,10 @@ export async function GET(
   } = await supabase.auth.getUser();
   if (!user || user.id !== annonce.user_id) {
     return new Response("Non autorisé", { status: 403 });
+  }
+  // L'affiche est débloquée à partir du forfait Locale.
+  if (!peut(annonce.forfait, "affiche")) {
+    return new Response("Forfait insuffisant", { status: 402 });
   }
 
   const origin = new URL(request.url).origin;

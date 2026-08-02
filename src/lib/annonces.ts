@@ -1,6 +1,17 @@
 import "server-only";
 import { createClient } from "@/lib/supabase/server";
 import type { Annonce } from "./types";
+import { forfaitAuMoins } from "./forfaits";
+
+// Annonces prioritaires (forfait Régionale+) placées en tête. Tri stable :
+// l'ordre par date, déjà appliqué par la requête, est conservé dans chaque groupe.
+function trierParPriorite(liste: Annonce[]): Annonce[] {
+  return [...liste].sort(
+    (a, b) =>
+      (forfaitAuMoins(b.forfait, "regional") ? 1 : 0) -
+      (forfaitAuMoins(a.forfait, "regional") ? 1 : 0),
+  );
+}
 
 export type FiltresRecherche = {
   motCle?: string;
@@ -22,9 +33,11 @@ export async function obtenirAnnoncesRecentes(limite = 6): Promise<Annonce[]> {
       .select(CHAMPS)
       .eq("statut", "actif")
       .order("created_at", { ascending: false })
-      .limit(limite);
+      // On récupère un bassin plus large pour que les annonces prioritaires
+      // (plus anciennes) puissent remonter au-dessus des récentes gratuites.
+      .limit(limite * 4);
     if (error) throw error;
-    return (data ?? []) as Annonce[];
+    return trierParPriorite((data ?? []) as Annonce[]).slice(0, limite);
   } catch {
     // Sans backend configuré, on renvoie une liste vide plutôt que planter.
     return [];
@@ -62,7 +75,7 @@ export async function rechercherAnnonces(
 
     const { data, error } = await requete;
     if (error) throw error;
-    return (data ?? []) as Annonce[];
+    return trierParPriorite((data ?? []) as Annonce[]);
   } catch {
     return [];
   }

@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { obtenirAnnonce } from "@/lib/annonces";
+import { peut } from "@/lib/forfaits";
 import { genererLegende } from "@/lib/affiche/legende";
 import { BoutonCopier } from "@/components/bouton-copier";
 
@@ -21,6 +22,10 @@ export default async function PartagerPage({
   const annonce = await obtenirAnnonce(id);
   if (!annonce || annonce.user_id !== user.id) {
     redirect(`/${locale}/annonces/${id}`);
+  }
+  // Images sociales : forfait Régionale+. Sinon, vers le choix de forfait.
+  if (!peut(annonce.forfait, "reseaux")) {
+    redirect(`/${locale}/annonces/${id}/forfait`);
   }
 
   const [t, tE] = await Promise.all([

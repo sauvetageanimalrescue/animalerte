@@ -9,6 +9,7 @@ import {
   IconFileText,
   IconPencil,
   IconShare,
+  IconSparkles,
 } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 import { LIGNE_SANS_FRAIS } from "@/lib/constants";
@@ -24,6 +25,7 @@ import {
   formaterPoids,
 } from "@/lib/champs";
 import { nomRace } from "@/lib/races";
+import { peut } from "@/lib/forfaits";
 import { TypeBadge, StatutBadge, ForfaitBadge } from "@/components/badges";
 import { CarteDetail } from "@/components/carte-detail";
 
@@ -269,22 +271,35 @@ export default async function AnnoncePage({
                 <IconPencil size={18} />
                 {tC("modifier")}
               </Link>
-              <a
-                href={`/api/affiche/${annonce.id}`}
-                target="_blank"
-                rel="noopener"
-                className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 font-semibold text-white transition hover:brightness-95"
-              >
-                <IconFileText size={18} />
-                {tA("genererCta")}
-              </a>
-              <Link
-                href={`/annonces/${annonce.id}/partager`}
-                className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 font-semibold text-white transition hover:bg-brand-dark"
-              >
-                <IconShare size={18} />
-                {tA("partagerCta")}
-              </Link>
+              {peut(annonce.forfait, "affiche") && (
+                <a
+                  href={`/api/affiche/${annonce.id}`}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 font-semibold text-white transition hover:brightness-95"
+                >
+                  <IconFileText size={18} />
+                  {tA("genererCta")}
+                </a>
+              )}
+              {peut(annonce.forfait, "reseaux") && (
+                <Link
+                  href={`/annonces/${annonce.id}/partager`}
+                  className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 font-semibold text-white transition hover:bg-brand-dark"
+                >
+                  <IconShare size={18} />
+                  {tA("partagerCta")}
+                </Link>
+              )}
+              {!peut(annonce.forfait, "reseaux") && (
+                <Link
+                  href={`/annonces/${annonce.id}/forfait`}
+                  className="inline-flex items-center gap-2 rounded-full border border-accent px-5 py-2.5 font-semibold text-accent transition hover:bg-accent-soft"
+                >
+                  <IconSparkles size={18} />
+                  {tA("debloquer")}
+                </Link>
+              )}
             </div>
           )}
         </div>
