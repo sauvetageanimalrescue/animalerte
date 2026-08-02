@@ -83,43 +83,35 @@ export async function remplirAffiche(
 
   draw(nom, 293, 170, black, fit(black, nom, 290, 34), navy);
 
-  // Valeur bilingue « Français / English » empilée sur deux étages (FR au-dessus,
-  // EN dessous en bleu) pour éviter que les longues valeurs ne débordent. Chaque
-  // ligne rétrécit au besoin pour rester dans la largeur de sa colonne.
-  const valBi = (
-    combine: string | null | undefined,
-    x: number,
-    base: number,
-    maxW: number,
-  ) => {
-    if (!combine) return;
-    const parts = combine.split(" / ");
-    if (parts.length === 2 && parts[0] !== parts[1]) {
-      const [fr, en] = parts;
-      draw(fr, x, base, semi, fit(semi, fr, maxW, 14), navy);
-      draw(en, x, base + 13, semi, fit(semi, en, maxW, 11.5), blue);
-    } else {
-      draw(combine, x, base, semi, fit(semi, combine, maxW, 15), navy);
-    }
-  };
-  const [tCoulFr, tCoulEn] = await Promise.all([
-    getTranslations({ locale: "fr", namespace: "couleurs" }),
-    getTranslations({ locale: "en", namespace: "couleurs" }),
-  ]);
-  const couleurBi =
+  // Valeurs en français seulement (l'affiche bilingue surchargeait trop la mise
+  // en page). On prend la partie française, avant « / ».
+  const tCoulFr = await getTranslations({ locale: "fr", namespace: "couleurs" });
+  const couleurFr =
     a.couleur && (COULEURS as readonly string[]).includes(a.couleur)
-      ? `${tCoulFr(a.couleur)} / ${tCoulEn(a.couleur)}`
+      ? tCoulFr(a.couleur)
       : a.couleur;
 
-  const COL_G = 145; // largeur dispo colonne gauche (x=293 → avant x=444)
-  const COL_D = 135; // largeur dispo colonne droite (x=444 → bord droit)
-  valBi(ESPECE_BI[a.espece] ?? a.espece, 293, 212, COL_G);
-  valBi(nomRace(a.race, a.espece, "bi"), 444, 212, COL_D);
-  valBi(SEXE_BI[a.sexe] ?? a.sexe, 293, 257, COL_G);
-  valBi(couleurBi, 444, 257, COL_D);
-  valBi(a.age ? formaterAge(a.age, "bi") : null, 293, 301, COL_G);
-  valBi(a.poids ? formaterPoids(a.poids) : null, 444, 301, COL_D);
-  // Signes distinctifs : texte libre (une seule langue), pleine largeur.
+  const COL_G = 150; // largeur dispo colonne gauche (x=293 → avant x=444)
+  const COL_D = 138; // largeur dispo colonne droite (x=444 → bord droit)
+  const grille = [
+    { t: ESPECE_BI[a.espece] ?? a.espece, x: 293, base: 212, maxW: COL_G },
+    { t: nomRace(a.race, a.espece, "fr"), x: 444, base: 212, maxW: COL_D },
+    { t: SEXE_BI[a.sexe] ?? a.sexe, x: 293, base: 257, maxW: COL_G },
+    { t: couleurFr, x: 444, base: 257, maxW: COL_D },
+    { t: a.age ? formaterAge(a.age, "fr") : null, x: 293, base: 301, maxW: COL_G },
+    { t: a.poids ? formaterPoids(a.poids) : null, x: 444, base: 301, maxW: COL_D },
+  ].map((c) => ({ ...c, fr: c.t ? c.t.split(" / ")[0] : null }));
+
+  // Uniformité : UNE seule taille pour toute la grille = la plus grande taille
+  // qui fait tenir la valeur la plus longue dans sa colonne.
+  let taille = 15;
+  for (const c of grille) {
+    if (c.fr) taille = Math.min(taille, fit(semi, c.fr, c.maxW, 15));
+  }
+  for (const c of grille) {
+    if (c.fr) draw(c.fr, c.x, c.base, semi, taille, navy);
+  }
+  // Signes distinctifs : texte libre, pleine largeur, taille indépendante.
   draw(
     a.signes_distinctifs,
     293,
