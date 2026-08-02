@@ -77,7 +77,7 @@ export default async function AnnoncePage({
     ...opt(tChamp("accessoires"), annonce.accessoires),
     ...opt(tChamp("temperament"), annonce.temperament),
     ...opt(tChamp("heure"), annonce.heure_approx),
-    ...opt(tChamp("adresse"), nomDeRue(annonce.adresse)),
+    ...opt(tChamp("secteur"), nomDeRue(annonce.adresse)),
     ...opt(tChamp("precisionLieu"), annonce.dernier_lieu_vu),
     ...opt(
       tChamp("recompense"),

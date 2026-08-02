@@ -155,6 +155,7 @@
       "adresse": "Adresse ou intersection",
       "adressePerdu": "Adresse d'où l'animal est disparu",
       "adresseTrouve": "Adresse où l'animal a été trouvé",
+      "secteur": "Secteur",
       "precisionLieu": "Précision sur l'emplacement",
       "dateEvenement": "Date de la disparition",
       "dateDecouverte": "Date de la découverte",

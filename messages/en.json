@@ -155,6 +155,7 @@
       "adresse": "Address or intersection",
       "adressePerdu": "Address where the pet went missing",
       "adresseTrouve": "Address where the pet was found",
+      "secteur": "Area",
       "precisionLieu": "Location details",
       "dateEvenement": "Date lost",
       "dateDecouverte": "Date found",
