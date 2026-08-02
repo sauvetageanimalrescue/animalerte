@@ -158,7 +158,9 @@ export async function remplirAffiche(
 
   // Lieu (ville + rue) et date, même style que le français.
   draw(a.ville, 32, 388 + DZ, bold, sFR, navy);
-  draw(nomDeRue(a.adresse) || a.dernier_lieu_vu, 32, 388 + DE, bold, sFR, navy);
+  // La rue est de même taille que la ville (pas plus petite comme l'anglais),
+  // alors on l'espace un peu plus pour ne pas coller.
+  draw(nomDeRue(a.adresse) || a.dernier_lieu_vu, 32, 388 + DE + 2, bold, sFR, navy);
   draw(formaterDate(a.date_evenement, "fr"), 32, 456 + DZ, bold, sFR, navy);
 
   // Numéro bleu (le rouge « 1 833 999 AIDE » est pré-imprimé dans le gabarit).
