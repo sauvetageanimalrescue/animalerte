@@ -8,6 +8,7 @@ import {
   COULEURS,
   YEUX,
   TEMPERAMENTS,
+  ETATS,
   AGES,
   POIDS_LB,
   formaterAge,
@@ -57,6 +58,7 @@ export function FormulaireAnnonce({
   const tCoul = useTranslations("couleurs");
   const tYeux = useTranslations("yeux");
   const tTemp = useTranslations("temperaments");
+  const tEtat = useTranslations("etats");
   const langAge: "fr" | "en" = useLocale() === "en" ? "en" : "fr";
 
   const enEdition = !!initial;
@@ -93,6 +95,23 @@ export function FormulaireAnnonce({
           <legend className="px-1 text-sm font-semibold text-brand-dark">
             {tSection("animal")}
           </legend>
+          {type === "trouve" && (
+            <label className={`${label} sm:col-span-2`}>
+              {tChamp("etat")}
+              <select
+                name="etat"
+                defaultValue={initial?.etat ?? ""}
+                className={champ}
+              >
+                <option value="">—</option>
+                {ETATS.map((c) => (
+                  <option key={c} value={c}>
+                    {tEtat(c)}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
           <label className={`${label} sm:col-span-2`}>
             <span>
               {tChamp("nomAnimal")}{" "}

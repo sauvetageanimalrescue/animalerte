@@ -27,6 +27,7 @@ export type Annonce = {
   micropuce_numero: string | null;
   accessoires: string | null;
   temperament: string | null;
+  etat: string | null; // état d'un animal trouvé (sain / blessé / décédé)
   description: string | null;
   ville: string;
   province: Province;

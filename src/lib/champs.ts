@@ -43,6 +43,9 @@ export const YEUX = [
   "autre",
 ] as const;
 
+// État d'un animal trouvé.
+export const ETATS = ["sain", "blesse", "decede"] as const;
+
 export const TEMPERAMENTS = [
   "sociable",
   "affectueux",

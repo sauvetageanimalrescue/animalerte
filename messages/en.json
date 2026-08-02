@@ -74,6 +74,11 @@
     "marbre": "Marbled",
     "autre": "Other"
   },
+  "etats": {
+    "sain": "Safe and sound",
+    "blesse": "Injured",
+    "decede": "Deceased"
+  },
   "temperaments": {
     "sociable": "Sociable, approaches people",
     "affectueux": "Affectionate",
@@ -195,6 +200,7 @@
       "micropuceNumero": "Microchip number",
       "accessoires": "Collar, leash or harness",
       "temperament": "Temperament",
+      "etat": "Animal's condition",
       "description": "Description",
       "descriptionAide": "Behaviour, particularities…",
       "ville": "City",

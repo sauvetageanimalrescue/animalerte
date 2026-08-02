@@ -18,6 +18,7 @@ import {
   COULEURS,
   YEUX,
   TEMPERAMENTS,
+  ETATS,
   formaterAge,
   formaterPoids,
 } from "@/lib/champs";
@@ -31,8 +32,22 @@ export default async function AnnoncePage({
   setRequestLocale(locale);
   const annonce = await obtenirAnnonce(id);
 
-  const [t, tE, tT, tS, tSexe, tP, tC, tChamp, tF, tA, tCoul, tYeux, tTemp] =
-    await Promise.all([
+  const [
+    t,
+    tE,
+    tT,
+    tS,
+    tSexe,
+    tP,
+    tC,
+    tChamp,
+    tF,
+    tA,
+    tCoul,
+    tYeux,
+    tTemp,
+    tEtat,
+  ] = await Promise.all([
       getTranslations("annonce"),
       getTranslations("especes"),
       getTranslations("types"),
@@ -46,6 +61,7 @@ export default async function AnnoncePage({
       getTranslations("couleurs"),
       getTranslations("yeux"),
       getTranslations("temperaments"),
+      getTranslations("etats"),
     ]);
   const langAge: "fr" | "en" = locale === "en" ? "en" : "fr";
   // Traduit un code de liste ; laisse tel quel si ce n'est pas un code connu
@@ -85,6 +101,9 @@ export default async function AnnoncePage({
 
   // Champs regroupés logiquement pour la fiche publique.
   const groupeAnimal: { label: string; valeur: string }[] = [
+    ...(annonce.type === "trouve"
+      ? opt(tChamp("etat"), trad(tEtat, ETATS, annonce.etat))
+      : []),
     { label: t("espece"), valeur: tE(annonce.espece) },
     ...opt(t("race"), annonce.race),
     { label: t("sexe"), valeur: tSexe(annonce.sexe) },

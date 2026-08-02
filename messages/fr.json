@@ -74,6 +74,11 @@
     "marbre": "Marbré",
     "autre": "Autre"
   },
+  "etats": {
+    "sain": "Sain et sauf",
+    "blesse": "Blessé",
+    "decede": "Décédé"
+  },
   "temperaments": {
     "sociable": "Sociable, va vers les gens",
     "affectueux": "Affectueux",
@@ -195,6 +200,7 @@
       "micropuceNumero": "Numéro de micropuce",
       "accessoires": "Collier, laisse ou harnais",
       "temperament": "Tempérament",
+      "etat": "État de l'animal",
       "description": "Description",
       "descriptionAide": "Comportement, particularités…",
       "ville": "Ville",
