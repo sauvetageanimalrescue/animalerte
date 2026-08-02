@@ -114,6 +114,104 @@ export async function publierAnnonce(
   redirect(`/${locale}/annonces/${data.id}`);
 }
 
+export async function modifierAnnonce(
+  _prev: EtatAnnonce,
+  formData: FormData,
+): Promise<EtatAnnonce> {
+  const t = await getTranslations("formulaire");
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { erreur: t("erreurGenerale") };
+
+  const id = texte(formData.get("id"));
+  if (!id) return { erreur: t("erreurGenerale") };
+
+  // Vérifie que l'annonce appartient bien à l'utilisateur.
+  const { data: existante } = await supabase
+    .from("annonces")
+    .select("id, user_id, photo_url")
+    .eq("id", id)
+    .single();
+  if (!existante || existante.user_id !== user.id) {
+    return { erreur: t("erreurGenerale") };
+  }
+
+  const contactCourriel = texteOuNull(formData.get("contact_courriel"));
+  const contactTelephone = texteOuNull(formData.get("contact_telephone"));
+  if (!contactCourriel || !contactTelephone) {
+    return { erreur: t("erreurContact") };
+  }
+
+  const typeAnnonce = texte(formData.get("type")) || "perdu";
+  const nomAnimal = texteOuNull(formData.get("nom_animal"));
+  const contactAdresse = texteOuNull(formData.get("contact_adresse"));
+  if (typeAnnonce === "perdu" && (!nomAnimal || !contactAdresse)) {
+    return { erreur: t("erreurGenerale") };
+  }
+
+  // On conserve la photo actuelle si aucun nouveau fichier n'est fourni.
+  let photoUrl: string | null = existante.photo_url ?? null;
+  const photo = formData.get("photo");
+  if (photo instanceof File && photo.size > 0) {
+    const ext = (photo.name.split(".").pop() || "jpg").toLowerCase();
+    const chemin = `${user.id}/${crypto.randomUUID()}.${ext}`;
+    const { error: erreurUpload } = await supabase.storage
+      .from("photos")
+      .upload(chemin, photo, { contentType: photo.type || undefined });
+    if (!erreurUpload) {
+      photoUrl = supabase.storage.from("photos").getPublicUrl(chemin)
+        .data.publicUrl;
+    }
+  }
+
+  const maj = {
+    type: typeAnnonce,
+    espece: texte(formData.get("espece")) || "chien",
+    nom_animal: nomAnimal,
+    race: texteOuNull(formData.get("race")),
+    sexe: texte(formData.get("sexe")) || "inconnu",
+    age: texteOuNull(formData.get("age")),
+    poids: texteOuNull(formData.get("poids")),
+    couleur: texteOuNull(formData.get("couleur")),
+    couleur_yeux: texteOuNull(formData.get("couleur_yeux")),
+    signes_distinctifs: texteOuNull(formData.get("signes_distinctifs")),
+    sterilise: boolTriOuNull(formData.get("sterilise")),
+    micropuce: boolTriOuNull(formData.get("micropuce")),
+    micropuce_numero: texteOuNull(formData.get("micropuce_numero")),
+    accessoires: texteOuNull(formData.get("accessoires")),
+    temperament: texteOuNull(formData.get("temperament")),
+    description: texteOuNull(formData.get("description")),
+    ville: texte(formData.get("ville")),
+    province: texte(formData.get("province")) || "QC",
+    adresse: texteOuNull(formData.get("adresse")),
+    dernier_lieu_vu: texteOuNull(formData.get("dernier_lieu_vu")),
+    latitude: nombreOuNull(formData.get("latitude")),
+    longitude: nombreOuNull(formData.get("longitude")),
+    date_evenement: texte(formData.get("date_evenement")),
+    heure_approx: texteOuNull(formData.get("heure_approx")),
+    recompense: texte(formData.get("recompense")) === "oui",
+    recompense_montant: texteOuNull(formData.get("recompense_montant")),
+    contact_nom: texte(formData.get("contact_nom")),
+    contact_prenom: texteOuNull(formData.get("contact_prenom")),
+    contact_adresse: contactAdresse,
+    contact_courriel: contactCourriel,
+    contact_telephone: contactTelephone,
+    photo_url: photoUrl,
+  };
+
+  const { error } = await supabase
+    .from("annonces")
+    .update(maj)
+    .eq("id", id)
+    .eq("user_id", user.id);
+  if (error) return { erreur: t("erreurGenerale") };
+
+  const locale = await getLocale();
+  redirect(`/${locale}/annonces/${id}`);
+}
+
 export async function basculerStatut(formData: FormData): Promise<void> {
   const supabase = await createClient();
   const {

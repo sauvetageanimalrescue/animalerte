@@ -6,8 +6,10 @@ import { useTranslations } from "next-intl";
 import { ESPECES, PROVINCES, SEXES } from "@/lib/constants";
 import {
   publierAnnonce,
+  modifierAnnonce,
   type EtatAnnonce,
 } from "@/lib/actions/annonces";
+import type { Annonce } from "@/lib/types";
 import { ChampAdresse } from "@/components/champ-adresse";
 import { ChampTelephone } from "@/components/champ-telephone";
 
@@ -23,12 +25,18 @@ const CarteSelecteur = dynamic(
 
 type Contact = { nom: string; courriel: string; telephone: string };
 
+// « oui »/« non »/« » à partir du tri-état booléen stocké.
+const triState = (b: boolean | null | undefined) =>
+  b === true ? "oui" : b === false ? "non" : "";
+
 export function FormulaireAnnonce({
   defaultType,
   contact,
+  initial,
 }: {
   defaultType: "perdu" | "trouve";
   contact: Contact;
+  initial?: Annonce;
 }) {
   const t = useTranslations("formulaire");
   const tChamp = useTranslations("formulaire.champ");
@@ -38,13 +46,14 @@ export function FormulaireAnnonce({
   const tP = useTranslations("provinces");
   const tCommun = useTranslations("commun");
 
-  const type = defaultType;
+  const enEdition = !!initial;
+  const type = (initial?.type as "perdu" | "trouve") ?? defaultType;
   const [pos, setPos] = useState<{ lat: number | null; lng: number | null }>({
-    lat: null,
-    lng: null,
+    lat: initial?.latitude ?? null,
+    lng: initial?.longitude ?? null,
   });
   const [etat, formAction, pending] = useActionState<EtatAnnonce, FormData>(
-    publierAnnonce,
+    enEdition ? modifierAnnonce : publierAnnonce,
     {},
   );
 
@@ -55,11 +64,16 @@ export function FormulaireAnnonce({
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
       <h1 className="mb-6 text-2xl font-bold text-brand-dark">
-        {type === "perdu" ? t("titrePerdu") : t("titreTrouve")}
+        {enEdition
+          ? t("titreModifier")
+          : type === "perdu"
+            ? t("titrePerdu")
+            : t("titreTrouve")}
       </h1>
 
       <form action={formAction} className="flex flex-col gap-6">
         <input type="hidden" name="type" value={type} />
+        {enEdition && <input type="hidden" name="id" value={initial.id} />}
 
         {/* Animal */}
         <fieldset className="grid gap-4 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-2">
@@ -68,7 +82,11 @@ export function FormulaireAnnonce({
           </legend>
           <label className={label}>
             {tChamp("espece")}
-            <select name="espece" defaultValue="chien" className={champ}>
+            <select
+              name="espece"
+              defaultValue={initial?.espece ?? "chien"}
+              className={champ}
+            >
               {ESPECES.map((v) => (
                 <option key={v} value={v}>
                   {tE(v)}
@@ -78,7 +96,11 @@ export function FormulaireAnnonce({
           </label>
           <label className={label}>
             {tChamp("sexe")}
-            <select name="sexe" defaultValue="inconnu" className={champ}>
+            <select
+              name="sexe"
+              defaultValue={initial?.sexe ?? "inconnu"}
+              className={champ}
+            >
               {SEXES.map((v) => (
                 <option key={v} value={v}>
                   {tSexe(v)}
@@ -95,36 +117,71 @@ export function FormulaireAnnonce({
               name="nom_animal"
               type="text"
               required={type === "perdu"}
+              defaultValue={initial?.nom_animal ?? ""}
               className={champ}
             />
           </label>
           <label className={label}>
             {tChamp("race")}
-            <input name="race" type="text" className={champ} />
+            <input
+              name="race"
+              type="text"
+              defaultValue={initial?.race ?? ""}
+              className={champ}
+            />
           </label>
           <label className={label}>
             {tChamp("age")}
-            <input name="age" type="text" className={champ} />
+            <input
+              name="age"
+              type="text"
+              defaultValue={initial?.age ?? ""}
+              className={champ}
+            />
           </label>
           <label className={label}>
             {tChamp("poids")}
-            <input name="poids" type="text" className={champ} />
+            <input
+              name="poids"
+              type="text"
+              defaultValue={initial?.poids ?? ""}
+              className={champ}
+            />
           </label>
           <label className={label}>
             {tChamp("couleur")}
-            <input name="couleur" type="text" className={champ} />
+            <input
+              name="couleur"
+              type="text"
+              defaultValue={initial?.couleur ?? ""}
+              className={champ}
+            />
           </label>
           <label className={label}>
             {tChamp("couleurYeux")}
-            <input name="couleur_yeux" type="text" className={champ} />
+            <input
+              name="couleur_yeux"
+              type="text"
+              defaultValue={initial?.couleur_yeux ?? ""}
+              className={champ}
+            />
           </label>
           <label className={`${label} sm:col-span-2`}>
             {tChamp("signesDistinctifs")}
-            <input name="signes_distinctifs" type="text" className={champ} />
+            <input
+              name="signes_distinctifs"
+              type="text"
+              defaultValue={initial?.signes_distinctifs ?? ""}
+              className={champ}
+            />
           </label>
           <label className={label}>
             {tChamp("sterilise")}
-            <select name="sterilise" defaultValue="" className={champ}>
+            <select
+              name="sterilise"
+              defaultValue={triState(initial?.sterilise)}
+              className={champ}
+            >
               <option value="">{t("inconnu")}</option>
               <option value="oui">{t("oui")}</option>
               <option value="non">{t("non")}</option>
@@ -132,7 +189,11 @@ export function FormulaireAnnonce({
           </label>
           <label className={label}>
             {tChamp("micropuce")}
-            <select name="micropuce" defaultValue="" className={champ}>
+            <select
+              name="micropuce"
+              defaultValue={triState(initial?.micropuce)}
+              className={champ}
+            >
               <option value="">{t("inconnu")}</option>
               <option value="oui">{t("oui")}</option>
               <option value="non">{t("non")}</option>
@@ -140,15 +201,30 @@ export function FormulaireAnnonce({
           </label>
           <label className={label}>
             {tChamp("micropuceNumero")}
-            <input name="micropuce_numero" type="text" className={champ} />
+            <input
+              name="micropuce_numero"
+              type="text"
+              defaultValue={initial?.micropuce_numero ?? ""}
+              className={champ}
+            />
           </label>
           <label className={label}>
             {tChamp("accessoires")}
-            <input name="accessoires" type="text" className={champ} />
+            <input
+              name="accessoires"
+              type="text"
+              defaultValue={initial?.accessoires ?? ""}
+              className={champ}
+            />
           </label>
           <label className={`${label} sm:col-span-2`}>
             {tChamp("temperament")}
-            <input name="temperament" type="text" className={champ} />
+            <input
+              name="temperament"
+              type="text"
+              defaultValue={initial?.temperament ?? ""}
+              className={champ}
+            />
           </label>
           <label className={`${label} sm:col-span-2`}>
             {tChamp("description")}
@@ -156,6 +232,7 @@ export function FormulaireAnnonce({
               name="description"
               rows={3}
               placeholder={tChamp("descriptionAide")}
+              defaultValue={initial?.description ?? ""}
               className={champ}
             />
           </label>
@@ -170,13 +247,24 @@ export function FormulaireAnnonce({
             <span>
               {tChamp("ville")} <span className="text-accent">*</span>
             </span>
-            <input name="ville" type="text" required className={champ} />
+            <input
+              name="ville"
+              type="text"
+              required
+              defaultValue={initial?.ville ?? ""}
+              className={champ}
+            />
           </label>
           <label className={label}>
             <span>
               {tChamp("province")} <span className="text-accent">*</span>
             </span>
-            <select name="province" defaultValue="QC" required className={champ}>
+            <select
+              name="province"
+              defaultValue={initial?.province ?? "QC"}
+              required
+              className={champ}
+            >
               {PROVINCES.map((v) => (
                 <option key={v} value={v}>
                   {tP(v)}
@@ -195,12 +283,18 @@ export function FormulaireAnnonce({
               name="date_evenement"
               type="date"
               required
+              defaultValue={initial?.date_evenement?.slice(0, 10) ?? ""}
               className={champ}
             />
           </label>
           <label className={label}>
             {tChamp("heure")}
-            <input name="heure_approx" type="time" className={champ} />
+            <input
+              name="heure_approx"
+              type="time"
+              defaultValue={initial?.heure_approx?.slice(0, 5) ?? ""}
+              className={champ}
+            />
           </label>
           <label className={`${label} sm:col-span-2`}>
             {type === "perdu"
@@ -208,13 +302,19 @@ export function FormulaireAnnonce({
               : tChamp("adresseTrouve")}
             <ChampAdresse
               name="adresse"
+              defaultValue={initial?.adresse ?? ""}
               className={champ}
               onSelect={(_a, lat, lng) => setPos({ lat, lng })}
             />
           </label>
           <label className={`${label} sm:col-span-2`}>
             {tChamp("precisionLieu")}
-            <input name="dernier_lieu_vu" type="text" className={champ} />
+            <input
+              name="dernier_lieu_vu"
+              type="text"
+              defaultValue={initial?.dernier_lieu_vu ?? ""}
+              className={champ}
+            />
           </label>
           <div className="sm:col-span-2">
             <p className="mb-2 text-sm font-medium text-muted">
@@ -239,14 +339,23 @@ export function FormulaireAnnonce({
             </legend>
             <label className={label}>
               {tChamp("recompense")}
-              <select name="recompense" defaultValue="non" className={champ}>
+              <select
+                name="recompense"
+                defaultValue={initial?.recompense ? "oui" : "non"}
+                className={champ}
+              >
                 <option value="non">{t("non")}</option>
                 <option value="oui">{t("oui")}</option>
               </select>
             </label>
             <label className={label}>
               {tChamp("recompenseMontant")}
-              <input name="recompense_montant" type="text" className={champ} />
+              <input
+                name="recompense_montant"
+                type="text"
+                defaultValue={initial?.recompense_montant ?? ""}
+                className={champ}
+              />
             </label>
           </fieldset>
         )}
@@ -264,7 +373,7 @@ export function FormulaireAnnonce({
               name="contact_nom"
               type="text"
               required
-              defaultValue={contact.nom}
+              defaultValue={initial?.contact_nom ?? contact.nom}
               className={champ}
             />
           </label>
@@ -272,7 +381,13 @@ export function FormulaireAnnonce({
             <span>
               {tChamp("contactPrenom")} <span className="text-accent">*</span>
             </span>
-            <input name="contact_prenom" type="text" required className={champ} />
+            <input
+              name="contact_prenom"
+              type="text"
+              required
+              defaultValue={initial?.contact_prenom ?? ""}
+              className={champ}
+            />
           </label>
           <label className={`${label} sm:col-span-2`}>
             <span>
@@ -284,6 +399,7 @@ export function FormulaireAnnonce({
             <ChampAdresse
               name="contact_adresse"
               required={type === "perdu"}
+              defaultValue={initial?.contact_adresse ?? ""}
               className={champ}
             />
           </label>
@@ -295,7 +411,7 @@ export function FormulaireAnnonce({
               name="contact_courriel"
               type="email"
               required
-              defaultValue={contact.courriel}
+              defaultValue={initial?.contact_courriel ?? contact.courriel}
               className={champ}
             />
           </label>
@@ -306,7 +422,7 @@ export function FormulaireAnnonce({
             <ChampTelephone
               name="contact_telephone"
               required
-              defaultValue={contact.telephone}
+              defaultValue={initial?.contact_telephone ?? contact.telephone}
               className={champ}
             />
           </label>
@@ -326,6 +442,9 @@ export function FormulaireAnnonce({
               className="text-sm text-muted file:mr-3 file:rounded-full file:border-0 file:bg-brand-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-dark"
             />
           </label>
+          {enEdition && (
+            <p className="mt-2 text-xs text-muted">{t("photoConserver")}</p>
+          )}
         </fieldset>
 
         <p className="text-xs text-muted">{t("retention")}</p>
@@ -341,7 +460,11 @@ export function FormulaireAnnonce({
           disabled={pending}
           className="rounded-full bg-accent px-6 py-3 font-semibold text-white transition hover:brightness-95 disabled:opacity-60"
         >
-          {pending ? t("publication") : t("publier")}
+          {pending
+            ? t("publication")
+            : enEdition
+              ? t("enregistrerModif")
+              : t("publier")}
         </button>
         <span className="sr-only">{tCommun("chargement")}</span>
       </form>

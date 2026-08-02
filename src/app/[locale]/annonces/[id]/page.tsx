@@ -7,6 +7,7 @@ import {
   IconPhone,
   IconArrowLeft,
   IconFileText,
+  IconPencil,
 } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 import { LIGNE_SANS_FRAIS } from "@/lib/constants";
@@ -184,15 +185,24 @@ export default async function AnnoncePage({
           </div>
 
           {estProprietaire && (
-            <a
-              href={`/api/affiche/${annonce.id}`}
-              target="_blank"
-              rel="noopener"
-              className="mt-4 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 font-semibold text-white transition hover:brightness-95"
-            >
-              <IconFileText size={18} />
-              {tA("genererCta")}
-            </a>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Link
+                href={`/annonces/${annonce.id}/modifier`}
+                className="inline-flex items-center gap-2 rounded-full border border-brand px-5 py-2.5 font-semibold text-brand transition hover:bg-brand-soft"
+              >
+                <IconPencil size={18} />
+                {tC("modifier")}
+              </Link>
+              <a
+                href={`/api/affiche/${annonce.id}`}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 font-semibold text-white transition hover:brightness-95"
+              >
+                <IconFileText size={18} />
+                {tA("genererCta")}
+              </a>
+            </div>
           )}
         </div>
       </div>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
-import { IconPaw, IconPlus } from "@tabler/icons-react";
+import { IconPaw, IconPlus, IconPencil } from "@tabler/icons-react";
 import { Link, redirect } from "@/i18n/navigation";
 import { getCurrentUser } from "@/lib/authz";
 import { obtenirMesAnnonces } from "@/lib/annonces";
@@ -100,16 +100,25 @@ export default async function MesAnnoncesPage({
                   </p>
                 </div>
 
-                <ActionsAnnonce
-                  id={a.id}
-                  statut={a.statut}
-                  labels={{
-                    marquerResolu: t("marquerResolu"),
-                    marquerActif: t("marquerActif"),
-                    supprimer: tCommun("supprimer"),
-                    confirmerSuppression: t("confirmerSuppression"),
-                  }}
-                />
+                <div className="flex flex-wrap items-center gap-2">
+                  <Link
+                    href={`/annonces/${a.id}/modifier`}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm font-medium text-brand transition hover:bg-brand-soft"
+                  >
+                    <IconPencil size={15} />
+                    {tCommun("modifier")}
+                  </Link>
+                  <ActionsAnnonce
+                    id={a.id}
+                    statut={a.statut}
+                    labels={{
+                      marquerResolu: t("marquerResolu"),
+                      marquerActif: t("marquerActif"),
+                      supprimer: tCommun("supprimer"),
+                      confirmerSuppression: t("confirmerSuppression"),
+                    }}
+                  />
+                </div>
               </li>
             );
           })}
