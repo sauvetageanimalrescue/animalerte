@@ -14,6 +14,7 @@ import {
   formaterAge,
   formaterPoids,
 } from "@/lib/champs";
+import { racesPour } from "@/lib/races";
 import {
   publierAnnonce,
   modifierAnnonce,
@@ -63,6 +64,9 @@ export function FormulaireAnnonce({
 
   const enEdition = !!initial;
   const type = (initial?.type as "perdu" | "trouve") ?? defaultType;
+  // Espèce contrôlée : la liste des races en dépend.
+  const [espece, setEspece] = useState<string>(initial?.espece ?? "chien");
+  const [race, setRace] = useState<string>(initial?.race ?? "");
   const [pos, setPos] = useState<{ lat: number | null; lng: number | null }>({
     lat: initial?.latitude ?? null,
     lng: initial?.longitude ?? null,
@@ -129,7 +133,11 @@ export function FormulaireAnnonce({
             {tChamp("espece")}
             <select
               name="espece"
-              defaultValue={initial?.espece ?? "chien"}
+              value={espece}
+              onChange={(e) => {
+                setEspece(e.target.value);
+                setRace("");
+              }}
               className={champ}
             >
               {ESPECES.map((v) => (
@@ -141,12 +149,19 @@ export function FormulaireAnnonce({
           </label>
           <label className={label}>
             {tChamp("race")}
-            <input
+            <select
               name="race"
-              type="text"
-              defaultValue={initial?.race ?? ""}
+              value={race}
+              onChange={(e) => setRace(e.target.value)}
               className={champ}
-            />
+            >
+              <option value="">—</option>
+              {racesPour(espece).map((r) => (
+                <option key={r.code} value={r.code}>
+                  {langAge === "en" ? r.en : r.fr}
+                </option>
+              ))}
+            </select>
           </label>
           <label className={label}>
             {tChamp("sexe")}

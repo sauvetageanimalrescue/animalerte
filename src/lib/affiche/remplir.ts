@@ -9,6 +9,7 @@ import { getTranslations } from "next-intl/server";
 import type { Annonce } from "@/lib/types";
 import { formaterDate, nomDeRue } from "@/lib/format";
 import { COULEURS, formaterAge, formaterPoids } from "@/lib/champs";
+import { nomRace } from "@/lib/races";
 
 const DIR = path.join(process.cwd(), "src", "lib", "affiche");
 
@@ -94,7 +95,7 @@ export async function remplirAffiche(
       : a.couleur;
 
   val(ESPECE_BI[a.espece] ?? a.espece, 293, 212);
-  val(a.race, 444, 212);
+  val(nomRace(a.race, a.espece, "bi"), 444, 212);
   val(SEXE_BI[a.sexe] ?? a.sexe, 293, 257);
   val(couleurBi, 444, 257);
   val(a.age ? formaterAge(a.age, "bi") : null, 293, 301);

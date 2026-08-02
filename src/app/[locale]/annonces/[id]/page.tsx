@@ -22,6 +22,7 @@ import {
   formaterAge,
   formaterPoids,
 } from "@/lib/champs";
+import { nomRace } from "@/lib/races";
 import { TypeBadge, StatutBadge } from "@/components/badges";
 import { CarteDetail } from "@/components/carte-detail";
 
@@ -105,7 +106,7 @@ export default async function AnnoncePage({
       ? opt(tChamp("etat"), trad(tEtat, ETATS, annonce.etat))
       : []),
     { label: t("espece"), valeur: tE(annonce.espece) },
-    ...opt(t("race"), annonce.race),
+    ...opt(t("race"), nomRace(annonce.race, annonce.espece, langAge)),
     { label: t("sexe"), valeur: tSexe(annonce.sexe) },
     ...opt(
       tChamp("age"),
