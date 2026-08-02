@@ -1,7 +1,9 @@
+import { createClient } from "@/lib/supabase/server";
 import { obtenirAnnonce } from "@/lib/annonces";
 import { remplirAffiche } from "@/lib/affiche/remplir";
 
 // Génère l'affiche PDF d'une annonce (gabarit d'Eric rempli automatiquement).
+// Réservé au propriétaire de l'annonce (l'affiche est une fonction du forfait).
 export async function GET(
   request: Request,
   ctx: RouteContext<"/api/affiche/[id]">,
@@ -9,6 +11,14 @@ export async function GET(
   const { id } = await ctx.params;
   const annonce = await obtenirAnnonce(id);
   if (!annonce) return new Response("Introuvable", { status: 404 });
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user || user.id !== annonce.user_id) {
+    return new Response("Non autorisé", { status: 403 });
+  }
 
   const origin = new URL(request.url).origin;
   const bytes = await remplirAffiche(annonce, origin);

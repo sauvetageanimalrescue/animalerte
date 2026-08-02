@@ -10,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 import { LIGNE_SANS_FRAIS } from "@/lib/constants";
+import { createClient } from "@/lib/supabase/server";
 import { obtenirAnnonce } from "@/lib/annonces";
 import { formaterDate } from "@/lib/format";
 import { TypeBadge, StatutBadge } from "@/components/badges";
@@ -89,6 +90,14 @@ export default async function AnnoncePage({
   const poste = annonce.numero_dossier
     ? annonce.numero_dossier.replace(/^\d+-/, "")
     : null;
+
+  // Le propriétaire de l'annonce voit des outils supplémentaires (affiche,
+  // modification). La génération d'affiche est une fonction du forfait payant.
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const estProprietaire = !!user && user.id === annonce.user_id;
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
@@ -174,15 +183,17 @@ export default async function AnnoncePage({
             </p>
           </div>
 
-          <a
-            href={`/api/affiche/${annonce.id}`}
-            target="_blank"
-            rel="noopener"
-            className="mt-4 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 font-semibold text-white transition hover:brightness-95"
-          >
-            <IconFileText size={18} />
-            {tA("genererCta")}
-          </a>
+          {estProprietaire && (
+            <a
+              href={`/api/affiche/${annonce.id}`}
+              target="_blank"
+              rel="noopener"
+              className="mt-4 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 font-semibold text-white transition hover:brightness-95"
+            >
+              <IconFileText size={18} />
+              {tA("genererCta")}
+            </a>
+          )}
         </div>
       </div>
 
