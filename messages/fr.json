@@ -398,7 +398,6 @@
     "choisir": "Choisir ce forfait",
     "commencerGratuit": "Commencer gratuitement",
     "telechargerComparatif": "Comparatif complet (PDF)",
-    "herite": "Tout ce qu'offre {plan}, plus :",
     "gratuit": {
       "nom": "Gratuit",
       "prix": "0 $",
@@ -409,33 +408,48 @@
       ]
     },
     "locale": {
-      "nom": "Locale",
+      "nom": "Alerte locale",
       "prix": "49,99 $",
       "points": [
+        "Fiche sur animalerte.ca",
         "2 photos",
+        "Courriel de conseils",
         "Affiche intelligente, prête à imprimer",
-        "Ligne sans frais 1 833 999 AIDE",
+        "Ligne 1 833 999 AIDE",
         "Messagerie anonyme",
-        "Alerte : Sentinelle et publicité Meta (5 km)"
+        "Alerte Sentinelle géolocalisée et publicité ciblée Meta dans un rayon de 5 km"
       ]
     },
     "regional": {
-      "nom": "Régionale",
+      "nom": "Alerte régionale",
       "prix": "149,99 $",
       "points": [
+        "Fiche sur animalerte.ca",
         "3 photos",
+        "Courriel de conseils",
+        "Affiche intelligente, prête à imprimer",
         "Images et publication pour les réseaux sociaux",
+        "Ligne 1 833 999 AIDE",
+        "Messagerie anonyme",
+        "Alerte Sentinelle géolocalisée et publicité ciblée Meta dans un rayon de 25 km",
         "flAIr, jumelage par intelligence artificielle",
-        "Annonce prioritaire",
-        "Alerte élargie à 25 km"
+        "Annonce prioritaire"
       ]
     },
     "provincial": {
-      "nom": "Provinciale",
+      "nom": "Alerte provinciale",
       "prix": "249,99 $",
       "points": [
+        "Fiche sur animalerte.ca",
         "4 photos",
-        "Alerte à l'échelle du Québec",
+        "Courriel de conseils",
+        "Affiche intelligente, prête à imprimer",
+        "Images et publication pour les réseaux sociaux",
+        "Ligne 1 833 999 AIDE",
+        "Messagerie anonyme",
+        "Alerte Sentinelle géolocalisée et publicité ciblée Meta à l'échelle du Québec",
+        "flAIr, jumelage par intelligence artificielle",
+        "Annonce prioritaire",
         "Diffusion sur la page Facebook de Sauvetage Animal Rescue"
       ]
     }

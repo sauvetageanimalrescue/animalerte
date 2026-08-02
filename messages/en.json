@@ -398,7 +398,6 @@
     "choisir": "Choose this plan",
     "commencerGratuit": "Start for free",
     "telechargerComparatif": "Full comparison (PDF)",
-    "herite": "Everything in {plan}, plus:",
     "gratuit": {
       "nom": "Free",
       "prix": "$0",
@@ -409,33 +408,48 @@
       ]
     },
     "locale": {
-      "nom": "Local",
+      "nom": "Local alert",
       "prix": "$49.99",
       "points": [
+        "Listing on animalerte.ca",
         "2 photos",
+        "Advice email",
         "Smart poster, ready to print",
-        "Toll-free line 1 833 999 AIDE",
+        "Line 1 833 999 AIDE",
         "Anonymous messaging",
-        "Alert: Sentinel network and Meta ads (5 km)"
+        "Geolocated Sentinel alert and targeted Meta ads within 5 km"
       ]
     },
     "regional": {
-      "nom": "Regional",
+      "nom": "Regional alert",
       "prix": "$149.99",
       "points": [
+        "Listing on animalerte.ca",
         "3 photos",
+        "Advice email",
+        "Smart poster, ready to print",
         "Social media images and ready-made post",
+        "Line 1 833 999 AIDE",
+        "Anonymous messaging",
+        "Geolocated Sentinel alert and targeted Meta ads within 25 km",
         "flAIr, AI matching",
-        "Priority listing",
-        "Alert extended to 25 km"
+        "Priority listing"
       ]
     },
     "provincial": {
-      "nom": "Province-wide",
+      "nom": "Province-wide alert",
       "prix": "$249.99",
       "points": [
+        "Listing on animalerte.ca",
         "4 photos",
-        "Alert across all of Quebec",
+        "Advice email",
+        "Smart poster, ready to print",
+        "Social media images and ready-made post",
+        "Line 1 833 999 AIDE",
+        "Anonymous messaging",
+        "Geolocated Sentinel alert and targeted Meta ads across all of Quebec",
+        "flAIr, AI matching",
+        "Priority listing",
         "Shared on the Sauvetage Animal Rescue Facebook page"
       ]
     }

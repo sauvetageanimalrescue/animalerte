@@ -3,10 +3,10 @@ import { IconCheck, IconFileTypePdf } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 
 const PLANS = [
-  { id: "gratuit", herite: null, populaire: false },
-  { id: "locale", herite: "gratuit", populaire: false },
-  { id: "regional", herite: "locale", populaire: true },
-  { id: "provincial", herite: "regional", populaire: false },
+  { id: "gratuit", populaire: false },
+  { id: "locale", populaire: false },
+  { id: "regional", populaire: true },
+  { id: "provincial", populaire: false },
 ] as const;
 
 export default async function ForfaitsPage({
@@ -36,7 +36,7 @@ export default async function ForfaitsPage({
         </a>
       </div>
 
-      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-12 grid items-start gap-6 md:grid-cols-2 lg:grid-cols-4">
         {PLANS.map((p) => {
           const points = t.raw(`${p.id}.points`) as string[];
           const gratuit = p.id === "gratuit";
@@ -66,17 +66,7 @@ export default async function ForfaitsPage({
                 )}
               </div>
 
-              {p.herite && (
-                <p className="mt-5 text-xs font-semibold text-muted">
-                  {t("herite", { plan: t(`${p.herite}.nom`) })}
-                </p>
-              )}
-
-              <ul
-                className={`flex flex-1 flex-col gap-2.5 ${
-                  p.herite ? "mt-2.5" : "mt-5"
-                }`}
-              >
+              <ul className="mt-5 flex flex-1 flex-col gap-2.5">
                 {points.map((pt, i) => (
                   <li
                     key={i}
