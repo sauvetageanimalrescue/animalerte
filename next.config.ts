@@ -4,12 +4,14 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  // sharp est un module natif : on le garde hors du bundle serveur.
-  serverExternalPackages: ["sharp"],
-  // La route de génération d'affiche lit le gabarit PDF + les polices Geist ;
-  // on force leur inclusion dans la fonction serverless sur Vercel.
+  // Modules natifs / WASM : hors du bundle serveur.
+  serverExternalPackages: ["sharp", "mupdf"],
+  // Les routes de génération lisent les gabarits PDF + polices Geist ;
+  // on force leur inclusion dans les fonctions serverless sur Vercel.
   outputFileTracingIncludes: {
     "/api/affiche/*": ["./src/lib/affiche/**/*"],
+    "/api/carre/*": ["./src/lib/affiche/**/*"],
+    "/api/story/*": ["./src/lib/affiche/**/*"],
   },
   experimental: {
     serverActions: {

@@ -312,9 +312,22 @@
   },
   "affiche": {
     "genererCta": "Générer l'affiche",
+    "partagerCta": "Partager sur les réseaux",
     "imprimer": "Imprimer / Enregistrer en PDF",
     "retour": "Retour à l'annonce",
     "introuvable": "Cette annonce est introuvable ou a été retirée."
+  },
+  "partager": {
+    "titre": "Partager {nom} sur les réseaux",
+    "instructions": "Téléchargez l'image, copiez la légende, puis publiez sur Facebook ou Instagram.",
+    "carre": "Publication (carré)",
+    "story": "Story (vertical)",
+    "telechargerCarre": "Télécharger le carré",
+    "telechargerStory": "Télécharger la story",
+    "legende": "Légende à copier-coller",
+    "copier": "Copier la légende",
+    "copie": "Copié !",
+    "noteInstagram": "Sur Instagram, les liens ne sont pas cliquables : c'est le code QR de l'image qui mène à la fiche. Sur Facebook, le lien fonctionne."
   },
   "contact": {
     "titre": "Nous joindre",

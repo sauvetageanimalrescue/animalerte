@@ -8,6 +8,7 @@ import {
   IconArrowLeft,
   IconFileText,
   IconPencil,
+  IconShare,
 } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 import { LIGNE_SANS_FRAIS } from "@/lib/constants";
@@ -263,6 +264,13 @@ export default async function AnnoncePage({
                 <IconFileText size={18} />
                 {tA("genererCta")}
               </a>
+              <Link
+                href={`/annonces/${annonce.id}/partager`}
+                className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 font-semibold text-white transition hover:bg-brand-dark"
+              >
+                <IconShare size={18} />
+                {tA("partagerCta")}
+              </Link>
             </div>
           )}
         </div>

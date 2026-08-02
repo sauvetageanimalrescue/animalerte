@@ -312,9 +312,22 @@
   },
   "affiche": {
     "genererCta": "Generate the poster",
+    "partagerCta": "Share on social media",
     "imprimer": "Print / Save as PDF",
     "retour": "Back to the listing",
     "introuvable": "This listing cannot be found or was removed."
+  },
+  "partager": {
+    "titre": "Share {nom} on social media",
+    "instructions": "Download the image, copy the caption, then post on Facebook or Instagram.",
+    "carre": "Post (square)",
+    "story": "Story (vertical)",
+    "telechargerCarre": "Download the square",
+    "telechargerStory": "Download the story",
+    "legende": "Caption to copy",
+    "copier": "Copy the caption",
+    "copie": "Copied!",
+    "noteInstagram": "On Instagram, links aren't clickable: the image's QR code leads to the listing. On Facebook, the link works."
   },
   "contact": {
     "titre": "Contact us",
