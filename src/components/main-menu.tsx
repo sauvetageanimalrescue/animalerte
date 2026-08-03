@@ -65,6 +65,10 @@ export function MainMenu({
           href: "/fonctions/annonce-prioritaire",
           label: nav("prioritaire"),
         },
+        {
+          href: "/fonctions/diffusion-partenaire",
+          label: nav("partenaire"),
+        },
         { href: "/forfaits", label: nav("forfaits") },
         { href: "/faq", label: p("faq") },
       ],

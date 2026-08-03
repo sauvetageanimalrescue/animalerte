@@ -24,7 +24,11 @@ function lienFonction(
   | "/fonctions/alerte-sentinelle"
   | "/fonctions/flair"
   | "/fonctions/annonce-prioritaire"
+  | "/fonctions/diffusion-partenaire"
   | null {
+  if (/sauvetage animal rescue|animal rescue/i.test(point)) {
+    return "/fonctions/diffusion-partenaire";
+  }
   if (/alerte sentinelle|sentinel alert/i.test(point)) {
     return "/fonctions/alerte-sentinelle";
   }
