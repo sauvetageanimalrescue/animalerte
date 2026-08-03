@@ -66,7 +66,7 @@ export async function SiteFooter() {
             </div>
             <div className="flex items-center gap-3">
               <a
-                href="#"
+                href="https://www.facebook.com/animalerte"
                 target="_blank"
                 rel="noopener"
                 aria-label="Facebook"
