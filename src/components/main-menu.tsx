@@ -55,6 +55,7 @@ export function MainMenu({
         { href: "/fonctions/photos", label: nav("photos") },
         { href: "/fonctions/courriel-conseils", label: nav("courriel") },
         { href: "/fonctions/affiche-intelligente", label: nav("affiche") },
+        { href: "/fonctions/images-reseaux", label: nav("reseaux") },
         { href: "/forfaits", label: nav("forfaits") },
         { href: "/faq", label: p("faq") },
       ],

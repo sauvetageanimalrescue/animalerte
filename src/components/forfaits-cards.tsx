@@ -18,6 +18,7 @@ function lienFonction(
   | "/fonctions/photos"
   | "/fonctions/courriel-conseils"
   | "/fonctions/affiche-intelligente"
+  | "/fonctions/images-reseaux"
   | null {
   if (/fiche sur animalerte|listing on animalerte/i.test(point)) {
     return "/fonctions/la-fiche";
@@ -30,6 +31,9 @@ function lienFonction(
   }
   if (/affiche intelligente|smart poster/i.test(point)) {
     return "/fonctions/affiche-intelligente";
+  }
+  if (/réseaux sociaux|social media/i.test(point)) {
+    return "/fonctions/images-reseaux";
   }
   return null;
 }
