@@ -1,10 +1,11 @@
 import { getTranslations } from "next-intl/server";
-import { IconMenu2, IconPlus } from "@tabler/icons-react";
+import { IconPlus } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 import { getCurrentUser } from "@/lib/authz";
 import { seDeconnecter } from "@/app/actions";
 import { LogoMarkImg, Wordmark } from "./logo";
 import { LanguageSwitcher } from "./language-switcher";
+import { MobileMenu } from "./mobile-menu";
 
 export async function SiteHeader() {
   const t = await getTranslations("nav");
@@ -75,53 +76,7 @@ export async function SiteHeader() {
         {/* Mobile : bouton de langue à gauche du menu hamburger. */}
         <div className="ml-auto flex items-center gap-2 md:hidden">
           <LanguageSwitcher />
-          <details className="relative">
-            <summary className="flex cursor-pointer list-none items-center rounded-full border border-border p-2 text-brand-dark">
-              <IconMenu2 size={20} />
-            </summary>
-            <div className="absolute right-0 mt-2 flex w-56 flex-col gap-1 rounded-xl border border-border bg-surface p-2 shadow-lg">
-              {liens.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-brand-soft"
-                >
-                  {l.label}
-                </Link>
-              ))}
-              <Link
-                href="/signaler"
-                className="rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-white"
-              >
-                {t("signaler")}
-              </Link>
-              {user ? (
-                <>
-                  <Link
-                    href="/mes-annonces"
-                    className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-brand-soft"
-                  >
-                    {t("mesAnnonces")}
-                  </Link>
-                  <form action={seDeconnecter}>
-                    <button
-                      type="submit"
-                      className="w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-muted hover:bg-brand-soft"
-                    >
-                      {t("deconnexion")}
-                    </button>
-                  </form>
-                </>
-              ) : (
-                <Link
-                  href="/connexion"
-                  className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-brand-soft"
-                >
-                  {t("connexion")}
-                </Link>
-              )}
-            </div>
-          </details>
+          <MobileMenu connecte={!!user} deconnexion={seDeconnecter} />
         </div>
       </div>
     </header>
