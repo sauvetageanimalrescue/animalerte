@@ -4,13 +4,14 @@ import {
   IconAlertTriangle,
   IconHeartHandshake,
   IconSpeakerphone,
-  IconEye,
   IconMapPin,
-  IconBellRinging,
   IconWorld,
   IconUsers,
   IconMap2,
   IconArrowRight,
+  IconScan,
+  IconPaw,
+  IconCalendarStats,
 } from "@tabler/icons-react";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
@@ -35,10 +36,18 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
     { icon: IconHeartHandshake, titre: t("etape3Titre"), texte: t("etape3Texte") },
   ];
 
-  const flairPoints = [
-    { icon: IconEye, titre: m("flairPoint1Titre"), texte: m("flairPoint1Texte") },
-    { icon: IconMapPin, titre: m("flairPoint2Titre"), texte: m("flairPoint2Texte") },
-    { icon: IconBellRinging, titre: m("flairPoint3Titre"), texte: m("flairPoint3Texte") },
+  const criteres = [
+    { icon: IconScan, titre: m("crit1Titre"), texte: m("crit1Texte") },
+    { icon: IconPaw, titre: m("crit2Titre"), texte: m("crit2Texte") },
+    { icon: IconMapPin, titre: m("crit3Titre"), texte: m("crit3Texte") },
+    { icon: IconCalendarStats, titre: m("crit4Titre"), texte: m("crit4Texte") },
+  ];
+
+  // Points de reconnaissance flAIr superposés sur l'image (en % de l'image).
+  // Chat perdu (gauche) puis chat trouvé (droite). À ajuster à l'œil au besoin.
+  const pointsFlair = [
+    { x: 17, y: 25 }, { x: 17, y: 35 }, { x: 25, y: 34 }, { x: 21, y: 42 }, { x: 34, y: 40 },
+    { x: 77, y: 19 }, { x: 77, y: 31 }, { x: 83, y: 30 }, { x: 80, y: 35 }, { x: 69, y: 34 },
   ];
 
   const portee = [
@@ -136,23 +145,45 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
               {m("flairVerbe")}
             </span>
           </div>
+          <p className="mx-auto mt-4 max-w-2xl text-muted">{m("flairIntro")}</p>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-3">
-            {flairPoints.map((p, i) => (
-              <div
+          <div className="relative mx-auto mt-8 w-full max-w-3xl">
+            <Image
+              src="/flair-hero.png"
+              alt="flAIr — reconnaissance faciale animale"
+              width={1535}
+              height={1063}
+              className="h-auto w-full"
+            />
+            {pointsFlair.map((p, i) => (
+              <span
                 key={i}
-                className="flex flex-col items-center gap-2 rounded-2xl border border-border bg-background p-6"
+                className="pointer-events-none absolute aspect-square w-[3.4%] -translate-x-1/2 -translate-y-1/2"
+                style={{ left: `${p.x}%`, top: `${p.y}%` }}
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-soft text-brand">
-                  <p.icon size={24} />
-                </div>
-                <h3 className="font-semibold text-foreground">{p.titre}</h3>
-                <p className="text-sm text-muted">{p.texte}</p>
-              </div>
+                <span className="block h-full w-full rounded-full border-2 border-brand bg-brand/10 shadow-[0_0_0_2px_rgba(255,255,255,0.55)]" />
+                <span
+                  className="absolute inset-0 rounded-full border-2 border-brand animate-ping [animation-duration:1.8s]"
+                  style={{ animationDelay: `${i * 0.18}s` }}
+                />
+              </span>
             ))}
           </div>
 
-          <p className="mx-auto mt-10 max-w-2xl text-muted">{m("flairTexte")}</p>
+          <div className="mt-12 grid gap-6 text-left sm:grid-cols-2 lg:grid-cols-4">
+            {criteres.map((c, i) => (
+              <div
+                key={i}
+                className="flex flex-col gap-2 rounded-2xl border border-border bg-background p-6"
+              >
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-soft text-brand">
+                  <c.icon size={22} />
+                </div>
+                <h3 className="font-semibold text-foreground">{c.titre}</h3>
+                <p className="text-sm text-muted">{c.texte}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
