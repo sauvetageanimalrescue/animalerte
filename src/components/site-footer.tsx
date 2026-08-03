@@ -84,7 +84,7 @@ export async function SiteFooter() {
                 <IconBrandInstagram size={22} />
               </a>
               <a
-                href="#"
+                href="https://www.tiktok.com/@animalerte"
                 target="_blank"
                 rel="noopener"
                 aria-label="TikTok"
