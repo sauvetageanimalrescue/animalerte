@@ -48,8 +48,8 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
   const pointsFlair = [
     // Chat perdu (gauche) — Agathinne : oreille 8N, œil 11S, nez 13V, pelage 19U
     { x: 14.4, y: 26.0 }, { x: 20.2, y: 35.6 }, { x: 24.0, y: 41.3 }, { x: 35.6, y: 39.4 },
-    // Chat trouvé (droite) — Inconnu : oreille 40I, œil 42O, nez 41R, pelage 37U
-    { x: 76.0, y: 16.3 }, { x: 79.8, y: 27.9 }, { x: 77.9, y: 33.7 }, { x: 70.2, y: 39.4 },
+    // Chat trouvé (droite) — Inconnu : oreille 40I, œil 42O, nez 44R, pelage 37U
+    { x: 76.0, y: 16.3 }, { x: 79.8, y: 27.9 }, { x: 83.7, y: 33.7 }, { x: 70.2, y: 39.4 },
   ];
 
   // Marqueurs GPS (radar pulsant autour du 📍 de l'emplacement). QQ8 / NN24.
