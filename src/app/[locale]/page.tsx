@@ -52,6 +52,12 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
     { x: 76.0, y: 16.3 }, { x: 79.8, y: 27.9 }, { x: 77.9, y: 33.7 }, { x: 70.2, y: 39.4 },
   ];
 
+  // Marqueurs GPS (radar pulsant autour du 📍 de l'emplacement). QQ8 / NN24.
+  const pointsGps = [
+    { x: 14.4, y: 81.7 }, // Agathinne — Beauharnois
+    { x: 45.2, y: 76.0 }, // Inconnu — Chateauguay
+  ];
+
   const portee = [
     { icon: IconWorld, titre: m("porteeWeb"), desc: m("porteeWebD"), variante: "blanc" as const },
     { icon: IconMapPin, titre: m("porteeLocale"), desc: m("porteeLocaleD"), variante: "blanc" as const },
@@ -167,6 +173,22 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
                 <span
                   className="absolute inset-0 rounded-full border-2 border-brand animate-ping [animation-duration:1.8s]"
                   style={{ animationDelay: `${i * 0.18}s` }}
+                />
+              </span>
+            ))}
+            {pointsGps.map((p, i) => (
+              <span
+                key={`gps-${i}`}
+                className="pointer-events-none absolute aspect-square w-[4.2%] -translate-x-1/2 -translate-y-1/2"
+                style={{ left: `${p.x}%`, top: `${p.y}%` }}
+              >
+                <span
+                  className="absolute inset-0 rounded-full border-2 border-accent animate-ping [animation-duration:2s]"
+                  style={{ animationDelay: `${i * 0.5}s` }}
+                />
+                <span
+                  className="absolute inset-[28%] rounded-full border-2 border-accent animate-ping [animation-duration:2s]"
+                  style={{ animationDelay: `${i * 0.5 + 0.6}s` }}
                 />
               </span>
             ))}
