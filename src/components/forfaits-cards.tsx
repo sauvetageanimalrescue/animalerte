@@ -23,12 +23,16 @@ function lienFonction(
   | "/fonctions/messagerie-anonyme"
   | "/fonctions/alerte-sentinelle"
   | "/fonctions/flair"
+  | "/fonctions/annonce-prioritaire"
   | null {
   if (/alerte sentinelle|sentinel alert/i.test(point)) {
     return "/fonctions/alerte-sentinelle";
   }
   if (/flair/i.test(point)) {
     return "/fonctions/flair";
+  }
+  if (/annonce prioritaire|priority listing/i.test(point)) {
+    return "/fonctions/annonce-prioritaire";
   }
   if (/fiche sur animalerte|listing on animalerte/i.test(point)) {
     return "/fonctions/la-fiche";
