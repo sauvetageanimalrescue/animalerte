@@ -75,7 +75,7 @@ export async function SiteFooter() {
                 <IconBrandFacebook size={22} />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/animalerte.ca"
                 target="_blank"
                 rel="noopener"
                 aria-label="Instagram"
