@@ -25,6 +25,7 @@
     "messagerie": "Messagerie anonyme",
     "alerteSentinelle": "Alerte Sentinelle",
     "publiciteMeta": "Publicité Meta",
+    "flair": "flAIr",
     "signaler": "Signaler",
     "mesAnnonces": "Mes annonces",
     "profil": "Mon profil",
@@ -382,6 +383,7 @@
     "messagerie": "Messagerie anonyme",
     "alerteSentinelle": "Alerte Sentinelle",
     "publiciteMeta": "Publicité Meta",
+    "flair": "flAIr",
     "sentinelles": "Sentinelles",
     "faq": "Foire aux questions",
     "conditions": "Conditions d'utilisation",
@@ -934,6 +936,59 @@
     ],
     "forfaitTitre": "Dans quel forfait ?",
     "forfaitTexte": "La publicité ciblée Meta est incluse dès l'Alerte locale, avec un secteur qui s'agrandit selon le forfait.",
+    "ctaTitre": "Prêt à commencer ?",
+    "ctaTexte": "La première étape, c'est votre profil.",
+    "ctaProfil": "Créer mon profil",
+    "ctaForfaits": "Voir les forfaits"
+  },
+  "pageFlair": {
+    "surtitre": "Une technologie exclusive",
+    "titre": "flAIr, le jumelage par intelligence artificielle",
+    "accroche": "flAIr reconnaît le visage de votre animal et veille sur votre secteur sans relâche. Dès qu'un animal trouvé lui ressemble, il vous prévient.",
+    "centralTitre": "L'intelligence artificielle d'animALERTE",
+    "centralTexte": "flAIr est le système d'intelligence artificielle développé par animALERTE pour rapprocher les animaux perdus et les animaux trouvés. Il veille en continu sur les nouveaux signalements de votre secteur et analyse chaque fiche selon plusieurs critères. Plutôt que de vous submerger de suggestions au hasard, il ne fait remonter que les pistes crédibles : avant de vous alerter, flAIr évalue chaque correspondance pour ne retenir que celles qui sont vraiment plausibles.",
+    "quoiTitre": "C'est quoi ?",
+    "quoiTexte": "flAIr est un système d'intelligence artificielle qui reconnaît le visage d'un animal, soit la couleur de son pelage, ses motifs et la couleur de ses yeux. C'est le seul de son genre au service des animaux perdus au Québec.",
+    "commentTitre": "Comment ça fonctionne",
+    "etape1Titre": "Vous publiez votre animal",
+    "etape1Texte": "flAIr part de vos photos et de votre fiche, surtout la photo de face.",
+    "etape2Titre": "Il surveille votre secteur",
+    "etape2Texte": "flAIr analyse en continu les animaux trouvés signalés près de chez vous.",
+    "etape3Titre": "Il évalue chaque correspondance",
+    "etape3Texte": "Traits du visage, pelage, proximité et cohérence des dates : flAIr ne retient que les pistes vraiment plausibles.",
+    "etape4Titre": "Il vous prévient",
+    "etape4Texte": "Dès qu'un animal trouvé ressemble au vôtre, flAIr vous alerte.",
+    "criteresTitre": "Ce que flAIr analyse",
+    "criteres": [
+      {
+        "titre": "Les traits du visage",
+        "texte": "flAIr compare la forme des oreilles, des yeux et du nez, ainsi que la couleur et le motif du pelage sur le visage."
+      },
+      {
+        "titre": "Le pelage",
+        "texte": "Le type et la longueur du poil, poil court ou poil long, affinent la correspondance."
+      },
+      {
+        "titre": "La proximité géographique",
+        "texte": "Deux villes voisines augmentent la probabilité d'une vraie correspondance; les correspondances à proximité sont priorisées."
+      },
+      {
+        "titre": "La cohérence des dates",
+        "texte": "flAIr vérifie la chronologie : un animal trouvé le jour de la disparition ou après reste plausible; trouvé avant, c'est impossible, donc la correspondance est écartée."
+      }
+    ],
+    "plausibleTitre": "Des pistes crédibles, pas du bruit",
+    "plausibleTexte": "Plutôt que de vous submerger de suggestions au hasard, flAIr évalue chaque correspondance et ne fait remonter que celles qui sont vraiment plausibles. Vous recevez une alerte quand ça vaut la peine de regarder.",
+    "apportsTitre": "Ce que ça vous apporte",
+    "apports": [
+      "Une reconnaissance du visage, au-delà des mots-clés.",
+      "Une veille en continu sur votre secteur.",
+      "Seulement les correspondances plausibles.",
+      "Une alerte dès qu'un animal trouvé ressemble au vôtre.",
+      "Une technologie exclusive à animALERTE."
+    ],
+    "forfaitTitre": "Dans quel forfait ?",
+    "forfaitTexte": "flAIr est inclus à partir de l'Alerte régionale.",
     "ctaTitre": "Prêt à commencer ?",
     "ctaTexte": "La première étape, c'est votre profil.",
     "ctaProfil": "Créer mon profil",

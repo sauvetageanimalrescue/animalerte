@@ -25,6 +25,7 @@
     "messagerie": "Anonymous messaging",
     "alerteSentinelle": "Sentinel alert",
     "publiciteMeta": "Meta ads",
+    "flair": "flAIr",
     "signaler": "Report",
     "mesAnnonces": "My listings",
     "profil": "My profile",
@@ -382,6 +383,7 @@
     "messagerie": "Anonymous messaging",
     "alerteSentinelle": "Sentinel alert",
     "publiciteMeta": "Meta ads",
+    "flair": "flAIr",
     "sentinelles": "Sentinels",
     "faq": "FAQ",
     "conditions": "Terms of use",
@@ -934,6 +936,59 @@
     ],
     "forfaitTitre": "Which plan includes it?",
     "forfaitTexte": "Targeted Meta advertising is included from the Local alert, with an area that grows with the plan.",
+    "ctaTitre": "Ready to start?",
+    "ctaTexte": "The first step is your profile.",
+    "ctaProfil": "Create my profile",
+    "ctaForfaits": "See the plans"
+  },
+  "pageFlair": {
+    "surtitre": "Exclusive technology",
+    "titre": "flAIr, AI-powered matching",
+    "accroche": "flAIr recognizes your pet's face and watches over your area around the clock. The moment a found pet resembles yours, it lets you know.",
+    "centralTitre": "animALERTE's artificial intelligence",
+    "centralTexte": "flAIr is the artificial intelligence system built by animALERTE to reconnect lost and found pets. It watches new reports in your area around the clock and analyzes every listing against several criteria. Rather than flooding you with random suggestions, it surfaces only credible leads: before alerting you, flAIr weighs each match to keep only the ones that are genuinely plausible.",
+    "quoiTitre": "What is it?",
+    "quoiTexte": "flAIr is an artificial-intelligence system that recognizes a pet's face, its coat colour, its patterns and its eye colour. It is the only one of its kind serving lost pets in Quebec.",
+    "commentTitre": "How it works",
+    "etape1Titre": "You post your pet",
+    "etape1Texte": "flAIr starts from your photos and your listing, especially the front-facing photo.",
+    "etape2Titre": "It watches your area",
+    "etape2Texte": "flAIr continuously analyzes found pets reported near you.",
+    "etape3Titre": "It evaluates each match",
+    "etape3Texte": "Facial features, coat, proximity and date consistency: flAIr keeps only the truly plausible leads.",
+    "etape4Titre": "It alerts you",
+    "etape4Texte": "As soon as a found pet resembles yours, flAIr lets you know.",
+    "criteresTitre": "What flAIr analyzes",
+    "criteres": [
+      {
+        "titre": "Facial features",
+        "texte": "flAIr compares the shape of the ears, eyes and nose, along with the colour and pattern of the coat on the face."
+      },
+      {
+        "titre": "The coat",
+        "texte": "The type and length of the fur, shorthair or longhair, refine the match."
+      },
+      {
+        "titre": "Geographic proximity",
+        "texte": "Two nearby towns raise the likelihood of a real match; nearby matches are prioritized."
+      },
+      {
+        "titre": "Timeline consistency",
+        "texte": "flAIr checks the timeline: an animal found on or after the disappearance date stays plausible; found before it, the match is impossible and is discarded."
+      }
+    ],
+    "plausibleTitre": "Credible leads, not noise",
+    "plausibleTexte": "Rather than flooding you with random suggestions, flAIr evaluates each match and surfaces only the ones that are truly plausible. You get an alert when it is worth a look.",
+    "apportsTitre": "What it gives you",
+    "apports": [
+      "Facial recognition, beyond keywords.",
+      "Continuous watch over your area.",
+      "Only plausible matches.",
+      "An alert as soon as a found pet resembles yours.",
+      "Technology exclusive to animALERTE."
+    ],
+    "forfaitTitre": "Which plan includes it?",
+    "forfaitTexte": "flAIr is included from the Regional alert.",
     "ctaTitre": "Ready to start?",
     "ctaTexte": "The first step is your profile.",
     "ctaProfil": "Create my profile",

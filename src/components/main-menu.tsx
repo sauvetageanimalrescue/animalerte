@@ -60,6 +60,7 @@ export function MainMenu({
         { href: "/fonctions/messagerie-anonyme", label: nav("messagerie") },
         { href: "/fonctions/alerte-sentinelle", label: nav("alerteSentinelle") },
         { href: "/fonctions/publicite-meta", label: nav("publiciteMeta") },
+        { href: "/fonctions/flair", label: nav("flair") },
         { href: "/forfaits", label: nav("forfaits") },
         { href: "/faq", label: p("faq") },
       ],
