@@ -530,5 +530,56 @@
         "texte": "Pour toute question au sujet de ces conditions, utilisez la page Contact."
       }
     ]
+  },
+  "confidentialite": {
+    "titre": "Politique de confidentialité",
+    "sousTitre": "Comment animALERTE recueille, utilise et protège vos renseignements.",
+    "maj": "Dernière mise à jour : 2 août 2026",
+    "sections": [
+      {
+        "titre": "1. Responsable et cadre légal",
+        "texte": "animALERTE (Sauvetage Animal Rescue) est responsable des renseignements personnels recueillis par le service. Nous les traitons conformément aux lois applicables au Québec, notamment la Loi 25 sur la protection des renseignements personnels."
+      },
+      {
+        "titre": "2. Renseignements recueillis",
+        "texte": "Compte : courriel, nom, mot de passe (chiffré). Annonces : renseignements sur l'animal, photos, lieu et dates, ainsi que vos coordonnées. Localisation : ville et code postal, pour cibler les alertes de votre secteur. Paiement : traité par notre fournisseur (Stripe); nous ne conservons jamais vos données de carte. Données techniques : témoins essentiels et journaux de connexion."
+      },
+      {
+        "titre": "3. Utilisation des renseignements",
+        "texte": "Nous utilisons vos renseignements pour publier vos annonces, faire fonctionner le jumelage flAIr, envoyer les alertes pertinentes, traiter les paiements, et communiquer avec vous au sujet du service."
+      },
+      {
+        "titre": "4. Protection de vos coordonnées",
+        "texte": "Vos coordonnées personnelles n'apparaissent jamais publiquement sur une fiche ou une affiche. Les personnes qui trouvent votre animal vous joignent par la ligne sans frais ou la messagerie anonyme, sans que votre numéro personnel ne soit dévoilé."
+      },
+      {
+        "titre": "5. Partage des renseignements",
+        "texte": "Nous partageons le minimum nécessaire : avec le réseau Sentinelle (alertes géolocalisées), avec les plateformes de Meta pour la publicité ciblée (leurs propres politiques s'appliquent), et avec notre fournisseur de paiement. Nous ne vendons jamais vos renseignements personnels."
+      },
+      {
+        "titre": "6. Conservation",
+        "texte": "Nous conservons vos renseignements le temps nécessaire aux fins décrites. Une annonce demeure consultable jusqu'à un an; les renseignements de compte sont conservés jusqu'à la suppression du compte."
+      },
+      {
+        "titre": "7. Vos droits",
+        "texte": "Vous pouvez accéder à vos renseignements, les faire corriger, retirer votre consentement ou demander la suppression de votre compte. Pour exercer ces droits, utilisez la page Contact."
+      },
+      {
+        "titre": "8. Témoins (cookies)",
+        "texte": "Nous utilisons des témoins essentiels au fonctionnement du site, notamment pour vous garder connecté. Nous limitons les témoins au strict nécessaire."
+      },
+      {
+        "titre": "9. Sécurité",
+        "texte": "Nous prenons des mesures raisonnables pour protéger vos renseignements. Aucun système n'étant infaillible, nous ne pouvons garantir une sécurité absolue."
+      },
+      {
+        "titre": "10. Modifications",
+        "texte": "Nous pouvons modifier cette politique en tout temps. La date de mise à jour ci-dessus indique la version en vigueur."
+      },
+      {
+        "titre": "11. Nous joindre",
+        "texte": "Pour toute question sur cette politique ou vos renseignements, utilisez la page Contact."
+      }
+    ]
   }
 }

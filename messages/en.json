@@ -530,5 +530,56 @@
         "texte": "For any questions about these terms, please use the Contact page."
       }
     ]
+  },
+  "confidentialite": {
+    "titre": "Privacy policy",
+    "sousTitre": "How animALERTE collects, uses and protects your information.",
+    "maj": "Last updated: August 2, 2026",
+    "sections": [
+      {
+        "titre": "1. Controller and legal framework",
+        "texte": "animALERTE (Sauvetage Animal Rescue) is responsible for the personal information collected by the service. We process it in accordance with the laws applicable in Quebec, including Law 25 on the protection of personal information."
+      },
+      {
+        "titre": "2. Information we collect",
+        "texte": "Account: email, name, password (encrypted). Listings: information about the animal, photos, location and dates, and your contact details. Location: city and postal code, to target alerts in your area. Payment: handled by our provider (Stripe); we never store your card details. Technical data: essential cookies and connection logs."
+      },
+      {
+        "titre": "3. How we use your information",
+        "texte": "We use your information to publish your listings, power flAIr matching, send relevant alerts, process payments, and communicate with you about the service."
+      },
+      {
+        "titre": "4. Protecting your contact details",
+        "texte": "Your personal contact details never appear publicly on a listing or poster. People who find your animal reach you through the toll-free line or anonymous messaging, without your personal number being disclosed."
+      },
+      {
+        "titre": "5. Sharing of information",
+        "texte": "We share the minimum necessary: with the Sentinel network (geolocated alerts), with Meta platforms for targeted advertising (their own policies apply), and with our payment provider. We never sell your personal information."
+      },
+      {
+        "titre": "6. Retention",
+        "texte": "We keep your information as long as necessary for the purposes described. A listing remains viewable for up to one year; account information is kept until the account is deleted."
+      },
+      {
+        "titre": "7. Your rights",
+        "texte": "You may access your information, have it corrected, withdraw your consent, or request deletion of your account. To exercise these rights, use the Contact page."
+      },
+      {
+        "titre": "8. Cookies",
+        "texte": "We use cookies essential to the operation of the site, notably to keep you signed in. We limit cookies to the strict minimum."
+      },
+      {
+        "titre": "9. Security",
+        "texte": "We take reasonable measures to protect your information. As no system is infallible, we cannot guarantee absolute security."
+      },
+      {
+        "titre": "10. Changes",
+        "texte": "We may change this policy at any time. The update date above indicates the version in effect."
+      },
+      {
+        "titre": "11. Contact us",
+        "texte": "For any questions about this policy or your information, please use the Contact page."
+      }
+    ]
   }
 }

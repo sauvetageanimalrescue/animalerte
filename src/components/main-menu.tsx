@@ -42,6 +42,7 @@ export function MainMenu({
       titre: p("legalTitre"),
       liens: [
         { href: "/conditions", label: p("conditions") },
+        { href: "/confidentialite", label: p("confidentialite") },
         { href: "/contact", label: p("contact") },
       ],
     },

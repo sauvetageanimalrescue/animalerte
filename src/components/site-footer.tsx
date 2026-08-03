@@ -42,7 +42,7 @@ export async function SiteFooter() {
       titre: t("legalTitre"),
       liens: [
         { href: "/conditions", label: t("conditions") },
-        { href: "#", label: t("confidentialite") },
+        { href: "/confidentialite", label: t("confidentialite") },
         { href: "/contact", label: t("contact") },
       ],
     },
