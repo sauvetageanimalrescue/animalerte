@@ -450,18 +450,6 @@ export function FormulaireAnnonce({
           </legend>
           <label className={label}>
             <span>
-              {tChamp("contactNom")} <span className="text-accent">*</span>
-            </span>
-            <input
-              name="contact_nom"
-              type="text"
-              required
-              defaultValue={initial?.contact_nom ?? contact.nom}
-              className={champ}
-            />
-          </label>
-          <label className={label}>
-            <span>
               {tChamp("contactPrenom")} <span className="text-accent">*</span>
             </span>
             <input
@@ -469,6 +457,18 @@ export function FormulaireAnnonce({
               type="text"
               required
               defaultValue={initial?.contact_prenom ?? contact.prenom}
+              className={champ}
+            />
+          </label>
+          <label className={label}>
+            <span>
+              {tChamp("contactNom")} <span className="text-accent">*</span>
+            </span>
+            <input
+              name="contact_nom"
+              type="text"
+              required
+              defaultValue={initial?.contact_nom ?? contact.nom}
               className={champ}
             />
           </label>
