@@ -1,12 +1,15 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { getCurrentUser } from "@/lib/authz";
+import { seDeconnecter } from "@/app/actions";
 import { Logo } from "./logo";
 
 export async function SiteFooter() {
-  const [t, nav] = await Promise.all([
+  const [t, nav, user] = await Promise.all([
     getTranslations("pied"),
     getTranslations("nav"),
+    getCurrentUser(),
   ]);
   const annee = new Date().getFullYear();
 
@@ -57,7 +60,7 @@ export async function SiteFooter() {
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-            {colonnes.map((col) => (
+            {colonnes.map((col, ci) => (
               <div key={col.titre}>
                 <h3 className="mb-3 text-sm font-semibold text-brand-dark">
                   {col.titre}
@@ -82,6 +85,19 @@ export async function SiteFooter() {
                       )}
                     </li>
                   ))}
+                  {/* Déconnexion dans la colonne Navigation, si connecté. */}
+                  {ci === 0 && user && (
+                    <li>
+                      <form action={seDeconnecter}>
+                        <button
+                          type="submit"
+                          className="text-sm text-muted transition hover:text-brand-dark"
+                        >
+                          {nav("deconnexion")}
+                        </button>
+                      </form>
+                    </li>
+                  )}
                 </ul>
               </div>
             ))}

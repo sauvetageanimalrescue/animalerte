@@ -63,10 +63,11 @@ export function MobileMenu({
                 <Link href="/mes-annonces" onClick={fermer} className={lienCls}>
                   {t("mesAnnonces")}
                 </Link>
+                {/* Pas de onClick ici : fermer le menu démonterait le
+                    formulaire avant que l'action serveur ne se déclenche. */}
                 <form action={deconnexion}>
                   <button
                     type="submit"
-                    onClick={fermer}
                     className="w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-muted hover:bg-brand-soft"
                   >
                     {t("deconnexion")}
