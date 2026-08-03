@@ -59,6 +59,7 @@ export function MainMenu({
         { href: "/fonctions/ligne-sans-frais", label: nav("ligne") },
         { href: "/fonctions/messagerie-anonyme", label: nav("messagerie") },
         { href: "/fonctions/alerte-sentinelle", label: nav("alerteSentinelle") },
+        { href: "/fonctions/publicite-meta", label: nav("publiciteMeta") },
         { href: "/forfaits", label: nav("forfaits") },
         { href: "/faq", label: p("faq") },
       ],
