@@ -585,12 +585,26 @@
   },
   "profil": {
     "titre": "Mon profil",
-    "sousTitre": "Vos informations sont réutilisées à chaque nouvelle annonce et servent à cibler les alertes de votre secteur.",
+    "sousTitre": "Vos coordonnées, réutilisées automatiquement à chaque nouvelle annonce.",
     "enregistre": "Profil enregistré.",
     "nom": "Nom",
+    "prenom": "Prénom",
     "courriel": "Courriel",
     "telephone": "Téléphone",
-    "ville": "Ville",
-    "villeAide": "Commencez à taper et choisissez votre ville dans la liste (Québec)."
+    "adresse": "Adresse",
+    "adresseAide": "Commencez à taper et choisissez votre adresse dans la liste."
+  },
+  "sentinelle": {
+    "titre": "Devenir Sentinelle",
+    "sousTitre": "Recevez les alertes d'animaux perdus de votre secteur. Aucun compte requis.",
+    "intro": "En tant que Sentinelle, vous êtes averti dès qu'un animal est signalé perdu près de chez vous. Les yeux de la communauté, c'est souvent ce qui permet de retrouver un animal.",
+    "nom": "Nom",
+    "courriel": "Courriel",
+    "telephone": "Téléphone (optionnel)",
+    "ville": "Votre ville",
+    "villeAide": "Commencez à taper et choisissez votre ville dans la liste (Québec).",
+    "cta": "M'inscrire comme Sentinelle",
+    "merci": "Merci, vous êtes inscrit !",
+    "merciTexte": "Vous recevrez les alertes d'animaux perdus de votre secteur."
   }
 }

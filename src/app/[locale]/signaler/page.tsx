@@ -67,8 +67,10 @@ export default async function SignalerPage({
       defaultType={type}
       contact={{
         nom: profil?.nom ?? "",
+        prenom: profil?.prenom ?? "",
         courriel: profil?.courriel ?? user.email ?? "",
         telephone: profil?.telephone ?? "",
+        adresse: profil?.adresse ?? "",
       }}
     />
   );

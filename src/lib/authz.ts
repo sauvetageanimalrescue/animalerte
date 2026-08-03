@@ -3,9 +3,10 @@ import { createClient } from "@/lib/supabase/server";
 export type Profil = {
   id: string;
   nom: string;
+  prenom: string | null;
   courriel: string;
   telephone: string | null;
-  ville: string | null;
+  adresse: string | null;
 };
 
 // Utilisateur Supabase courant (ou null si non connecté).
@@ -27,7 +28,7 @@ export async function getCurrentProfile(): Promise<Profil | null> {
 
   const { data } = await supabase
     .from("profiles")
-    .select("id, nom, courriel, telephone, ville")
+    .select("id, nom, prenom, courriel, telephone, adresse")
     .eq("id", user.id)
     .single();
 

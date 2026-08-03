@@ -249,7 +249,7 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
           </h2>
           <p className="max-w-xl text-white/80">{m("sentinelleTexte")}</p>
           <Link
-            href="/inscription"
+            href="/sentinelle"
             className="mt-2 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-brand-dark transition hover:bg-brand-soft"
           >
             {m("sentinelleCta")}

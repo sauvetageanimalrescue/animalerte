@@ -34,7 +34,13 @@ const CarteSelecteur = dynamic(
   },
 );
 
-type Contact = { nom: string; courriel: string; telephone: string };
+type Contact = {
+  nom: string;
+  prenom: string;
+  courriel: string;
+  telephone: string;
+  adresse: string;
+};
 
 // « oui »/« non »/« » à partir du tri-état booléen stocké.
 const triState = (b: boolean | null | undefined) =>
@@ -462,7 +468,7 @@ export function FormulaireAnnonce({
               name="contact_prenom"
               type="text"
               required
-              defaultValue={initial?.contact_prenom ?? ""}
+              defaultValue={initial?.contact_prenom ?? contact.prenom}
               className={champ}
             />
           </label>
@@ -476,7 +482,7 @@ export function FormulaireAnnonce({
             <ChampAdresse
               name="contact_adresse"
               required={type === "perdu"}
-              defaultValue={initial?.contact_adresse ?? ""}
+              defaultValue={initial?.contact_adresse ?? contact.adresse}
               className={champ}
             />
           </label>

@@ -585,12 +585,26 @@
   },
   "profil": {
     "titre": "My profile",
-    "sousTitre": "Your information is reused for every new listing and helps target alerts in your area.",
+    "sousTitre": "Your contact details, reused automatically for every new listing.",
     "enregistre": "Profile saved.",
     "nom": "Name",
+    "prenom": "First name",
     "courriel": "Email",
     "telephone": "Phone",
-    "ville": "City",
-    "villeAide": "Start typing and pick your city from the list (Quebec)."
+    "adresse": "Address",
+    "adresseAide": "Start typing and pick your address from the list."
+  },
+  "sentinelle": {
+    "titre": "Become a Sentinel",
+    "sousTitre": "Receive lost-pet alerts for your area. No account required.",
+    "intro": "As a Sentinel, you are notified whenever a pet is reported lost near you. The community's eyes are often what brings a pet home.",
+    "nom": "Name",
+    "courriel": "Email",
+    "telephone": "Phone (optional)",
+    "ville": "Your city",
+    "villeAide": "Start typing and pick your city from the list (Quebec).",
+    "cta": "Sign me up as a Sentinel",
+    "merci": "Thank you, you're signed up!",
+    "merciTexte": "You'll receive lost-pet alerts for your area."
   }
 }

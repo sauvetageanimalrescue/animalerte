@@ -24,7 +24,7 @@ export default async function ModifierAnnoncePage({
   return (
     <FormulaireAnnonce
       defaultType={annonce.type as "perdu" | "trouve"}
-      contact={{ nom: "", courriel: "", telephone: "" }}
+      contact={{ nom: "", prenom: "", courriel: "", telephone: "", adresse: "" }}
       initial={annonce}
     />
   );

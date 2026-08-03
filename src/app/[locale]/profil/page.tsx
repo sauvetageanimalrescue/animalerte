@@ -1,7 +1,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { ChampVille } from "@/components/champ-ville";
+import { ChampAdresse } from "@/components/champ-adresse";
+import { ChampTelephone } from "@/components/champ-telephone";
 import { modifierProfil } from "@/lib/actions/profil";
 
 export default async function ProfilPage({
@@ -20,7 +21,7 @@ export default async function ProfilPage({
 
   const { data: profil } = await supabase
     .from("profiles")
-    .select("nom, courriel, telephone, ville, ville_lat, ville_lng")
+    .select("nom, prenom, courriel, telephone, adresse")
     .eq("id", user.id)
     .single();
 
@@ -43,15 +44,25 @@ export default async function ProfilPage({
       )}
 
       <form action={modifierProfil} className="mt-6 flex flex-col gap-4">
-        <label className={labelCls}>
-          {t("nom")}
-          <input
-            name="nom"
-            defaultValue={profil?.nom ?? ""}
-            required
-            className={champCls}
-          />
-        </label>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className={labelCls}>
+            {t("prenom")}
+            <input
+              name="prenom"
+              defaultValue={profil?.prenom ?? ""}
+              className={champCls}
+            />
+          </label>
+          <label className={labelCls}>
+            {t("nom")}
+            <input
+              name="nom"
+              defaultValue={profil?.nom ?? ""}
+              required
+              className={champCls}
+            />
+          </label>
+        </div>
         <label className={labelCls}>
           {t("courriel")}
           <input
@@ -62,25 +73,22 @@ export default async function ProfilPage({
         </label>
         <label className={labelCls}>
           {t("telephone")}
-          <input
+          <ChampTelephone
             name="telephone"
-            type="tel"
             defaultValue={profil?.telephone ?? ""}
             className={champCls}
           />
         </label>
         <label className={labelCls}>
-          {t("ville")}
-          <ChampVille
-            name="ville"
-            latName="ville_lat"
-            lngName="ville_lng"
-            defaultValue={profil?.ville ?? ""}
-            defaultLat={profil?.ville_lat ?? null}
-            defaultLng={profil?.ville_lng ?? null}
+          {t("adresse")}
+          <ChampAdresse
+            name="adresse"
+            defaultValue={profil?.adresse ?? ""}
             className={champCls}
           />
-          <span className="mt-1 block text-xs text-muted">{t("villeAide")}</span>
+          <span className="mt-1 block text-xs text-muted">
+            {t("adresseAide")}
+          </span>
         </label>
 
         <button
