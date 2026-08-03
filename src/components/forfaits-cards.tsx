@@ -13,12 +13,19 @@ const PLANS = [
 // lien que lorsque la page existe (sinon 404). À enrichir au fil des pages.
 function lienFonction(
   point: string,
-): "/fonctions/la-fiche" | "/fonctions/photos" | null {
+):
+  | "/fonctions/la-fiche"
+  | "/fonctions/photos"
+  | "/fonctions/courriel-conseils"
+  | null {
   if (/fiche sur animalerte|listing on animalerte/i.test(point)) {
     return "/fonctions/la-fiche";
   }
   if (/photo/i.test(point)) {
     return "/fonctions/photos";
+  }
+  if (/conseils|advice email/i.test(point)) {
+    return "/fonctions/courriel-conseils";
   }
   return null;
 }
