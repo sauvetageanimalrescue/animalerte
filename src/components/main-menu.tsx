@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -18,6 +18,20 @@ export function MainMenu({
   const p = useTranslations("pied");
   const [ouvert, setOuvert] = useState(false);
   const fermer = () => setOuvert(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Ferme le menu au clic à l'extérieur (le voile ne suffit pas : le
+  // backdrop-blur de l'en-tête piège le positionnement fixe).
+  useEffect(() => {
+    if (!ouvert) return;
+    const surClic = (e: PointerEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOuvert(false);
+      }
+    };
+    document.addEventListener("pointerdown", surClic);
+    return () => document.removeEventListener("pointerdown", surClic);
+  }, [ouvert]);
 
   const sections = [
     {
@@ -56,7 +70,7 @@ export function MainMenu({
     "block rounded-md px-2 py-1.5 text-sm font-medium text-foreground/80 transition hover:bg-brand-soft hover:text-brand-dark";
 
   return (
-    <div className="relative">
+    <div className="relative" ref={ref}>
       <button
         type="button"
         onClick={() => setOuvert((v) => !v)}
@@ -69,10 +83,7 @@ export function MainMenu({
       </button>
 
       {ouvert && (
-        <>
-          {/* Voile : clic à l'extérieur ferme le menu. */}
-          <div className="fixed inset-0 z-30" aria-hidden onClick={fermer} />
-          <div className="absolute left-0 z-40 mt-3 w-[min(92vw,620px)] rounded-2xl border border-border bg-surface p-6 shadow-xl">
+        <div className="absolute left-0 z-40 mt-3 w-[min(92vw,620px)] rounded-2xl border border-border bg-surface p-6 shadow-xl">
             <div className="grid gap-6 sm:grid-cols-3">
               {sections.map((sec) => (
                 <div key={sec.titre}>
@@ -119,8 +130,7 @@ export function MainMenu({
                 </Link>
               )}
             </div>
-          </div>
-        </>
+        </div>
       )}
     </div>
   );

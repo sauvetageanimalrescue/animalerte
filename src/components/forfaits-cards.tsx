@@ -9,6 +9,15 @@ const PLANS = [
   { id: "provincial", populaire: false },
 ] as const;
 
+// Rend certains points cliquables vers leur page « fonction ». On n'ajoute un
+// lien que lorsque la page existe (sinon 404). À enrichir au fil des pages.
+function lienFonction(point: string) {
+  if (/fiche sur animalerte|listing on animalerte/i.test(point)) {
+    return "/fonctions/la-fiche" as const;
+  }
+  return null;
+}
+
 // Grille des 4 forfaits, réutilisée sur la page /forfaits et la page d'accueil.
 export async function ForfaitsCards() {
   const t = await getTranslations("forfaits");
@@ -45,15 +54,30 @@ export async function ForfaitsCards() {
             </div>
 
             <ul className="mt-5 flex flex-1 flex-col gap-2.5">
-              {points.map((pt, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-2 text-sm text-foreground"
-                >
-                  <IconCheck size={18} className="mt-0.5 shrink-0 text-brand" />
-                  <span>{pt}</span>
-                </li>
-              ))}
+              {points.map((pt, i) => {
+                const lien = lienFonction(pt);
+                return (
+                  <li
+                    key={i}
+                    className="flex items-start gap-2 text-sm text-foreground"
+                  >
+                    <IconCheck
+                      size={18}
+                      className="mt-0.5 shrink-0 text-brand"
+                    />
+                    {lien ? (
+                      <Link
+                        href={lien}
+                        className="underline decoration-dotted underline-offset-2 transition hover:text-brand"
+                      >
+                        {pt}
+                      </Link>
+                    ) : (
+                      <span>{pt}</span>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
 
             <Link
