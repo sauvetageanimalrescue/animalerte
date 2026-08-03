@@ -19,10 +19,11 @@ export async function SiteHeader() {
           <MainMenu connecte={!!user} deconnexion={seDeconnecter} />
         </div>
 
-        {/* Centre : logo */}
+        {/* Centre : sur mobile, le wordmark « animALERTE » (bleu/rouge)
+            centré ; sur ordinateur, l'icône accolée au wordmark. */}
         <Link href="/" className="flex items-center justify-center gap-2">
-          <LogoMarkImg className="h-10 w-auto" priority />
-          <Wordmark className="hidden text-xl font-extrabold tracking-tight sm:block" />
+          <LogoMarkImg className="hidden h-10 w-auto sm:block" priority />
+          <Wordmark className="text-xl font-extrabold tracking-tight" />
         </Link>
 
         {/* Droite : Signaler puis English (tout à droite) */}
