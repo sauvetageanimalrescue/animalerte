@@ -27,7 +27,10 @@ export function MainMenu({
         { href: "/recherche", label: nav("recherche") },
         { href: "/signaler", label: nav("signaler") },
         ...(connecte
-          ? [{ href: "/mes-annonces", label: nav("mesAnnonces") }]
+          ? [
+              { href: "/mes-annonces", label: nav("mesAnnonces") },
+              { href: "/profil", label: nav("profil") },
+            ]
           : []),
       ],
     },

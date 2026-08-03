@@ -17,6 +17,7 @@
     "forfaits": "Plans",
     "signaler": "Report",
     "mesAnnonces": "My listings",
+    "profil": "My profile",
     "connexion": "Sign in",
     "inscription": "Sign up",
     "deconnexion": "Sign out",
@@ -581,5 +582,15 @@
         "texte": "For any questions about this policy or your information, please use the Contact page."
       }
     ]
+  },
+  "profil": {
+    "titre": "My profile",
+    "sousTitre": "Your information is reused for every new listing and helps target alerts in your area.",
+    "enregistre": "Profile saved.",
+    "nom": "Name",
+    "courriel": "Email",
+    "telephone": "Phone",
+    "ville": "City",
+    "villeAide": "Start typing and pick your city from the list (Quebec)."
   }
 }

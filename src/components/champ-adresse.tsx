@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 // Chargement paresseux et unique du script Google Maps + Places.
 let chargement: Promise<void> | null = null;
-function chargerGoogle(cle: string): Promise<void> {
+export function chargerGoogle(cle: string): Promise<void> {
   if (typeof window === "undefined") return Promise.resolve();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if ((window as any).google?.maps?.places) return Promise.resolve();

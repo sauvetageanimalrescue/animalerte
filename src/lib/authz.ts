@@ -5,6 +5,7 @@ export type Profil = {
   nom: string;
   courriel: string;
   telephone: string | null;
+  ville: string | null;
 };
 
 // Utilisateur Supabase courant (ou null si non connecté).
@@ -26,7 +27,7 @@ export async function getCurrentProfile(): Promise<Profil | null> {
 
   const { data } = await supabase
     .from("profiles")
-    .select("id, nom, courriel, telephone")
+    .select("id, nom, courriel, telephone, ville")
     .eq("id", user.id)
     .single();
 

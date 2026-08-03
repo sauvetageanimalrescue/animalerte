@@ -17,6 +17,7 @@
     "forfaits": "Forfaits",
     "signaler": "Signaler",
     "mesAnnonces": "Mes annonces",
+    "profil": "Mon profil",
     "connexion": "Connexion",
     "inscription": "Inscription",
     "deconnexion": "Déconnexion",
@@ -581,5 +582,15 @@
         "texte": "Pour toute question sur cette politique ou vos renseignements, utilisez la page Contact."
       }
     ]
+  },
+  "profil": {
+    "titre": "Mon profil",
+    "sousTitre": "Vos informations sont réutilisées à chaque nouvelle annonce et servent à cibler les alertes de votre secteur.",
+    "enregistre": "Profil enregistré.",
+    "nom": "Nom",
+    "courriel": "Courriel",
+    "telephone": "Téléphone",
+    "ville": "Ville",
+    "villeAide": "Commencez à taper et choisissez votre ville dans la liste (Québec)."
   }
 }
