@@ -46,10 +46,10 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
   // Points de reconnaissance flAIr superposés sur l'image (en % de l'image),
   // mesurés à la grille. 4 par chat : oreille, œil, nez, pelage (sur le côté).
   const pointsFlair = [
-    // Chat perdu (gauche) — Agathinne : oreille, œil, nez, pelage
-    { x: 26, y: 24 }, { x: 18, y: 35 }, { x: 22, y: 44 }, { x: 37, y: 41 },
-    // Chat trouvé (droite) — Inconnu : oreille, œil, nez, pelage
-    { x: 81, y: 20 }, { x: 85, y: 32 }, { x: 84, y: 35 }, { x: 67, y: 34 },
+    // Chat perdu (gauche) — Agathinne : oreille 8N, œil 11S, nez 13V, pelage 19U
+    { x: 14.4, y: 26.0 }, { x: 20.2, y: 35.6 }, { x: 24.0, y: 41.3 }, { x: 35.6, y: 39.4 },
+    // Chat trouvé (droite) — Inconnu : oreille 40I, œil 42O, nez 41R, pelage 37U
+    { x: 76.0, y: 16.3 }, { x: 79.8, y: 27.9 }, { x: 77.9, y: 33.7 }, { x: 70.2, y: 39.4 },
   ];
 
   const portee = [
