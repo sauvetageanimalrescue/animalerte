@@ -19,6 +19,7 @@ function lienFonction(
   | "/fonctions/courriel-conseils"
   | "/fonctions/affiche-intelligente"
   | "/fonctions/images-reseaux"
+  | "/fonctions/ligne-sans-frais"
   | null {
   if (/fiche sur animalerte|listing on animalerte/i.test(point)) {
     return "/fonctions/la-fiche";
@@ -34,6 +35,9 @@ function lienFonction(
   }
   if (/réseaux sociaux|social media/i.test(point)) {
     return "/fonctions/images-reseaux";
+  }
+  if (/1 833 999 AIDE/i.test(point)) {
+    return "/fonctions/ligne-sans-frais";
   }
   return null;
 }
