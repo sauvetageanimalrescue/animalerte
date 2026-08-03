@@ -43,11 +43,13 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
     { icon: IconCalendarStats, titre: m("crit4Titre"), texte: m("crit4Texte") },
   ];
 
-  // Points de reconnaissance flAIr superposés sur l'image (en % de l'image).
-  // Chat perdu (gauche) puis chat trouvé (droite). À ajuster à l'œil au besoin.
+  // Points de reconnaissance flAIr superposés sur l'image (en % de l'image),
+  // mesurés à la grille. 4 par chat : oreille, œil, nez, pelage (sur le côté).
   const pointsFlair = [
-    { x: 17, y: 25 }, { x: 17, y: 35 }, { x: 25, y: 34 }, { x: 21, y: 42 }, { x: 34, y: 40 },
-    { x: 77, y: 19 }, { x: 77, y: 31 }, { x: 83, y: 30 }, { x: 80, y: 35 }, { x: 69, y: 34 },
+    // Chat perdu (gauche) — Agathinne : oreille, œil, nez, pelage
+    { x: 26, y: 24 }, { x: 18, y: 35 }, { x: 22, y: 44 }, { x: 37, y: 41 },
+    // Chat trouvé (droite) — Inconnu : oreille, œil, nez, pelage
+    { x: 81, y: 20 }, { x: 85, y: 32 }, { x: 84, y: 35 }, { x: 67, y: 34 },
   ];
 
   const portee = [
