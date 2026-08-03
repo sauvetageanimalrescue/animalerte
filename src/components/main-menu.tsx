@@ -52,6 +52,7 @@ export function MainMenu({
       titre: nav("fonctionnalites"),
       liens: [
         { href: "/fonctions/la-fiche", label: nav("fiche") },
+        { href: "/fonctions/photos", label: nav("photos") },
         { href: "/forfaits", label: nav("forfaits") },
         { href: "/faq", label: p("faq") },
       ],

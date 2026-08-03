@@ -11,9 +11,14 @@ const PLANS = [
 
 // Rend certains points cliquables vers leur page « fonction ». On n'ajoute un
 // lien que lorsque la page existe (sinon 404). À enrichir au fil des pages.
-function lienFonction(point: string) {
+function lienFonction(
+  point: string,
+): "/fonctions/la-fiche" | "/fonctions/photos" | null {
   if (/fiche sur animalerte|listing on animalerte/i.test(point)) {
-    return "/fonctions/la-fiche" as const;
+    return "/fonctions/la-fiche";
+  }
+  if (/photo/i.test(point)) {
+    return "/fonctions/photos";
   }
   return null;
 }
