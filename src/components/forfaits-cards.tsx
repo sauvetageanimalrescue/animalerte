@@ -20,6 +20,7 @@ function lienFonction(
   | "/fonctions/affiche-intelligente"
   | "/fonctions/images-reseaux"
   | "/fonctions/ligne-sans-frais"
+  | "/fonctions/messagerie-anonyme"
   | null {
   if (/fiche sur animalerte|listing on animalerte/i.test(point)) {
     return "/fonctions/la-fiche";
@@ -38,6 +39,9 @@ function lienFonction(
   }
   if (/1 833 999 AIDE/i.test(point)) {
     return "/fonctions/ligne-sans-frais";
+  }
+  if (/messagerie anonyme|anonymous messaging/i.test(point)) {
+    return "/fonctions/messagerie-anonyme";
   }
   return null;
 }
