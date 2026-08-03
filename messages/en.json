@@ -606,5 +606,40 @@
     "cta": "Sign me up as a Sentinel",
     "merci": "Thank you, you're signed up!",
     "merciTexte": "You'll receive lost-pet alerts for your area."
+  },
+  "pageFiche": {
+    "surtitre": "The core feature",
+    "titre": "The listing on animalerte.ca",
+    "accroche": "The central point of every search. Everything starts here, and everything leads back here.",
+    "centralTitre": "The heart of the search",
+    "centralTexte": "The listing is where all the information comes together. Every QR code leads to the listing. Every social media post leads to the listing. And it is from the listing that people can reach the pet's family, in full confidentiality.",
+    "quoiTitre": "What is it?",
+    "quoiTexte": "A public listing for your lost or found pet. It shows the photo, the details such as species, breed, colour and distinctive marks, along with the location and date. It appears in the directory, in search and on the map, viewable by the whole community.",
+    "problemeTitre": "The problem it solves",
+    "problemeTexte": "A social media post disappears into the feed within hours. The listing, on the other hand, gives your pet a permanent, searchable page. The person who finds it can look it up by area, species or colour, even several days later.",
+    "commentTitre": "How it works",
+    "etape1Titre": "Create your profile",
+    "etape1Texte": "Everything starts with your profile. You fill in your contact details once, and they are reused for all your listings, with nothing to retype.",
+    "etape2Titre": "Create the listing",
+    "etape2Texte": "Photo, details, location and date. A few minutes is all it takes.",
+    "etape3Titre": "It becomes visible",
+    "etape3Texte": "The listing appears right away in search and on the map, with its own unique file number.",
+    "etape4Titre": "Everything leads to the listing",
+    "etape4Texte": "QR codes and social posts lead back to it. The person who finds the pet reaches the family without ever seeing their contact details.",
+    "apportsTitre": "What it gives you",
+    "apports": [
+      "Permanent visibility, never buried in a news feed.",
+      "Filtered search by species, area and colour.",
+      "The location on your area's map.",
+      "Your contact details kept confidential.",
+      "A listing you can edit at any time.",
+      "Free to get started."
+    ],
+    "forfaitTitre": "Which plan includes it?",
+    "forfaitTexte": "The listing is included in every plan, even the Free one. It is the foundation. Paid plans add broadcasting and alerts on top.",
+    "ctaTitre": "Ready to start?",
+    "ctaTexte": "The first step is your profile.",
+    "ctaProfil": "Create my profile",
+    "ctaForfaits": "See the plans"
   }
 }

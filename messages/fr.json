@@ -606,5 +606,40 @@
     "cta": "M'inscrire comme Sentinelle",
     "merci": "Merci, vous êtes inscrit !",
     "merciTexte": "Vous recevrez les alertes d'animaux perdus de votre secteur."
+  },
+  "pageFiche": {
+    "surtitre": "La fonction de base",
+    "titre": "La fiche sur animalerte.ca",
+    "accroche": "Le point central de toute la recherche. Tout part d'ici, et tout y ramène.",
+    "centralTitre": "Le cœur de la recherche",
+    "centralTexte": "La fiche, c'est là que toute l'information se centralise. Chaque code QR mène à la fiche. Chaque publication sur les réseaux sociaux mène à la fiche. Et c'est à partir de la fiche qu'on peut joindre la famille de l'animal, en toute confidentialité.",
+    "quoiTitre": "C'est quoi ?",
+    "quoiTexte": "Une fiche publique pour votre animal perdu ou trouvé. On y retrouve sa photo, ses caractéristiques comme l'espèce, la race, la couleur et les signes distinctifs, ainsi que l'endroit et la date. Elle apparaît dans le répertoire, dans la recherche et sur la carte, consultable par toute la communauté.",
+    "problemeTitre": "Le problème que ça règle",
+    "problemeTexte": "Une publication sur les réseaux sociaux disparaît dans le fil en quelques heures. La fiche, elle, donne à votre animal une page permanente et cherchable. La personne qui le trouve peut la retrouver par secteur, par espèce ou par couleur, même plusieurs jours plus tard.",
+    "commentTitre": "Comment ça fonctionne",
+    "etape1Titre": "Créez votre profil",
+    "etape1Texte": "Tout commence par le profil. Vous remplissez une seule fois vos coordonnées, et elles serviront à toutes vos fiches, sans avoir à les retaper.",
+    "etape2Titre": "Créez la fiche",
+    "etape2Texte": "Photo, caractéristiques, lieu et date. Quelques minutes suffisent.",
+    "etape3Titre": "Elle devient visible",
+    "etape3Texte": "La fiche apparaît immédiatement dans la recherche et sur la carte, avec son numéro de dossier unique.",
+    "etape4Titre": "Tout ramène à la fiche",
+    "etape4Texte": "Les codes QR et les publications sociales y ramènent. La personne qui trouve l'animal joint la famille sans jamais voir ses coordonnées.",
+    "apportsTitre": "Ce que ça vous apporte",
+    "apports": [
+      "Une visibilité permanente, jamais noyée dans un fil d'actualité.",
+      "Une recherche par filtres : espèce, secteur, couleur.",
+      "La position sur la carte de votre secteur.",
+      "Vos coordonnées gardées confidentielles.",
+      "Une fiche modifiable en tout temps.",
+      "Gratuite pour commencer."
+    ],
+    "forfaitTitre": "Dans quel forfait ?",
+    "forfaitTexte": "La fiche est incluse dans tous les forfaits, même le Gratuit. C'est la fondation. Les forfaits payants ajoutent la diffusion et les alertes par-dessus.",
+    "ctaTitre": "Prêt à commencer ?",
+    "ctaTexte": "La première étape, c'est votre profil.",
+    "ctaProfil": "Créer mon profil",
+    "ctaForfaits": "Voir les forfaits"
   }
 }
