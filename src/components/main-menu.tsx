@@ -58,6 +58,7 @@ export function MainMenu({
         { href: "/fonctions/images-reseaux", label: nav("reseaux") },
         { href: "/fonctions/ligne-sans-frais", label: nav("ligne") },
         { href: "/fonctions/messagerie-anonyme", label: nav("messagerie") },
+        { href: "/fonctions/alerte-sentinelle", label: nav("alerteSentinelle") },
         { href: "/forfaits", label: nav("forfaits") },
         { href: "/faq", label: p("faq") },
       ],

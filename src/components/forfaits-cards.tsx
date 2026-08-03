@@ -21,7 +21,11 @@ function lienFonction(
   | "/fonctions/images-reseaux"
   | "/fonctions/ligne-sans-frais"
   | "/fonctions/messagerie-anonyme"
+  | "/fonctions/alerte-sentinelle"
   | null {
+  if (/alerte sentinelle|sentinel alert/i.test(point)) {
+    return "/fonctions/alerte-sentinelle";
+  }
   if (/fiche sur animalerte|listing on animalerte/i.test(point)) {
     return "/fonctions/la-fiche";
   }
