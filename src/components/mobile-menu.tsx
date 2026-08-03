@@ -51,11 +51,7 @@ export function MobileMenu({
                 {l.label}
               </Link>
             ))}
-            <Link
-              href="/signaler"
-              onClick={fermer}
-              className="rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-white"
-            >
+            <Link href="/signaler" onClick={fermer} className={lienCls}>
               {t("signaler")}
             </Link>
             {connecte ? (
