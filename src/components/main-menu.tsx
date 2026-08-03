@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { IconMenu2, IconX, IconPlus } from "@tabler/icons-react";
+import {
+  IconMenu2,
+  IconX,
+  IconPlus,
+  IconChevronDown,
+} from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
@@ -19,6 +24,13 @@ export function MainMenu({
   const [ouvert, setOuvert] = useState(false);
   const fermer = () => setOuvert(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  // Sections repliables sur mobile : la Navigation est ouverte par défaut,
+  // les autres se déplient d'une touche. Sur ordinateur (sm+), tout est
+  // toujours affiché en 3 colonnes, peu importe cet état.
+  const [ouvertes, setOuvertes] = useState<Record<number, boolean>>({ 0: true });
+  const basculer = (i: number) =>
+    setOuvertes((s) => ({ ...s, [i]: !s[i] }));
 
   // Ferme le menu au clic à l'extérieur (le voile ne suffit pas : le
   // backdrop-blur de l'en-tête piège le positionnement fixe).
@@ -100,14 +112,36 @@ export function MainMenu({
       </button>
 
       {ouvert && (
-        <div className="absolute left-0 z-40 mt-3 w-[min(92vw,620px)] rounded-2xl border border-border bg-surface p-6 shadow-xl">
-            <div className="grid gap-6 sm:grid-cols-3">
-              {sections.map((sec) => (
-                <div key={sec.titre}>
-                  <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-muted">
-                    {sec.titre}
-                  </h3>
-                  <ul className="flex flex-col gap-0.5">
+        <div className="absolute left-0 z-40 mt-3 max-h-[calc(100dvh-6rem)] w-[min(92vw,620px)] overflow-y-auto rounded-2xl border border-border bg-surface p-6 shadow-xl">
+            <div className="grid gap-4 sm:grid-cols-3 sm:gap-6">
+              {sections.map((sec, i) => {
+                const estOuverte = !!ouvertes[i];
+                return (
+                <div
+                  key={sec.titre}
+                  className="border-b border-border pb-3 last:border-0 last:pb-0 sm:border-0 sm:pb-0"
+                >
+                  <button
+                    type="button"
+                    onClick={() => basculer(i)}
+                    aria-expanded={estOuverte}
+                    className="flex w-full items-center justify-between sm:pointer-events-none"
+                  >
+                    <span className="text-xs font-bold uppercase tracking-wide text-muted">
+                      {sec.titre}
+                    </span>
+                    <IconChevronDown
+                      size={16}
+                      className={`text-muted transition sm:hidden ${
+                        estOuverte ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  <ul
+                    className={`mt-2 flex-col gap-0.5 ${
+                      estOuverte ? "flex" : "hidden"
+                    } sm:flex`}
+                  >
                     {sec.liens.map((l) => (
                       <li key={l.href}>
                         <Link href={l.href} onClick={fermer} className={lienCls}>
@@ -117,7 +151,8 @@ export function MainMenu({
                     ))}
                   </ul>
                 </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-border pt-4">
