@@ -373,7 +373,7 @@
     "flairTitre": "flAIr renifle les correspondances pour vous.",
     "flairTexte": "flAIr est un système d'intelligence artificielle qui reconnaît le visage d'un animal : la couleur de son pelage, ses motifs et la couleur de ses yeux. Il veille sur votre secteur sans relâche et, dès qu'un animal trouvé lui ressemble, flAIr vous prévient.",
     "flairUnique": "Une technologie exclusive",
-    "flairIntro": "Avant de vous alerter, flAIr évalue plusieurs critères pour ne retenir que les correspondances vraiment plausibles.",
+    "flairIntro": "flAIr est le système d'intelligence artificielle développé par animALERTE pour rapprocher les animaux perdus et les animaux trouvés. Il veille en continu sur les nouveaux signalements de votre secteur et analyse chaque fiche selon plusieurs critères. Plutôt que de vous submerger de suggestions au hasard, il ne fait remonter que les pistes crédibles : avant de vous alerter, flAIr évalue chaque correspondance pour ne retenir que celles qui sont vraiment plausibles.",
     "crit1Titre": "Les traits du visage",
     "crit1Texte": "flAIr compare la forme des oreilles, des yeux et du nez, ainsi que la couleur et le motif du pelage sur le visage.",
     "crit2Titre": "Le pelage",

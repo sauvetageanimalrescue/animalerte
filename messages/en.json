@@ -373,7 +373,7 @@
     "flairTitre": "flAIr sniffs out the matches for you.",
     "flairTexte": "flAIr is an artificial intelligence system that recognizes an animal's face: its coat, its markings and its eye colour. It watches your area around the clock and, the moment a found pet looks like yours, flAIr lets you know.",
     "flairUnique": "Exclusive technology",
-    "flairIntro": "Before alerting you, flAIr weighs several criteria to surface only the matches that are genuinely plausible.",
+    "flairIntro": "flAIr is the artificial intelligence system built by animALERTE to reconnect lost and found pets. It watches new reports in your area around the clock and analyzes every listing against several criteria. Rather than flooding you with random suggestions, it surfaces only credible leads: before alerting you, flAIr weighs each match to keep only the ones that are genuinely plausible.",
     "crit1Titre": "Facial features",
     "crit1Texte": "flAIr compares the shape of the ears, eyes and nose, along with the colour and pattern of the coat on the face.",
     "crit2Titre": "The coat",
