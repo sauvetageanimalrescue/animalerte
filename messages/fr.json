@@ -13,7 +13,7 @@
   },
   "nav": {
     "accueil": "Accueil",
-    "recherche": "Rechercher",
+    "recherche": "Signalements",
     "forfaits": "Forfaits",
     "signaler": "Signaler",
     "mesAnnonces": "Mes annonces",
@@ -122,7 +122,7 @@
     "signalerTrouveCta": "J'ai trouvé un animal",
     "prioritairesTitre": "Alertes prioritaires",
     "recentesTitre": "Signalements récents",
-    "recentesVoirTout": "Voir tous les signalements",
+    "recentesVoirTout": "Voir les signalements",
     "aucuneRecente": "Aucun signalement pour l'instant. Soyez le premier à en publier un.",
     "commentTitre": "Comment ça marche",
     "etape1Titre": "Signalez",

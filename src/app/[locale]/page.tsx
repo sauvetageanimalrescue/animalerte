@@ -2,12 +2,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   IconSearch,
   IconAlertTriangle,
-  IconHeartHandshake,
-  IconSpeakerphone,
   IconMapPin,
-  IconWorld,
   IconUsers,
-  IconMap2,
   IconArrowRight,
   IconScan,
   IconPaw,
@@ -20,6 +16,7 @@ import {
   obtenirAnnoncesPrioritaires,
 } from "@/lib/annonces";
 import { AnnonceCard } from "@/components/annonce-card";
+import { ForfaitsCards } from "@/components/forfaits-cards";
 import { FlairWord } from "@/components/logo";
 
 export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
@@ -27,14 +24,9 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
   setRequestLocale(locale);
   const t = await getTranslations("accueil");
   const m = await getTranslations("marketing");
+  const tf = await getTranslations("forfaits");
   const recentes = await obtenirAnnoncesRecentes(6);
   const prioritaires = await obtenirAnnoncesPrioritaires();
-
-  const etapes = [
-    { icon: IconSpeakerphone, titre: t("etape1Titre"), texte: t("etape1Texte") },
-    { icon: IconSearch, titre: t("etape2Titre"), texte: t("etape2Texte") },
-    { icon: IconHeartHandshake, titre: t("etape3Titre"), texte: t("etape3Texte") },
-  ];
 
   const criteres = [
     { icon: IconScan, titre: m("crit1Titre"), texte: m("crit1Texte") },
@@ -57,18 +49,6 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
     { x: 14.4, y: 81.7 }, // Agathinne — Beauharnois
     { x: 45.2, y: 76.0 }, // Inconnu — Chateauguay
   ];
-
-  const portee = [
-    { icon: IconWorld, titre: m("porteeWeb"), desc: m("porteeWebD"), variante: "blanc" as const },
-    { icon: IconMapPin, titre: m("porteeLocale"), desc: m("porteeLocaleD"), variante: "blanc" as const },
-    { icon: IconMap2, titre: m("porteeRegionale"), desc: m("porteeRegionaleD"), variante: "bleu" as const },
-    { icon: IconAlertTriangle, titre: m("porteeProvinciale"), desc: m("porteeProvincialeD"), variante: "rouge" as const },
-  ];
-  const varStyles = {
-    blanc: { card: "border-border bg-surface", icon: "bg-brand-soft text-brand", bar: "bg-brand", num: "text-brand/30" },
-    bleu: { card: "border-brand/40 bg-brand-soft", icon: "bg-brand text-white", bar: "bg-brand", num: "text-brand/40" },
-    rouge: { card: "border-accent/40 bg-accent-soft", icon: "bg-accent text-white", bar: "bg-accent", num: "text-accent/45" },
-  };
 
   return (
     <>
@@ -124,11 +104,19 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
       {prioritaires.length > 0 && (
         <section className="border-b border-border bg-surface">
           <div className="mx-auto max-w-6xl px-4 py-8">
-            <div className="mb-4 flex items-center gap-2">
-              <IconAlertTriangle size={20} className="text-accent" />
-              <h2 className="text-lg font-bold text-foreground">
-                {t("prioritairesTitre")}
-              </h2>
+            <div className="mb-4 flex items-end justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <IconAlertTriangle size={20} className="text-accent" />
+                <h2 className="text-lg font-bold text-foreground">
+                  {t("prioritairesTitre")}
+                </h2>
+              </div>
+              <Link
+                href="/recherche"
+                className="whitespace-nowrap text-sm font-semibold text-brand hover:text-brand-dark"
+              >
+                {t("recentesVoirTout")}
+              </Link>
             </div>
             <div className="flex snap-x gap-5 overflow-x-auto pb-3">
               {prioritaires.map((a) => (
@@ -211,43 +199,16 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
         </div>
       </section>
 
-      {/* Portée */}
+      {/* Forfaits */}
       <section className="mx-auto max-w-6xl px-4 py-16">
         <h2 className="text-center text-2xl font-bold text-foreground">
-          {m("porteeTitre")}
+          {tf("titre")}
         </h2>
         <p className="mx-auto mt-2 max-w-2xl text-center text-muted">
-          {m("porteeSousTitre")}
+          {tf("sousTitre")}
         </p>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {portee.map((p, i) => {
-            const s = varStyles[p.variante];
-            return (
-              <div
-                key={i}
-                className={`flex flex-col gap-3 rounded-2xl border p-5 ${s.card}`}
-              >
-                <div className="flex items-center justify-between">
-                  <div
-                    className={`flex h-11 w-11 items-center justify-center rounded-xl ${s.icon}`}
-                  >
-                    <p.icon size={22} />
-                  </div>
-                  <span className={`text-2xl font-extrabold ${s.num}`}>
-                    {i + 1}
-                  </span>
-                </div>
-                <h3 className="font-semibold text-foreground">{p.titre}</h3>
-                <p className="text-sm text-muted">{p.desc}</p>
-                <div className="mt-auto h-1.5 overflow-hidden rounded-full bg-foreground/10">
-                  <div
-                    className={`h-full ${s.bar}`}
-                    style={{ width: `${((i + 1) / portee.length) * 100}%` }}
-                  />
-                </div>
-              </div>
-            );
-          })}
+        <div className="mt-10">
+          <ForfaitsCards />
         </div>
       </section>
 
@@ -259,9 +220,9 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
           </h2>
           <Link
             href="/recherche"
-            className="text-sm font-semibold text-brand hover:text-brand-dark"
+            className="whitespace-nowrap text-sm font-semibold text-brand hover:text-brand-dark"
           >
-            {t("recentesVoirTout")} →
+            {t("recentesVoirTout")}
           </Link>
         </div>
         {recentes.length === 0 ? (
@@ -275,24 +236,6 @@ export default async function AccueilPage({ params }: PageProps<"/[locale]">) {
             ))}
           </div>
         )}
-      </section>
-
-      {/* Comment ça marche */}
-      <section className="mx-auto max-w-6xl px-4 py-16">
-        <h2 className="mb-10 text-center text-2xl font-bold text-foreground">
-          {t("commentTitre")}
-        </h2>
-        <div className="grid gap-8 md:grid-cols-3">
-          {etapes.map((e, i) => (
-            <div key={i} className="flex flex-col items-center text-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-soft text-brand">
-                <e.icon size={28} />
-              </div>
-              <h3 className="mt-4 font-semibold text-foreground">{e.titre}</h3>
-              <p className="mt-1 text-sm text-muted">{e.texte}</p>
-            </div>
-          ))}
-        </div>
       </section>
 
       {/* Sentinelles */}

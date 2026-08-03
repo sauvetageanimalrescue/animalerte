@@ -13,7 +13,7 @@
   },
   "nav": {
     "accueil": "Home",
-    "recherche": "Search",
+    "recherche": "Reports",
     "forfaits": "Plans",
     "signaler": "Report",
     "mesAnnonces": "My listings",
@@ -122,7 +122,7 @@
     "signalerTrouveCta": "I found a pet",
     "prioritairesTitre": "Priority alerts",
     "recentesTitre": "Recent reports",
-    "recentesVoirTout": "See all reports",
+    "recentesVoirTout": "See reports",
     "aucuneRecente": "No reports yet. Be the first to post one.",
     "commentTitre": "How it works",
     "etape1Titre": "Report",
