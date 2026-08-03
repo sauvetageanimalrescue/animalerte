@@ -40,6 +40,7 @@ export function MainMenu({
         { href: "/", label: nav("accueil") },
         { href: "/recherche", label: nav("recherche") },
         { href: "/signaler", label: nav("signaler") },
+        { href: "/forfaits", label: nav("forfaits") },
         ...(connecte
           ? [
               { href: "/mes-annonces", label: nav("mesAnnonces") },
@@ -69,8 +70,6 @@ export function MainMenu({
           href: "/fonctions/diffusion-partenaire",
           label: nav("partenaire"),
         },
-        { href: "/forfaits", label: nav("forfaits") },
-        { href: "/faq", label: p("faq") },
       ],
     },
     {
@@ -78,6 +77,7 @@ export function MainMenu({
       liens: [
         { href: "/conditions", label: p("conditions") },
         { href: "/confidentialite", label: p("confidentialite") },
+        { href: "/faq", label: p("faq") },
         { href: "/contact", label: p("contact") },
       ],
     },
