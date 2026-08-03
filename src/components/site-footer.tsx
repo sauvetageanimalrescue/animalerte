@@ -1,5 +1,10 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import {
+  IconBrandFacebook,
+  IconBrandInstagram,
+  IconBrandTiktok,
+} from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 import { getCurrentUser } from "@/lib/authz";
 import { seDeconnecter } from "@/app/actions";
@@ -47,16 +52,47 @@ export async function SiteFooter() {
     <footer className="mt-16 border-t border-border bg-surface">
       <div className="mx-auto max-w-6xl px-4 py-12">
         <div className="flex flex-col gap-10 md:flex-row md:justify-between">
-          <div className="flex items-center gap-4">
-            <Logo className="h-[72px] w-auto" />
-            <span className="h-[54px] w-px bg-border" aria-hidden />
-            <Image
-              src="/flair-couleur.png"
-              alt="flAIr"
-              width={120}
-              height={60}
-              className="h-[42px] w-auto"
-            />
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-4">
+              <Logo className="h-[72px] w-auto" />
+              <span className="h-[54px] w-px bg-border" aria-hidden />
+              <Image
+                src="/flair-couleur.png"
+                alt="flAIr"
+                width={120}
+                height={60}
+                className="h-[42px] w-auto"
+              />
+            </div>
+            <div className="flex items-center gap-3">
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener"
+                aria-label="Facebook"
+                className="text-muted transition hover:text-brand-dark"
+              >
+                <IconBrandFacebook size={22} />
+              </a>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener"
+                aria-label="Instagram"
+                className="text-muted transition hover:text-brand-dark"
+              >
+                <IconBrandInstagram size={22} />
+              </a>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener"
+                aria-label="TikTok"
+                className="text-muted transition hover:text-brand-dark"
+              >
+                <IconBrandTiktok size={22} />
+              </a>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
