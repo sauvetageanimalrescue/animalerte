@@ -350,7 +350,8 @@
     "debloquer": "Débloquer plus de fonctions",
     "imprimer": "Imprimer / Enregistrer en PDF",
     "retour": "Retour à l'annonce",
-    "introuvable": "Cette annonce est introuvable ou a été retirée."
+    "introuvable": "Cette annonce est introuvable ou a été retirée.",
+    "verrouilleInfo": "Inclus dans un forfait payant"
   },
   "partager": {
     "titre": "Partager {nom} sur les réseaux",

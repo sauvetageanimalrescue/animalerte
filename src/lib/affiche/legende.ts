@@ -19,7 +19,7 @@ const FLAIR: Record<Lang, string> = {
 
 // Génère la légende bilingue (FR puis EN) prête à copier-coller.
 export async function genererLegende(a: Annonce, origin: string): Promise<string> {
-  const [eFr, eEn, cFr, cEn, yFr, yEn, tFr, tEn] = await Promise.all([
+  const [eFr, eEn, cFr, cEn, yFr, yEn, tFr, tEn, sFr, sEn] = await Promise.all([
     getTranslations({ locale: "fr", namespace: "especes" }),
     getTranslations({ locale: "en", namespace: "especes" }),
     getTranslations({ locale: "fr", namespace: "couleurs" }),
@@ -28,6 +28,8 @@ export async function genererLegende(a: Annonce, origin: string): Promise<string
     getTranslations({ locale: "en", namespace: "yeux" }),
     getTranslations({ locale: "fr", namespace: "temperaments" }),
     getTranslations({ locale: "en", namespace: "temperaments" }),
+    getTranslations({ locale: "fr", namespace: "sexes" }),
+    getTranslations({ locale: "en", namespace: "sexes" }),
   ]);
 
   const tr = (arr: readonly string[], t: T, v: string | null) =>
@@ -42,6 +44,7 @@ export async function genererLegende(a: Annonce, origin: string): Promise<string
     const tC = L === "fr" ? cFr : cEn;
     const tY = L === "fr" ? yFr : yEn;
     const tT = L === "fr" ? tFr : tEn;
+    const tSex = L === "fr" ? sFr : sEn;
     const perdu = a.type === "perdu";
     const espece = tE(a.espece);
     const typeMot = perdu
@@ -70,9 +73,12 @@ export async function genererLegende(a: Annonce, origin: string): Promise<string
     if (dossier) li.push(`#️⃣ ${L === "fr" ? "Dossier" : "File"} ${dossier}`);
 
     const puces: string[] = [];
+    // Sexe (mâle / femelle) en tête du signalement, sauf si inconnu.
+    const sexe = a.sexe && a.sexe !== "inconnu" ? tSex(a.sexe) : null;
     const race = nomRace(a.race, a.espece, L);
     const couleur = tr(COULEURS, tC, a.couleur);
-    if (race || couleur) puces.push([race, couleur].filter(Boolean).join(", "));
+    const desc = [sexe, race, couleur].filter(Boolean);
+    if (desc.length) puces.push(desc.join(", "));
     if (a.couleur_yeux) {
       const y = tr(YEUX, tY, a.couleur_yeux);
       puces.push(L === "fr" ? `Yeux ${String(y).toLowerCase()}` : `${y} eyes`);

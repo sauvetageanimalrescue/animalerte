@@ -350,7 +350,8 @@
     "debloquer": "Unlock more features",
     "imprimer": "Print / Save as PDF",
     "retour": "Back to the listing",
-    "introuvable": "This listing cannot be found or was removed."
+    "introuvable": "This listing cannot be found or was removed.",
+    "verrouilleInfo": "Included in a paid plan"
   },
   "partager": {
     "titre": "Share {nom} on social media",

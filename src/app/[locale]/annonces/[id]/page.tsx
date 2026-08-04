@@ -11,6 +11,7 @@ import {
   IconShare,
   IconSparkles,
   IconPhoto,
+  IconLock,
 } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 import { LIGNE_SANS_FRAIS } from "@/lib/constants";
@@ -314,7 +315,10 @@ export default async function AnnoncePage({
                   {tC("gererPhotos")}
                 </Link>
               )}
-              {(peut(annonce.forfait, "affiche") || admin) && (
+              {/* Générer l'affiche : bouton actif si le forfait le permet (ou
+                  admin) ; sinon, pour le vrai propriétaire, un bouton grisé et
+                  verrouillé qui montre la fonction sans la débloquer. */}
+              {peut(annonce.forfait, "affiche") || admin ? (
                 <a
                   href={`/api/affiche/${annonce.id}`}
                   target="_blank"
@@ -324,8 +328,17 @@ export default async function AnnoncePage({
                   <IconFileText size={18} />
                   {tA("genererCta")}
                 </a>
-              )}
-              {(peut(annonce.forfait, "reseaux") || admin) && (
+              ) : proprioReel ? (
+                <span
+                  aria-disabled="true"
+                  title={tA("verrouilleInfo")}
+                  className="inline-flex cursor-not-allowed items-center gap-2 rounded-full border border-border bg-surface px-5 py-2.5 font-semibold text-muted opacity-70"
+                >
+                  <IconLock size={16} />
+                  {tA("genererCta")}
+                </span>
+              ) : null}
+              {peut(annonce.forfait, "reseaux") || admin ? (
                 <Link
                   href={`/annonces/${annonce.id}/partager`}
                   className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 font-semibold text-white transition hover:bg-brand-dark"
@@ -333,7 +346,16 @@ export default async function AnnoncePage({
                   <IconShare size={18} />
                   {tA("partagerCta")}
                 </Link>
-              )}
+              ) : proprioReel ? (
+                <span
+                  aria-disabled="true"
+                  title={tA("verrouilleInfo")}
+                  className="inline-flex cursor-not-allowed items-center gap-2 rounded-full border border-border bg-surface px-5 py-2.5 font-semibold text-muted opacity-70"
+                >
+                  <IconLock size={16} />
+                  {tA("partagerCta")}
+                </span>
+              ) : null}
               {proprioReel && !peut(annonce.forfait, "reseaux") && (
                 <Link
                   href={`/annonces/${annonce.id}/forfait`}
