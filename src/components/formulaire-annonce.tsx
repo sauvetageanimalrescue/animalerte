@@ -80,7 +80,7 @@ export function FormulaireAnnonce({
   const photoRef = useRef<HTMLInputElement>(null);
   const couleurRef = useRef<HTMLSelectElement>(null);
   const yeuxRef = useRef<HTMLSelectElement>(null);
-  const signesRef = useRef<HTMLInputElement>(null);
+  const signesRef = useRef<HTMLTextAreaElement>(null);
   const [aPhoto, setAPhoto] = useState(false);
   const [flairEtat, setFlairEtat] = useState<
     "idle" | "loading" | "done" | "error" | "cle" | "connexion" | "limite"
@@ -379,10 +379,10 @@ export function FormulaireAnnonce({
           </label>
           <label className={`${label} sm:col-span-2`}>
             {tChamp("signesDistinctifs")}
-            <input
+            <textarea
               ref={signesRef}
               name="signes_distinctifs"
-              type="text"
+              rows={3}
               defaultValue={initial?.signes_distinctifs ?? ""}
               className={champ}
             />
