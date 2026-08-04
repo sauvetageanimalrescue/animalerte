@@ -109,14 +109,15 @@ export function FormulaireAnnonce({
     const W = bmp.width;
     const H = bmp.height;
     const minDim = Math.min(W, H);
-    const teteMax = Math.max((cadre.largeur / 100) * W, (cadre.hauteur / 100) * H);
+    const maxDim = Math.max(W, H);
+    // Image déjà (quasi) carrée : rien à reformater.
+    if (maxDim / minDim < 1.05) return null;
     const cx = ((cadre.x + cadre.largeur / 2) / 100) * W;
     const cy = ((cadre.y + cadre.hauteur / 2) / 100) * H;
-    // Carré : un peu plus grand que la tête (contexte), borné pour éviter un
-    // zoom extrême sur une tête minuscule.
-    let cote = Math.round(borne(teteMax * 1.8, minDim * 0.3, minDim));
-    // Si le carré couvre déjà presque toute l'image, le recadrage n'apporte rien.
-    if (cote >= minDim * 0.95) return null;
+    // AUCUN zoom : on prend le plus grand carré possible (côté = petite
+    // dimension de la photo) et on le centre sur le visage. On ne fait que
+    // recadrer le FORMAT pour que le visage ne soit pas coupé — jamais grossir.
+    const cote = minDim;
     const sx = borne(Math.round(cx - cote / 2), 0, W - cote);
     const sy = borne(Math.round(cy - cote / 2), 0, H - cote);
     const sortie = Math.min(1100, cote); // jamais > résolution native
