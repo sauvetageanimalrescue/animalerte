@@ -1019,7 +1019,10 @@
     "ctaTitre": "Ready to start?",
     "ctaTexte": "The first step is your profile.",
     "ctaProfil": "Create my profile",
-    "ctaForfaits": "See the plans"
+    "ctaForfaits": "See the plans",
+    "baremeTitre": "The full scoring guide",
+    "baremeTexte": "Curious how flAIr scores a match, exactly? Download our one-page guide: automatic exclusions, points per criterion, distance scale and probability levels.",
+    "baremeCta": "Download the guide (PDF)"
   },
   "pagePrioritaire": {
     "surtitre": "More visibility, faster",

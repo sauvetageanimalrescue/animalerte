@@ -1019,7 +1019,10 @@
     "ctaTitre": "Prêt à commencer ?",
     "ctaTexte": "La première étape, c'est votre profil.",
     "ctaProfil": "Créer mon profil",
-    "ctaForfaits": "Voir les forfaits"
+    "ctaForfaits": "Voir les forfaits",
+    "baremeTitre": "Le barème en détail",
+    "baremeTexte": "Curieux de savoir exactement comment flAIr évalue une correspondance ? Téléchargez notre guide d’une page : éliminations d’office, points par critère, échelle de distance et niveaux de probabilité.",
+    "baremeCta": "Télécharger le guide (PDF)"
   },
   "pagePrioritaire": {
     "surtitre": "Plus de visibilité, plus vite",
