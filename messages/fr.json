@@ -542,11 +542,11 @@
       },
       {
         "titre": "6. Forfaits et paiements",
-        "texte": "Le signalement d'un animal trouvé est toujours gratuit. Pour un animal perdu, des forfaits payants (paiement unique par annonce, sans abonnement) débloquent des fonctions de diffusion additionnelles. Les paiements sont traités de façon sécurisée par notre fournisseur de paiement; animALERTE ne conserve jamais vos données de carte. Tous les paiements sont définitifs : aucun remboursement n'est possible, y compris lorsqu'une annonce n'a pas permis de retrouver l'animal."
+        "texte": "Le signalement d'un animal trouvé est toujours gratuit. Pour un animal perdu, des forfaits payants (paiement unique par annonce, sans abonnement) débloquent des fonctions de diffusion additionnelles. Les paiements sont traités de façon sécurisée par notre fournisseur de paiement; animALERTE ne conserve jamais vos données de carte. Tous les paiements sont définitifs : aucun remboursement n'est possible, y compris lorsqu'une annonce n'a pas permis de retrouver l'animal. Tant que votre annonce est active, vous pouvez à tout moment passer d'un forfait gratuit à un forfait payant en réglant le plein prix de ce forfait. La mise à niveau d'un forfait payant vers un forfait supérieur (paiement de la différence uniquement) n'est toutefois possible que dans les vingt-quatre (24) heures suivant le paiement du forfait en cours; passé ce délai, le forfait payant devient définitif. Aucune baisse de forfait ni aucun remboursement n'est possible."
       },
       {
         "titre": "7. Affichage prioritaire (7 jours)",
-        "texte": "Les forfaits Régionale et Provinciale accordent un affichage prioritaire : votre annonce apparaît en tête des listes et dans le carrousel des alertes prioritaires de la page d'accueil pendant sept (7) jours suivant le paiement. Passé ce délai, votre annonce demeure active et consultable jusqu'à un an, mais n'est plus mise en avant de façon prioritaire."
+        "texte": "Les forfaits Régionale et Provinciale accordent un affichage prioritaire : votre annonce apparaît en tête des listes et dans le carrousel des alertes prioritaires de la page d'accueil pendant sept (7) jours suivant le paiement. Passé ce délai, votre annonce demeure active et consultable jusqu'à un an, mais n'est plus mise en avant de façon prioritaire. Une mise à niveau vers un forfait supérieur, effectuée dans le délai permis, redémarre cette période de sept (7) jours à compter du moment de la mise à niveau."
       },
       {
         "titre": "8. Alertes et publicité",
