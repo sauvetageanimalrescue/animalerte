@@ -26,9 +26,28 @@ export type AttributsFlair = {
   note: string;
 };
 
+// Rectangle du visage/tête de l'animal, en pourcentages de l'image (0 à 100).
+// Sert au recadrage automatique. null si flAIr ne localise pas la tête.
+export type CadreFlair = {
+  x: number;
+  y: number;
+  largeur: number;
+  hauteur: number;
+};
+
 export type ResultatFlair =
-  | { ok: true; attributs: AttributsFlair }
+  | { ok: true; attributs: AttributsFlair; cadre: CadreFlair | null }
   | { ok: false; erreur: "cle_absente" | "connexion" | "limite" | "analyse" };
+
+type BrutFlair = AttributsFlair & {
+  cadre?: {
+    present: boolean;
+    x: number;
+    y: number;
+    largeur: number;
+    hauteur: number;
+  };
+};
 
 // Vocabulaire autorisé : tous les codes de race (chat + chien), dédupliqués.
 const RACE_CODES = Array.from(
@@ -48,6 +67,18 @@ const SCHEMA = {
     couleur_yeux: { type: "string", enum: [...YEUX, ""] },
     signes_distinctifs: { type: "string" },
     note: { type: "string" },
+    cadre: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        present: { type: "boolean" },
+        x: { type: "integer" },
+        y: { type: "integer" },
+        largeur: { type: "integer" },
+        hauteur: { type: "integer" },
+      },
+      required: ["present", "x", "y", "largeur", "hauteur"],
+    },
   },
   required: [
     "espece",
@@ -56,6 +87,7 @@ const SCHEMA = {
     "couleur_yeux",
     "signes_distinctifs",
     "note",
+    "cadre",
   ],
 } as const;
 
@@ -67,7 +99,8 @@ Règles :
 - "couleur" : la couleur ou le motif dominant du pelage sur le visage et le corps visible.
 - "couleur_yeux" : seulement si les yeux sont bien visibles, sinon "".
 - "signes_distinctifs" : une courte phrase en français décrivant les marques distinctives visibles (tache, collier de couleur, oreille pliée, etc.), ou "" s'il n'y en a pas de notable.
-- "note" : une seule phrase en français résumant ce que tu as reconnu.`;
+- "note" : une seule phrase en français résumant ce que tu as reconnu.
+- "cadre" : le rectangle qui entoure la TÊTE et le visage de l'animal, exprimé en pourcentages de l'image — x = distance du bord gauche, y = distance du bord haut, largeur et hauteur du rectangle, chacun entre 0 et 100. Encadre bien la tête au complet (oreilles comprises). Mets "present" à true seulement si tu localises clairement la tête sur la photo ; sinon "present" à false et des zéros.`;
 
 export async function analyserPhotoFlair(
   base64: string,
@@ -130,11 +163,20 @@ export async function analyserPhotoFlair(
     if (!bloc || bloc.type !== "text") {
       return { ok: false, erreur: "analyse" };
     }
-    const brut = JSON.parse(bloc.text) as AttributsFlair;
+    const brut = JSON.parse(bloc.text) as BrutFlair;
 
     // Filet de sécurité : la race doit appartenir à l'espèce reconnue.
     const racesValides = racesPour(brut.espece).map((r) => r.code);
     const race = racesValides.includes(brut.race) ? brut.race : "";
+
+    // Cadre du visage : uniquement si localisé et de taille plausible. Le
+    // recadrage lui-même (avec ses garde-fous anti-agrandissement) se fait
+    // côté client, qui connaît la résolution réelle de la photo.
+    const c = brut.cadre;
+    const cadre =
+      c && c.present && c.largeur > 3 && c.hauteur > 3
+        ? { x: c.x, y: c.y, largeur: c.largeur, hauteur: c.hauteur }
+        : null;
 
     return {
       ok: true,
@@ -146,6 +188,7 @@ export async function analyserPhotoFlair(
         signes_distinctifs: brut.signes_distinctifs ?? "",
         note: brut.note ?? "",
       },
+      cadre,
     };
   } catch {
     return { ok: false, erreur: "analyse" };

@@ -86,6 +86,77 @@ export function FormulaireAnnonce({
     "idle" | "loading" | "done" | "error" | "cle" | "connexion" | "limite"
   >("idle");
   const [flairNote, setFlairNote] = useState("");
+  // Recadrage sur le visage proposé par flAIr (aperçu + fichier recadré).
+  const [recadrage, setRecadrage] = useState<{
+    apercu: string;
+    fichier: File;
+    original: File;
+    originalApercu: string;
+  } | null>(null);
+  const [recadrageApplique, setRecadrageApplique] = useState(false);
+
+  const borne = (v: number, min: number, max: number) =>
+    Math.max(min, Math.min(max, v));
+
+  // Recadre la photo ORIGINALE en un carré centré sur le visage. Garde-fous :
+  // zoom modéré, JAMAIS d'agrandissement au-delà de la résolution native (pas
+  // de pixelisation), et on ne propose rien si le visage remplit déjà l'image.
+  async function recadrerVisage(
+    file: File,
+    cadre: { x: number; y: number; largeur: number; hauteur: number },
+  ): Promise<{ apercu: string; fichier: File } | null> {
+    const bmp = await createImageBitmap(file);
+    const W = bmp.width;
+    const H = bmp.height;
+    const minDim = Math.min(W, H);
+    const teteMax = Math.max((cadre.largeur / 100) * W, (cadre.hauteur / 100) * H);
+    const cx = ((cadre.x + cadre.largeur / 2) / 100) * W;
+    const cy = ((cadre.y + cadre.hauteur / 2) / 100) * H;
+    // Carré : un peu plus grand que la tête (contexte), borné pour éviter un
+    // zoom extrême sur une tête minuscule.
+    let cote = Math.round(borne(teteMax * 1.8, minDim * 0.3, minDim));
+    // Si le carré couvre déjà presque toute l'image, le recadrage n'apporte rien.
+    if (cote >= minDim * 0.95) return null;
+    const sx = borne(Math.round(cx - cote / 2), 0, W - cote);
+    const sy = borne(Math.round(cy - cote / 2), 0, H - cote);
+    const sortie = Math.min(1100, cote); // jamais > résolution native
+    const canvas = document.createElement("canvas");
+    canvas.width = sortie;
+    canvas.height = sortie;
+    canvas
+      .getContext("2d")!
+      .drawImage(bmp, sx, sy, cote, cote, 0, 0, sortie, sortie);
+    const apercu = canvas.toDataURL("image/jpeg", 0.9);
+    const blob: Blob | null = await new Promise((r) =>
+      canvas.toBlob(r, "image/jpeg", 0.9),
+    );
+    if (!blob) return null;
+    const fichier = new File([blob], "photo-recadree.jpg", {
+      type: "image/jpeg",
+    });
+    return { apercu, fichier };
+  }
+
+  // Remplace le fichier de l'input <file> par le fichier fourni (via
+  // DataTransfer), pour que la version choisie parte avec le formulaire.
+  function definirPhoto(fichier: File) {
+    if (!photoRef.current) return;
+    const dt = new DataTransfer();
+    dt.items.add(fichier);
+    photoRef.current.files = dt.files;
+  }
+
+  function appliquerRecadrage() {
+    if (!recadrage) return;
+    definirPhoto(recadrage.fichier);
+    setRecadrageApplique(true);
+  }
+
+  function annulerRecadrage() {
+    if (!recadrage) return;
+    definirPhoto(recadrage.original);
+    setRecadrageApplique(false);
+  }
 
   // Réduit l'image à ~768 px et renvoie sa version base64 (JPEG). Assez pour la
   // reconnaissance, bien plus léger et rapide à analyser que l'originale.
@@ -135,6 +206,20 @@ export function FormulaireAnnonce({
         signesRef.current.value = a.signes_distinctifs;
       setFlairNote(a.note);
       setFlairEtat("done");
+
+      // Proposition de recadrage sur le visage (si flAIr a localisé la tête).
+      setRecadrage(null);
+      setRecadrageApplique(false);
+      if (res.cadre) {
+        const rec = await recadrerVisage(file, res.cadre);
+        if (rec) {
+          setRecadrage({
+            ...rec,
+            original: file,
+            originalApercu: URL.createObjectURL(file),
+          });
+        }
+      }
     } catch {
       setFlairEtat("error");
     }
@@ -182,6 +267,8 @@ export function FormulaireAnnonce({
                 setAPhoto(!!e.target.files?.length);
                 setFlairEtat("idle");
                 setFlairNote("");
+                setRecadrage(null);
+                setRecadrageApplique(false);
               }}
               className="text-sm text-muted file:mr-3 file:rounded-full file:border-0 file:bg-brand-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-dark"
             />
@@ -218,6 +305,63 @@ export function FormulaireAnnonce({
             </p>
             <p className="mt-1 text-[11px] text-muted">{t("flairInclus")}</p>
           </div>
+
+          {/* Recadrage sur le visage proposé par flAIr */}
+          {recadrage && (
+            <div className="mt-3 rounded-xl border border-border bg-surface p-3">
+              <p className="text-sm font-semibold text-brand-dark">
+                {t("recadrageTitre")}
+              </p>
+              <div className="mt-2 flex items-end gap-3">
+                <figure className="text-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={recadrage.originalApercu}
+                    alt=""
+                    className="h-24 w-24 rounded-lg border border-border object-cover"
+                  />
+                  <figcaption className="mt-1 text-[11px] text-muted">
+                    {t("recadrageOriginal")}
+                  </figcaption>
+                </figure>
+                <figure className="text-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={recadrage.apercu}
+                    alt=""
+                    className={`h-24 w-24 rounded-lg border-2 object-cover ${
+                      recadrageApplique ? "border-brand" : "border-border"
+                    }`}
+                  />
+                  <figcaption className="mt-1 text-[11px] text-muted">
+                    {t("recadrageRecadre")}
+                  </figcaption>
+                </figure>
+              </div>
+              {recadrageApplique ? (
+                <div className="mt-2 flex items-center gap-3">
+                  <span className="text-xs font-medium text-brand">
+                    {t("recadrageApplique")}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={annulerRecadrage}
+                    className="text-xs font-medium text-muted underline hover:text-foreground"
+                  >
+                    {t("recadrageAnnuler")}
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={appliquerRecadrage}
+                  className="mt-2 rounded-full bg-brand px-4 py-1.5 text-xs font-semibold text-white transition hover:bg-brand-dark"
+                >
+                  {t("recadrageUtiliser")}
+                </button>
+              )}
+            </div>
+          )}
         </fieldset>
 
         {/* Animal */}

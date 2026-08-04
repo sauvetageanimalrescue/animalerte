@@ -264,7 +264,13 @@
     "flairIntro": "flAIr peut lire la photo et pré-remplir l'espèce, la race et les couleurs. Vous pourrez tout corriger.",
     "flairConnexion": "Connectez-vous pour utiliser flAIr.",
     "flairLimite": "Limite d'analyses atteinte pour aujourd'hui. Réessayez demain.",
-    "flairInclus": "Fonction flAIr, incluse dès l'Alerte régionale."
+    "flairInclus": "Fonction flAIr, incluse dès l'Alerte régionale.",
+    "recadrageTitre": "flAIr propose de centrer le visage",
+    "recadrageOriginal": "Original",
+    "recadrageRecadre": "Recadré",
+    "recadrageUtiliser": "Utiliser ce recadrage",
+    "recadrageApplique": "Recadrage appliqué",
+    "recadrageAnnuler": "Revenir à l'original"
   },
   "auth": {
     "connexionTitre": "Connexion",

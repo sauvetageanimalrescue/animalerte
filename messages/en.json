@@ -264,7 +264,13 @@
     "flairIntro": "flAIr can read the photo and pre-fill the species, breed and colours. You can correct everything.",
     "flairConnexion": "Sign in to use flAIr.",
     "flairLimite": "Daily analysis limit reached. Try again tomorrow.",
-    "flairInclus": "flAIr feature, included from the Regional alert."
+    "flairInclus": "flAIr feature, included from the Regional alert.",
+    "recadrageTitre": "flAIr suggests centering the face",
+    "recadrageOriginal": "Original",
+    "recadrageRecadre": "Cropped",
+    "recadrageUtiliser": "Use this crop",
+    "recadrageApplique": "Crop applied",
+    "recadrageAnnuler": "Back to original"
   },
   "auth": {
     "connexionTitre": "Sign in",
