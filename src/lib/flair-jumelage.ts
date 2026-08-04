@@ -142,18 +142,21 @@ export function scoreCorrespondance(
     score += 4;
   }
 
-  // Ressemblance visuelle (empreintes) : rattrape les correspondances que les
-  // mots-clés ratent (et l'inverse). Seuils à ajuster avec des données réelles.
+  // Ressemblance visuelle (empreintes). Seuils calibrés sur la distribution
+  // réelle de voyage-multimodal-3 : deux animaux différents de même espèce se
+  // situent autour de 0,34, et deux espèces différentes autour de 0,20. On ne
+  // récompense donc que nettement au-dessus de ce plancher. À affiner encore
+  // avec de vraies paires « même animal, deux photos ».
   if (perdu.photo_embedding?.length && trouve.photo_embedding?.length) {
     const sim = cosinus(perdu.photo_embedding, trouve.photo_embedding);
-    if (sim >= 0.85) {
-      score += 30;
+    if (sim >= 0.58) {
+      score += 28;
       raisons.push("ressemblance");
-    } else if (sim >= 0.78) {
-      score += 18;
+    } else if (sim >= 0.48) {
+      score += 16;
       raisons.push("ressemblance");
-    } else if (sim >= 0.7) {
-      score += 8;
+    } else if (sim >= 0.4) {
+      score += 6;
     }
   }
 
