@@ -513,7 +513,12 @@
         "Annonce prioritaire",
         "Diffusion sur la page Facebook de Sauvetage Animal Rescue"
       ]
-    }
+    },
+    "forfaitActuel": "Votre forfait actuel : {nom}.",
+    "majSousTitre": "Vous pouvez monter d'un palier en payant la différence, dans les 24 h suivant votre paiement.",
+    "majExpiree": "La période de mise à niveau de 24 heures est écoulée. Votre forfait est définitif.",
+    "erreurMaj": "Cette mise à niveau n'est plus disponible.",
+    "parMaj": "mise à niveau"
   },
   "conditions": {
     "titre": "Conditions d'utilisation",

@@ -513,7 +513,12 @@
         "Priority listing",
         "Shared on the Sauvetage Animal Rescue Facebook page"
       ]
-    }
+    },
+    "forfaitActuel": "Your current plan: {nom}.",
+    "majSousTitre": "You can move up a tier by paying the difference, within 24 h of your payment.",
+    "majExpiree": "The 24-hour upgrade window has passed. Your plan is final.",
+    "erreurMaj": "This upgrade is no longer available.",
+    "parMaj": "upgrade"
   },
   "conditions": {
     "titre": "Terms of use",

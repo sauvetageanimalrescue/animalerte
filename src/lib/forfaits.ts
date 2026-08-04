@@ -73,3 +73,57 @@ export function peut(
 ): boolean {
   return forfaitAuMoins(forfait, REQUIS[fonction]);
 }
+
+// ── Mise à niveau de forfait ────────────────────────────────────────────────
+// Règle : le premier passage Gratuit → payant est possible à tout moment (plein
+// prix). La montée d'un forfait payant vers un supérieur (paiement de la
+// différence) n'est possible que dans les 24 h suivant le paiement du forfait
+// en cours ; elle redémarre les 7 jours de priorité.
+export const FENETRE_MAJ_MS = 24 * 60 * 60 * 1000;
+
+export type OptionForfait = {
+  forfait: Forfait;
+  prixCents: number; // plein prix (1er paiement) OU différence (mise à niveau)
+  estMaj: boolean;
+};
+
+export function optionsPaiement(a: {
+  forfait: string | null | undefined;
+  paye: boolean | null | undefined;
+  paye_at: string | null | undefined;
+}): { fenetreMajExpiree: boolean; options: OptionForfait[] } {
+  const actuel: Forfait = estForfait(a.forfait) ? a.forfait : "gratuit";
+  const aPayant = a.paye === true && actuel !== "gratuit";
+
+  // Pas encore payé : tous les paliers payants, plein prix, sans limite de temps.
+  if (!aPayant) {
+    const options = FORFAITS.filter((f) => f !== "gratuit").map((f) => ({
+      forfait: f,
+      prixCents: PRIX_CENTS[f],
+      estMaj: false,
+    }));
+    return { fenetreMajExpiree: false, options };
+  }
+
+  // Déjà payant : mise à niveau vers un palier supérieur, dans les 24 h.
+  const superieurs = FORFAITS.filter((f) => RANG[f] > RANG[actuel]);
+  const t = a.paye_at ? Date.parse(a.paye_at) : NaN;
+  const ouverte = Number.isFinite(t) && Date.now() - t < FENETRE_MAJ_MS;
+  if (!ouverte || superieurs.length === 0) {
+    return { fenetreMajExpiree: superieurs.length > 0, options: [] };
+  }
+  const options = superieurs.map((f) => ({
+    forfait: f,
+    prixCents: PRIX_CENTS[f] - PRIX_CENTS[actuel],
+    estMaj: true,
+  }));
+  return { fenetreMajExpiree: false, options };
+}
+
+// Formate un montant en cents CAD selon la locale (« 100,00 $ » / « $100.00 »).
+export function formatPrixCents(cents: number, locale: string): string {
+  return new Intl.NumberFormat(locale === "en" ? "en-CA" : "fr-CA", {
+    style: "currency",
+    currency: "CAD",
+  }).format(cents / 100);
+}

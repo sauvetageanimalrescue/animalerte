@@ -5,7 +5,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { stripe } from "@/lib/stripe";
-import { estForfait, NOMS, PRIX_CENTS } from "@/lib/forfaits";
+import { estForfait, NOMS, optionsPaiement } from "@/lib/forfaits";
 
 // Choix d'un forfait pour une annonce « perdu ».
 // Gratuit → on va directement à la fiche.
@@ -32,12 +32,22 @@ export async function payerForfait(formData: FormData): Promise<void> {
   // Vérifie la propriété de l'annonce.
   const { data: annonce } = await supabase
     .from("annonces")
-    .select("id, user_id, nom_animal")
+    .select("id, user_id, nom_animal, forfait, paye, paye_at")
     .eq("id", annonceId)
     .single();
   if (!annonce || annonce.user_id !== user.id) {
     redirect(`/${locale}/annonces/${annonceId}`);
   }
+
+  // Le montant fait autorité côté serveur : plein prix (1er paiement) ou
+  // différence (mise à niveau, seulement si la fenêtre de 24 h est ouverte et
+  // le palier supérieur). On ne fait jamais confiance à un prix venu du client.
+  const { options } = optionsPaiement(annonce);
+  const option = options.find((o) => o.forfait === forfait);
+  if (!option) {
+    redirect(`/${locale}/annonces/${annonceId}/forfait?erreur=maj`);
+  }
+  const montant = option.prixCents;
 
   const h = await headers();
   const host = h.get("x-forwarded-host") ?? h.get("host");
@@ -55,7 +65,7 @@ export async function payerForfait(formData: FormData): Promise<void> {
         quantity: 1,
         price_data: {
           currency: "cad",
-          unit_amount: PRIX_CENTS[forfait],
+          unit_amount: montant,
           product_data: { name: `animALERTE${animal}`, description: nom },
         },
       },
