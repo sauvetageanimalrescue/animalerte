@@ -261,7 +261,10 @@
     "flairFait": "flAIr pre-filled the fields. Review and correct as needed:",
     "flairErreur": "flAIr could not analyze this photo. You can fill the fields manually.",
     "flairCle": "flAIr is not configured on the server yet.",
-    "flairIntro": "flAIr can read the photo and pre-fill the species, breed and colours. You can correct everything."
+    "flairIntro": "flAIr can read the photo and pre-fill the species, breed and colours. You can correct everything.",
+    "flairConnexion": "Sign in to use flAIr.",
+    "flairLimite": "Daily analysis limit reached. Try again tomorrow.",
+    "flairInclus": "flAIr feature, included from the Regional alert."
   },
   "auth": {
     "connexionTitre": "Sign in",

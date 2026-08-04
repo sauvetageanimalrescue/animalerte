@@ -261,7 +261,10 @@
     "flairFait": "flAIr a pré-rempli les champs. Vérifiez et corrigez au besoin :",
     "flairErreur": "flAIr n'a pas pu analyser cette photo. Vous pouvez remplir les champs à la main.",
     "flairCle": "flAIr n'est pas encore configuré sur le serveur.",
-    "flairIntro": "flAIr peut lire la photo et pré-remplir l'espèce, la race et les couleurs. Vous pourrez tout corriger."
+    "flairIntro": "flAIr peut lire la photo et pré-remplir l'espèce, la race et les couleurs. Vous pourrez tout corriger.",
+    "flairConnexion": "Connectez-vous pour utiliser flAIr.",
+    "flairLimite": "Limite d'analyses atteinte pour aujourd'hui. Réessayez demain.",
+    "flairInclus": "Fonction flAIr, incluse dès l'Alerte régionale."
   },
   "auth": {
     "connexionTitre": "Connexion",

@@ -9,6 +9,13 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { COULEURS, YEUX } from "@/lib/champs";
 import { RACES_CHAT, RACES_CHIEN, racesPour } from "@/lib/races";
+import { getCurrentUser } from "@/lib/authz";
+import { createAdminClient } from "@/lib/supabase/admin";
+
+// Nombre maximal d'analyses flAIr par compte et par jour. Plafonne le coût API
+// et bloque l'abus automatisé, sans gêner un usage normal (une famille publie
+// rarement plus de quelques animaux).
+const LIMITE_JOUR = 10;
 
 export type AttributsFlair = {
   espece: string;
@@ -21,7 +28,7 @@ export type AttributsFlair = {
 
 export type ResultatFlair =
   | { ok: true; attributs: AttributsFlair }
-  | { ok: false; erreur: "cle_absente" | "analyse" };
+  | { ok: false; erreur: "cle_absente" | "connexion" | "limite" | "analyse" };
 
 // Vocabulaire autorisé : tous les codes de race (chat + chien), dédupliqués.
 const RACE_CODES = Array.from(
@@ -69,6 +76,28 @@ export async function analyserPhotoFlair(
   if (!process.env.ANTHROPIC_API_KEY) {
     return { ok: false, erreur: "cle_absente" };
   }
+
+  // Connexion obligatoire : flAIr n'est pas ouvert au public anonyme.
+  const user = await getCurrentUser();
+  if (!user) {
+    return { ok: false, erreur: "connexion" };
+  }
+
+  // Limite par compte et par jour (anti-abus + protection du coût). On vérifie
+  // AVANT l'appel API, et on journalise la tentative pour qu'un retry en boucle
+  // compte lui aussi dans le quota.
+  const admin = createAdminClient();
+  const debutJour = new Date();
+  debutJour.setHours(0, 0, 0, 0);
+  const { count } = await admin
+    .from("flair_analyses")
+    .select("id", { count: "exact", head: true })
+    .eq("user_id", user.id)
+    .gte("created_at", debutJour.toISOString());
+  if ((count ?? 0) >= LIMITE_JOUR) {
+    return { ok: false, erreur: "limite" };
+  }
+  await admin.from("flair_analyses").insert({ user_id: user.id });
 
   try {
     const client = new Anthropic();

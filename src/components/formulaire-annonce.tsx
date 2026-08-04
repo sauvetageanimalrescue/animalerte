@@ -83,7 +83,7 @@ export function FormulaireAnnonce({
   const signesRef = useRef<HTMLInputElement>(null);
   const [aPhoto, setAPhoto] = useState(false);
   const [flairEtat, setFlairEtat] = useState<
-    "idle" | "loading" | "done" | "error" | "cle"
+    "idle" | "loading" | "done" | "error" | "cle" | "connexion" | "limite"
   >("idle");
   const [flairNote, setFlairNote] = useState("");
 
@@ -114,7 +114,15 @@ export function FormulaireAnnonce({
       const { base64, mediaType } = await reduireImage(file);
       const res = await analyserPhotoFlair(base64, mediaType);
       if (!res.ok) {
-        setFlairEtat(res.erreur === "cle_absente" ? "cle" : "error");
+        setFlairEtat(
+          res.erreur === "cle_absente"
+            ? "cle"
+            : res.erreur === "connexion"
+              ? "connexion"
+              : res.erreur === "limite"
+                ? "limite"
+                : "error",
+        );
         return;
       }
       const a = res.attributs;
@@ -614,10 +622,15 @@ export function FormulaireAnnonce({
                 ? `${t("flairFait")} « ${flairNote} »`
                 : flairEtat === "cle"
                   ? t("flairCle")
-                  : flairEtat === "error"
-                    ? t("flairErreur")
-                    : t("flairIntro")}
+                  : flairEtat === "connexion"
+                    ? t("flairConnexion")
+                    : flairEtat === "limite"
+                      ? t("flairLimite")
+                      : flairEtat === "error"
+                        ? t("flairErreur")
+                        : t("flairIntro")}
             </p>
+            <p className="mt-1 text-[11px] text-muted">{t("flairInclus")}</p>
           </div>
         </fieldset>
 
