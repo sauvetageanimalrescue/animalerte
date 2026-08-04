@@ -1074,5 +1074,24 @@
     "ctaTexte": "La première étape, c'est votre profil.",
     "ctaProfil": "Créer mon profil",
     "ctaForfaits": "Voir les forfaits"
+  },
+  "pistesFlair": {
+    "titre": "Correspondances trouvées par flAIr",
+    "sousTitre": "flAIr compare cet animal aux signalements de l'autre côté (perdus et trouvés) et fait remonter les pistes les plus plausibles. À vous de vérifier.",
+    "aucune": "Aucune piste plausible pour l'instant. flAIr continue de surveiller les nouveaux signalements de votre secteur.",
+    "verrou": "flAIr peut chercher automatiquement des correspondances parmi les animaux trouvés et vous prévenir. Fonction incluse dès l'Alerte régionale.",
+    "debloquer": "Débloquer flAIr",
+    "aKm": "à {km} km",
+    "niveau": {
+      "forte": "Piste forte",
+      "moyenne": "Piste possible"
+    },
+    "raisons": {
+      "meme_couleur": "Même couleur",
+      "couleur_proche": "Couleur proche",
+      "meme_race": "Même race",
+      "meme_yeux": "Mêmes yeux",
+      "peu_apres": "Trouvé peu après"
+    }
   }
 }

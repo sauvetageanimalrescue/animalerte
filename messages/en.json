@@ -1074,5 +1074,24 @@
     "ctaTexte": "The first step is your profile.",
     "ctaProfil": "Create my profile",
     "ctaForfaits": "See the plans"
+  },
+  "pistesFlair": {
+    "titre": "Matches found by flAIr",
+    "sousTitre": "flAIr compares this pet with reports from the other side (lost and found) and surfaces the most plausible leads. It is up to you to verify.",
+    "aucune": "No plausible lead yet. flAIr keeps watching new reports in your area.",
+    "verrou": "flAIr can automatically look for matches among found pets and alert you. Included from the Regional alert.",
+    "debloquer": "Unlock flAIr",
+    "aKm": "{km} km away",
+    "niveau": {
+      "forte": "Strong match",
+      "moyenne": "Possible match"
+    },
+    "raisons": {
+      "meme_couleur": "Same colour",
+      "couleur_proche": "Similar colour",
+      "meme_race": "Same breed",
+      "meme_yeux": "Same eyes",
+      "peu_apres": "Found shortly after"
+    }
   }
 }

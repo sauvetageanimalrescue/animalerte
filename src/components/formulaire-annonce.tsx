@@ -166,6 +166,60 @@ export function FormulaireAnnonce({
         <input type="hidden" name="type" value={type} />
         {enEdition && <input type="hidden" name="id" value={initial.id} />}
 
+        {/* Photo — en premier : flAIr lit la photo et pré-remplit la suite */}
+        <fieldset className="rounded-2xl border border-border bg-surface p-4">
+          <legend className="px-1 text-sm font-semibold text-brand-dark">
+            {tSection("photo")}
+          </legend>
+          <label className={`${label} mt-2`}>
+            {tChamp("photo")}
+            <input
+              ref={photoRef}
+              name="photo"
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                setAPhoto(!!e.target.files?.length);
+                setFlairEtat("idle");
+                setFlairNote("");
+              }}
+              className="text-sm text-muted file:mr-3 file:rounded-full file:border-0 file:bg-brand-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-dark"
+            />
+          </label>
+          {enEdition && (
+            <p className="mt-2 text-xs text-muted">{t("photoConserver")}</p>
+          )}
+
+          {/* flAIr : lecture de la photo pour pré-remplir les attributs */}
+          <div className="mt-3 rounded-xl border border-brand/30 bg-brand-soft p-3">
+            <button
+              type="button"
+              onClick={analyserFlair}
+              disabled={!aPhoto || flairEtat === "loading"}
+              className="inline-flex items-center gap-1.5 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-dark disabled:opacity-50"
+            >
+              <IconSparkles size={16} />
+              {flairEtat === "loading"
+                ? t("flairEncours")
+                : t("flairAnalyser")}
+            </button>
+            <p className="mt-2 text-xs leading-relaxed text-foreground/70">
+              {flairEtat === "done" && flairNote
+                ? `${t("flairFait")} « ${flairNote} »`
+                : flairEtat === "cle"
+                  ? t("flairCle")
+                  : flairEtat === "connexion"
+                    ? t("flairConnexion")
+                    : flairEtat === "limite"
+                      ? t("flairLimite")
+                      : flairEtat === "error"
+                        ? t("flairErreur")
+                        : t("flairIntro")}
+            </p>
+            <p className="mt-1 text-[11px] text-muted">{t("flairInclus")}</p>
+          </div>
+        </fieldset>
+
         {/* Animal */}
         <fieldset className="grid gap-4 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-2">
           <legend className="px-1 text-sm font-semibold text-brand-dark">
@@ -578,60 +632,6 @@ export function FormulaireAnnonce({
               className={champ}
             />
           </label>
-        </fieldset>
-
-        {/* Photo */}
-        <fieldset className="rounded-2xl border border-border bg-surface p-4">
-          <legend className="px-1 text-sm font-semibold text-brand-dark">
-            {tSection("photo")}
-          </legend>
-          <label className={`${label} mt-2`}>
-            {tChamp("photo")}
-            <input
-              ref={photoRef}
-              name="photo"
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                setAPhoto(!!e.target.files?.length);
-                setFlairEtat("idle");
-                setFlairNote("");
-              }}
-              className="text-sm text-muted file:mr-3 file:rounded-full file:border-0 file:bg-brand-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-dark"
-            />
-          </label>
-          {enEdition && (
-            <p className="mt-2 text-xs text-muted">{t("photoConserver")}</p>
-          )}
-
-          {/* flAIr : lecture de la photo pour pré-remplir les attributs */}
-          <div className="mt-3 rounded-xl border border-brand/30 bg-brand-soft p-3">
-            <button
-              type="button"
-              onClick={analyserFlair}
-              disabled={!aPhoto || flairEtat === "loading"}
-              className="inline-flex items-center gap-1.5 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-dark disabled:opacity-50"
-            >
-              <IconSparkles size={16} />
-              {flairEtat === "loading"
-                ? t("flairEncours")
-                : t("flairAnalyser")}
-            </button>
-            <p className="mt-2 text-xs leading-relaxed text-foreground/70">
-              {flairEtat === "done" && flairNote
-                ? `${t("flairFait")} « ${flairNote} »`
-                : flairEtat === "cle"
-                  ? t("flairCle")
-                  : flairEtat === "connexion"
-                    ? t("flairConnexion")
-                    : flairEtat === "limite"
-                      ? t("flairLimite")
-                      : flairEtat === "error"
-                        ? t("flairErreur")
-                        : t("flairIntro")}
-            </p>
-            <p className="mt-1 text-[11px] text-muted">{t("flairInclus")}</p>
-          </div>
         </fieldset>
 
         <p className="text-xs text-muted">{t("retention")}</p>

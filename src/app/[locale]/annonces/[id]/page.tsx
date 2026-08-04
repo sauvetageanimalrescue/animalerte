@@ -28,6 +28,7 @@ import { nomRace } from "@/lib/races";
 import { peut } from "@/lib/forfaits";
 import { TypeBadge, StatutBadge, ForfaitBadge } from "@/components/badges";
 import { CarteDetail } from "@/components/carte-detail";
+import { PistesFlair } from "@/components/pistes-flair";
 
 export default async function AnnoncePage({
   params,
@@ -304,6 +305,8 @@ export default async function AnnoncePage({
           )}
         </div>
       </div>
+
+      {estProprietaire && <PistesFlair annonce={annonce} />}
 
       {/* Carte */}
       {annonce.latitude != null && annonce.longitude != null && (
