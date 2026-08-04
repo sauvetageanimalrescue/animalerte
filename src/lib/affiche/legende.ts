@@ -4,6 +4,7 @@ import type { Annonce } from "@/lib/types";
 import { formaterDate, nomDeRue } from "@/lib/format";
 import { nomRace } from "@/lib/races";
 import { COULEURS, YEUX, TEMPERAMENTS } from "@/lib/champs";
+import { traduireBilingue } from "@/lib/traduction";
 
 type Lang = "fr" | "en";
 type T = (k: string) => string;
@@ -38,6 +39,17 @@ export async function genererLegende(a: Annonce, origin: string): Promise<string
   const poste = dossier ? dossier.replace(/^\d+-/, "") : "";
   const secteur = [a.ville, nomDeRue(a.adresse)].filter(Boolean).join(", ");
   const url = `${origin}/annonces/${a.id}`;
+
+  // Champs libres (saisis par l'utilisateur) : on les traduit dans les deux
+  // langues pour que le bloc anglais ne contienne pas de texte français. Ordre
+  // conservé : accessoires d'abord, puis signes distinctifs.
+  const libres: string[] = [];
+  if (a.accessoires) libres.push(a.accessoires);
+  if (a.signes_distinctifs) libres.push(a.signes_distinctifs);
+  const trad = (await traduireBilingue(libres)) ?? [];
+  let iTrad = 0;
+  const accBil = a.accessoires ? trad[iTrad++] ?? null : null;
+  const sigBil = a.signes_distinctifs ? trad[iTrad++] ?? null : null;
 
   const bloc = (L: Lang): string => {
     const tE = L === "fr" ? eFr : eEn;
@@ -83,8 +95,14 @@ export async function genererLegende(a: Annonce, origin: string): Promise<string
       const y = tr(YEUX, tY, a.couleur_yeux);
       puces.push(L === "fr" ? `Yeux ${String(y).toLowerCase()}` : `${y} eyes`);
     }
-    if (a.accessoires) puces.push(a.accessoires);
-    if (a.signes_distinctifs) puces.push(a.signes_distinctifs);
+    if (a.accessoires) {
+      puces.push(accBil ? (L === "fr" ? accBil.fr : accBil.en) : a.accessoires);
+    }
+    if (a.signes_distinctifs) {
+      puces.push(
+        sigBil ? (L === "fr" ? sigBil.fr : sigBil.en) : a.signes_distinctifs,
+      );
+    }
     const flags: string[] = [];
     if (a.micropuce === true) flags.push(L === "fr" ? "micropucé" : "microchipped");
     if (a.sterilise === true) flags.push(L === "fr" ? "stérilisé" : "neutered");
