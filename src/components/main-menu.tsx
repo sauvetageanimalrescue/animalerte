@@ -56,6 +56,7 @@ export function MainMenu({
         ...(connecte
           ? [
               { href: "/mes-annonces", label: nav("mesAnnonces") },
+              { href: "/mes-messages", label: nav("mesMessages") },
               { href: "/profil", label: nav("profil") },
             ]
           : []),

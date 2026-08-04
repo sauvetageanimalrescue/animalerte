@@ -35,7 +35,8 @@
     "connexion": "Connexion",
     "inscription": "Inscription",
     "deconnexion": "Déconnexion",
-    "changerLangue": "English"
+    "changerLangue": "English",
+    "mesMessages": "Mes messages"
   },
   "especes": {
     "chien": "Chien",
@@ -1121,5 +1122,31 @@
     "erreurLimite": "Limite de photos atteinte pour ce forfait.",
     "erreurAucune": "Choisissez au moins une photo.",
     "erreurGenerale": "Le téléversement a échoué. Réessayez."
+  },
+  "messages": {
+    "contacterTitre": "Contacter la famille",
+    "contacterIntro": "Vous avez vu cet animal ou vous avez des informations ? Écrivez à la famille. Votre courriel reste confidentiel : il ne lui est jamais montré.",
+    "votreCourriel": "Votre courriel",
+    "votreMessage": "Votre message",
+    "placeholderContact": "Ex. : Je crois avoir vu cet animal près de…",
+    "envoyer": "Envoyer le message",
+    "envoiEnCours": "Envoi…",
+    "erreurChamps": "Veuillez entrer un courriel valide et un message.",
+    "erreurSoi": "Vous ne pouvez pas écrire à votre propre annonce.",
+    "confidentialite": "animALERTE relaie les messages sans jamais partager les courriels entre les deux personnes.",
+    "envoyeTitre": "Message envoyé",
+    "envoyeTexte": "La famille a été avisée. Vous recevrez un courriel avec un lien privé pour suivre la conversation, sans avoir à créer de compte.",
+    "boiteTitre": "Mes messages",
+    "boiteVide": "Vous n'avez aucun message pour l'instant. Quand une personne vous écrira au sujet d'un de vos animaux, la conversation apparaîtra ici.",
+    "nouveau": "Nouveau",
+    "laFamille": "La famille",
+    "leTrouveur": "La personne",
+    "vous": "Vous",
+    "conversationAuSujet": "Conversation au sujet de {nom}",
+    "voirFiche": "Voir la fiche",
+    "retourBoite": "Retour à mes messages",
+    "placeholderReponse": "Écrivez votre réponse…",
+    "envoyerReponse": "Envoyer",
+    "lienPrive": "Ceci est votre lien privé pour cette conversation. Ne le partagez pas."
   }
 }

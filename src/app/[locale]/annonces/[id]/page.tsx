@@ -31,6 +31,7 @@ import { peut, nbPhotosMax } from "@/lib/forfaits";
 import { TypeBadge, StatutBadge, ForfaitBadge } from "@/components/badges";
 import { CarteDetail } from "@/components/carte-detail";
 import { PistesFlair } from "@/components/pistes-flair";
+import { ContacterFamille } from "@/components/contacter-famille";
 
 export default async function AnnoncePage({
   params,
@@ -290,6 +291,8 @@ export default async function AnnoncePage({
               {t("ligneExplication")}
             </p>
           </div>
+
+          {!proprioReel && <ContacterFamille annonceId={annonce.id} />}
 
           {estProprietaire && (
             <div className="mt-4 flex flex-wrap gap-3">

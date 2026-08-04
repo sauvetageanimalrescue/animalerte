@@ -35,7 +35,8 @@
     "connexion": "Sign in",
     "inscription": "Sign up",
     "deconnexion": "Sign out",
-    "changerLangue": "Français"
+    "changerLangue": "Français",
+    "mesMessages": "My messages"
   },
   "especes": {
     "chien": "Dog",
@@ -1121,5 +1122,31 @@
     "erreurLimite": "Photo limit reached for this plan.",
     "erreurAucune": "Choose at least one photo.",
     "erreurGenerale": "Upload failed. Please try again."
+  },
+  "messages": {
+    "contacterTitre": "Contact the family",
+    "contacterIntro": "Did you see this pet or do you have information? Write to the family. Your email stays private and is never shown to them.",
+    "votreCourriel": "Your email",
+    "votreMessage": "Your message",
+    "placeholderContact": "e.g., I think I saw this pet near…",
+    "envoyer": "Send message",
+    "envoiEnCours": "Sending…",
+    "erreurChamps": "Please enter a valid email and a message.",
+    "erreurSoi": "You cannot message your own listing.",
+    "confidentialite": "animALERTE relays messages without ever sharing either person’s email.",
+    "envoyeTitre": "Message sent",
+    "envoyeTexte": "The family has been notified. You will receive an email with a private link to follow the conversation, without creating an account.",
+    "boiteTitre": "My messages",
+    "boiteVide": "You have no messages yet. When someone writes to you about one of your pets, the conversation will appear here.",
+    "nouveau": "New",
+    "laFamille": "The family",
+    "leTrouveur": "The person",
+    "vous": "You",
+    "conversationAuSujet": "Conversation about {nom}",
+    "voirFiche": "View the listing",
+    "retourBoite": "Back to my messages",
+    "placeholderReponse": "Write your reply…",
+    "envoyerReponse": "Send",
+    "lienPrive": "This is your private link for this conversation. Do not share it."
   }
 }
