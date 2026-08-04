@@ -17,7 +17,18 @@ export type Piste = {
 };
 
 // En deçà de ce score, la piste n'est pas assez crédible pour être montrée.
-const SEUIL = 30;
+const SEUIL = 35;
+
+// Races « génériques » (non identifiantes) : la quasi-totalité des chats sont
+// « domestique poil court/long » et la quasi-totalité des chiens sans pedigree
+// sont « croisés ». Un accord sur ces catégories ne prouve à peu près rien ;
+// seules les races PRÉCISES constituent un vrai indice de correspondance.
+const RACES_GENERIQUES = new Set([
+  "domestique_court",
+  "domestique_long",
+  "croise",
+  "autre",
+]);
 
 // Distance à vol d'oiseau entre deux points (km), formule de haversine.
 function distanceKm(
@@ -78,7 +89,19 @@ export function scoreCorrespondance(
   let score = 0;
   const raisons: string[] = [];
 
-  // Couleur / motif du pelage (indice le plus fort).
+  // Empreinte visuelle calculée d'abord : elle sert aussi de garde-fou pour la
+  // couleur (flAIr a pu mal nommer une couleur sur une photo difficile).
+  let sim: number | null = null;
+  if (perdu.photo_embedding?.length && trouve.photo_embedding?.length) {
+    sim = cosinus(perdu.photo_embedding, trouve.photo_embedding);
+  }
+
+  // Couleur / motif du pelage : l'indice d'identité le plus fiable.
+  //  - accord exact : fort bonus ;
+  //  - token commun (« noir_blanc » vs « noir ») : bonus modéré ;
+  //  - désaccord franc (aucun token commun) : très mauvais signe. On ÉLIMINE la
+  //    piste (ex. chat noir vs chat gris), sauf si l'empreinte visuelle est
+  //    nettement ressemblante, auquel cas on garde mais on pénalise.
   if (perdu.couleur && trouve.couleur) {
     if (perdu.couleur === trouve.couleur) {
       score += 35;
@@ -86,13 +109,21 @@ export function scoreCorrespondance(
     } else if (partageToken(perdu.couleur, trouve.couleur)) {
       score += 15;
       raisons.push("couleur_proche");
+    } else {
+      if (sim == null || sim < 0.5) return null;
+      score -= 12;
     }
   }
 
-  // Race identique.
+  // Race : seulement si c'est une race PRÉCISE. Les catégories génériques
+  // (« domestique poil court », « croisé ») sont trop communes pour compter.
   if (perdu.race && trouve.race && perdu.race === trouve.race) {
-    score += 25;
-    raisons.push("meme_race");
+    if (RACES_GENERIQUES.has(perdu.race)) {
+      score += 5;
+    } else {
+      score += 25;
+      raisons.push("meme_race");
+    }
   }
 
   // Couleur des yeux (seulement si connue des deux côtés).
@@ -142,13 +173,12 @@ export function scoreCorrespondance(
     score += 4;
   }
 
-  // Ressemblance visuelle (empreintes). Seuils calibrés sur la distribution
-  // réelle de voyage-multimodal-3 : deux animaux différents de même espèce se
-  // situent autour de 0,34, et deux espèces différentes autour de 0,20. On ne
-  // récompense donc que nettement au-dessus de ce plancher. À affiner encore
-  // avec de vraies paires « même animal, deux photos ».
-  if (perdu.photo_embedding?.length && trouve.photo_embedding?.length) {
-    const sim = cosinus(perdu.photo_embedding, trouve.photo_embedding);
+  // Ressemblance visuelle (empreintes, calculée plus haut). Seuils calibrés sur
+  // la distribution réelle de voyage-multimodal-3 : deux animaux différents de
+  // même espèce se situent autour de 0,34, deux espèces différentes autour de
+  // 0,20. On ne récompense donc que nettement au-dessus de ce plancher. À
+  // affiner encore avec de vraies paires « même animal, deux photos ».
+  if (sim != null) {
     if (sim >= 0.58) {
       score += 28;
       raisons.push("ressemblance");
