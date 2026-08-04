@@ -255,7 +255,13 @@
     "oui": "Oui",
     "non": "Non",
     "inconnu": "Inconnu",
-    "retention": "Une annonce reste sur animALERTE pendant 365 jours tant que l'animal est toujours recherché. Idem pour la diffusion Facebook."
+    "retention": "Une annonce reste sur animALERTE pendant 365 jours tant que l'animal est toujours recherché. Idem pour la diffusion Facebook.",
+    "flairAnalyser": "Analyser la photo avec flAIr",
+    "flairEncours": "flAIr analyse…",
+    "flairFait": "flAIr a pré-rempli les champs. Vérifiez et corrigez au besoin :",
+    "flairErreur": "flAIr n'a pas pu analyser cette photo. Vous pouvez remplir les champs à la main.",
+    "flairCle": "flAIr n'est pas encore configuré sur le serveur.",
+    "flairIntro": "flAIr peut lire la photo et pré-remplir l'espèce, la race et les couleurs. Vous pourrez tout corriger."
   },
   "auth": {
     "connexionTitre": "Connexion",

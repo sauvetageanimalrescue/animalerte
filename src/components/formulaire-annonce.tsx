@@ -1,7 +1,8 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import { IconSparkles } from "@tabler/icons-react";
 import { useTranslations, useLocale } from "next-intl";
 import { ESPECES, PROVINCES, SEXES } from "@/lib/constants";
 import {
@@ -20,6 +21,7 @@ import {
   modifierAnnonce,
   type EtatAnnonce,
 } from "@/lib/actions/annonces";
+import { analyserPhotoFlair } from "@/lib/actions/flair";
 import type { Annonce } from "@/lib/types";
 import { ChampAdresse } from "@/components/champ-adresse";
 import { ChampTelephone } from "@/components/champ-telephone";
@@ -73,6 +75,62 @@ export function FormulaireAnnonce({
   // Espèce contrôlée : la liste des races en dépend.
   const [espece, setEspece] = useState<string>(initial?.espece ?? "chien");
   const [race, setRace] = useState<string>(initial?.race ?? "");
+
+  // flAIr : lecture de la photo pour pré-remplir les attributs (étape 1).
+  const photoRef = useRef<HTMLInputElement>(null);
+  const couleurRef = useRef<HTMLSelectElement>(null);
+  const yeuxRef = useRef<HTMLSelectElement>(null);
+  const signesRef = useRef<HTMLInputElement>(null);
+  const [aPhoto, setAPhoto] = useState(false);
+  const [flairEtat, setFlairEtat] = useState<
+    "idle" | "loading" | "done" | "error" | "cle"
+  >("idle");
+  const [flairNote, setFlairNote] = useState("");
+
+  // Réduit l'image à ~768 px et renvoie sa version base64 (JPEG). Assez pour la
+  // reconnaissance, bien plus léger et rapide à analyser que l'originale.
+  async function reduireImage(
+    file: File,
+  ): Promise<{ base64: string; mediaType: string }> {
+    const bitmap = await createImageBitmap(file);
+    const max = 768;
+    const ratio = Math.min(1, max / Math.max(bitmap.width, bitmap.height));
+    const w = Math.round(bitmap.width * ratio);
+    const h = Math.round(bitmap.height * ratio);
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    canvas.getContext("2d")!.drawImage(bitmap, 0, 0, w, h);
+    const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+    return { base64: dataUrl.split(",")[1], mediaType: "image/jpeg" };
+  }
+
+  async function analyserFlair() {
+    const file = photoRef.current?.files?.[0];
+    if (!file) return;
+    setFlairEtat("loading");
+    setFlairNote("");
+    try {
+      const { base64, mediaType } = await reduireImage(file);
+      const res = await analyserPhotoFlair(base64, mediaType);
+      if (!res.ok) {
+        setFlairEtat(res.erreur === "cle_absente" ? "cle" : "error");
+        return;
+      }
+      const a = res.attributs;
+      if (a.espece) setEspece(a.espece);
+      setRace(a.race); // validé côté serveur pour l'espèce reconnue
+      if (couleurRef.current && a.couleur) couleurRef.current.value = a.couleur;
+      if (yeuxRef.current && a.couleur_yeux)
+        yeuxRef.current.value = a.couleur_yeux;
+      if (signesRef.current && a.signes_distinctifs)
+        signesRef.current.value = a.signes_distinctifs;
+      setFlairNote(a.note);
+      setFlairEtat("done");
+    } catch {
+      setFlairEtat("error");
+    }
+  }
   const [pos, setPos] = useState<{ lat: number | null; lng: number | null }>({
     lat: initial?.latitude ?? null,
     lng: initial?.longitude ?? null,
@@ -201,6 +259,7 @@ export function FormulaireAnnonce({
           <label className={label}>
             {tChamp("couleur")}
             <select
+              ref={couleurRef}
               name="couleur"
               defaultValue={initial?.couleur ?? ""}
               className={champ}
@@ -216,6 +275,7 @@ export function FormulaireAnnonce({
           <label className={label}>
             {tChamp("couleurYeux")}
             <select
+              ref={yeuxRef}
               name="couleur_yeux"
               defaultValue={initial?.couleur_yeux ?? ""}
               className={champ}
@@ -258,6 +318,7 @@ export function FormulaireAnnonce({
           <label className={`${label} sm:col-span-2`}>
             {tChamp("signesDistinctifs")}
             <input
+              ref={signesRef}
               name="signes_distinctifs"
               type="text"
               defaultValue={initial?.signes_distinctifs ?? ""}
@@ -519,15 +580,45 @@ export function FormulaireAnnonce({
           <label className={`${label} mt-2`}>
             {tChamp("photo")}
             <input
+              ref={photoRef}
               name="photo"
               type="file"
               accept="image/*"
+              onChange={(e) => {
+                setAPhoto(!!e.target.files?.length);
+                setFlairEtat("idle");
+                setFlairNote("");
+              }}
               className="text-sm text-muted file:mr-3 file:rounded-full file:border-0 file:bg-brand-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-dark"
             />
           </label>
           {enEdition && (
             <p className="mt-2 text-xs text-muted">{t("photoConserver")}</p>
           )}
+
+          {/* flAIr : lecture de la photo pour pré-remplir les attributs */}
+          <div className="mt-3 rounded-xl border border-brand/30 bg-brand-soft p-3">
+            <button
+              type="button"
+              onClick={analyserFlair}
+              disabled={!aPhoto || flairEtat === "loading"}
+              className="inline-flex items-center gap-1.5 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-dark disabled:opacity-50"
+            >
+              <IconSparkles size={16} />
+              {flairEtat === "loading"
+                ? t("flairEncours")
+                : t("flairAnalyser")}
+            </button>
+            <p className="mt-2 text-xs leading-relaxed text-foreground/70">
+              {flairEtat === "done" && flairNote
+                ? `${t("flairFait")} « ${flairNote} »`
+                : flairEtat === "cle"
+                  ? t("flairCle")
+                  : flairEtat === "error"
+                    ? t("flairErreur")
+                    : t("flairIntro")}
+            </p>
+          </div>
         </fieldset>
 
         <p className="text-xs text-muted">{t("retention")}</p>
