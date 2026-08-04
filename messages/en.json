@@ -9,7 +9,8 @@
     "supprimer": "Delete",
     "retour": "Back",
     "obligatoire": "required",
-    "optionnel": "optional"
+    "optionnel": "optional",
+    "gererPhotos": "Manage photos"
   },
   "nav": {
     "accueil": "Home",
@@ -1099,5 +1100,20 @@
       "meme_yeux": "Same eyes",
       "peu_apres": "Found shortly after"
     }
+  },
+  "photos": {
+    "titre": "Photos of {nom}",
+    "intro": "Add general views of your pet (full body, markings, from behind…). The main photo (the face) is managed from the form.",
+    "retour": "Back to the listing",
+    "compte": "{total} / {max} photos",
+    "principale": "Main",
+    "supprimer": "Delete",
+    "ajouterLabel": "Add photos (up to {n})",
+    "ajouter": "Add",
+    "envoi": "Uploading…",
+    "complet": "You have reached the photo limit of your plan.",
+    "erreurLimite": "Photo limit reached for this plan.",
+    "erreurAucune": "Choose at least one photo.",
+    "erreurGenerale": "Upload failed. Please try again."
   }
 }

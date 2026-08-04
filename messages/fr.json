@@ -9,7 +9,8 @@
     "supprimer": "Supprimer",
     "retour": "Retour",
     "obligatoire": "obligatoire",
-    "optionnel": "optionnel"
+    "optionnel": "optionnel",
+    "gererPhotos": "Gérer les photos"
   },
   "nav": {
     "accueil": "Accueil",
@@ -1099,5 +1100,20 @@
       "meme_yeux": "Mêmes yeux",
       "peu_apres": "Trouvé peu après"
     }
+  },
+  "photos": {
+    "titre": "Photos de {nom}",
+    "intro": "Ajoutez des vues générales de votre animal (corps entier, marques, de dos…). La photo principale (le visage) se gère depuis le formulaire.",
+    "retour": "Retour à la fiche",
+    "compte": "{total} / {max} photos",
+    "principale": "Principale",
+    "supprimer": "Supprimer",
+    "ajouterLabel": "Ajouter des photos (jusqu'à {n})",
+    "ajouter": "Ajouter",
+    "envoi": "Envoi…",
+    "complet": "Vous avez atteint le maximum de photos de votre forfait.",
+    "erreurLimite": "Limite de photos atteinte pour ce forfait.",
+    "erreurAucune": "Choisissez au moins une photo.",
+    "erreurGenerale": "Le téléversement a échoué. Réessayez."
   }
 }

@@ -28,8 +28,21 @@ const RANG: Record<Forfait, number> = {
   provincial: 3,
 };
 
+// Nombre TOTAL de photos autorisées selon le forfait (photo principale
+// comprise). Les extras = ce nombre moins 1.
+export const MAX_PHOTOS: Record<Forfait, number> = {
+  gratuit: 1,
+  locale: 2,
+  regional: 3,
+  provincial: 4,
+};
+
 export function estForfait(v: string | null | undefined): v is Forfait {
   return !!v && (FORFAITS as readonly string[]).includes(v);
+}
+
+export function nbPhotosMax(forfait: string | null | undefined): number {
+  return MAX_PHOTOS[estForfait(forfait) ? forfait : "gratuit"];
 }
 
 export function forfaitAuMoins(

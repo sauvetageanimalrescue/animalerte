@@ -46,6 +46,7 @@ export type Annonce = {
   contact_courriel: string | null;
   contact_telephone: string | null;
   photo_url: string | null;
+  photos: string[] | null; // photos supplémentaires (vues générales)
   forfait: Forfait;
   paye: boolean;
   paye_at: string | null;

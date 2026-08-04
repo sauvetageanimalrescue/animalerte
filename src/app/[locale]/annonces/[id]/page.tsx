@@ -10,6 +10,7 @@ import {
   IconPencil,
   IconShare,
   IconSparkles,
+  IconPhoto,
 } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
 import { LIGNE_SANS_FRAIS } from "@/lib/constants";
@@ -25,7 +26,7 @@ import {
   formaterPoids,
 } from "@/lib/champs";
 import { nomRace } from "@/lib/races";
-import { peut } from "@/lib/forfaits";
+import { peut, nbPhotosMax } from "@/lib/forfaits";
 import { TypeBadge, StatutBadge, ForfaitBadge } from "@/components/badges";
 import { CarteDetail } from "@/components/carte-detail";
 import { PistesFlair } from "@/components/pistes-flair";
@@ -175,19 +176,41 @@ export default async function AnnoncePage({
       )}
 
       <div className="grid gap-8 md:grid-cols-2">
-        {/* Photo */}
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-brand-soft">
-          {annonce.photo_url ? (
-            <Image
-              src={annonce.photo_url}
-              alt={titre}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center text-brand/40">
-              <IconPaw size={64} />
+        {/* Photo principale + miniatures des photos supplémentaires */}
+        <div>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-brand-soft">
+            {annonce.photo_url ? (
+              <Image
+                src={annonce.photo_url}
+                alt={titre}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+            ) : (
+              <div className="flex h-full items-center justify-center text-brand/40">
+                <IconPaw size={64} />
+              </div>
+            )}
+          </div>
+          {annonce.photos && annonce.photos.length > 0 && (
+            <div className="mt-3 grid grid-cols-4 gap-2">
+              {annonce.photos.map((url) => (
+                <a
+                  key={url}
+                  href={url}
+                  target="_blank"
+                  rel="noopener"
+                  className="overflow-hidden rounded-lg border border-border transition hover:border-brand"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={url}
+                    alt=""
+                    className="aspect-square w-full object-cover"
+                  />
+                </a>
+              ))}
             </div>
           )}
         </div>
@@ -272,6 +295,15 @@ export default async function AnnoncePage({
                 <IconPencil size={18} />
                 {tC("modifier")}
               </Link>
+              {nbPhotosMax(annonce.forfait) > 1 && (
+                <Link
+                  href={`/annonces/${annonce.id}/photos`}
+                  className="inline-flex items-center gap-2 rounded-full border border-brand px-5 py-2.5 font-semibold text-brand transition hover:bg-brand-soft"
+                >
+                  <IconPhoto size={18} />
+                  {tC("gererPhotos")}
+                </Link>
+              )}
               {peut(annonce.forfait, "affiche") && (
                 <a
                   href={`/api/affiche/${annonce.id}`}
