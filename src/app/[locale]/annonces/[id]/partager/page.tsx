@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
+import { estAdmin } from "@/lib/authz";
 import { obtenirAnnonce } from "@/lib/annonces";
 import { peut } from "@/lib/forfaits";
 import { genererLegende } from "@/lib/affiche/legende";
@@ -19,12 +20,13 @@ export default async function PartagerPage({
   } = await supabase.auth.getUser();
   if (!user) redirect(`/${locale}/connexion`);
 
+  const admin = estAdmin(user);
   const annonce = await obtenirAnnonce(id);
-  if (!annonce || annonce.user_id !== user.id) {
+  if (!annonce || (annonce.user_id !== user.id && !admin)) {
     redirect(`/${locale}/annonces/${id}`);
   }
-  // Images sociales : forfait Régionale+. Sinon, vers le choix de forfait.
-  if (!peut(annonce.forfait, "reseaux")) {
+  // Images sociales : forfait Régionale+ (l'admin y accède aussi).
+  if (!peut(annonce.forfait, "reseaux") && !admin) {
     redirect(`/${locale}/annonces/${id}/forfait`);
   }
 

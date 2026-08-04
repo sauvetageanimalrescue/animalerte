@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { IconCheck } from "@tabler/icons-react";
 import { createClient } from "@/lib/supabase/server";
+import { estAdmin } from "@/lib/authz";
 import { obtenirAnnonce } from "@/lib/annonces";
 import { payerForfait } from "@/lib/actions/paiement";
 import { estForfait, optionsPaiement, formatPrixCents } from "@/lib/forfaits";
@@ -21,7 +22,7 @@ export default async function ChoixForfaitPage({
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user || user.id !== annonce.user_id) {
+  if (!user || (user.id !== annonce.user_id && !estAdmin(user))) {
     redirect(`/${locale}/annonces/${id}`);
   }
 

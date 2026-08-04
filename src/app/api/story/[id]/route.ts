@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { obtenirAnnonce } from "@/lib/annonces";
 import { remplirStory } from "@/lib/affiche/reseaux";
+import { estAdmin } from "@/lib/authz";
 import { peut } from "@/lib/forfaits";
 
 // Génère l'image story (vertical 9:16). Réservé au propriétaire.
@@ -16,11 +17,12 @@ export async function GET(
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user || user.id !== annonce.user_id) {
+  const admin = estAdmin(user);
+  if (!user || (user.id !== annonce.user_id && !admin)) {
     return new Response("Non autorisé", { status: 403 });
   }
-  // Les images sociales sont débloquées à partir du forfait Régionale.
-  if (!peut(annonce.forfait, "reseaux")) {
+  // Images sociales débloquées à partir du forfait Régionale (admin y accède).
+  if (!peut(annonce.forfait, "reseaux") && !admin) {
     return new Response("Forfait insuffisant", { status: 402 });
   }
 

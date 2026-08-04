@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { estAdmin } from "@/lib/authz";
 import { obtenirAnnonce } from "@/lib/annonces";
 import { remplirAffiche } from "@/lib/affiche/remplir";
 import { peut } from "@/lib/forfaits";
@@ -17,11 +18,12 @@ export async function GET(
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user || user.id !== annonce.user_id) {
+  const admin = estAdmin(user);
+  if (!user || (user.id !== annonce.user_id && !admin)) {
     return new Response("Non autorisé", { status: 403 });
   }
-  // L'affiche est débloquée à partir du forfait Locale.
-  if (!peut(annonce.forfait, "affiche")) {
+  // L'affiche est débloquée à partir du forfait Locale (l'admin y accède aussi).
+  if (!peut(annonce.forfait, "affiche") && !admin) {
     return new Response("Forfait insuffisant", { status: 402 });
   }
 

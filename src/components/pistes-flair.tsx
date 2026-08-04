@@ -10,13 +10,19 @@ import { formaterDate } from "@/lib/format";
 // Section « Correspondances trouvées par flAIr » sur la fiche (vue propriétaire).
 // Réservée aux forfaits Régionale+ (fonction payante). Sous ce forfait, on
 // affiche plutôt une invitation à débloquer flAIr.
-export async function PistesFlair({ annonce }: { annonce: Annonce }) {
+export async function PistesFlair({
+  annonce,
+  admin = false,
+}: {
+  annonce: Annonce;
+  admin?: boolean;
+}) {
   const t = await getTranslations("pistesFlair");
   const tE = await getTranslations("especes");
   const locale = await getLocale();
 
-  // Verrou : flAIr est inclus dès l'Alerte régionale.
-  if (!peut(annonce.forfait, "flair")) {
+  // Verrou : flAIr est inclus dès l'Alerte régionale (l'admin y accède aussi).
+  if (!peut(annonce.forfait, "flair") && !admin) {
     return (
       <section className="mt-10 rounded-2xl border border-brand/30 bg-brand-soft p-5">
         <h2 className="flex items-center gap-2 font-bold text-brand-dark">

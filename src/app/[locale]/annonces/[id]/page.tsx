@@ -15,6 +15,7 @@ import {
 import { Link } from "@/i18n/navigation";
 import { LIGNE_SANS_FRAIS } from "@/lib/constants";
 import { createClient } from "@/lib/supabase/server";
+import { estAdmin } from "@/lib/authz";
 import { obtenirAnnonce } from "@/lib/annonces";
 import { formaterDate, nomDeRue } from "@/lib/format";
 import {
@@ -157,7 +158,11 @@ export default async function AnnoncePage({
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const estProprietaire = !!user && user.id === annonce.user_id;
+  // Vrai propriétaire (gestion : modifier, gérer les photos) vs accès admin
+  // (inspection : voir/générer l'affiche, les images, le jumelage flAIr).
+  const proprioReel = !!user && user.id === annonce.user_id;
+  const admin = estAdmin(user);
+  const estProprietaire = proprioReel || admin;
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
@@ -288,14 +293,16 @@ export default async function AnnoncePage({
 
           {estProprietaire && (
             <div className="mt-4 flex flex-wrap gap-3">
-              <Link
-                href={`/annonces/${annonce.id}/modifier`}
-                className="inline-flex items-center gap-2 rounded-full border border-brand px-5 py-2.5 font-semibold text-brand transition hover:bg-brand-soft"
-              >
-                <IconPencil size={18} />
-                {tC("modifier")}
-              </Link>
-              {nbPhotosMax(annonce.forfait) > 1 && (
+              {proprioReel && (
+                <Link
+                  href={`/annonces/${annonce.id}/modifier`}
+                  className="inline-flex items-center gap-2 rounded-full border border-brand px-5 py-2.5 font-semibold text-brand transition hover:bg-brand-soft"
+                >
+                  <IconPencil size={18} />
+                  {tC("modifier")}
+                </Link>
+              )}
+              {proprioReel && nbPhotosMax(annonce.forfait) > 1 && (
                 <Link
                   href={`/annonces/${annonce.id}/photos`}
                   className="inline-flex items-center gap-2 rounded-full border border-brand px-5 py-2.5 font-semibold text-brand transition hover:bg-brand-soft"
@@ -304,7 +311,7 @@ export default async function AnnoncePage({
                   {tC("gererPhotos")}
                 </Link>
               )}
-              {peut(annonce.forfait, "affiche") && (
+              {(peut(annonce.forfait, "affiche") || admin) && (
                 <a
                   href={`/api/affiche/${annonce.id}`}
                   target="_blank"
@@ -315,7 +322,7 @@ export default async function AnnoncePage({
                   {tA("genererCta")}
                 </a>
               )}
-              {peut(annonce.forfait, "reseaux") && (
+              {(peut(annonce.forfait, "reseaux") || admin) && (
                 <Link
                   href={`/annonces/${annonce.id}/partager`}
                   className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 font-semibold text-white transition hover:bg-brand-dark"
@@ -324,7 +331,7 @@ export default async function AnnoncePage({
                   {tA("partagerCta")}
                 </Link>
               )}
-              {!peut(annonce.forfait, "reseaux") && (
+              {proprioReel && !peut(annonce.forfait, "reseaux") && (
                 <Link
                   href={`/annonces/${annonce.id}/forfait`}
                   className="inline-flex items-center gap-2 rounded-full border border-accent px-5 py-2.5 font-semibold text-accent transition hover:bg-accent-soft"
@@ -338,7 +345,7 @@ export default async function AnnoncePage({
         </div>
       </div>
 
-      {estProprietaire && <PistesFlair annonce={annonce} />}
+      {estProprietaire && <PistesFlair annonce={annonce} admin={admin} />}
 
       {/* Carte */}
       {annonce.latitude != null && annonce.longitude != null && (
