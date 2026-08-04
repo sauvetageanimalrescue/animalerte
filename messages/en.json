@@ -1103,7 +1103,8 @@
       "couleur_proche": "Similar colour",
       "meme_race": "Same breed",
       "meme_yeux": "Same eyes",
-      "peu_apres": "Found shortly after"
+      "peu_apres": "Found shortly after",
+      "ressemblance": "Visual resemblance"
     }
   },
   "photos": {

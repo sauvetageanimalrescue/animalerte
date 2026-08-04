@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { alerterPourNouveauTrouve } from "@/lib/flair-alertes";
+import { genererEmbedding } from "@/lib/embeddings";
 
 export type EtatAnnonce = { erreur?: string };
 
@@ -52,18 +53,25 @@ export async function publierAnnonce(
     return { erreur: t("erreurGenerale") };
   }
 
-  // Téléversement de la photo (optionnel).
+  // Téléversement de la photo (optionnel) + empreinte visuelle flAIr.
   let photoUrl: string | null = null;
+  let photoEmbedding: number[] | null = null;
   const photo = formData.get("photo");
   if (photo instanceof File && photo.size > 0) {
+    const buf = Buffer.from(await photo.arrayBuffer());
     const ext = (photo.name.split(".").pop() || "jpg").toLowerCase();
     const chemin = `${user.id}/${crypto.randomUUID()}.${ext}`;
     const { error: erreurUpload } = await supabase.storage
       .from("photos")
-      .upload(chemin, photo, { contentType: photo.type || undefined });
+      .upload(chemin, buf, { contentType: photo.type || undefined });
     if (!erreurUpload) {
       photoUrl = supabase.storage.from("photos").getPublicUrl(chemin)
         .data.publicUrl;
+      try {
+        photoEmbedding = await genererEmbedding(buf);
+      } catch {
+        // Une empreinte ratée n'empêche pas la publication.
+      }
     }
   }
 
@@ -102,6 +110,7 @@ export async function publierAnnonce(
     contact_courriel: contactCourriel,
     contact_telephone: contactTelephone,
     photo_url: photoUrl,
+    photo_embedding: photoEmbedding,
   };
 
   const { data, error } = await supabase
@@ -169,18 +178,26 @@ export async function modifierAnnonce(
     return { erreur: t("erreurGenerale") };
   }
 
-  // On conserve la photo actuelle si aucun nouveau fichier n'est fourni.
+  // On conserve la photo actuelle si aucun nouveau fichier n'est fourni. Une
+  // nouvelle photo régénère aussi l'empreinte visuelle flAIr.
   let photoUrl: string | null = existante.photo_url ?? null;
+  let nouvelleEmpreinte: number[] | null | undefined = undefined;
   const photo = formData.get("photo");
   if (photo instanceof File && photo.size > 0) {
+    const buf = Buffer.from(await photo.arrayBuffer());
     const ext = (photo.name.split(".").pop() || "jpg").toLowerCase();
     const chemin = `${user.id}/${crypto.randomUUID()}.${ext}`;
     const { error: erreurUpload } = await supabase.storage
       .from("photos")
-      .upload(chemin, photo, { contentType: photo.type || undefined });
+      .upload(chemin, buf, { contentType: photo.type || undefined });
     if (!erreurUpload) {
       photoUrl = supabase.storage.from("photos").getPublicUrl(chemin)
         .data.publicUrl;
+      try {
+        nouvelleEmpreinte = await genererEmbedding(buf);
+      } catch {
+        nouvelleEmpreinte = undefined;
+      }
     }
   }
 
@@ -218,6 +235,10 @@ export async function modifierAnnonce(
     contact_courriel: contactCourriel,
     contact_telephone: contactTelephone,
     photo_url: photoUrl,
+    // Ne touche à l'empreinte que si une nouvelle photo a été fournie.
+    ...(nouvelleEmpreinte !== undefined
+      ? { photo_embedding: nouvelleEmpreinte }
+      : {}),
   };
 
   const { error } = await supabase

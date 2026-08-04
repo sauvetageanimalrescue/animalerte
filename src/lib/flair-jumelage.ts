@@ -42,6 +42,21 @@ function partageToken(a: string, b: string): boolean {
   return b.split("_").some((x) => ta.has(x));
 }
 
+// Similarité cosinus entre deux empreintes visuelles (0 à 1).
+function cosinus(a: number[], b: number[]): number {
+  const n = Math.min(a.length, b.length);
+  let dot = 0;
+  let na = 0;
+  let nb = 0;
+  for (let i = 0; i < n; i++) {
+    dot += a[i] * b[i];
+    na += a[i] * a[i];
+    nb += b[i] * b[i];
+  }
+  if (na === 0 || nb === 0) return 0;
+  return dot / (Math.sqrt(na) * Math.sqrt(nb));
+}
+
 // Compare un « perdu » à un « trouvé » (l'appelant garantit ces rôles).
 // Renvoie null si incompatible (espèce différente, ou trouvé AVANT la
 // disparition = impossible).
@@ -125,6 +140,21 @@ export function scoreCorrespondance(
     raisons.push("peu_apres");
   } else if (jours != null && jours <= 45) {
     score += 4;
+  }
+
+  // Ressemblance visuelle (empreintes) : rattrape les correspondances que les
+  // mots-clés ratent (et l'inverse). Seuils à ajuster avec des données réelles.
+  if (perdu.photo_embedding?.length && trouve.photo_embedding?.length) {
+    const sim = cosinus(perdu.photo_embedding, trouve.photo_embedding);
+    if (sim >= 0.85) {
+      score += 30;
+      raisons.push("ressemblance");
+    } else if (sim >= 0.78) {
+      score += 18;
+      raisons.push("ressemblance");
+    } else if (sim >= 0.7) {
+      score += 8;
+    }
   }
 
   if (score < SEUIL) return null;
