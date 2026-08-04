@@ -58,7 +58,10 @@ export const REQUIS = {
   affiche: "locale",
   reseaux: "regional",
   ligne: "locale",
-  messagerie: "locale",
+  // La messagerie anonyme est offerte dès le forfait Gratuit : c'est le canal
+  // de contact de base, indispensable pour réunir un animal avec sa famille.
+  // Seule la ligne téléphonique sans frais reste réservée aux forfaits payants.
+  messagerie: "gratuit",
   flair: "regional",
   prioritaire: "regional",
   diffusionSAR: "provincial",

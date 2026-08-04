@@ -274,24 +274,27 @@ export default async function AnnoncePage({
             </div>
           )}
 
-          {/* Ligne animALERTE (contact anonyme, coordonnées jamais exposées) */}
-          <div className="mt-6 rounded-2xl border border-border bg-surface p-4">
-            <p className="text-sm text-muted">{t("infoTitre")}</p>
-            <a
-              href={`tel:${LIGNE_SANS_FRAIS.replace(/-/g, "")}`}
-              className="mt-1 inline-flex items-center gap-2 text-2xl font-extrabold text-accent"
-            >
-              <IconPhone size={22} />
-              1&nbsp;833&nbsp;999&nbsp;AIDE
-            </a>
-            <p className="mt-1 text-sm text-brand">
-              {LIGNE_SANS_FRAIS.replace(/-/g, " ")}
-              {poste ? ` · ${t("poste")} ${poste}` : ""}
-            </p>
-            <p className="mt-3 border-t border-border pt-3 text-sm leading-relaxed text-muted">
-              {t("ligneExplication")}
-            </p>
-          </div>
+          {/* Ligne animALERTE (contact anonyme) : fonction des forfaits payants
+              seulement. Une annonce gratuite n'affiche pas la ligne. */}
+          {(peut(annonce.forfait, "ligne") || admin) && (
+            <div className="mt-6 rounded-2xl border border-border bg-surface p-4">
+              <p className="text-sm text-muted">{t("infoTitre")}</p>
+              <a
+                href={`tel:${LIGNE_SANS_FRAIS.replace(/-/g, "")}`}
+                className="mt-1 inline-flex items-center gap-2 text-2xl font-extrabold text-accent"
+              >
+                <IconPhone size={22} />
+                1&nbsp;833&nbsp;999&nbsp;AIDE
+              </a>
+              <p className="mt-1 text-sm text-brand">
+                {LIGNE_SANS_FRAIS.replace(/-/g, " ")}
+                {poste ? ` · ${t("poste")} ${poste}` : ""}
+              </p>
+              <p className="mt-3 border-t border-border pt-3 text-sm leading-relaxed text-muted">
+                {t("ligneExplication")}
+              </p>
+            </div>
+          )}
 
           {!proprioReel && <ContacterFamille annonceId={annonce.id} />}
 
