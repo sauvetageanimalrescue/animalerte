@@ -9,7 +9,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { COULEURS, YEUX } from "@/lib/champs";
 import { RACES_CHAT, RACES_CHIEN, racesPour } from "@/lib/races";
-import { getCurrentUser } from "@/lib/authz";
+import { getCurrentUser, estAdmin } from "@/lib/authz";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 // Nombre maximal d'analyses flAIr par compte et par jour. Plafonne le coût API
@@ -118,19 +118,22 @@ export async function analyserPhotoFlair(
 
   // Limite par compte et par jour (anti-abus + protection du coût). On vérifie
   // AVANT l'appel API, et on journalise la tentative pour qu'un retry en boucle
-  // compte lui aussi dans le quota.
-  const admin = createAdminClient();
-  const debutJour = new Date();
-  debutJour.setHours(0, 0, 0, 0);
-  const { count } = await admin
-    .from("flair_analyses")
-    .select("id", { count: "exact", head: true })
-    .eq("user_id", user.id)
-    .gte("created_at", debutJour.toISOString());
-  if ((count ?? 0) >= LIMITE_JOUR) {
-    return { ok: false, erreur: "limite" };
+  // compte lui aussi dans le quota. Les administrateurs ne sont PAS plafonnés
+  // (ils testent et inspectent beaucoup).
+  if (!estAdmin(user)) {
+    const admin = createAdminClient();
+    const debutJour = new Date();
+    debutJour.setHours(0, 0, 0, 0);
+    const { count } = await admin
+      .from("flair_analyses")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", user.id)
+      .gte("created_at", debutJour.toISOString());
+    if ((count ?? 0) >= LIMITE_JOUR) {
+      return { ok: false, erreur: "limite" };
+    }
+    await admin.from("flair_analyses").insert({ user_id: user.id });
   }
-  await admin.from("flair_analyses").insert({ user_id: user.id });
 
   try {
     const client = new Anthropic();
