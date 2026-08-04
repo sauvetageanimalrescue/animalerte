@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { alerterPourNouveauTrouve } from "@/lib/flair-alertes";
+import { envoyerConseilsPerdu } from "@/lib/courriel-conseils";
 import { genererEmbedding } from "@/lib/embeddings";
 
 export type EtatAnnonce = { erreur?: string };
@@ -121,6 +122,8 @@ export async function publierAnnonce(
 
   if (error || !data) return { erreur: t("erreurGenerale") };
 
+  const locale = await getLocale();
+
   // Un « trouvé » vient d'être publié : flAIr prévient les « perdus »
   // Régionale+ qui correspondent (avant le redirect, qui interrompt le flux).
   if (typeAnnonce === "trouve") {
@@ -131,7 +134,23 @@ export async function publierAnnonce(
     }
   }
 
-  const locale = await getLocale();
+  // Un « perdu » vient d'être signalé : on envoie tout de suite à la famille le
+  // courriel de conseils adapté à l'espèce (chat ou chien). Inclus dans tous
+  // les forfaits, donc envoyé ici avant même l'étape de paiement.
+  if (typeAnnonce === "perdu") {
+    const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://animalerte.ca";
+    try {
+      await envoyerConseilsPerdu({
+        destinataire: contactCourriel,
+        espece: ligne.espece,
+        nomAnimal,
+        locale,
+        ficheUrl: `${base}/${locale}/annonces/${data.id}`,
+      });
+    } catch {
+      // Un courriel raté ne doit jamais empêcher la publication.
+    }
+  }
   // Un animal « perdu » passe par l'écran de choix du forfait ; un animal
   // « trouvé » est toujours gratuit et va directement à sa fiche.
   redirect(
