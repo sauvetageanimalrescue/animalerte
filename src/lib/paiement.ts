@@ -1,7 +1,8 @@
 import "server-only";
 import { stripe } from "./stripe";
 import { createAdminClient } from "./supabase/admin";
-import { estForfait } from "./forfaits";
+import { estForfait, forfaitAuMoins } from "./forfaits";
+import { alerterPourPerdu } from "./flair-alertes";
 
 // Confirme un paiement Stripe et inscrit le forfait sur l'annonce.
 // Idempotent : appelable par la page de succès ET par le webhook.
@@ -27,6 +28,17 @@ export async function finaliserPaiement(
       stripe_session_id: session.id,
     })
     .eq("id", annonceId);
+
+  // Si un « perdu » vient de débloquer flAIr (Régionale+), lui envoyer les
+  // « trouvés » déjà correspondants. Idempotent + dédoublonné, donc sans risque
+  // même si la page de succès ET le webhook appellent tous deux cette fonction.
+  if (forfaitAuMoins(forfait, "regional")) {
+    try {
+      await alerterPourPerdu(annonceId);
+    } catch {
+      // Une alerte ratée ne doit pas invalider la confirmation de paiement.
+    }
+  }
 
   return { annonceId, locale };
 }

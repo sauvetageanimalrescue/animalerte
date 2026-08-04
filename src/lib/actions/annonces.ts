@@ -3,6 +3,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { alerterPourNouveauTrouve } from "@/lib/flair-alertes";
 
 export type EtatAnnonce = { erreur?: string };
 
@@ -110,6 +111,16 @@ export async function publierAnnonce(
     .single();
 
   if (error || !data) return { erreur: t("erreurGenerale") };
+
+  // Un « trouvé » vient d'être publié : flAIr prévient les « perdus »
+  // Régionale+ qui correspondent (avant le redirect, qui interrompt le flux).
+  if (typeAnnonce === "trouve") {
+    try {
+      await alerterPourNouveauTrouve(data.id);
+    } catch {
+      // Une alerte ratée ne doit jamais empêcher la publication.
+    }
+  }
 
   const locale = await getLocale();
   // Un animal « perdu » passe par l'écran de choix du forfait ; un animal
