@@ -6,7 +6,7 @@ import {
   IconBrandTiktok,
 } from "@tabler/icons-react";
 import { Link } from "@/i18n/navigation";
-import { getCurrentUser } from "@/lib/authz";
+import { getCurrentUser, estAdmin } from "@/lib/authz";
 import { seDeconnecter } from "@/app/actions";
 import { Logo } from "./logo";
 
@@ -46,6 +46,15 @@ export async function SiteFooter() {
         { href: "/contact", label: t("contact") },
       ],
     },
+    // Colonne réservée aux administrateurs : n'apparaît que pour eux.
+    ...(estAdmin(user)
+      ? [
+          {
+            titre: t("adminTitre"),
+            liens: [{ href: "/administration/sms", label: t("adminSms") }],
+          },
+        ]
+      : []),
   ];
 
   return (
@@ -95,7 +104,11 @@ export async function SiteFooter() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+          <div
+            className={`grid grid-cols-2 gap-8 ${
+              colonnes.length > 3 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-3"
+            }`}
+          >
             {colonnes.map((col, ci) => (
               <div key={col.titre}>
                 <h3 className="mb-3 text-sm font-semibold text-brand-dark">
