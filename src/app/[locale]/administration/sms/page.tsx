@@ -6,7 +6,7 @@ import { AdminSmsForm } from "@/components/admin-sms-form";
 
 // Message respectueux pré-rempli, modifiable avant l'envoi.
 const MESSAGE_DEFAUT =
-  "Bonjour, j'ai vu votre affiche pour votre animal perdu. animALERTE.ca aide à retrouver les animaux perdus : affiche, alertes de proximité et reconnaissance par intelligence artificielle. Il est possible d'y publier une fiche gratuitement. En espérant que votre animal rentre vite à la maison. — animALERTE";
+  "Bonjour, j'ai vu votre affiche pour votre animal perdu. animALERTE.ca aide à retrouver les animaux perdus : affiche, alertes de proximité et reconnaissance par intelligence artificielle. Il est possible d'y publier une fiche gratuitement. En espérant que votre animal rentre vite à la maison. — animALERTE\nwww.animalerte.ca";
 
 export default async function PageAdminSms({
   params,

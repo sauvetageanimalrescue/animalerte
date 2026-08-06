@@ -7,9 +7,9 @@ export type Forfait = (typeof FORFAITS)[number];
 // Prix en cents CAD (paiement unique par annonce).
 export const PRIX_CENTS: Record<Forfait, number> = {
   gratuit: 0,
-  locale: 4999,
-  regional: 14999,
-  provincial: 24999,
+  locale: 2499,
+  regional: 4999,
+  provincial: 7499,
 };
 
 // Nom du forfait pour le libellé Stripe.

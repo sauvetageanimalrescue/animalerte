@@ -475,7 +475,7 @@
     },
     "locale": {
       "nom": "Local alert",
-      "prix": "$49.99",
+      "prix": "$24.99",
       "points": [
         "Listing on animalerte.ca",
         "2 photos",
@@ -488,7 +488,7 @@
     },
     "regional": {
       "nom": "Regional alert",
-      "prix": "$149.99",
+      "prix": "$49.99",
       "points": [
         "Listing on animalerte.ca",
         "3 photos",
@@ -504,7 +504,7 @@
     },
     "provincial": {
       "nom": "Province-wide alert",
-      "prix": "$249.99",
+      "prix": "$74.99",
       "points": [
         "Listing on animalerte.ca",
         "4 photos",

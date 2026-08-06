@@ -11,10 +11,12 @@
 import { writeFileSync } from "node:fs";
 
 const COLS = [
-  { nom: "Gratuit", prix: "0 $", c: "#647d94" },
-  { nom: "Locale", prix: "49,99 $", c: "#3d87b3" },
-  { nom: "Régionale", prix: "149,99 $", c: "#0c5679" },
-  { nom: "Provinciale", prix: "249,99 $", c: "#ce1f2b" },
+  // Prix volontairement absents du PDF : ils changent trop souvent. Le
+  // comparatif montre seulement CE QUI EST INCLUS par forfait.
+  { nom: "Gratuit", c: "#647d94" },
+  { nom: "Locale", c: "#3d87b3" },
+  { nom: "Régionale", c: "#0c5679" },
+  { nom: "Provinciale", c: "#ce1f2b" },
 ];
 
 // Chaque rangée : titre, description, 4 cellules (check | dash | texte), et
@@ -45,7 +47,7 @@ const cell = (val, c) => {
 
 const headRow = COLS.map(
   (col) =>
-    `<th><div class="pill" style="background:${col.c}"><span class="pn">${col.nom}</span><span class="pp">${col.prix}</span></div></th>`,
+    `<th><div class="pill" style="background:${col.c}"><span class="pn">${col.nom}</span></div></th>`,
 ).join("");
 
 const bodyRows = ROWS.map((r) => {
@@ -76,9 +78,8 @@ const html = `<!doctype html>
   table { width: 100%; border-collapse: collapse; table-layout: fixed; }
   col.feat { width: 40%; }
   th { vertical-align: bottom; padding: 0 4px 6px; }
-  .pill { border-radius: 9px 9px 0 0; padding: 6px 4px; text-align: center; color: #fff; }
-  .pn { display: block; font-size: 11pt; font-weight: 800; }
-  .pp { display: block; font-size: 8.5pt; font-weight: 600; opacity: .95; margin-top: 1px; }
+  .pill { border-radius: 9px 9px 0 0; padding: 11px 4px; text-align: center; color: #fff; }
+  .pn { display: block; font-size: 12.5pt; font-weight: 800; }
 
   tbody tr { border-bottom: 1px solid #e7eef2; }
   tbody tr.shaded { background: #f4f8fb; }

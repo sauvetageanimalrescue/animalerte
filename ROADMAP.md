@@ -22,7 +22,7 @@
 
 | Fonction | **Gratuit** | **Base** | **Régional** | **Provincial** |
 |---|:--:|:--:|:--:|:--:|
-| **Prix** | **0 $** | **49,99 $** | **149,99 $** | **249,99 $** |
+| **Prix** (test lancement, non définitif) | **0 $** | **24,99 $** | **49,99 $** | **74,99 $** |
 | Fiche sur animalerte.ca (recherche + carte) | ✅ | ✅ | ✅ | ✅ |
 | Photos | 1 | plusieurs | plusieurs + **vidéo** | plusieurs + vidéo |
 | Courriel éducatif « quoi faire » | ✅ | ✅ | ✅ | ✅ |
@@ -36,7 +36,9 @@
 
 > ⚠️ Les forfaits payants incluent un **budget de pub Meta** : prix = budget pub + marge.
 > À valider avec le coût réel des pubs (benchmark PawBoost + CPM Meta) pour dimensionner
-> le budget/rayon de chaque niveau — surtout Provincial (249,99 $) qui couvre tout le Québec.
+> le budget/rayon de chaque niveau — surtout Provincial qui couvre tout le Québec.
+> Prix de lancement volontairement bas (24,99 / 49,99 / 74,99 $) pour remplir la plateforme ;
+> à réviser quand la pub Meta sera réellement branchée (le prix devra couvrir le budget pub).
 
 **Raffinements forfaits (2026-07-31) :**
 - Noms des 4 niveaux = **Gratuit / Alerte locale / Alerte régionale / Alerte provinciale** (terminologie uniforme partout).
