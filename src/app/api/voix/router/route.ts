@@ -10,8 +10,10 @@ export async function POST(request: Request) {
 
   const introuvable = reponseTwiml(
     `<Response>` +
-      `<Say language="fr-CA">Aucun dossier actif ne correspond à ce numéro. ` +
+      `<Say voice="Polly.Chantal">Aucun dossier actif ne correspond à ce numéro. ` +
       `Vérifiez les quatre chiffres sur l'affiche et rappelez. Au revoir.</Say>` +
+      `<Say voice="Polly.Joanna">No active file matches this number. ` +
+      `Please check the four digits on the poster and call again. Goodbye.</Say>` +
       `<Hangup/>` +
       `</Response>`,
   );
@@ -36,7 +38,8 @@ export async function POST(request: Request) {
 
   return reponseTwiml(
     `<Response>` +
-      `<Say language="fr-CA">Un instant, nous vous mettons en relation.</Say>` +
+      `<Say voice="Polly.Chantal">Un instant, nous vous mettons en relation.</Say>` +
+      `<Say voice="Polly.Joanna">One moment, we are connecting you.</Say>` +
       `<Dial callerId="${callerId}" timeout="25"><Number>${numero}</Number></Dial>` +
       `</Response>`,
   );
